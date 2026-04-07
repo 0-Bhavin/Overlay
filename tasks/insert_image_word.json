@@ -1,0 +1,54 @@
+{
+  "task": "Insert an Image into a Document",
+  "app": "Microsoft Word",
+  "steps": [
+    {
+      "id": 1,
+      "target": "Insert tab",
+      "tooltip": "Let's start by clicking the **Insert** tab in the ribbon at the top of the screen. This is where all the options for adding things — like images, tables, and shapes — live.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse"
+    },
+    {
+      "id": 2,
+      "target": "Pictures button",
+      "tooltip": "Great! Now click **Pictures** in the Insert ribbon. This opens up the options for where you want to grab your image from.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse"
+    },
+    {
+      "id": 3,
+      "target": "This Device menu option",
+      "tooltip": "Choose **This Device** from the dropdown to browse for an image saved on your computer. You can also pick from online sources later, but let's keep it local for now.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "arrow"
+    },
+    {
+      "id": 4,
+      "target": "File picker dialog",
+      "tooltip": "A file browser will open. Navigate to the folder where your image is saved, then click on the image file to select it. It'll be highlighted when selected.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "none"
+    },
+    {
+      "id": 5,
+      "target": "Insert button in file picker",
+      "tooltip": "Almost there! Click the **Insert** button in the bottom-right corner of the file browser to drop the image into your document at the current cursor position.",
+      "action": "click",
+      "spotlight_shape": "circle",
+      "animation": "pulse"
+    },
+    {
+      "id": 6,
+      "target": "Inserted image in document",
+      "tooltip": "Your image should now appear in the document. You'll see a selection box around it with handles — you can drag the corners to resize it, or click and drag it anywhere on the page. Nice work! 🎉",
+      "action": "hover",
+      "spotlight_shape": "rect",
+      "animation": "pulse"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "name": "GUide me to implement TF IDF in Vs Code",
+  "app": "Vs Code",
+  "steps": [
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 1,
+      "spotlight_shape": "rect",
+      "target": "File",
+      "tooltip": "Click 'File' to begin creating your TF-IDF implementation."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 2,
+      "spotlight_shape": "rect",
+      "target": "New Text File",
+      "tooltip": "Select 'New Text File' to open an empty editor."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 3,
+      "spotlight_shape": "rect",
+      "target": "File",
+      "tooltip": "Now, click 'File' again to save your new file."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 4,
+      "spotlight_shape": "rect",
+      "target": "Save As",
+      "tooltip": "Select 'Save As' and name your file (e.g., 'tfidf.py') in your desired project folder."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 5,
+      "spotlight_shape": "rect",
+      "target": "Terminal",
+      "tooltip": "Click 'Terminal' to open the integrated terminal."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 6,
+      "spotlight_shape": "rect",
+      "target": "New Terminal",
+      "tooltip": "Choose 'New Terminal' to open a command line within VS Code."
+    },
+    {
+      "action": "type",
+      "animation": "arrow",
+      "id": 7,
+      "spotlight_shape": "rect",
+      "target": "Integrated Terminal",
+      "tooltip": "Type 'pip install scikit-learn' in the terminal to install the library, then press Enter."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 8,
+      "spotlight_shape": "rect",
+      "target": "Run",
+      "tooltip": "Click 'Run' to execute your Python TF-IDF script."
+    },
+    {
+      "action": "click",
+      "animation": "pulse",
+      "id": 9,
+      "spotlight_shape": "rect",
+      "target": "Run Without Debugging",
+      "tooltip": "Select 'Run Without Debugging' to execute your Python code."
+    }
+  ]
+}

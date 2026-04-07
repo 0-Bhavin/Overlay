@@ -1,0 +1,28 @@
+# Qt6 UI framework
+PyQt6==6.7.0
+PyQt6-Qt6==6.7.0
+PyQt6-sip==13.6.0
+
+# Gemini AI
+google-generativeai==0.7.2
+
+# Windows accessibility API (Windows only)
+pywinauto==0.6.8
+
+# Environment variable loading
+python-dotenv==1.0.1
+
+# Hotkey support
+keyboard==0.13.5
+
+# Screen info utilities
+screeninfo==0.8.1
+
+# Screenshot capture (HybridResolver)
+mss==9.0.2
+
+# Image processing (HybridResolver — JPEG encoding for Gemini Vision)
+Pillow==10.3.0
+
+# NOTE: pyatspi is NOT on PyPI — install via system package manager (Linux only)
+# Do NOT add pyatspi here
