@@ -29,7 +29,7 @@ def _separator(title: str) -> None:
 
 
 def main() -> None:
-    api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyCEGOdUJvfs37fUz6QwOKskOJDJbizmnJ8")
+    api_key = os.environ.get("GEMINI_API_KEY", "")
     if not api_key:
         print("⚠  GEMINI_API_KEY not set — Vision fallback will fail.")
 
