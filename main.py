@@ -18,7 +18,7 @@ load_dotenv()
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment, or replace the fallback string.
-_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6IS5mv4a2Rwsh7GHfvzRCU6UmqXzziBzSf7KPlKduXn2Q")
+_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
 
 
 def main() -> None:
