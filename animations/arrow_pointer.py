@@ -186,8 +186,9 @@ class ArrowPointer(QObject):
         if step.coords is None:
             return
 
-        x, y, w, h = step.coords
-        spotlight = QRect(x, y, w, h)
+        left, top, right, bottom = step.coords
+        w, h = right - left, bottom - top
+        spotlight = QRect(left, top, w, h)
         screen = self._layer.rect()
 
         self._angle = _direction_angle(spotlight, screen)

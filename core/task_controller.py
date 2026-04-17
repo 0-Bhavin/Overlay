@@ -18,12 +18,12 @@ _log = logging.getLogger(__name__)
 
 # ── Phase 4: remove this lookup table once the coord resolver is live. ────────
 _FAKE_COORDS: dict[int, tuple[int, int, int, int]] = {
-    1: (100,  60, 200,  36),   # simulates a ribbon tab
-    2: (120, 100, 160,  40),
-    3: (300, 200, 180,  40),
-    4: (200, 300, 260,  44),
-    5: (350, 420, 120,  36),
-    6: (240, 260, 300, 200),
+    1: (100,  60, 300,  96),   # simulates a ribbon tab
+    2: (120, 100, 280, 140),
+    3: (300, 200, 480, 240),
+    4: (200, 300, 460, 344),
+    5: (350, 420, 470, 456),
+    6: (240, 260, 540, 460),
 }
 
 _RESOLUTION_TIMEOUT_MS: int = 10_000
@@ -73,7 +73,8 @@ class _CoordWorker(QObject):
 
             # Sanity-check: reject implausibly large rects (full-window matches).
             # A real interactive element is almost never larger than 600×400 px.
-            x, y, w, h = coords
+            left, top, right, bottom = coords
+            w, h = right - left, bottom - top
             if w > 600 or h > 400:
                 _log.warning(
                     "Resolved rect for %r is suspiciously large (%dx%d) — discarding",

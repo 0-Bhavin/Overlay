@@ -206,8 +206,27 @@ class HybridResolver:
                 )
                 return None
 
-            coords = (int(x), int(y), int(w), int(h))
-            _log.info("Gemini Vision resolved %r → %s", target_name, coords)
+            # Gemini returns coords in thumbnail image space (max 1280px wide).
+            # Scale back to physical screen then convert to Qt logical pixels.
+            try:
+                from PyQt6.QtWidgets import QApplication
+                screen = QApplication.primaryScreen()
+                dpr = screen.devicePixelRatio()
+                # Physical screen size (what mss captured)
+                phys_w = screen.geometry().width() * dpr
+                thumb_w = min(1280.0, phys_w)
+                phys_scale = phys_w / thumb_w   # thumbnail → physical
+                logical_scale = phys_scale / dpr  # physical → logical
+            except Exception:
+                logical_scale = 1.0
+
+            lx = int(int(x) * logical_scale)
+            ly = int(int(y) * logical_scale)
+            lw = int(int(w) * logical_scale)
+            lh = int(int(h) * logical_scale)
+
+            coords = (lx, ly, lx + lw, ly + lh)
+            _log.info("Gemini Vision resolved %r → %s (scale=%.3f)", target_name, coords, logical_scale)
             return coords
 
         except Exception as exc:  # noqa: BLE001

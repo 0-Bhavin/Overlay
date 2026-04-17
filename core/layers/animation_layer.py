@@ -66,8 +66,8 @@ class AnimationLayer(BaseLayer):
     # ------------------------------------------------------------------
 
     def paintEvent(self, event) -> None:  # type: ignore[override]
-        # First clear the layer to transparent.
-        super().paintEvent(event)
+        # Do NOT call super().paintEvent() — it uses CompositionMode_Clear
+        # which erases the dim painted by SpotlightLayer underneath.
 
         if self._paint_callback is None:
             return

@@ -35,9 +35,11 @@ _MOVE_MS      = 300
 _FADE_IN_MS   = 150
 
 
-def _coords_to_rect(coords: tuple[int, int, int, int], padding: int = 16) -> QRect:
-    x, y, w, h = coords
-    return QRect(x - padding, y - padding, w + padding * 2, h + padding * 2)
+def _coords_to_rect(coords: tuple[int, int, int, int], padding: int = 0) -> QRect:
+    left, top, right, bottom = coords
+    w = right - left
+    h = bottom - top
+    return QRect(left - padding, top - padding, w + padding * 2, h + padding * 2)
 
 
 class LayerManager(QObject):

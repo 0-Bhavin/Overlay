@@ -18,7 +18,7 @@ load_dotenv()
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment, or replace the fallback string.
-_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "AIzaSyCEGOdUJvfs37fUz6QwOKskOJDJbizmnJ8")
+_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6IS5mv4a2Rwsh7GHfvzRCU6UmqXzziBzSf7KPlKduXn2Q")
 
 
 def main() -> None:
@@ -102,28 +102,10 @@ def main() -> None:
     sc_exit.setContext(Qt.ShortcutContext.ApplicationShortcut)
     sc_exit.activated.connect(_on_exit)
 
-    # ── 8. Task-input dialog ──────────────────────────────────────────
-    dialog = TaskInputDialog(api_key=_GEMINI_API_KEY)
-    dialog.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, True)
-
-    def _on_task_ready(path: str) -> None:
-        """Called when Gemini finishes and the task JSON file is saved."""
-        dialog.hide()
-        controller.load_task(path)
-        overlay.show_overlay()
-
-    dialog.task_ready.connect(_on_task_ready)
-
-    # Quit if the user closes the dialog before a task is started
-    def _on_dialog_closed() -> None:
-        if not overlay.isVisible():
-            controller.shutdown()
-            app.quit()
-
-    app.lastWindowClosed.connect(_on_dialog_closed)
-
-    # ── 9. Show the input dialog ──────────────────────────────────────
-    dialog.show()
+    # ── 8. Direct task load for testing ──────────────────────────────
+    _TASK_PATH = os.path.join(os.path.dirname(__file__), "tasks", "insert_image_word.json")
+    controller.load_task(_TASK_PATH)
+    overlay.show_overlay()
 
     sys.exit(app.exec())
 

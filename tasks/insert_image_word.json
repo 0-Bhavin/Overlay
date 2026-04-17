@@ -1,5 +1,5 @@
 {
-  "task": "Insert an Image into a Document",
+  "name": "Insert an Image into a Document",
   "app": "Microsoft Word",
   "steps": [
     {

@@ -8,7 +8,7 @@ from core.layers.base_layer import BaseLayer
 from core.step import Step
 
 _DEFAULT_OPACITY: float = 0.55
-_CORNER_RADIUS: float = 8.0
+_CORNER_RADIUS: float = 3.0
 _PULSE_PEN_WIDTH: float = 2.5
 
 
@@ -102,8 +102,10 @@ class SpotlightLayer(BaseLayer):
     def render(self, step: Step) -> None:
         """Update the spotlight from *step*.coords and schedule a repaint."""
         if step.coords is not None:
-            x, y, w, h = step.coords
-            self.set_spotlight(x, y, w, h)
+            left, top, right, bottom = step.coords
+            w = right - left
+            h = bottom - top
+            self.set_spotlight(left, top, w, h, padding=0)
         else:
             self._spotlight_rect = None
             if self._pulse is not None:
@@ -193,23 +195,12 @@ class SpotlightLayer(BaseLayer):
         dim_color.setAlphaF(self._opacity)
 
         if self._spotlight_rect is not None:
-            # Create a path for the full screen
-            full_path = QPainterPath()
-            full_path.addRect(self.rect().toRectF())
-
-            # Create a path for the rounded hole
-            hole_path = QPainterPath()
-            hole_path.addRoundedRect(
-                self._spotlight_rect.toRectF()
-                if hasattr(self._spotlight_rect, "toRectF")
-                else self._spotlight_rect,
-                _CORNER_RADIUS,
-                _CORNER_RADIUS,
-            )
-
-            # The background is the screen MINUS the hole
-            dim_path = full_path.subtracted(hole_path)
-            painter.fillPath(dim_path, dim_color)
+            # Draw dim over full screen first
+            painter.fillRect(self.rect(), dim_color)
+            # Cut an exact rectangular hole using CompositionMode_Clear
+            painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
+            painter.fillRect(self._spotlight_rect, Qt.GlobalColor.transparent)
+            painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
         else:
             # No spotlight: just fill the whole screen
             painter.fillRect(self.rect(), dim_color)

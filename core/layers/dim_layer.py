@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QWidget
 from core.layers.base_layer import BaseLayer
 from core.step import Step
 
-_DEFAULT_OPACITY: float = 0.55
+_DEFAULT_OPACITY: float = 0.45
 
 
 class DimLayer(BaseLayer):

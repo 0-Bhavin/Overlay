@@ -170,8 +170,11 @@ class TooltipLayer(BaseLayer):
 
     def __init__(self, parent: QWidget) -> None:
         super().__init__(parent)
-        # This layer accepts mouse events (do NOT set WA_TransparentForMouseEvents)
+        # The full-screen layer itself must pass clicks through to the app below.
+        # The _card child widget is NOT transparent and still receives mouse events.
+        self.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         self._card = _Card(self)
+        self._card.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, False)
         self._card.hide()
 
     def set_opacity(self, opacity: float) -> None:
@@ -229,21 +232,15 @@ class TooltipLayer(BaseLayer):
             self._card.move(QPoint(x, y))
             return
 
-        sx, sy, sw, sh = coords
+        left, top, right, bottom = coords
 
-        # Centre the card horizontally over the spotlight
-        x = sx + (sw - card_size.width()) // 2
-        # Prefer placing below
-        y_below = sy + sh + _GAP
-        y_above = sy - card_size.height() - _GAP
+        # Position tooltip just below the spotlight rect (2 px gap)
+        x = left
+        y = bottom + 2
 
-        if y_below + card_size.height() <= screen_rect.height():
-            y = y_below
-        else:
-            y = max(0, y_above)
-
-        # Clamp horizontally so the card stays on screen
+        # Clamp so the card stays on screen
         x = max(0, min(x, screen_rect.width() - card_size.width()))
+        y = max(0, min(y, screen_rect.height() - card_size.height()))
 
         self._card.move(QPoint(x, y))
 
@@ -267,5 +264,6 @@ class TooltipLayer(BaseLayer):
     # ------------------------------------------------------------------
 
     def paintEvent(self, event) -> None:  # type: ignore[override]
-        # Clear to transparent so nothing behind the card is obscured
-        super().paintEvent(event)
+        # Do NOT call super().paintEvent() — it uses CompositionMode_Clear
+        # which erases the dim painted by SpotlightLayer underneath.
+        pass

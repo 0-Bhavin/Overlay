@@ -1,6 +1,14 @@
+import ctypes
+import ctypes.wintypes
+
 from PyQt6.QtWidgets import QWidget, QApplication
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPainter
+
+# Win32 extended-style flags needed for OS-level click-through
+_GWL_EXSTYLE    = -20
+_WS_EX_LAYERED  = 0x00080000
+_WS_EX_TRANSPARENT = 0x00000020
 
 
 class OverlayWindow(QWidget):
@@ -36,6 +44,29 @@ class OverlayWindow(QWidget):
         painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
         painter.fillRect(self.rect(), Qt.GlobalColor.transparent)
         painter.end()
+
+    # ------------------------------------------------------------------
+    # Win32 click-through
+    # ------------------------------------------------------------------
+
+    def _make_click_through(self) -> None:
+        """Set WS_EX_LAYERED | WS_EX_TRANSPARENT on the HWND.
+
+        This makes the window invisible to Windows hit-testing so that mouse
+        clicks fall through to whatever application is below the overlay.
+        Qt's ``WA_TransparentForMouseEvents`` only affects Qt's own event
+        dispatch; this call handles the OS level.
+        """
+        hwnd = int(self.winId())
+        style = ctypes.windll.user32.GetWindowLongW(hwnd, _GWL_EXSTYLE)
+        ctypes.windll.user32.SetWindowLongW(
+            hwnd, _GWL_EXSTYLE, style | _WS_EX_LAYERED | _WS_EX_TRANSPARENT
+        )
+
+    def showEvent(self, event) -> None:  # noqa: N802
+        """Apply Win32 click-through flags as soon as the HWND exists."""
+        super().showEvent(event)
+        self._make_click_through()
 
     # ------------------------------------------------------------------
     # Visibility helpers
