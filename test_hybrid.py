@@ -53,15 +53,7 @@ def main() -> None:
     else:
         print("   (UIAResolver unavailable on this platform)")
 
-    # ── 2. Vision only ────────────────────────────────────────────────
-    _separator("2 · Gemini Vision only")
-    t0 = time.perf_counter()
-    coords = resolver._vision_resolve(APP, TARGET)
-    elapsed = time.perf_counter() - t0
-    if coords:
-        print(f"   ✓ Vision found: {coords}  ({elapsed*1000:.1f} ms)")
-    else:
-        print(f"   ✗ Vision did not find '{TARGET}'  ({elapsed*1000:.1f} ms)")
+
 
     # ── 3. Full hybrid (UIA → Vision fallback) ────────────────────────
     _separator("3 · Full hybrid  resolve()")

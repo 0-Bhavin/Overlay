@@ -1,6 +1,6 @@
 {
-  "name": "GUide me to implement TF IDF in Vs Code",
-  "app": "Vs Code",
+  "name": "Save an file in microsoft word",
+  "app": "microsoft word",
   "steps": [
     {
       "action": "click",
@@ -8,71 +8,39 @@
       "id": 1,
       "spotlight_shape": "rect",
       "target": "File",
-      "tooltip": "Click 'File' to begin creating your TF-IDF implementation."
+      "tooltip": "Click 'File' to open the File menu and access save options."
     },
     {
       "action": "click",
-      "animation": "pulse",
+      "animation": "arrow",
       "id": 2,
       "spotlight_shape": "rect",
-      "target": "New Text File",
-      "tooltip": "Select 'New Text File' to open an empty editor."
+      "target": "Save",
+      "tooltip": "Select 'Save' from the options to begin saving your document."
     },
     {
       "action": "click",
-      "animation": "pulse",
+      "animation": "arrow",
       "id": 3,
       "spotlight_shape": "rect",
-      "target": "File",
-      "tooltip": "Now, click 'File' again to save your new file."
-    },
-    {
-      "action": "click",
-      "animation": "pulse",
-      "id": 4,
-      "spotlight_shape": "rect",
-      "target": "Save As",
-      "tooltip": "Select 'Save As' and name your file (e.g., 'tfidf.py') in your desired project folder."
-    },
-    {
-      "action": "click",
-      "animation": "pulse",
-      "id": 5,
-      "spotlight_shape": "rect",
-      "target": "Terminal",
-      "tooltip": "Click 'Terminal' to open the integrated terminal."
-    },
-    {
-      "action": "click",
-      "animation": "pulse",
-      "id": 6,
-      "spotlight_shape": "rect",
-      "target": "New Terminal",
-      "tooltip": "Choose 'New Terminal' to open a command line within VS Code."
+      "target": "Browse",
+      "tooltip": "Click 'Browse' to choose a specific location on your computer."
     },
     {
       "action": "type",
+      "animation": "pulse",
+      "id": 4,
+      "spotlight_shape": "rect",
+      "target": "File name",
+      "tooltip": "Type a name for your document in the 'File name' text box."
+    },
+    {
+      "action": "click",
       "animation": "arrow",
-      "id": 7,
+      "id": 5,
       "spotlight_shape": "rect",
-      "target": "Integrated Terminal",
-      "tooltip": "Type 'pip install scikit-learn' in the terminal to install the library, then press Enter."
-    },
-    {
-      "action": "click",
-      "animation": "pulse",
-      "id": 8,
-      "spotlight_shape": "rect",
-      "target": "Run",
-      "tooltip": "Click 'Run' to execute your Python TF-IDF script."
-    },
-    {
-      "action": "click",
-      "animation": "pulse",
-      "id": 9,
-      "spotlight_shape": "rect",
-      "target": "Run Without Debugging",
-      "tooltip": "Select 'Run Without Debugging' to execute your Python code."
+      "target": "Save",
+      "tooltip": "Click 'Save' in the dialog box to finalize saving your file."
     }
   ]
 }

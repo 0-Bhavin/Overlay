@@ -21,13 +21,12 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from core.layers.base_layer import BaseLayer
 from core.step import Step
 
 # ── Layout constants ──────────────────────────────────────────────────────────
 _CARD_MAX_WIDTH: int = 320
 _CARD_PADDING: int = 16          # inner padding (px)
-_GAP: int = 18                   # vertical gap between spotlight and card
+_GAP: int = 5                    # vertical gap: tooltip starts 5px below element bottom
 _CORNER_RADIUS: float = 12.0
 _SHADOW_BLUR: int = 8            # approximate shadow spread (px)
 _BORDER_COLOR = QColor(220, 220, 220)
@@ -161,7 +160,7 @@ class _Card(QWidget):
         painter.end()
 
 
-class TooltipLayer(BaseLayer):
+class TooltipLayer(QWidget):
     """Overlay layer that displays a floating tooltip card near the spotlight.
 
     Navigation buttons have been removed — the HUD bar handles all navigation.
@@ -170,7 +169,10 @@ class TooltipLayer(BaseLayer):
 
     def __init__(self, parent: QWidget) -> None:
         super().__init__(parent)
-        # This layer accepts mouse events (do NOT set WA_TransparentForMouseEvents)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        # Mirror parent geometry
+        if parent:
+            self.setGeometry(parent.rect())
         self._card = _Card(self)
         self._card.hide()
 
@@ -193,7 +195,7 @@ class TooltipLayer(BaseLayer):
     def clear(self) -> None:
         """Hide the tooltip card."""
         self._card.hide()
-        super().clear()
+        self.update()
 
     def show_message(self, message: str) -> None:
         """Display *message* as the card body with no action label.
@@ -218,7 +220,14 @@ class TooltipLayer(BaseLayer):
     # ------------------------------------------------------------------
 
     def _position_card(self, coords: tuple[int, int, int, int] | None) -> None:
-        """Place the card below (or above) the spotlight, within screen bounds."""
+        """Place the card 5 px below (or above) the element rect, within screen bounds.
+
+        Parameters
+        ----------
+        coords:
+            ``(L, T, R, B)`` screen-pixel rect of the target element, or
+            ``None`` to centre the card on screen.
+        """
         screen_rect: QRect = self.rect()
         card_size: QSize = self._card.sizeHint()
 
@@ -229,13 +238,24 @@ class TooltipLayer(BaseLayer):
             self._card.move(QPoint(x, y))
             return
 
-        sx, sy, sw, sh = coords
+        from PyQt6.QtWidgets import QApplication
+        app = QApplication.instance()
+        dpr = 1.0
+        if app is not None and app.primaryScreen() is not None:
+            dpr = app.primaryScreen().devicePixelRatio()
 
-        # Centre the card horizontally over the spotlight
-        x = sx + (sw - card_size.width()) // 2
-        # Prefer placing below
-        y_below = sy + sh + _GAP
-        y_above = sy - card_size.height() - _GAP
+        sl = int(coords[0] / dpr)
+        st = int(coords[1] / dpr)
+        sr = int(coords[2] / dpr)
+        sb = int(coords[3] / dpr)
+        sw = sr - sl   # logical element width
+        sh = sb - st   # logical element height
+
+        # Centre the card horizontally over the element
+        x = sl + (sw - card_size.width()) // 2
+        # Prefer placing 5px below the element bottom
+        y_below = sb + _GAP
+        y_above = st - card_size.height() - _GAP
 
         if y_below + card_size.height() <= screen_rect.height():
             y = y_below
@@ -253,6 +273,8 @@ class TooltipLayer(BaseLayer):
 
     def resizeEvent(self, event) -> None:  # type: ignore[override]
         super().resizeEvent(event)
+        if self.parent() is not None:
+            self.setGeometry(self.parent().rect())
         # Re-clamp position if the card is currently visible
         if self._card.isVisible():
             pos = self._card.pos()
@@ -261,11 +283,3 @@ class TooltipLayer(BaseLayer):
             x = max(0, min(pos.x(), sr.width() - cs.width()))
             y = max(0, min(pos.y(), sr.height() - cs.height()))
             self._card.move(QPoint(x, y))
-
-    # ------------------------------------------------------------------
-    # paintEvent — layer itself is transparent; card does its own drawing
-    # ------------------------------------------------------------------
-
-    def paintEvent(self, event) -> None:  # type: ignore[override]
-        # Clear to transparent so nothing behind the card is obscured
-        super().paintEvent(event)

@@ -7,9 +7,9 @@ All application code should import from this module::
     resolver = get_resolver()
     coords   = resolver.resolve("Microsoft Word", "Insert tab")
 
-:class:`~platforms.hybrid_resolver.HybridResolver` handles platform
-differences internally: it tries Windows UI Automation first, then falls
-back to Gemini Vision if UIA cannot locate the element.
+:class:`~platforms.hybrid_resolver.HybridResolver` wraps
+:class:`~platforms.uia_resolver.UIAResolver` and returns ``(L, T, R, B)``
+screen-pixel coordinates from Windows UI Automation.
 """
 from __future__ import annotations
 

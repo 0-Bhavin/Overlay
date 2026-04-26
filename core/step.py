@@ -14,7 +14,7 @@ class Step:
     action: str = "click"               # "click" | "type" | "scroll" | "hover"
     spotlight_shape: str = "rect"       # "rect" | "circle"
     animation: str = "pulse"            # "pulse" | "arrow" | "none"
-    coords: Optional[tuple[int, int, int, int]] = None  # (x, y, w, h) — filled at runtime by coord resolver
+    coords: Optional[tuple[int, int, int, int]] = None  # (L, T, R, B) screen pixels — filled at runtime by coord resolver
 
     # ------------------------------------------------------------------
     # Construction helpers

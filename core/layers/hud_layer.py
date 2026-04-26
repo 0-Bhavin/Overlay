@@ -16,7 +16,6 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from core.layers.base_layer import BaseLayer
 from core.step import Step
 
 # ---------------------------------------------------------------------------
@@ -57,7 +56,7 @@ _PILL_H     = 56
 _PILL_RADIUS = 28.0
 
 
-class HUDLayer(BaseLayer):
+class HUDLayer(QWidget):
     """Pill-shaped HUD control bar rendered at the bottom-centre of the screen.
 
     Signals

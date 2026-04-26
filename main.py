@@ -8,6 +8,11 @@ from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import QApplication
 
+# Force 1:1 pixel mapping so pywinauto's physical pixel coords match Qt's
+# coordinate space exactly. Without this, on a 125% DPI display Qt uses
+# logical pixels (physical / 1.25) which shifts every spotlight/dim rect.
+QApplication.setAttribute(Qt.ApplicationAttribute.AA_Use96Dpi)
+
 from core.overlay_window import OverlayWindow
 from core.layer_manager import LayerManager
 from core.task_controller import TaskController
@@ -18,7 +23,7 @@ load_dotenv()
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment, or replace the fallback string.
-_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
+_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6LgNY5fvcOV_9K1ccr8Mouad3FTiYb8wpkGrsHVnaP4fA")
 
 
 def main() -> None:
@@ -57,7 +62,8 @@ def main() -> None:
     def _on_coords_resolved(step) -> None:
         layer_manager.on_coords_resolved(step)
         if step.coords:
-            watcher.start_watching(QRect(*step.coords))
+            l, t, r, b = step.coords
+            watcher.start_watching(QRect(l, t, r - l, b - t))
 
     controller.coords_resolved.disconnect(layer_manager.on_coords_resolved)
     controller.coords_resolved.connect(_on_coords_resolved)
