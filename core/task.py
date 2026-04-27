@@ -12,6 +12,7 @@ class Task:
 
     name: str
     app: str
+    app_exe: str = ""          # Windows process exe name from Gemini (e.g. "EXCEL.EXE")
     steps: list[Step] = field(default_factory=list)
 
     # ------------------------------------------------------------------
@@ -57,5 +58,6 @@ class Task:
         return cls(
             name=data["name"],
             app=data["app"],
+            app_exe=data.get("app_exe", ""),
             steps=steps,
         )

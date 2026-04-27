@@ -50,8 +50,8 @@ class _CoordWorker(QObject):
         super().__init__()
         self._resolver = _get_resolver() if _RESOLVER_AVAILABLE else None
 
-    @pyqtSlot(object, str)
-    def resolve(self, step: Step, app_name: str) -> None:
+    @pyqtSlot(object, str, str)
+    def resolve(self, step: Step, app_name: str, app_exe: str) -> None:
         """Resolve coordinates on the worker thread via HybridResolver.resolve().
 
         Parameters
@@ -60,13 +60,17 @@ class _CoordWorker(QObject):
             The step to resolve.
         app_name:
             The ``Task.app`` string used to locate the target window.
+        app_exe:
+            The ``Task.app_exe`` string (e.g. ``"EXCEL.EXE"``), passed directly
+            to the UIA backend so it connects to the right process without
+            falling back to the static exe map.
         """
         if self._resolver is None:
             self.failed.emit(step.target)
             return
 
         try:
-            coords = self._resolver.resolve(app_name, step.target)
+            coords = self._resolver.resolve(app_name, step.target, app_exe=app_exe or None)
             if coords is None:
                 _log.warning("Resolver returned None for %r in app %r", step.target, app_name)
                 self.failed.emit(step.target)
@@ -85,7 +89,7 @@ class _CoordWorker(QObject):
                 self.failed.emit(step.target)
                 return
 
-            _log.debug("Resolved %r → %s", step.target, coords)
+            _log.debug("Resolved %r -> %s", step.target, coords)
             self.resolved.emit(dataclasses.replace(step, coords=coords))
         except Exception as exc:  # noqa: BLE001
             _log.error("Resolution error for %r: %s", step.target, exc)
@@ -132,7 +136,7 @@ class TaskController(QObject):
     task_completed    = pyqtSignal()
     coords_resolved   = pyqtSignal(object)         # Step
     resolution_failed = pyqtSignal(str)            # target name
-    _resolve_requested = pyqtSignal(object, str)   # (Step, app_name)
+    _resolve_requested = pyqtSignal(object, str, str)   # (Step, app_name, app_exe)
     
     def __init__(self, layer_manager) -> None:
         """
@@ -238,7 +242,7 @@ class TaskController(QObject):
         if self._resolver_available():
             self._pending_step_id = step.id
             self._timeout_timer.start()
-            self._resolve_requested.emit(step, self._task.app)
+            self._resolve_requested.emit(step, self._task.app, self._task.app_exe)
         else:
             # No resolver — fall back to fake coords
             step_with_fake = self.inject_fake_coords(step)

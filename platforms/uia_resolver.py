@@ -35,13 +35,29 @@ _APP_EXE_MAP: dict[str, list[str]] = {
 }
 
 
-def _exe_candidates(app_name: str) -> list[str]:
-    """Return a list of likely exe names for *app_name*."""
+def _exe_candidates(app_name: str, app_exe: str | None = None) -> list[str]:
+    """Return a list of likely exe names for *app_name*.
+
+    If *app_exe* is provided (e.g. read from the generated task JSON produced
+    by Gemini), it is used as the first — and preferred — candidate so the
+    static ``_APP_EXE_MAP`` lookup is skipped.
+    """
+    if app_exe:
+        # Gemini-supplied exe is the primary candidate; keep fallbacks too
+        lower = app_name.lower()
+        for key, exes in _APP_EXE_MAP.items():
+            if key in lower:
+                # Merge: Gemini candidate first, then the map entries
+                return [app_exe] + [e for e in exes if e != app_exe]
+        last = lower.split()[-1] if lower.split() else lower
+        fallbacks = [last + ".exe", last.upper() + ".EXE"]
+        return [app_exe] + [f for f in fallbacks if f != app_exe]
+
+    # No Gemini-supplied exe — use the static map or a best-guess fallback
     lower = app_name.lower()
     for key, exes in _APP_EXE_MAP.items():
         if key in lower:
             return exes
-    # Fallback: use the last word as a best guess exe name
     last = lower.split()[-1] if lower.split() else lower
     return [last + ".exe", last.upper() + ".EXE"]
 
@@ -57,7 +73,7 @@ class UIAResolver:
     # Window discovery
     # ------------------------------------------------------------------
 
-    def find_window(self, app_name: str):
+    def find_window(self, app_name: str, app_exe: str | None = None):
         """Connect to the target application and return the top-level window.
 
         Uses ``Application(backend="uia").connect(path=exe)`` which is the
@@ -67,6 +83,10 @@ class UIAResolver:
         ----------
         app_name:
             Human-readable application name, e.g. ``"Microsoft Word"``.
+        app_exe:
+            Optional Windows process name (e.g. ``"WINWORD.EXE"``), typically
+            read from the ``app_exe`` field of the generated task JSON.
+            When supplied, it is tried first before any fallback candidates.
 
         Returns
         -------
@@ -75,7 +95,7 @@ class UIAResolver:
         if not _PYWINAUTO_AVAILABLE:
             return None
 
-        for exe in _exe_candidates(app_name):
+        for exe in _exe_candidates(app_name, app_exe):
             try:
                 app = Application(backend="uia").connect(path=exe, timeout=5)
                 win = app.top_window()
@@ -93,7 +113,7 @@ class UIAResolver:
     # Element discovery
     # ------------------------------------------------------------------
 
-    def find_element(self, app_name: str, target_name: str):
+    def find_element(self, app_name: str, target_name: str, app_exe: str | None = None):
         """Locate a UI element by name inside the application window.
 
         Strategies (tried in order):
@@ -109,6 +129,11 @@ class UIAResolver:
             Identifies the target window (passed to :meth:`find_window`).
         target_name:
             Human-readable name of the element to locate.
+        app_exe:
+            Optional Windows process exe name (e.g. ``"EXCEL.EXE"``), read
+            from the ``app_exe`` field of the generated task JSON.  Passed
+            through to :meth:`find_window` to ensure the correct process is
+            targeted without relying on the static map.
 
         Returns
         -------
@@ -117,7 +142,7 @@ class UIAResolver:
         if not _PYWINAUTO_AVAILABLE:
             return None
 
-        wrapper = self.find_window(app_name)
+        wrapper = self.find_window(app_name, app_exe=app_exe)
         if wrapper is None:
             _log.warning("find_element: window not found for app %r", app_name)
             return None

@@ -36,6 +36,7 @@ class HybridResolver:
         self,
         app_name: str,
         target_name: str,
+        app_exe: str | None = None,
     ) -> tuple[int, int, int, int] | None:
         """Return ``(x, y, w, h)`` screen coordinates for *target_name*.
 
@@ -47,6 +48,10 @@ class HybridResolver:
             Application name fragment used to locate the target window with UIA.
         target_name:
             Human-readable name of the UI element to locate.
+        app_exe:
+            Optional Windows process exe name (e.g. ``"EXCEL.EXE"``).  When
+            provided it is forwarded directly to the UIA backend so the correct
+            process is targeted without relying on the static exe map.
 
         Returns
         -------
@@ -56,12 +61,12 @@ class HybridResolver:
         """
         if self._uia is not None:
             try:
-                element = self._uia.find_element(app_name, target_name)
+                element = self._uia.find_element(app_name, target_name, app_exe=app_exe)
                 if element is not None:
                     coords = self._uia.get_coords(element)
                     if coords is not None:
                         _log.info(
-                            "UIA resolved %r → %s", target_name, coords
+                            "UIA resolved %r -> %s", target_name, coords
                         )
                         return coords
             except Exception as exc:  # noqa: BLE001
@@ -76,7 +81,7 @@ class HybridResolver:
     # UIAResolver-compatible stub interface
     # ------------------------------------------------------------------
 
-    def find_element(self, app_name: str, target_name: str):  # noqa: ANN201
+    def find_element(self, app_name: str, target_name: str, app_exe: str | None = None):  # noqa: ANN201
         """Stub — satisfies the resolver interface; always returns ``None``.
 
         Use :meth:`resolve` for the full lookup.

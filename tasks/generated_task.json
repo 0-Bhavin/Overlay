@@ -1,46 +1,39 @@
 {
-  "name": "Save an file in microsoft word",
-  "app": "microsoft word",
+  "name": "insert an picture in microsoft excel",
+  "app": "microsoft excel",
+  "app_exe": "EXCEL.EXE",
   "steps": [
     {
-      "action": "click",
-      "animation": "pulse",
       "id": 1,
+      "target": "Insert",
+      "tooltip": "Click the Insert tab to access options for adding content.",
+      "action": "click",
       "spotlight_shape": "rect",
-      "target": "File",
-      "tooltip": "Click 'File' to open the File menu and access save options."
+      "animation": "pulse"
     },
     {
-      "action": "click",
-      "animation": "arrow",
       "id": 2,
+      "target": "Pictures",
+      "tooltip": "Click Pictures to choose an image to insert into your spreadsheet.",
+      "action": "click",
       "spotlight_shape": "rect",
-      "target": "Save",
-      "tooltip": "Select 'Save' from the options to begin saving your document."
+      "animation": "arrow"
     },
     {
-      "action": "click",
-      "animation": "arrow",
       "id": 3,
-      "spotlight_shape": "rect",
-      "target": "Browse",
-      "tooltip": "Click 'Browse' to choose a specific location on your computer."
-    },
-    {
-      "action": "type",
-      "animation": "pulse",
-      "id": 4,
-      "spotlight_shape": "rect",
-      "target": "File name",
-      "tooltip": "Type a name for your document in the 'File name' text box."
-    },
-    {
+      "target": "This Device",
+      "tooltip": "Select This Device to insert a picture saved on your computer.",
       "action": "click",
-      "animation": "arrow",
-      "id": 5,
       "spotlight_shape": "rect",
-      "target": "Save",
-      "tooltip": "Click 'Save' in the dialog box to finalize saving your file."
+      "animation": "arrow"
+    },
+    {
+      "id": 4,
+      "target": "Insert",
+      "tooltip": "Browse to your desired picture, select it, and click Insert.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "arrow"
     }
   ]
 }

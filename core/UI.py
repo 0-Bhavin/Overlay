@@ -109,7 +109,7 @@ _OUTPUT_FILE = os.path.join(_OUTPUT_DIR, "generated_task.json")
 class _GeneratorWorker(QObject):
     """Runs GeminiTaskGenerator.generate() on a background thread."""
 
-    succeeded = pyqtSignal(list)    # list[dict]
+    succeeded = pyqtSignal(dict)    # {app_exe, steps}
     failed    = pyqtSignal(str)     # error message
 
     def __init__(self, generator: GeminiTaskGenerator, task: str, app: str) -> None:
@@ -121,8 +121,8 @@ class _GeneratorWorker(QObject):
     @pyqtSlot()
     def run(self) -> None:
         try:
-            steps = self._generator.generate(self._task, self._app)
-            self.succeeded.emit(steps)
+            result = self._generator.generate(self._task, self._app)
+            self.succeeded.emit(result)
         except Exception as exc:  # noqa: BLE001
             self.failed.emit(str(exc))
 
@@ -258,15 +258,16 @@ class TaskInputDialog(QWidget):
 
         self._thread.start()
 
-    @pyqtSlot(list)
-    def _on_success(self, steps: list) -> None:
+    @pyqtSlot(dict)
+    def _on_success(self, result: dict) -> None:
         self._set_loading(False)
 
         # Wrap in a full task dict and save
         task_dict = {
-            "name": self._task_edit.text().strip(),
-            "app":  self._app_edit.text().strip(),
-            "steps": steps,
+            "name":    self._task_edit.text().strip(),
+            "app":     self._app_edit.text().strip(),
+            "app_exe": result.get("app_exe", ""),
+            "steps":   result.get("steps", []),
         }
         os.makedirs(_OUTPUT_DIR, exist_ok=True)
         out_path = os.path.abspath(_OUTPUT_FILE)
