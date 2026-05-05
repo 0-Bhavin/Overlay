@@ -208,6 +208,15 @@ class TaskController(QObject):
         self._index -= 1
         self._render_current()
 
+    def go_to_step(self, index: int) -> None:
+        """Jump directly to the step at *index* (0-based).  Feature 1.8."""
+        if self._task is None:
+            return
+        if index < 0 or index >= len(self._task.steps):
+            return
+        self._index = index
+        self._render_current()
+
     # ------------------------------------------------------------------
     # Accessors
     # ------------------------------------------------------------------

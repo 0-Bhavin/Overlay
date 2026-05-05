@@ -10,11 +10,12 @@ class Step:
 
     id: int
     target: str                          # Human-readable name of the UI element, e.g. "Insert tab"
-    tooltip: str                         # Instruction shown to the user
+    tooltip: str                         # Short instruction shown to the user (≤ 20 words)
     action: str = "click"               # "click" | "type" | "scroll" | "hover"
     spotlight_shape: str = "rect"       # "rect" | "circle"
     animation: str = "pulse"            # "pulse" | "arrow" | "none"
-    coords: Optional[tuple[int, int, int, int]] = None  # (L, T, R, B) screen pixels — filled at runtime by coord resolver
+    coords: Optional[tuple[int, int, int, int]] = None  # (L, T, R, B) screen pixels — filled at runtime
+    explanation: str = ""              # Longer why/how explanation for "More info" panel (1.10)
 
     # ------------------------------------------------------------------
     # Construction helpers
@@ -35,4 +36,5 @@ class Step:
             spotlight_shape=d.get("spotlight_shape", "rect"),
             animation=d.get("animation", "pulse"),
             coords=tuple(d["coords"]) if d.get("coords") is not None else None,
+            explanation=d.get("explanation", ""),   # graceful fallback for old JSON
         )

@@ -1,8 +1,8 @@
 """Task input dialog.
 
-A compact, frameless, always-on-top window that lets the user describe a task
-and target application, then calls :class:`~core.ai_task_generator.GeminiTaskGenerator`
-to produce a structured step file.
+Features:
+    1.6  Microphone button for voice-to-text dictation.
+    1.7  Recent tasks history dropdown.
 """
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ from PyQt6.QtCore import (
 )
 from PyQt6.QtWidgets import (
     QApplication,
+    QComboBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -29,6 +30,18 @@ from PyQt6.QtWidgets import (
 )
 
 from core.ai_task_generator import GeminiTaskGenerator
+from core.task_history import load_history, save_to_history
+
+# ---------------------------------------------------------------------------
+# Optional speech recognition (feature 1.6)
+# ---------------------------------------------------------------------------
+
+try:
+    import speech_recognition as _sr  # type: ignore[import]
+    _SR_AVAILABLE = True
+except ImportError:
+    _sr = None
+    _SR_AVAILABLE = False
 
 # ---------------------------------------------------------------------------
 # Stylesheet
@@ -75,7 +88,7 @@ QPushButton#startBtn {
     font-size: 12px;
     font-weight: 700;
 }
-QPushButton#startBtn:hover  { background: #74c7ec; }
+QPushButton#startBtn:hover   { background: #74c7ec; }
 QPushButton#startBtn:pressed { background: #89dceb; }
 QPushButton#startBtn:disabled {
     background: #45475a;
@@ -91,26 +104,52 @@ QPushButton#closeBtn {
 }
 QPushButton#closeBtn:hover { color: #f38ba8; }
 
+QPushButton#micBtn {
+    background: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    color: #cdd6f4;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+QPushButton#micBtn:hover   { background: #45475a; }
+QPushButton#micBtn:checked { background: #f38ba8; border-color: #f38ba8; color: #1e1e2e; }
+
+QComboBox#historyBox {
+    background: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: #a6adc8;
+    font-size: 11px;
+}
+QComboBox#historyBox::drop-down { border: none; }
+QComboBox#historyBox QAbstractItemView {
+    background: #313244;
+    color: #cdd6f4;
+    selection-background-color: #45475a;
+    border: 1px solid #45475a;
+}
+
 QLabel#status {
     color: #89b4fa;
     font-size: 11px;
 }
 """
 
-# Output directory relative to this file's location
-_OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "tasks")
+_OUTPUT_DIR  = os.path.join(os.path.dirname(__file__), "..", "tasks")
 _OUTPUT_FILE = os.path.join(_OUTPUT_DIR, "generated_task.json")
 
 
 # ---------------------------------------------------------------------------
-# Background worker
+# Background workers
 # ---------------------------------------------------------------------------
 
 class _GeneratorWorker(QObject):
     """Runs GeminiTaskGenerator.generate() on a background thread."""
 
-    succeeded = pyqtSignal(dict)    # {app_exe, steps}
-    failed    = pyqtSignal(str)     # error message
+    succeeded = pyqtSignal(dict)
+    failed    = pyqtSignal(str)
 
     def __init__(self, generator: GeminiTaskGenerator, task: str, app: str) -> None:
         super().__init__()
@@ -127,12 +166,38 @@ class _GeneratorWorker(QObject):
             self.failed.emit(str(exc))
 
 
+class _MicWorker(QObject):
+    """Records from microphone and transcribes via speech_recognition (1.6)."""
+
+    succeeded = pyqtSignal(str)   # transcribed text
+    failed    = pyqtSignal(str)   # error message
+
+    @pyqtSlot()
+    def run(self) -> None:
+        if not _SR_AVAILABLE or _sr is None:
+            self.failed.emit("speech_recognition not installed.\nRun: pip install speechrecognition pyaudio")
+            return
+        try:
+            r = _sr.Recognizer()
+            with _sr.Microphone() as source:
+                r.adjust_for_ambient_noise(source, duration=0.4)
+                audio = r.listen(source, timeout=6, phrase_time_limit=10)
+            text = r.recognize_google(audio)
+            self.succeeded.emit(text)
+        except _sr.WaitTimeoutError:
+            self.failed.emit("No speech detected. Please try again.")
+        except _sr.UnknownValueError:
+            self.failed.emit("Could not understand speech. Please try again.")
+        except Exception as exc:  # noqa: BLE001
+            self.failed.emit(str(exc))
+
+
 # ---------------------------------------------------------------------------
 # Dialog
 # ---------------------------------------------------------------------------
 
 class TaskInputDialog(QWidget):
-    """Compact floating dialog for task input.
+    """Compact floating dialog for task input with history and mic support.
 
     Signals
     -------
@@ -150,23 +215,26 @@ class TaskInputDialog(QWidget):
         )
         self.setObjectName("TaskInputDialog")
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
-        self.setFixedSize(420, 210)
+        self.setFixedSize(440, 310)
         self.setStyleSheet(_STYLE)
 
         self._generator = GeminiTaskGenerator(api_key)
         self._thread: QThread | None = None
         self._worker: _GeneratorWorker | None = None
+        self._mic_thread: QThread | None = None
+        self._mic_worker: _MicWorker | None = None
 
-        # ── Animated dots state ──────────────────────────────────────
+        # Animated dots
         self._dot_count = 0
         self._dot_timer = QTimer(self)
         self._dot_timer.setInterval(450)
         self._dot_timer.timeout.connect(self._tick_dots)
 
-        # ── Allow dragging ───────────────────────────────────────────
+        # Drag support
         self._drag_pos = None
 
         self._build_ui()
+        self._load_history()
         self._centre_on_screen()
 
     # ------------------------------------------------------------------
@@ -176,32 +244,55 @@ class TaskInputDialog(QWidget):
     def _build_ui(self) -> None:
         root = QVBoxLayout(self)
         root.setContentsMargins(20, 16, 20, 16)
-        root.setSpacing(10)
+        root.setSpacing(8)
 
         # ── Title row ────────────────────────────────────────────────
         title_row = QHBoxLayout()
-
         title = QLabel("AI Overlay — New Task")
         title.setObjectName("title")
         title_row.addWidget(title)
         title_row.addStretch()
-
         close_btn = QPushButton("✕")
         close_btn.setObjectName("closeBtn")
         close_btn.setFixedSize(24, 24)
         close_btn.clicked.connect(self.close)
         title_row.addWidget(close_btn)
-
         root.addLayout(title_row)
+
+        # ── History dropdown (1.7) ────────────────────────────────────
+        lbl_hist = QLabel("Recent tasks")
+        lbl_hist.setObjectName("fieldLabel")
+        root.addWidget(lbl_hist)
+
+        self._history_box = QComboBox()
+        self._history_box.setObjectName("historyBox")
+        self._history_box.addItem("— select a recent task —")
+        self._history_box.currentIndexChanged.connect(self._on_history_selected)
+        root.addWidget(self._history_box)
 
         # ── Task description ─────────────────────────────────────────
         lbl_task = QLabel("Task description")
         lbl_task.setObjectName("fieldLabel")
         root.addWidget(lbl_task)
 
+        task_row = QHBoxLayout()
+        task_row.setSpacing(6)
         self._task_edit = QLineEdit()
         self._task_edit.setPlaceholderText('e.g. "Insert an image into the document"')
-        root.addWidget(self._task_edit)
+        task_row.addWidget(self._task_edit)
+
+        # Mic button (1.6)
+        self._mic_btn = QPushButton("🎤")
+        self._mic_btn.setObjectName("micBtn")
+        self._mic_btn.setFixedSize(36, 34)
+        self._mic_btn.setToolTip(
+            "Click to dictate the task description" if _SR_AVAILABLE
+            else "Voice input unavailable\n(pip install speechrecognition pyaudio)"
+        )
+        self._mic_btn.setCheckable(True)
+        self._mic_btn.clicked.connect(self._on_mic_clicked)
+        task_row.addWidget(self._mic_btn)
+        root.addLayout(task_row)
 
         # ── App name ─────────────────────────────────────────────────
         lbl_app = QLabel("Target application")
@@ -212,10 +303,9 @@ class TaskInputDialog(QWidget):
         self._app_edit.setPlaceholderText('e.g. "Microsoft Word"')
         root.addWidget(self._app_edit)
 
-        # ── Footer row ───────────────────────────────────────────────
+        # ── Footer ───────────────────────────────────────────────────
         footer = QHBoxLayout()
         footer.setSpacing(10)
-
         self._status_label = QLabel("")
         self._status_label.setObjectName("status")
         footer.addWidget(self._status_label)
@@ -227,45 +317,107 @@ class TaskInputDialog(QWidget):
         self._start_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         self._start_btn.clicked.connect(self._on_start)
         footer.addWidget(self._start_btn)
-
         root.addLayout(footer)
 
     # ------------------------------------------------------------------
-    # Actions
+    # 1.7  History
+    # ------------------------------------------------------------------
+
+    def _load_history(self) -> None:
+        history = load_history()
+        for entry in history:
+            label = f"{entry['task'][:30]}… | {entry['app']}" if len(entry['task']) > 30 \
+                    else f"{entry['task']} | {entry['app']}"
+            self._history_box.addItem(label, userData=entry)
+
+    @pyqtSlot(int)
+    def _on_history_selected(self, index: int) -> None:
+        if index <= 0:
+            return
+        entry = self._history_box.itemData(index)
+        if entry:
+            self._task_edit.setText(entry.get("task", ""))
+            self._app_edit.setText(entry.get("app", ""))
+
+    # ------------------------------------------------------------------
+    # 1.6  Mic voice input
+    # ------------------------------------------------------------------
+
+    def _on_mic_clicked(self, checked: bool) -> None:
+        if not checked:
+            return   # button released mid-recording — ignore
+
+        if not _SR_AVAILABLE:
+            QMessageBox.information(
+                self, "Voice Input Unavailable",
+                "Install the required packages:\n\n"
+                "    pip install speechrecognition pyaudio\n\n"
+                "Then restart the application."
+            )
+            self._mic_btn.setChecked(False)
+            return
+
+        self._status_label.setText("🎤 Listening…")
+        self._set_loading(True)
+
+        self._mic_thread = QThread(self)
+        self._mic_worker = _MicWorker()
+        self._mic_worker.moveToThread(self._mic_thread)
+        self._mic_thread.started.connect(self._mic_worker.run)
+        self._mic_worker.succeeded.connect(self._on_mic_success)
+        self._mic_worker.failed.connect(self._on_mic_failure)
+        self._mic_worker.succeeded.connect(self._mic_thread.quit)
+        self._mic_worker.failed.connect(self._mic_thread.quit)
+        self._mic_thread.finished.connect(self._mic_thread.deleteLater)
+        self._mic_thread.start()
+
+    @pyqtSlot(str)
+    def _on_mic_success(self, text: str) -> None:
+        self._task_edit.setText(text)
+        self._status_label.setText("✓ Transcribed!")
+        self._mic_btn.setChecked(False)
+        self._set_loading(False)
+
+    @pyqtSlot(str)
+    def _on_mic_failure(self, error: str) -> None:
+        self._status_label.setText(f"⚠ {error}")
+        self._mic_btn.setChecked(False)
+        self._set_loading(False)
+
+    # ------------------------------------------------------------------
+    # Generation
     # ------------------------------------------------------------------
 
     def _on_start(self) -> None:
         task = self._task_edit.text().strip()
         app  = self._app_edit.text().strip()
-
         if not task or not app:
             self._status_label.setText("⚠ Both fields are required.")
             return
-
         self._set_loading(True)
-
-        # Run generator on a background thread
         self._thread = QThread(self)
         self._worker = _GeneratorWorker(self._generator, task, app)
         self._worker.moveToThread(self._thread)
-
         self._thread.started.connect(self._worker.run)
         self._worker.succeeded.connect(self._on_success)
         self._worker.failed.connect(self._on_failure)
         self._worker.succeeded.connect(self._thread.quit)
         self._worker.failed.connect(self._thread.quit)
         self._thread.finished.connect(self._thread.deleteLater)
-
         self._thread.start()
 
     @pyqtSlot(dict)
     def _on_success(self, result: dict) -> None:
         self._set_loading(False)
+        task = self._task_edit.text().strip()
+        app  = self._app_edit.text().strip()
 
-        # Wrap in a full task dict and save
+        # Save to history (1.7)
+        save_to_history(task, app)
+
         task_dict = {
-            "name":    self._task_edit.text().strip(),
-            "app":     self._app_edit.text().strip(),
+            "name":    task,
+            "app":     app,
             "app_exe": result.get("app_exe", ""),
             "steps":   result.get("steps", []),
         }
@@ -282,8 +434,7 @@ class TaskInputDialog(QWidget):
         self._set_loading(False)
         self._status_label.setText("")
         QMessageBox.critical(
-            self,
-            "Generation Failed",
+            self, "Generation Failed",
             f"Could not generate task steps:\n\n{error}",
         )
 
@@ -295,9 +446,12 @@ class TaskInputDialog(QWidget):
         self._start_btn.setEnabled(not loading)
         self._task_edit.setEnabled(not loading)
         self._app_edit.setEnabled(not loading)
+        self._mic_btn.setEnabled(not loading)
+        self._history_box.setEnabled(not loading)
         if loading:
             self._dot_count = 0
-            self._status_label.setText("Generating…")
+            if "🎤" not in self._status_label.text():
+                self._status_label.setText("Generating…")
             self._dot_timer.start()
         else:
             self._dot_timer.stop()
@@ -305,7 +459,8 @@ class TaskInputDialog(QWidget):
     def _tick_dots(self) -> None:
         self._dot_count = (self._dot_count + 1) % 4
         dots = "." * self._dot_count
-        self._status_label.setText(f"Generating{dots}")
+        if "🎤" not in self._status_label.text():
+            self._status_label.setText(f"Generating{dots}")
 
     # ------------------------------------------------------------------
     # Drag to move (frameless window)

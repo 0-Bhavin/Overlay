@@ -45,6 +45,8 @@ _SYSTEM_PROMPT = textwrap.dedent("""\
       "action"          : string, one of: "click", "type", "scroll", "hover"
       "spotlight_shape" : string, one of: "rect", "circle"
       "animation"       : string, one of: "pulse", "arrow", "none"
+      "explanation"     : string, 1-2 sentences explaining WHY this step is
+                          needed and what it achieves, ≤ 40 words
 
     Rules:
     - Never include a "coords" key in any step.
@@ -185,7 +187,7 @@ class GeminiTaskGenerator:
             raise ValueError("Response is missing required top-level key: 'app_exe'")
         if "steps" not in result or not isinstance(result["steps"], list):
             raise ValueError("Response is missing a 'steps' list")
-        required = {"id", "target", "tooltip", "action", "spotlight_shape", "animation"}
+        required = {"id", "target", "tooltip", "action", "spotlight_shape", "animation", "explanation"}
         for i, step in enumerate(result["steps"]):
             if not isinstance(step, dict):
                 raise ValueError(f"Step {i} is not a dict: {step!r}")
