@@ -1,34 +1,61 @@
 {
-  "name": "add watermark on my Microsoft Word",
-  "app": "Microsoft word",
-  "app_exe": "WINWORD.EXE",
+  "name": "how to create a new python file in root directory",
+  "app": "antigravity IDE",
+  "app_exe": "antigravity.exe",
   "steps": [
     {
       "id": 1,
-      "target": "Design",
-      "tooltip": "Click the \"Design\" tab to access document formatting options.",
+      "target": "File",
+      "tooltip": "Click File to open the main menu and access file management options.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "The Design tab contains tools for page background, themes, and watermarks."
+      "explanation": "Accessing the File menu is the first step for most document-related operations, including creating new files."
     },
     {
       "id": 2,
-      "target": "Watermark",
-      "tooltip": "Click \"Watermark\" to add text or an image behind your document's content.",
+      "target": "New File",
+      "tooltip": "Select New File to open a blank editor tab for your new Python script.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "This opens a gallery of predefined watermarks and options to create custom ones."
+      "explanation": "This action creates a new, unsaved document, providing a workspace to begin writing your code."
     },
     {
       "id": 3,
-      "target": "Confidential 1",
-      "tooltip": "Choose a pre-designed watermark like \"Confidential 1\".",
+      "target": "Save",
+      "tooltip": "Click Save to open the Save As dialog and specify the file's name and location.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "It's important to save your file early to prevent data loss and to define its properties."
+    },
+    {
+      "id": 4,
+      "target": "File name",
+      "tooltip": "Type your desired Python file name, ensuring it ends with the '.py' extension.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "arrow",
+      "explanation": "The '.py' extension identifies the file as a Python script, which is crucial for the IDE to recognize it correctly."
+    },
+    {
+      "id": 5,
+      "target": "Navigation pane",
+      "tooltip": "In the dialog, use the Navigation pane to browse and select your project's root directory.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "Selecting a watermark automatically applies it to all pages of your document."
+      "explanation": "Placing the file in the root directory ensures it is easily accessible and correctly structured within your project."
+    },
+    {
+      "id": 6,
+      "target": "Save",
+      "tooltip": "Click Save to finalize creating your new Python file in the specified root directory.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "This action completes the process, saving the new Python file to the chosen location within your project."
     }
   ]
 }

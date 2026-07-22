@@ -1,7 +1,7 @@
 # Qt6 UI framework
 PyQt6==6.7.0
 PyQt6-Qt6==6.7.0
-PyQt6-sip==13.6.0
+PyQt6-sip>=13.6.0
 
 # Gemini AI
 google-generativeai==0.7.2
@@ -22,7 +22,7 @@ screeninfo==0.8.1
 mss==9.0.2
 
 # Image processing (HybridResolver — JPEG encoding for Gemini Vision)
-Pillow==10.3.0
+Pillow>=11.0.0
 
 # NOTE: pyatspi is NOT on PyPI — install via system package manager (Linux only)
 # Do NOT add pyatspi here
