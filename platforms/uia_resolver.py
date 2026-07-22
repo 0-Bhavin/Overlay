@@ -14,6 +14,18 @@ import os
 
 _log = logging.getLogger(__name__)
 
+
+class ElementNotFoundError(Exception):
+    """Exception raised when a target UI element cannot be located after all retries and BFS fallback."""
+
+    def __init__(self, app_name: str, target_name: str, strategies_tried: list[str]) -> None:
+        super().__init__(
+            f"Could not find element {target_name!r} in application {app_name!r} after trying: {', '.join(strategies_tried)}"
+        )
+        self.app_name = app_name
+        self.target_name = target_name
+        self.strategies_tried = strategies_tried
+
 try:
     from pywinauto.application import Application
     _PYWINAUTO_AVAILABLE = True
@@ -269,6 +281,62 @@ class UIAResolver:
             "find_element: all strategies failed for %r in %r", target_name, app_name
         )
         return None
+
+    def find_element_with_retry(self, app_name: str, target_name: str, app_exe: str | None = None):
+        """Locate a UI element with retries and a BFS fallback on failure."""
+        import time
+        from collections import deque
+
+        strategies_tried = []
+        max_attempts = 3  # Initial + 2 retries
+        for attempt in range(1, max_attempts + 1):
+            strategies_tried.append(f"Attempt {attempt}: find_element strategy chain")
+            try:
+                el = self.find_element(app_name, target_name, app_exe=app_exe)
+                if el is not None:
+                    return el
+            except Exception as exc:
+                _log.debug("find_element_with_retry: Attempt %d failed: %s", attempt, exc)
+            
+            if attempt < max_attempts:
+                time.sleep(1.5)
+
+        # Fallback BFS scan
+        strategies_tried.append("Fallback: BFS descendant scan")
+        _log.info("find_element_with_retry: Falling back to BFS descendant scan for %r", target_name)
+        
+        wrapper = self.find_window(app_name, app_exe=app_exe)
+        if wrapper is not None:
+            needle = target_name.lower().strip()
+            try:
+                queue = deque([wrapper])
+                visited = set()
+                while queue:
+                    curr = queue.popleft()
+                    curr_id = id(curr)
+                    if curr_id in visited:
+                        continue
+                    visited.add(curr_id)
+                    
+                    try:
+                        text = curr.window_text()
+                        if text:
+                            text_lower = text.lower()
+                            if needle in text_lower:
+                                _log.info("find_element_with_retry BFS: found matching element %r", text)
+                                return curr
+                    except Exception:
+                        pass
+                    
+                    try:
+                        for child in curr.children():
+                            queue.append(child)
+                    except Exception:
+                        pass
+            except Exception as exc:
+                _log.debug("find_element_with_retry BFS failed: %s", exc)
+
+        raise ElementNotFoundError(app_name, target_name, strategies_tried)
 
     # ------------------------------------------------------------------
     # Coordinate extraction — returns (L, T, R, B)

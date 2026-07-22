@@ -95,6 +95,15 @@ def main() -> None:
     controller.coords_resolved.connect(layer_manager.on_coords_resolved)
     controller.resolution_failed.connect(layer_manager.show_resolution_failed)
 
+    def _on_element_not_found(target: str, error: object) -> None:
+        layer_manager.show_recovery_panel(
+            target=target,
+            error=error,
+            on_skip=controller.next_step,
+            on_retry=lambda: controller.go_to_step(controller.current_step_index())
+        )
+    controller.element_not_found.connect(_on_element_not_found)
+
     # ── 8b. ActionWatcher — auto-advance on menu/dialog/focus events ──
     def _on_coords_resolved(step) -> None:
         layer_manager.on_coords_resolved(step)

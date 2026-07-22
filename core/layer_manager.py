@@ -128,6 +128,11 @@ class LayerManager(QObject):
             f"\u26a0\ufe0f Couldn\u2019t find \u201c{target}\u201d \u2014 please click it manually"
         )
 
+    def show_recovery_panel(self, target: str, error: object, on_skip, on_retry) -> None:
+        self._overlay.set_resolving(False)   # stop pulse
+        msg = f"\u26a0\ufe0f Couldn't find \"{target}\" \u2014 skip or retry?"
+        self._tooltip.show_recovery_panel(msg, on_skip, on_retry)
+
     # ------------------------------------------------------------------
     # 1.3  Step-complete flash
     # ------------------------------------------------------------------

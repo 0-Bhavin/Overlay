@@ -58,13 +58,17 @@ def main() -> None:
     # ── 3. Full hybrid (UIA → Vision fallback) ────────────────────────
     _separator("3 · Full hybrid  resolve()")
     t0 = time.perf_counter()
-    coords = resolver.resolve(APP, TARGET)
-    elapsed = time.perf_counter() - t0
-    if coords:
-        x, y, w, h = coords
-        print(f"   ✓ Result: x={x}  y={y}  w={w}  h={h}  ({elapsed*1000:.1f} ms)")
-    else:
-        print(f"   ✗ not found  ({elapsed*1000:.1f} ms)")
+    try:
+        coords = resolver.resolve(APP, TARGET)
+        elapsed = time.perf_counter() - t0
+        if coords:
+            x, y, w, h = coords
+            print(f"   ✓ Result: x={x}  y={y}  w={w}  h={h}  ({elapsed*1000:.1f} ms)")
+        else:
+            print(f"   ✗ not found  ({elapsed*1000:.1f} ms)")
+    except Exception as exc:
+        elapsed = time.perf_counter() - t0
+        print(f"   ✗ Raised expected error: {exc} ({elapsed*1000:.1f} ms)")
 
     print()
 

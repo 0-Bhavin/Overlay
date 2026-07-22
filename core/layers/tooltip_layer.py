@@ -157,6 +157,32 @@ class _Card(QWidget):
         self._more_label.hide()
         outer.addWidget(self._more_label)
 
+        # ── Recovery buttons (hidden by default) ──────────────────────
+        self._recovery_layout = QHBoxLayout()
+        self._skip_btn = QPushButton("Skip")
+        self._retry_btn = QPushButton("Retry")
+        
+        self._skip_btn.setStyleSheet(
+            "QPushButton { background: #45475a; border: none; border-radius: 4px; "
+            "color: #cdd6f4; font-size: 11px; padding: 6px 14px; font-weight: bold; } "
+            "QPushButton:hover { background: #585b70; }"
+        )
+        self._retry_btn.setStyleSheet(
+            "QPushButton { background: #89b4fa; border: none; border-radius: 4px; "
+            "color: #1e1e2e; font-size: 11px; padding: 6px 14px; font-weight: bold; } "
+            "QPushButton:hover { background: #74c7ec; }"
+        )
+        self._skip_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self._retry_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        
+        self._recovery_layout.addWidget(self._skip_btn)
+        self._recovery_layout.addWidget(self._retry_btn)
+        self._recovery_layout.addStretch()
+        outer.addLayout(self._recovery_layout)
+        
+        self._skip_btn.hide()
+        self._retry_btn.hide()
+
         # ── Drag hint label ───────────────────────────────────────────
         drag_hint = QLabel("⠿ drag")
         drag_hint.setStyleSheet(
@@ -185,6 +211,31 @@ class _Card(QWidget):
             self._more_label.hide()
             self._expanded = False
 
+        self._skip_btn.hide()
+        self._retry_btn.hide()
+        self.adjustSize()
+
+    def show_recovery(self, message: str, on_skip, on_retry) -> None:
+        self._action = "click"  # Default accent color styling
+        self._action_label.setText("Error")
+        self._tooltip_label.setText(message)
+        self._toggle_btn.hide()
+        self._more_label.hide()
+        
+        try:
+            self._skip_btn.clicked.disconnect()
+        except TypeError:
+            pass
+        try:
+            self._retry_btn.clicked.disconnect()
+        except TypeError:
+            pass
+            
+        self._skip_btn.clicked.connect(on_skip)
+        self._retry_btn.clicked.connect(on_retry)
+        
+        self._skip_btn.show()
+        self._retry_btn.show()
         self.adjustSize()
 
     # ------------------------------------------------------------------
@@ -325,6 +376,13 @@ class TooltipLayer(QWidget):
         self._card._toggle_btn.hide()
         self._card._more_label.hide()
         self._card.adjustSize()
+        self._position_card(None)
+        self._card.show()
+        self._card.raise_()
+
+    def show_recovery_panel(self, message: str, on_skip, on_retry) -> None:
+        """Display the recovery skip/retry buttons on the card."""
+        self._card.show_recovery(message, on_skip, on_retry)
         self._position_card(None)
         self._card.show()
         self._card.raise_()
