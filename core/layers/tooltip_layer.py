@@ -169,10 +169,13 @@ class _Card(QWidget):
     # Public setters
     # ------------------------------------------------------------------
 
-    def set_content(self, tooltip: str, action: str, explanation: str = "") -> None:
+    def set_content(self, tooltip: str, action: str, explanation: str = "", cache_hit: bool = False) -> None:
         self._action = action
         self._tooltip_label.setText(tooltip)
-        self._action_label.setText(_ACTION_LABELS.get(action, action.capitalize()))
+        action_text = _ACTION_LABELS.get(action, action.capitalize())
+        if cache_hit:
+            action_text = f"{action_text} [Cached]"
+        self._action_label.setText(action_text)
 
         # 1.10 — update explanation and toggle button visibility
         has_explanation = bool(explanation.strip())
@@ -303,7 +306,8 @@ class TooltipLayer(QWidget):
 
     def render(self, step: Step) -> None:
         """Show the tooltip card positioned relative to *step*.coords."""
-        self._card.set_content(step.tooltip, step.action, step.explanation)
+        cache_hit = getattr(step, "cache_hit", False)
+        self._card.set_content(step.tooltip, step.action, step.explanation, cache_hit=cache_hit)
         self._card.adjustSize()
         self._last_coords = step.coords
         self._position_card(step.coords)

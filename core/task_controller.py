@@ -89,8 +89,13 @@ class _CoordWorker(QObject):
                 self.failed.emit(step.target)
                 return
 
-            _log.debug("Resolved %r -> %s", step.target, coords)
-            self.resolved.emit(dataclasses.replace(step, coords=coords))
+            # Determine if it was a cache hit
+            cache_hit = False
+            if self._resolver is not None and hasattr(self._resolver, "_uia") and self._resolver._uia is not None:
+                cache_hit = getattr(self._resolver._uia, "last_cache_hit", False)
+
+            _log.debug("Resolved %r -> %s (cache hit: %s)", step.target, coords, cache_hit)
+            self.resolved.emit(dataclasses.replace(step, coords=coords, cache_hit=cache_hit))
         except Exception as exc:  # noqa: BLE001
             _log.error("Resolution error for %r: %s", step.target, exc)
             self.failed.emit(step.target)
@@ -277,7 +282,8 @@ class TaskController(QObject):
         if step.id != self._pending_step_id:
             return  # stale result — user navigated away
         self._cancel_pending_resolution()
-        print(f"Resolved step {step.id}: {step.target!r} at {step.coords} [live]")
+        cache_str = " [cache]" if getattr(step, "cache_hit", False) else " [live]"
+        print(f"Resolved step {step.id}: {step.target!r} at {step.coords}{cache_str}")
         self.coords_resolved.emit(step)
 
     @pyqtSlot(str)

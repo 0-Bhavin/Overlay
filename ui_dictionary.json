@@ -1,0 +1,151 @@
+{
+  "word": {
+    "bold": {
+      "control_type": "Button",
+      "title": "Bold",
+      "path_hint": "Home tab > Font group"
+    },
+    "bold text": {
+      "control_type": "Button",
+      "title": "Bold",
+      "path_hint": "Home tab > Font group"
+    },
+    "italic": {
+      "control_type": "Button",
+      "title": "Italic",
+      "path_hint": "Home tab > Font group"
+    },
+    "italic text": {
+      "control_type": "Button",
+      "title": "Italic",
+      "path_hint": "Home tab > Font group"
+    },
+    "underline": {
+      "control_type": "Button",
+      "title": "Underline",
+      "path_hint": "Home tab > Font group"
+    },
+    "insert image": {
+      "control_type": "Button",
+      "title": "Pictures",
+      "path_hint": "Insert tab > Illustrations group"
+    },
+    "pictures": {
+      "control_type": "Button",
+      "title": "Pictures",
+      "path_hint": "Insert tab > Illustrations group"
+    },
+    "insert table": {
+      "control_type": "Button",
+      "title": "Table",
+      "path_hint": "Insert tab > Tables group"
+    },
+    "table": {
+      "control_type": "Button",
+      "title": "Table",
+      "path_hint": "Insert tab > Tables group"
+    },
+    "save": {
+      "control_type": "Button",
+      "title": "Save",
+      "path_hint": "Quick Access Toolbar"
+    },
+    "undo": {
+      "control_type": "Button",
+      "title": "Undo",
+      "path_hint": "Quick Access Toolbar"
+    },
+    "redo": {
+      "control_type": "Button",
+      "title": "Redo",
+      "path_hint": "Quick Access Toolbar"
+    },
+    "font size": {
+      "control_type": "ComboBox",
+      "title": "Font Size",
+      "path_hint": "Home tab > Font group"
+    },
+    "alignment": {
+      "control_type": "Button",
+      "title": "Align Left",
+      "path_hint": "Home tab > Paragraph group"
+    },
+    "align left": {
+      "control_type": "Button",
+      "title": "Align Left",
+      "path_hint": "Home tab > Paragraph group"
+    },
+    "align center": {
+      "control_type": "Button",
+      "title": "Center",
+      "path_hint": "Home tab > Paragraph group"
+    },
+    "align right": {
+      "control_type": "Button",
+      "title": "Align Right",
+      "path_hint": "Home tab > Paragraph group"
+    }
+  },
+  "excel": {
+    "bold": {
+      "control_type": "Button",
+      "title": "Bold",
+      "path_hint": "Home tab > Font group"
+    },
+    "italic": {
+      "control_type": "Button",
+      "title": "Italic",
+      "path_hint": "Home tab > Font group"
+    },
+    "insert image": {
+      "control_type": "Button",
+      "title": "Pictures",
+      "path_hint": "Insert tab > Illustrations group"
+    },
+    "insert table": {
+      "control_type": "Button",
+      "title": "Table",
+      "path_hint": "Insert tab > Tables group"
+    },
+    "table": {
+      "control_type": "Button",
+      "title": "Table",
+      "path_hint": "Insert tab > Tables group"
+    },
+    "vlookup": {
+      "control_type": "Button",
+      "title": "Insert Function",
+      "path_hint": "Formulas tab > Function Library group"
+    },
+    "save": {
+      "control_type": "Button",
+      "title": "Save",
+      "path_hint": "Quick Access Toolbar"
+    },
+    "undo": {
+      "control_type": "Button",
+      "title": "Undo",
+      "path_hint": "Quick Access Toolbar"
+    },
+    "font size": {
+      "control_type": "ComboBox",
+      "title": "Font Size",
+      "path_hint": "Home tab > Font group"
+    },
+    "merge & center": {
+      "control_type": "Button",
+      "title": "Merge & Center",
+      "path_hint": "Home tab > Alignment group"
+    },
+    "merge": {
+      "control_type": "Button",
+      "title": "Merge & Center",
+      "path_hint": "Home tab > Alignment group"
+    },
+    "insert chart": {
+      "control_type": "Button",
+      "title": "Recommended Charts",
+      "path_hint": "Insert tab > Charts group"
+    }
+  }
+}
