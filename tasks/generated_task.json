@@ -1,61 +1,70 @@
 {
   "name": "how to create a new python file in root directory",
-  "app": "antigravity IDE",
+  "app": "overlay - antigravity IDE",
   "app_exe": "antigravity.exe",
   "steps": [
     {
       "id": 1,
       "target": "File",
-      "tooltip": "Click File to open the main menu and access file management options.",
+      "tooltip": "Click the File menu to access options for managing files.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "Accessing the File menu is the first step for most document-related operations, including creating new files."
+      "explanation": "This opens the File menu, where you can select actions like creating a new file."
     },
     {
       "id": 2,
       "target": "New File",
-      "tooltip": "Select New File to open a blank editor tab for your new Python script.",
+      "tooltip": "Choose New File to open a new, unsaved document in the editor.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "This action creates a new, unsaved document, providing a workspace to begin writing your code."
+      "explanation": "Selecting 'New File' creates an empty tab, ready for you to type your Python code."
     },
     {
       "id": 3,
-      "target": "Save",
-      "tooltip": "Click Save to open the Save As dialog and specify the file's name and location.",
+      "target": "File",
+      "tooltip": "Click the File menu again to save your newly created file.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "It's important to save your file early to prevent data loss and to define its properties."
+      "explanation": "You need to save the new, untitled file to specify its name and location."
     },
     {
       "id": 4,
-      "target": "File name",
-      "tooltip": "Type your desired Python file name, ensuring it ends with the '.py' extension.",
-      "action": "type",
+      "target": "Save As",
+      "tooltip": "Select Save As to open the dialog for naming and locating your file.",
+      "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "The '.py' extension identifies the file as a Python script, which is crucial for the IDE to recognize it correctly."
+      "explanation": "The 'Save As' dialog allows you to choose where to save your file and what to call it."
     },
     {
       "id": 5,
-      "target": "Navigation pane",
-      "tooltip": "In the dialog, use the Navigation pane to browse and select your project's root directory.",
+      "target": "Folders list",
+      "tooltip": "In the Save As dialog, navigate to and select the project's root directory.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "Placing the file in the root directory ensures it is easily accessible and correctly structured within your project."
+      "explanation": "This ensures your new Python file will be created directly within the top-level project folder."
     },
     {
       "id": 6,
+      "target": "File name",
+      "tooltip": "Type your desired file name, making sure to add the '.py' extension.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "The '.py' extension identifies the file as a Python script, enabling proper syntax highlighting and IDE features."
+    },
+    {
+      "id": 7,
       "target": "Save",
-      "tooltip": "Click Save to finalize creating your new Python file in the specified root directory.",
+      "tooltip": "Click Save to finalize creating and saving your new Python file.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "This action completes the process, saving the new Python file to the chosen location within your project."
+      "explanation": "This action saves the file with the specified name in the chosen root directory, making it available in your project."
     }
   ]
 }
