@@ -1,70 +1,43 @@
 {
-  "name": "how to create a new python file in root directory",
-  "app": "overlay - antigravity IDE",
-  "app_exe": "antigravity.exe",
+  "name": "insert an image int the slide",
+  "app": "PowerPoint",
+  "app_exe": "POWERPNT.EXE",
   "steps": [
     {
       "id": 1,
-      "target": "File",
-      "tooltip": "Click the File menu to access options for managing files.",
+      "target": "Insert",
+      "tooltip": "Click the Insert tab to see options for adding content to your slide.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "This opens the File menu, where you can select actions like creating a new file."
+      "explanation": "The Insert tab contains all the tools needed to add various elements, including images, to your presentation."
     },
     {
       "id": 2,
-      "target": "New File",
-      "tooltip": "Choose New File to open a new, unsaved document in the editor.",
+      "target": "Pictures",
+      "tooltip": "Click Pictures to insert an image from your computer or online sources.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "Selecting 'New File' creates an empty tab, ready for you to type your Python code."
+      "explanation": "This opens a menu allowing you to choose the source of the picture you wish to insert into your slide."
     },
     {
       "id": 3,
-      "target": "File",
-      "tooltip": "Click the File menu again to save your newly created file.",
+      "target": "This Device",
+      "tooltip": "Select This Device to browse for an image stored on your computer.",
       "action": "click",
       "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "You need to save the new, untitled file to specify its name and location."
+      "animation": "arrow",
+      "explanation": "Choosing 'This Device' will open a file explorer window, letting you navigate to and select an image file from your local storage."
     },
     {
       "id": 4,
-      "target": "Save As",
-      "tooltip": "Select Save As to open the dialog for naming and locating your file.",
+      "target": "Open",
+      "tooltip": "Navigate to your desired image, select it, and click Open to insert it.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "The 'Save As' dialog allows you to choose where to save your file and what to call it."
-    },
-    {
-      "id": 5,
-      "target": "Folders list",
-      "tooltip": "In the Save As dialog, navigate to and select the project's root directory.",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "This ensures your new Python file will be created directly within the top-level project folder."
-    },
-    {
-      "id": 6,
-      "target": "File name",
-      "tooltip": "Type your desired file name, making sure to add the '.py' extension.",
-      "action": "type",
-      "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "The '.py' extension identifies the file as a Python script, enabling proper syntax highlighting and IDE features."
-    },
-    {
-      "id": 7,
-      "target": "Save",
-      "tooltip": "Click Save to finalize creating and saving your new Python file.",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "This action saves the file with the specified name in the chosen root directory, making it available in your project."
+      "explanation": "After selecting your image file, clicking 'Open' will place the image directly onto your current PowerPoint slide."
     }
   ]
 }

@@ -10,10 +10,12 @@ import logging
 import textwrap
 
 try:
-    import google.generativeai as genai  # type: ignore[import]
+    import google.genai
+     as genai  # type: ignore[import]
+    from google.genai import types  # type: ignore[import]
 except ModuleNotFoundError as _err:
     raise ModuleNotFoundError(
-        "google-generativeai is not installed. Run: pip install google-generativeai"
+        "google-genai is not installed. Run: pip install google-genai"
     ) from _err
 
 _log = logging.getLogger(__name__)
@@ -80,11 +82,7 @@ class GeminiTaskGenerator:
     _MODEL = "gemini-2.5-flash"
 
     def __init__(self, api_key: str) -> None:
-        genai.configure(api_key=api_key)
-        self._model = genai.GenerativeModel(
-            model_name=self._MODEL,
-            system_instruction=_SYSTEM_PROMPT,
-        )
+        self._client = genai.Client(api_key=api_key)
 
     # ------------------------------------------------------------------
     # Public API
@@ -123,7 +121,13 @@ class GeminiTaskGenerator:
             _log.debug("Gemini request attempt %d/%d", attempt + 1, 1 + _MAX_RETRIES)
 
             try:
-                response = self._model.generate_content(prompt)
+                response = self._client.models.generate_content(
+                    model=self._MODEL,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        system_instruction=_SYSTEM_PROMPT,
+                    ),
+                )
                 raw = (response.text or "").strip()
                 _log.debug("Gemini raw response: %s", raw[:200])
                 result = self._parse_json(raw)

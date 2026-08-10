@@ -25,7 +25,7 @@ load_dotenv()
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment (.env file or system variable).
-_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
+_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6Ij7vlOrKU0B3IwnnvSIF2hR7ZBhf8quG69-YewEwf2wg")
 if not _GEMINI_API_KEY:
     raise EnvironmentError(
         "GEMINI_API_KEY is not set.\n"
