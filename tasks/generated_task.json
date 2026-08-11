@@ -1,61 +1,34 @@
 {
-  "name": "how to create a new python file in root directory",
-  "app": "antigravity IDE",
-  "app_exe": "antigravity.exe",
+  "name": "How do change the margin to wide",
+  "app": "Book1 - Excel",
+  "app_exe": "EXCEL.EXE",
   "steps": [
     {
       "id": 1,
-      "target": "File",
-      "tooltip": "Click File to open the main menu and access file management options.",
+      "target": "Page Layout",
+      "tooltip": "Click the Page Layout tab to access page setup options.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "Accessing the File menu is the first step for most document-related operations, including creating new files."
+      "explanation": "This tab contains options for page setup, including document margins."
     },
     {
       "id": 2,
-      "target": "New File",
-      "tooltip": "Select New File to open a blank editor tab for your new Python script.",
+      "target": "Margins",
+      "tooltip": "Click Margins to see available margin presets.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "This action creates a new, unsaved document, providing a workspace to begin writing your code."
+      "explanation": "This opens a dropdown menu with different margin configurations for your worksheet."
     },
     {
       "id": 3,
-      "target": "Save",
-      "tooltip": "Click Save to open the Save As dialog and specify the file's name and location.",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "It's important to save your file early to prevent data loss and to define its properties."
-    },
-    {
-      "id": 4,
-      "target": "File name",
-      "tooltip": "Type your desired Python file name, ensuring it ends with the '.py' extension.",
-      "action": "type",
-      "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "The '.py' extension identifies the file as a Python script, which is crucial for the IDE to recognize it correctly."
-    },
-    {
-      "id": 5,
-      "target": "Navigation pane",
-      "tooltip": "In the dialog, use the Navigation pane to browse and select your project's root directory.",
+      "target": "Wide",
+      "tooltip": "Select Wide to apply a wider margin setting to your document.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "Placing the file in the root directory ensures it is easily accessible and correctly structured within your project."
-    },
-    {
-      "id": 6,
-      "target": "Save",
-      "tooltip": "Click Save to finalize creating your new Python file in the specified root directory.",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "This action completes the process, saving the new Python file to the chosen location within your project."
+      "explanation": "Choosing 'Wide' will set the top, bottom, left, and right margins to a larger value."
     }
   ]
 }

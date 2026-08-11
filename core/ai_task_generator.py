@@ -21,10 +21,10 @@ _log = logging.getLogger(__name__)
 _MAX_RETRIES: int = 2  # number of extra attempts after the first failure
 
 # ---------------------------------------------------------------------------
-# System prompt
+# System prompts
 # ---------------------------------------------------------------------------
 
-_SYSTEM_PROMPT = textwrap.dedent("""\
+_APP_SYSTEM_PROMPT = textwrap.dedent("""\
     You are a UI task decomposer. Given a user task and a target application
     name, you output ONLY a valid JSON object — no markdown fences, no
     explanations, no preamble, nothing but the raw JSON.
@@ -58,6 +58,50 @@ _SYSTEM_PROMPT = textwrap.dedent("""\
     - Output ONLY the JSON object. Any extra text will break the parser.
 """)
 
+_WEBSITE_SYSTEM_PROMPT = textwrap.dedent("""\
+    You are given:
+
+    A task description that needs to be performed on a webpage.
+    A JSON representation of the entire webpage, where each UI element and its attributes are available.
+
+    Your objective is to decompose the task into the smallest possible executable steps, where each step corresponds to a single user interaction (one click or one atomic action).
+
+    Instructions
+    Break the task into a sequence of atomic steps.
+    Each step should represent one interaction only (e.g., click a button, open a menu, select an option, focus an input field).
+    For every step, identify the corresponding element in the provided webpage JSON.
+    Extract and include all relevant attributes required to uniquely identify, filter, or navigate to that element.
+    Preserve the correct execution order of the steps.
+    If an element is nested, include its parent navigation path when necessary.
+    Do not omit intermediate navigation steps.
+    Return only valid JSON with no additional explanation.
+    Output JSON format
+    {
+      "task": "<original task>",
+      "steps": [
+        {
+          "step_number": 1,
+          "action": "click",
+          "description": "Click the Login button",
+          "element": {
+            "tag": "button",
+            "text": "Login",
+            "id": "login-btn",
+            "class": "btn btn-primary",
+            "name": null,
+            "role": "button",
+            "aria_label": "Login",
+            "xpath": "...",
+            "css_selector": "...",
+            "parent_path": ["header", "nav"]
+          }
+        }
+      ]
+    }
+
+    The goal is to generate a machine-readable JSON workflow where every step is directly mapped to the corresponding element in the webpage JSON and contains sufficient attributes for reliable element identification and navigation.
+""")
+
 _RETRY_SUFFIX = (
     "\n\nYour last response was not valid JSON. "
     "Return ONLY the JSON array, with no extra text."
@@ -81,16 +125,20 @@ class GeminiTaskGenerator:
 
     def __init__(self, api_key: str) -> None:
         genai.configure(api_key=api_key)
-        self._model = genai.GenerativeModel(
+        self._app_model = genai.GenerativeModel(
             model_name=self._MODEL,
-            system_instruction=_SYSTEM_PROMPT,
+            system_instruction=_APP_SYSTEM_PROMPT,
+        )
+        self._website_model = genai.GenerativeModel(
+            model_name=self._MODEL,
+            system_instruction=_WEBSITE_SYSTEM_PROMPT,
         )
 
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
 
-    def generate(self, task_description: str, app_name: str) -> dict:
+    def generate(self, task_description: str, app_name: str, target_mode: str = "app") -> dict:
         """Convert *task_description* into a task dict for *app_name*.
 
         Parameters
@@ -99,15 +147,15 @@ class GeminiTaskGenerator:
             Plain-English description of what the user wants to accomplish,
             e.g. ``"Insert an image from file into the document"``.
         app_name:
-            The name of the target application, e.g. ``"Microsoft Word"``.
+            The name of the target application or website URL, e.g. ``"Microsoft Word"``
+            or ``"https://google.com"``.
+        target_mode:
+            ``"app"`` for window desktop applications, or ``"website"`` for web applications.
 
         Returns
         -------
         dict
-            A dict with two keys:
-            - ``"app_exe"``: the Windows process exe name (e.g. ``"EXCEL.EXE"``)
-            - ``"steps"``: list of step dicts, each containing the keys
-              specified in the system prompt.
+            A dict containing generated task steps.
 
         Raises
         ------
@@ -115,19 +163,28 @@ class GeminiTaskGenerator:
             If the Gemini response cannot be parsed as valid JSON after all
             retries are exhausted.
         """
-        user_prompt = self._build_user_prompt(task_description, app_name)
+        is_website = (target_mode == "website")
+        model = self._website_model if is_website else self._app_model
+        user_prompt = (
+            self._build_website_user_prompt(task_description, app_name)
+            if is_website
+            else self._build_app_user_prompt(task_description, app_name)
+        )
         last_error: Exception | None = None
 
         for attempt in range(1 + _MAX_RETRIES):
             prompt = user_prompt if attempt == 0 else user_prompt + _RETRY_SUFFIX
-            _log.debug("Gemini request attempt %d/%d", attempt + 1, 1 + _MAX_RETRIES)
+            _log.debug("Gemini request attempt %d/%d (mode=%s)", attempt + 1, 1 + _MAX_RETRIES, target_mode)
 
             try:
-                response = self._model.generate_content(prompt)
+                response = model.generate_content(prompt)
                 raw = (response.text or "").strip()
                 _log.debug("Gemini raw response: %s", raw[:200])
                 result = self._parse_json(raw)
-                self._validate_result(result)
+                if is_website:
+                    self._validate_website_result(result)
+                else:
+                    self._validate_app_result(result)
                 return result
 
             except (json.JSONDecodeError, ValueError) as exc:
@@ -153,11 +210,19 @@ class GeminiTaskGenerator:
     # ------------------------------------------------------------------
 
     @staticmethod
-    def _build_user_prompt(task_description: str, app_name: str) -> str:
+    def _build_app_user_prompt(task_description: str, app_name: str) -> str:
         return (
             f"Application: {app_name}\n"
             f"Task: {task_description}\n\n"
             "Return the JSON step array now."
+        )
+
+    @staticmethod
+    def _build_website_user_prompt(task_description: str, app_name: str) -> str:
+        return (
+            f"Target Webpage/URL: {app_name}\n"
+            f"Task: {task_description}\n\n"
+            "Return the JSON workflow object now."
         )
 
     @staticmethod
@@ -181,8 +246,8 @@ class GeminiTaskGenerator:
         return parsed  # type: ignore[return-value]
 
     @staticmethod
-    def _validate_result(result: dict) -> None:
-        """Raise ``ValueError`` if the top-level result or any step is missing required keys."""
+    def _validate_app_result(result: dict) -> None:
+        """Raise ``ValueError`` if the top-level result or any step is missing required keys for app mode."""
         if "app_exe" not in result:
             raise ValueError("Response is missing required top-level key: 'app_exe'")
         if "steps" not in result or not isinstance(result["steps"], list):
@@ -197,4 +262,13 @@ class GeminiTaskGenerator:
                     f"Step {i} is missing required keys: {missing}"
                 )
 
-
+    @staticmethod
+    def _validate_website_result(result: dict) -> None:
+        """Raise ``ValueError`` if the top-level result or any step is missing required keys for website mode."""
+        if "steps" not in result or not isinstance(result["steps"], list):
+            raise ValueError("Response is missing a 'steps' list")
+        for i, step in enumerate(result["steps"]):
+            if not isinstance(step, dict):
+                raise ValueError(f"Step {i} is not a dict: {step!r}")
+            if "step_number" not in step and "id" not in step:
+                raise ValueError(f"Step {i} is missing 'step_number' or 'id'")

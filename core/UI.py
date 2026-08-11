@@ -131,9 +131,68 @@ QComboBox#historyBox QAbstractItemView {
     border: 1px solid #45475a;
 }
 
+QComboBox#appBox {
+    background: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: #cdd6f4;
+    font-size: 12px;
+}
+QComboBox#appBox:focus { border-color: #89b4fa; }
+QComboBox#appBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: right center;
+    width: 20px;
+    border: none;
+}
+QComboBox#appBox QAbstractItemView {
+    background: #313244;
+    color: #cdd6f4;
+    selection-background-color: #45475a;
+    border: 1px solid #45475a;
+    padding: 2px;
+}
+
+QPushButton#refreshBtn {
+    background: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    color: #a6adc8;
+    font-size: 13px;
+    padding: 4px 8px;
+}
+QPushButton#refreshBtn:hover   { background: #45475a; color: #cdd6f4; }
+QPushButton#refreshBtn:disabled { color: #585b70; }
+
 QLabel#status {
     color: #89b4fa;
     font-size: 11px;
+}
+
+QWidget#modeToggleContainer {
+    background: #181825;
+    border-radius: 8px;
+    border: 1px solid #313244;
+}
+
+QPushButton#toggleAppBtn, QPushButton#toggleWebBtn {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #a6adc8;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+QPushButton#toggleAppBtn:hover, QPushButton#toggleWebBtn:hover {
+    color: #cdd6f4;
+    background: #313244;
+}
+QPushButton#toggleAppBtn:checked, QPushButton#toggleWebBtn:checked {
+    background: #89b4fa;
+    color: #1e1e2e;
+    font-weight: 700;
 }
 """
 
@@ -151,16 +210,17 @@ class _GeneratorWorker(QObject):
     succeeded = pyqtSignal(dict)
     failed    = pyqtSignal(str)
 
-    def __init__(self, generator: GeminiTaskGenerator, task: str, app: str) -> None:
+    def __init__(self, generator: GeminiTaskGenerator, task: str, app: str, target_mode: str = "app") -> None:
         super().__init__()
         self._generator = generator
         self._task = task
         self._app  = app
+        self._mode = target_mode
 
     @pyqtSlot()
     def run(self) -> None:
         try:
-            result = self._generator.generate(self._task, self._app)
+            result = self._generator.generate(self._task, self._app, target_mode=self._mode)
             self.succeeded.emit(result)
         except Exception as exc:  # noqa: BLE001
             self.failed.emit(str(exc))
@@ -192,6 +252,32 @@ class _MicWorker(QObject):
             self.failed.emit(str(exc))
 
 
+class _WindowScanWorker(QObject):
+    """Scans open windows via pywinauto on a background thread."""
+
+    succeeded = pyqtSignal(list)   # list[str] of window titles
+    failed    = pyqtSignal(str)
+
+    @pyqtSlot()
+    def run(self) -> None:
+        try:
+            from pywinauto import Desktop  # type: ignore[import]
+            windows = Desktop(backend="uia").windows()
+            titles: list[str] = []
+            seen: set[str] = set()
+            for w in windows:
+                try:
+                    title = w.window_text().strip()
+                    if title and title not in seen:
+                        seen.add(title)
+                        titles.append(title)
+                except Exception:  # noqa: BLE001
+                    pass
+            self.succeeded.emit(sorted(titles, key=str.casefold))
+        except Exception as exc:  # noqa: BLE001
+            self.failed.emit(str(exc))
+
+
 # ---------------------------------------------------------------------------
 # Dialog
 # ---------------------------------------------------------------------------
@@ -215,14 +301,17 @@ class TaskInputDialog(QWidget):
         )
         self.setObjectName("TaskInputDialog")
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
-        self.setFixedSize(440, 310)
+        self.setFixedSize(440, 360)
         self.setStyleSheet(_STYLE)
 
+        self._target_mode = "app"  # "app" or "website"
         self._generator = GeminiTaskGenerator(api_key)
         self._thread: QThread | None = None
         self._worker: _GeneratorWorker | None = None
         self._mic_thread: QThread | None = None
         self._mic_worker: _MicWorker | None = None
+        self._scan_thread: QThread | None = None
+        self._scan_worker: _WindowScanWorker | None = None
 
         # Animated dots
         self._dot_count = 0
@@ -236,6 +325,8 @@ class TaskInputDialog(QWidget):
         self._build_ui()
         self._load_history()
         self._centre_on_screen()
+        # Auto-scan open windows when the dialog first opens
+        QTimer.singleShot(200, self._refresh_windows)
 
     # ------------------------------------------------------------------
     # UI construction
@@ -258,6 +349,32 @@ class TaskInputDialog(QWidget):
         close_btn.clicked.connect(self.close)
         title_row.addWidget(close_btn)
         root.addLayout(title_row)
+
+        # ── Mode Toggle Switch (Top) ───────────────────────────────
+        mode_container = QWidget()
+        mode_container.setObjectName("modeToggleContainer")
+        mode_layout = QHBoxLayout(mode_container)
+        mode_layout.setContentsMargins(3, 3, 3, 3)
+        mode_layout.setSpacing(4)
+
+        self._toggle_app_btn = QPushButton("🖥️ Window Application")
+        self._toggle_app_btn.setObjectName("toggleAppBtn")
+        self._toggle_app_btn.setCheckable(True)
+        self._toggle_app_btn.setChecked(True)
+        self._toggle_app_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+
+        self._toggle_web_btn = QPushButton("🌐 Website")
+        self._toggle_web_btn.setObjectName("toggleWebBtn")
+        self._toggle_web_btn.setCheckable(True)
+        self._toggle_web_btn.setChecked(False)
+        self._toggle_web_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+
+        self._toggle_app_btn.clicked.connect(lambda: self._set_target_mode("app"))
+        self._toggle_web_btn.clicked.connect(lambda: self._set_target_mode("website"))
+
+        mode_layout.addWidget(self._toggle_app_btn)
+        mode_layout.addWidget(self._toggle_web_btn)
+        root.addWidget(mode_container)
 
         # ── History dropdown (1.7) ────────────────────────────────────
         lbl_hist = QLabel("Recent tasks")
@@ -294,14 +411,31 @@ class TaskInputDialog(QWidget):
         task_row.addWidget(self._mic_btn)
         root.addLayout(task_row)
 
-        # ── App name ─────────────────────────────────────────────────
-        lbl_app = QLabel("Target application")
-        lbl_app.setObjectName("fieldLabel")
-        root.addWidget(lbl_app)
+        # ── App name (editable dropdown of open windows) ──────────────
+        self._lbl_app = QLabel("Target application")
+        self._lbl_app.setObjectName("fieldLabel")
+        root.addWidget(self._lbl_app)
 
-        self._app_edit = QLineEdit()
-        self._app_edit.setPlaceholderText('e.g. "Microsoft Word"')
-        root.addWidget(self._app_edit)
+        app_row = QHBoxLayout()
+        app_row.setSpacing(6)
+
+        self._app_box = QComboBox()
+        self._app_box.setObjectName("appBox")
+        self._app_box.setEditable(True)            # allow free-text too
+        self._app_box.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
+        self._app_box.lineEdit().setPlaceholderText(
+            'Select or type an application name'
+        )
+        self._app_box.setCursor(Qt.CursorShape.PointingHandCursor)
+        app_row.addWidget(self._app_box)
+
+        self._refresh_btn = QPushButton("↺")
+        self._refresh_btn.setObjectName("refreshBtn")
+        self._refresh_btn.setFixedSize(36, 34)
+        self._refresh_btn.setToolTip("Refresh open windows list")
+        self._refresh_btn.clicked.connect(self._refresh_windows)
+        app_row.addWidget(self._refresh_btn)
+        root.addLayout(app_row)
 
         # ── Footer ───────────────────────────────────────────────────
         footer = QHBoxLayout()
@@ -337,7 +471,8 @@ class TaskInputDialog(QWidget):
         entry = self._history_box.itemData(index)
         if entry:
             self._task_edit.setText(entry.get("task", ""))
-            self._app_edit.setText(entry.get("app", ""))
+            # Set the app combo text without triggering the index-changed signal
+            self._app_box.setCurrentText(entry.get("app", ""))
 
     # ------------------------------------------------------------------
     # 1.6  Mic voice input
@@ -385,18 +520,92 @@ class TaskInputDialog(QWidget):
         self._set_loading(False)
 
     # ------------------------------------------------------------------
+    # Open-window scanner
+    # ------------------------------------------------------------------
+
+    def _refresh_windows(self) -> None:
+        """Scan open windows on a background thread and populate _app_box."""
+        self._refresh_btn.setEnabled(False)
+        self._refresh_btn.setText("⏳")
+        self._status_label.setText("Scanning windows…")
+
+        self._scan_thread = QThread(self)
+        self._scan_worker = _WindowScanWorker()
+        self._scan_worker.moveToThread(self._scan_thread)
+        self._scan_thread.started.connect(self._scan_worker.run)
+        self._scan_worker.succeeded.connect(self._on_scan_success)
+        self._scan_worker.failed.connect(self._on_scan_failure)
+        self._scan_worker.succeeded.connect(self._scan_thread.quit)
+        self._scan_worker.failed.connect(self._scan_thread.quit)
+        self._scan_thread.finished.connect(self._scan_thread.deleteLater)
+        self._scan_thread.start()
+
+    @pyqtSlot(list)
+    def _on_scan_success(self, titles: list) -> None:
+        current = self._app_box.currentText()
+        self._app_box.clear()
+        self._app_box.addItems(titles)
+        # Restore whatever the user had typed / selected
+        if current:
+            self._app_box.setCurrentText(current)
+        self._refresh_btn.setEnabled(True)
+        self._refresh_btn.setText("↺")
+        self._status_label.setText(f"{len(titles)} windows found")
+        QTimer.singleShot(2000, lambda: self._status_label.setText(""))
+
+    @pyqtSlot(str)
+    def _on_scan_failure(self, error: str) -> None:
+        self._refresh_btn.setEnabled(True)
+        self._refresh_btn.setText("↺")
+        self._status_label.setText(f"⚠ Scan failed: {error[:40]}")
+
+    # ------------------------------------------------------------------
+    # Target Mode Switcher
+    # ------------------------------------------------------------------
+
+    def _set_target_mode(self, mode: str) -> None:
+        self._target_mode = mode
+        if mode == "app":
+            self._toggle_app_btn.setChecked(True)
+            self._toggle_web_btn.setChecked(False)
+            self._lbl_app.setText("Target application")
+            self._app_box.lineEdit().setPlaceholderText('Select or type an application name')
+            self._refresh_windows()
+        else:
+            self._toggle_app_btn.setChecked(False)
+            self._toggle_web_btn.setChecked(True)
+            self._lbl_app.setText("Target website / URL")
+            self._app_box.lineEdit().setPlaceholderText('Enter URL or select browser (e.g. https://google.com)')
+            self._populate_website_presets()
+
+    def _populate_website_presets(self) -> None:
+        current = self._app_box.currentText()
+        self._app_box.clear()
+        presets = [
+            "https://google.com",
+            "https://github.com",
+            "https://youtube.com",
+            "https://wikipedia.org",
+        ]
+        self._app_box.addItems(presets)
+        if current and current not in presets:
+            self._app_box.insertItem(0, current)
+        if current:
+            self._app_box.setCurrentText(current)
+
+    # ------------------------------------------------------------------
     # Generation
     # ------------------------------------------------------------------
 
     def _on_start(self) -> None:
         task = self._task_edit.text().strip()
-        app  = self._app_edit.text().strip()
+        app  = self._app_box.currentText().strip()
         if not task or not app:
             self._status_label.setText("⚠ Both fields are required.")
             return
         self._set_loading(True)
         self._thread = QThread(self)
-        self._worker = _GeneratorWorker(self._generator, task, app)
+        self._worker = _GeneratorWorker(self._generator, task, app, target_mode=self._target_mode)
         self._worker.moveToThread(self._thread)
         self._thread.started.connect(self._worker.run)
         self._worker.succeeded.connect(self._on_success)
@@ -410,7 +619,7 @@ class TaskInputDialog(QWidget):
     def _on_success(self, result: dict) -> None:
         self._set_loading(False)
         task = self._task_edit.text().strip()
-        app  = self._app_edit.text().strip()
+        app  = self._app_box.currentText().strip()
 
         # Save to history (1.7)
         save_to_history(task, app)
@@ -445,7 +654,8 @@ class TaskInputDialog(QWidget):
     def _set_loading(self, loading: bool) -> None:
         self._start_btn.setEnabled(not loading)
         self._task_edit.setEnabled(not loading)
-        self._app_edit.setEnabled(not loading)
+        self._app_box.setEnabled(not loading)
+        self._refresh_btn.setEnabled(not loading)
         self._mic_btn.setEnabled(not loading)
         self._history_box.setEnabled(not loading)
         if loading:
