@@ -59,23 +59,23 @@ class HybridResolver:
             Screen coordinates ``(x, y, width, height)``, or ``None`` if the
             element could not be found.
         """
-        if self._uia is not None:
-            try:
-                element = self._uia.find_element(app_name, target_name, app_exe=app_exe)
-                if element is not None:
-                    coords = self._uia.get_coords(element)
-                    if coords is not None:
-                        _log.info(
-                            "UIA resolved %r -> %s", target_name, coords
-                        )
-                        return coords
-            except Exception as exc:  # noqa: BLE001
-                _log.warning("UIA lookup failed for %r: %s", target_name, exc)
+        from platforms.uia_resolver import ElementNotFoundError
 
-        _log.warning(
-            "UIA could not locate %r.", target_name
-        )
-        return None
+        if self._uia is not None:
+            element = self._uia.find_element_with_retry(app_name, target_name, app_exe=app_exe)
+            if element is not None:
+                coords = self._uia.get_coords(element)
+                if coords is not None:
+                    _log.info(
+                        "UIA resolved %r -> %s", target_name, coords
+                    )
+                    return coords
+                else:
+                    raise ElementNotFoundError(app_name, target_name, ["Element found, but failed to retrieve coordinates"])
+            else:
+                raise ElementNotFoundError(app_name, target_name, ["find_element_with_retry returned None"])
+        else:
+            raise ElementNotFoundError(app_name, target_name, ["UIAResolver is unavailable on this platform"])
 
     # ------------------------------------------------------------------
     # UIAResolver-compatible stub interface

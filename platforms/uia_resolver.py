@@ -8,9 +8,23 @@ Coords are returned as (L, T, R, B) — left, top, right, bottom screen pixels.
 """
 from __future__ import annotations
 
+import json
 import logging
+import os
 
 _log = logging.getLogger(__name__)
+
+
+class ElementNotFoundError(Exception):
+    """Exception raised when a target UI element cannot be located after all retries and BFS fallback."""
+
+    def __init__(self, app_name: str, target_name: str, strategies_tried: list[str]) -> None:
+        super().__init__(
+            f"Could not find element {target_name!r} in application {app_name!r} after trying: {', '.join(strategies_tried)}"
+        )
+        self.app_name = app_name
+        self.target_name = target_name
+        self.strategies_tried = strategies_tried
 
 try:
     from pywinauto.application import Application
@@ -68,6 +82,49 @@ class UIAResolver:
     Coords are returned as ``(L, T, R, B)`` — left, top, right, bottom in
     screen pixels, exactly as returned by pywinauto's ``rectangle()``.
     """
+
+    def __init__(self) -> None:
+        self.last_cache_hit = False
+        self._cache = None
+        self._load_cache()
+
+    def _load_cache(self) -> None:
+        try:
+            dict_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "ui_dictionary.json"))
+            if os.path.exists(dict_path):
+                with open(dict_path, "r", encoding="utf-8") as f:
+                    self._cache = json.load(f)
+                _log.info("UIAResolver: Loaded ui_dictionary.json from %s", dict_path)
+            else:
+                _log.warning("UIAResolver: ui_dictionary.json not found at %s", dict_path)
+        except Exception as exc:
+            _log.error("UIAResolver: Failed to load ui_dictionary.json: %s", exc)
+
+    def resolve_from_cache(self, app_name: str, goal_key: str) -> dict | None:
+        """Check the cache dictionary for a pre-shaped hint dict."""
+        if not self._cache or not app_name or not goal_key:
+            return None
+
+        app_name_lower = app_name.lower()
+        app_key = None
+        if "word" in app_name_lower:
+            app_key = "word"
+        elif "excel" in app_name_lower:
+            app_key = "excel"
+
+        if not app_key or app_key not in self._cache:
+            return None
+
+        goal_key_normalized = goal_key.lower().strip()
+        app_dict = self._cache[app_key]
+        if goal_key_normalized in app_dict:
+            return app_dict[goal_key_normalized]
+
+        for k, v in app_dict.items():
+            if k in goal_key_normalized or goal_key_normalized in k:
+                return v
+
+        return None
 
     # ------------------------------------------------------------------
     # Window discovery
@@ -142,6 +199,8 @@ class UIAResolver:
         if not _PYWINAUTO_AVAILABLE:
             return None
 
+        self.last_cache_hit = False
+
         wrapper = self.find_window(app_name, app_exe=app_exe)
         if wrapper is None:
             _log.warning("find_element: window not found for app %r", app_name)
@@ -149,6 +208,20 @@ class UIAResolver:
 
         target_name = target_name.strip()
         needle = target_name.lower()
+
+        # ── Strategy 0: Cache lookup ──────────────────────────────────
+        hint = self.resolve_from_cache(app_name, target_name)
+        if hint is not None:
+            try:
+                title = hint.get("title")
+                control_type = hint.get("control_type")
+                el = wrapper.child_window(title=title, control_type=control_type)
+                if el.exists(timeout=1):
+                    _log.info("find_element [cache]: found %r via cache hint %r", target_name, hint)
+                    self.last_cache_hit = True
+                    return el
+            except Exception as exc:
+                _log.debug("find_element [cache]: failed using hint %r — %s", hint, exc)
 
         # ── Strategy 1: exact title + Button control type ─────────────
         try:
@@ -208,6 +281,62 @@ class UIAResolver:
             "find_element: all strategies failed for %r in %r", target_name, app_name
         )
         return None
+
+    def find_element_with_retry(self, app_name: str, target_name: str, app_exe: str | None = None):
+        """Locate a UI element with retries and a BFS fallback on failure."""
+        import time
+        from collections import deque
+
+        strategies_tried = []
+        max_attempts = 3  # Initial + 2 retries
+        for attempt in range(1, max_attempts + 1):
+            strategies_tried.append(f"Attempt {attempt}: find_element strategy chain")
+            try:
+                el = self.find_element(app_name, target_name, app_exe=app_exe)
+                if el is not None:
+                    return el
+            except Exception as exc:
+                _log.debug("find_element_with_retry: Attempt %d failed: %s", attempt, exc)
+            
+            if attempt < max_attempts:
+                time.sleep(1.5)
+
+        # Fallback BFS scan
+        strategies_tried.append("Fallback: BFS descendant scan")
+        _log.info("find_element_with_retry: Falling back to BFS descendant scan for %r", target_name)
+        
+        wrapper = self.find_window(app_name, app_exe=app_exe)
+        if wrapper is not None:
+            needle = target_name.lower().strip()
+            try:
+                queue = deque([wrapper])
+                visited = set()
+                while queue:
+                    curr = queue.popleft()
+                    curr_id = id(curr)
+                    if curr_id in visited:
+                        continue
+                    visited.add(curr_id)
+                    
+                    try:
+                        text = curr.window_text()
+                        if text:
+                            text_lower = text.lower()
+                            if needle in text_lower:
+                                _log.info("find_element_with_retry BFS: found matching element %r", text)
+                                return curr
+                    except Exception:
+                        pass
+                    
+                    try:
+                        for child in curr.children():
+                            queue.append(child)
+                    except Exception:
+                        pass
+            except Exception as exc:
+                _log.debug("find_element_with_retry BFS failed: %s", exc)
+
+        raise ElementNotFoundError(app_name, target_name, strategies_tried)
 
     # ------------------------------------------------------------------
     # Coordinate extraction — returns (L, T, R, B)

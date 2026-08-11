@@ -1,5 +1,55 @@
 [
   {
+    "task": "help me sign up",
+    "app": "OpenAI | Research & Deployment - Google Chrome",
+    "timestamp": "2026-08-11T14:36:59"
+  },
+  {
+    "task": "insert an image int the slide",
+    "app": "PowerPoint",
+    "timestamp": "2026-07-24T13:02:05"
+  },
+  {
+    "task": "insert an image in slide",
+    "app": "PowerPoint",
+    "timestamp": "2026-07-24T12:58:22"
+  },
+  {
+    "task": "how do i filter the coloumns",
+    "app": "excel",
+    "timestamp": "2026-07-24T12:52:06"
+  },
+  {
+    "task": "add watermark on my Microsoft Word",
+    "app": "Microsoft word",
+    "timestamp": "2026-07-24T12:50:39"
+  },
+  {
+    "task": "insert an image into document",
+    "app": "LY_project_ppt  -  Protected View - PowerPoint",
+    "timestamp": "2026-07-24T12:48:19"
+  },
+  {
+    "task": "insert an image into the document",
+    "app": "LY_project_ppt  -  Protected View - PowerPoint",
+    "timestamp": "2026-07-24T12:45:34"
+  },
+  {
+    "task": "insert an image",
+    "app": "microsoft powerpoint",
+    "timestamp": "2026-07-24T12:42:28"
+  },
+  {
+    "task": "how to load data",
+    "app": "power BI desktop",
+    "timestamp": "2026-07-23T09:39:32"
+  },
+  {
+    "task": "how to create a new python file in root directory",
+    "app": "overlay - antigravity IDE",
+    "timestamp": "2026-07-23T09:12:35"
+  },
+  {
     "task": "How do change the margin to wide",
     "app": "Book1 - Excel",
     "timestamp": "2026-08-11T14:01:25"

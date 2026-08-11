@@ -45,6 +45,8 @@ class _CoordWorker(QObject):
     resolved = pyqtSignal(object)   # payload: Step (with coords filled)
     # Emitted when AT-SPI cannot find the element or its coords.
     failed = pyqtSignal(str)        # payload: step.target
+    # Emitted when the element is not found, carrying the error details.
+    element_not_found = pyqtSignal(str, object)  # payload: target (str), ElementNotFoundError (object)
 
     def __init__(self) -> None:
         super().__init__()
@@ -70,15 +72,15 @@ class _CoordWorker(QObject):
             return
 
         try:
+            from platforms.uia_resolver import ElementNotFoundError
+        except ImportError:
+            class ElementNotFoundError(Exception): pass
+
+        try:
             coords = self._resolver.resolve(app_name, step.target, app_exe=app_exe or None)
             if coords is None:
-                _log.warning("Resolver returned None for %r in app %r", step.target, app_name)
-                self.failed.emit(step.target)
-                return
+                raise ElementNotFoundError(app_name, step.target, ["Resolver returned None"])
 
-            # Sanity-check: reject implausibly large rects (full-window matches).
-            # Coords are (L, T, R, B). A real interactive element is almost
-            # never larger than 600×400 px.
             l, t, r, b = coords
             w, h = r - l, b - t
             if w > 600 or h > 400:
@@ -86,11 +88,18 @@ class _CoordWorker(QObject):
                     "Resolved rect for %r is suspiciously large (%dx%d) — discarding",
                     step.target, w, h,
                 )
-                self.failed.emit(step.target)
-                return
+                raise ElementNotFoundError(app_name, step.target, [f"Resolved rect is suspiciously large ({w}x{h})"])
 
-            _log.debug("Resolved %r -> %s", step.target, coords)
-            self.resolved.emit(dataclasses.replace(step, coords=coords))
+            # Determine if it was a cache hit
+            cache_hit = False
+            if self._resolver is not None and hasattr(self._resolver, "_uia") and self._resolver._uia is not None:
+                cache_hit = getattr(self._resolver._uia, "last_cache_hit", False)
+
+            _log.debug("Resolved %r -> %s (cache hit: %s)", step.target, coords, cache_hit)
+            self.resolved.emit(dataclasses.replace(step, coords=coords, cache_hit=cache_hit))
+        except ElementNotFoundError as exc:
+            _log.warning("Element not found: %s", exc)
+            self.element_not_found.emit(step.target, exc)
         except Exception as exc:  # noqa: BLE001
             _log.error("Resolution error for %r: %s", step.target, exc)
             self.failed.emit(step.target)
@@ -136,6 +145,7 @@ class TaskController(QObject):
     task_completed    = pyqtSignal()
     coords_resolved   = pyqtSignal(object)         # Step
     resolution_failed = pyqtSignal(str)            # target name
+    element_not_found = pyqtSignal(str, object)    # target name, ElementNotFoundError
     _resolve_requested = pyqtSignal(object, str, str)   # (Step, app_name, app_exe)
     
     def __init__(self, layer_manager) -> None:
@@ -160,6 +170,7 @@ class TaskController(QObject):
         # Wire worker signals back to main-thread slots
         self._worker.resolved.connect(self._on_worker_resolved)
         self._worker.failed.connect(self._on_worker_failed)
+        self._worker.element_not_found.connect(self._on_worker_element_not_found)
 
         # Wire the internal signal → worker slot (crosses thread boundary)
         self._resolve_requested.connect(self._worker.resolve)
@@ -277,7 +288,8 @@ class TaskController(QObject):
         if step.id != self._pending_step_id:
             return  # stale result — user navigated away
         self._cancel_pending_resolution()
-        print(f"Resolved step {step.id}: {step.target!r} at {step.coords} [live]")
+        cache_str = " [cache]" if getattr(step, "cache_hit", False) else " [live]"
+        print(f"Resolved step {step.id}: {step.target!r} at {step.coords}{cache_str}")
         self.coords_resolved.emit(step)
 
     @pyqtSlot(str)
@@ -291,6 +303,17 @@ class TaskController(QObject):
             return
         self._cancel_pending_resolution()
         self.resolution_failed.emit(target)
+
+    @pyqtSlot(str, object)
+    def _on_worker_element_not_found(self, target: str, error: object) -> None:
+        """Called when resolver raised ElementNotFoundError."""
+        if self._task is None:
+            return
+        current = self._task.steps[self._index] if self._index >= 0 else None
+        if current is None or current.target != target:
+            return
+        self._cancel_pending_resolution()
+        self.element_not_found.emit(target, error)
 
     @pyqtSlot()
     def _on_resolution_timeout(self) -> None:

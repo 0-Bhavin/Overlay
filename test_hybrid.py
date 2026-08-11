@@ -23,20 +23,20 @@ TARGET = "File"
 
 
 def _separator(title: str) -> None:
-    print(f"\n{'─' * 50}")
+    print(f"\n{'-' * 50}")
     print(f"  {title}")
-    print('─' * 50)
+    print('-' * 50)
 
 
 def main() -> None:
     api_key = os.environ.get("GEMINI_API_KEY", "")
     if not api_key:
-        print("⚠  GEMINI_API_KEY not set — Vision fallback will fail.")
+        print("[WARN] GEMINI_API_KEY not set -- Vision fallback will fail.")
 
     resolver = HybridResolver(api_key=api_key)
 
-    # ── 1. UIA only ───────────────────────────────────────────────────
-    _separator("1 · UIA only")
+    # 1. UIA only
+    _separator("1 * UIA only")
     if resolver._uia is not None:
         t0 = time.perf_counter()
         try:
@@ -47,24 +47,28 @@ def main() -> None:
             print(f"   ERROR: {exc}")
         elapsed = time.perf_counter() - t0
         if coords:
-            print(f"   ✓ UIA found: {coords}  ({elapsed*1000:.1f} ms)")
+            print(f"   [OK] UIA found: {coords}  ({elapsed*1000:.1f} ms)")
         else:
-            print(f"   ✗ UIA did not find '{TARGET}'  ({elapsed*1000:.1f} ms)")
+            print(f"   [FAIL] UIA did not find '{TARGET}'  ({elapsed*1000:.1f} ms)")
     else:
         print("   (UIAResolver unavailable on this platform)")
 
 
 
-    # ── 3. Full hybrid (UIA → Vision fallback) ────────────────────────
-    _separator("3 · Full hybrid  resolve()")
+    # 3. Full hybrid (UIA -> Vision fallback)
+    _separator("3 * Full hybrid  resolve()")
     t0 = time.perf_counter()
-    coords = resolver.resolve(APP, TARGET)
-    elapsed = time.perf_counter() - t0
-    if coords:
-        x, y, w, h = coords
-        print(f"   ✓ Result: x={x}  y={y}  w={w}  h={h}  ({elapsed*1000:.1f} ms)")
-    else:
-        print(f"   ✗ not found  ({elapsed*1000:.1f} ms)")
+    try:
+        coords = resolver.resolve(APP, TARGET)
+        elapsed = time.perf_counter() - t0
+        if coords:
+            x, y, w, h = coords
+            print(f"   [OK] Result: x={x}  y={y}  w={w}  h={h}  ({elapsed*1000:.1f} ms)")
+        else:
+            print(f"   [FAIL] not found  ({elapsed*1000:.1f} ms)")
+    except Exception as exc:
+        elapsed = time.perf_counter() - t0
+        print(f"   [FAIL] Raised expected error: {exc} ({elapsed*1000:.1f} ms)")
 
     print()
 

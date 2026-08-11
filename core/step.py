@@ -16,6 +16,7 @@ class Step:
     animation: str = "pulse"            # "pulse" | "arrow" | "none"
     coords: Optional[tuple[int, int, int, int]] = None  # (L, T, R, B) screen pixels — filled at runtime
     explanation: str = ""              # Longer why/how explanation for "More info" panel (1.10)
+    cache_hit: bool = False             # True if coordinates were resolved from local cache
 
     # ------------------------------------------------------------------
     # Construction helpers
@@ -37,4 +38,5 @@ class Step:
             animation=d.get("animation", "pulse"),
             coords=tuple(d["coords"]) if d.get("coords") is not None else None,
             explanation=d.get("explanation", ""),   # graceful fallback for old JSON
+            cache_hit=d.get("cache_hit", False),
         )

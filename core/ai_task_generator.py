@@ -10,10 +10,12 @@ import logging
 import textwrap
 
 try:
-    import google.generativeai as genai  # type: ignore[import]
+    import google.genai as genai  # type: ignore[import]
+    # pyrefly: ignore [missing-import]
+    from google.genai import types 
 except ModuleNotFoundError as _err:
     raise ModuleNotFoundError(
-        "google-generativeai is not installed. Run: pip install google-generativeai"
+        "google-genai is not installed. Run: pip install google-genai"
     ) from _err
 
 _log = logging.getLogger(__name__)
