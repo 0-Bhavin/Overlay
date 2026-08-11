@@ -1,34 +1,16 @@
 {
-  "name": "add watermark on my Microsoft Word",
-  "app": "Microsoft word",
-  "app_exe": "WINWORD.EXE",
+  "name": "how do I sign in in github",
+  "app": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub - Personal - Microsoft\u200b Edge",
+  "app_exe": "msedge.exe",
   "steps": [
     {
       "id": 1,
-      "target": "Design",
-      "tooltip": "Click the \"Design\" tab to access document formatting options.",
+      "target": "Sign in",
+      "tooltip": "Click 'Sign in' to proceed to the login page.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
-      "explanation": "The Design tab contains tools for page background, themes, and watermarks."
-    },
-    {
-      "id": 2,
-      "target": "Watermark",
-      "tooltip": "Click \"Watermark\" to add text or an image behind your document's content.",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "This opens a gallery of predefined watermarks and options to create custom ones."
-    },
-    {
-      "id": 3,
-      "target": "Confidential 1",
-      "tooltip": "Choose a pre-designed watermark like \"Confidential 1\".",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "Selecting a watermark automatically applies it to all pages of your document."
+      "explanation": "This step initiates the sign-in process, taking you to the form where you can enter your credentials."
     }
   ]
 }
