@@ -169,6 +169,31 @@ QLabel#status {
     color: #89b4fa;
     font-size: 11px;
 }
+
+QWidget#modeToggleContainer {
+    background: #181825;
+    border-radius: 8px;
+    border: 1px solid #313244;
+}
+
+QPushButton#toggleAppBtn, QPushButton#toggleWebBtn {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #a6adc8;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+QPushButton#toggleAppBtn:hover, QPushButton#toggleWebBtn:hover {
+    color: #cdd6f4;
+    background: #313244;
+}
+QPushButton#toggleAppBtn:checked, QPushButton#toggleWebBtn:checked {
+    background: #89b4fa;
+    color: #1e1e2e;
+    font-weight: 700;
+}
 """
 
 _OUTPUT_DIR  = os.path.join(os.path.dirname(__file__), "..", "tasks")
@@ -185,16 +210,17 @@ class _GeneratorWorker(QObject):
     succeeded = pyqtSignal(dict)
     failed    = pyqtSignal(str)
 
-    def __init__(self, generator: GeminiTaskGenerator, task: str, app: str) -> None:
+    def __init__(self, generator: GeminiTaskGenerator, task: str, app: str, target_mode: str = "app") -> None:
         super().__init__()
         self._generator = generator
         self._task = task
         self._app  = app
+        self._mode = target_mode
 
     @pyqtSlot()
     def run(self) -> None:
         try:
-            result = self._generator.generate(self._task, self._app)
+            result = self._generator.generate(self._task, self._app, target_mode=self._mode)
             self.succeeded.emit(result)
         except Exception as exc:  # noqa: BLE001
             self.failed.emit(str(exc))
@@ -275,9 +301,10 @@ class TaskInputDialog(QWidget):
         )
         self.setObjectName("TaskInputDialog")
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
-        self.setFixedSize(440, 310)
+        self.setFixedSize(440, 360)
         self.setStyleSheet(_STYLE)
 
+        self._target_mode = "app"  # "app" or "website"
         self._generator = GeminiTaskGenerator(api_key)
         self._thread: QThread | None = None
         self._worker: _GeneratorWorker | None = None
@@ -323,6 +350,32 @@ class TaskInputDialog(QWidget):
         title_row.addWidget(close_btn)
         root.addLayout(title_row)
 
+        # ── Mode Toggle Switch (Top) ───────────────────────────────
+        mode_container = QWidget()
+        mode_container.setObjectName("modeToggleContainer")
+        mode_layout = QHBoxLayout(mode_container)
+        mode_layout.setContentsMargins(3, 3, 3, 3)
+        mode_layout.setSpacing(4)
+
+        self._toggle_app_btn = QPushButton("🖥️ Window Application")
+        self._toggle_app_btn.setObjectName("toggleAppBtn")
+        self._toggle_app_btn.setCheckable(True)
+        self._toggle_app_btn.setChecked(True)
+        self._toggle_app_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+
+        self._toggle_web_btn = QPushButton("🌐 Website")
+        self._toggle_web_btn.setObjectName("toggleWebBtn")
+        self._toggle_web_btn.setCheckable(True)
+        self._toggle_web_btn.setChecked(False)
+        self._toggle_web_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+
+        self._toggle_app_btn.clicked.connect(lambda: self._set_target_mode("app"))
+        self._toggle_web_btn.clicked.connect(lambda: self._set_target_mode("website"))
+
+        mode_layout.addWidget(self._toggle_app_btn)
+        mode_layout.addWidget(self._toggle_web_btn)
+        root.addWidget(mode_container)
+
         # ── History dropdown (1.7) ────────────────────────────────────
         lbl_hist = QLabel("Recent tasks")
         lbl_hist.setObjectName("fieldLabel")
@@ -359,9 +412,9 @@ class TaskInputDialog(QWidget):
         root.addLayout(task_row)
 
         # ── App name (editable dropdown of open windows) ──────────────
-        lbl_app = QLabel("Target application")
-        lbl_app.setObjectName("fieldLabel")
-        root.addWidget(lbl_app)
+        self._lbl_app = QLabel("Target application")
+        self._lbl_app.setObjectName("fieldLabel")
+        root.addWidget(self._lbl_app)
 
         app_row = QHBoxLayout()
         app_row.setSpacing(6)
@@ -507,6 +560,40 @@ class TaskInputDialog(QWidget):
         self._status_label.setText(f"⚠ Scan failed: {error[:40]}")
 
     # ------------------------------------------------------------------
+    # Target Mode Switcher
+    # ------------------------------------------------------------------
+
+    def _set_target_mode(self, mode: str) -> None:
+        self._target_mode = mode
+        if mode == "app":
+            self._toggle_app_btn.setChecked(True)
+            self._toggle_web_btn.setChecked(False)
+            self._lbl_app.setText("Target application")
+            self._app_box.lineEdit().setPlaceholderText('Select or type an application name')
+            self._refresh_windows()
+        else:
+            self._toggle_app_btn.setChecked(False)
+            self._toggle_web_btn.setChecked(True)
+            self._lbl_app.setText("Target website / URL")
+            self._app_box.lineEdit().setPlaceholderText('Enter URL or select browser (e.g. https://google.com)')
+            self._populate_website_presets()
+
+    def _populate_website_presets(self) -> None:
+        current = self._app_box.currentText()
+        self._app_box.clear()
+        presets = [
+            "https://google.com",
+            "https://github.com",
+            "https://youtube.com",
+            "https://wikipedia.org",
+        ]
+        self._app_box.addItems(presets)
+        if current and current not in presets:
+            self._app_box.insertItem(0, current)
+        if current:
+            self._app_box.setCurrentText(current)
+
+    # ------------------------------------------------------------------
     # Generation
     # ------------------------------------------------------------------
 
@@ -518,7 +605,7 @@ class TaskInputDialog(QWidget):
             return
         self._set_loading(True)
         self._thread = QThread(self)
-        self._worker = _GeneratorWorker(self._generator, task, app)
+        self._worker = _GeneratorWorker(self._generator, task, app, target_mode=self._target_mode)
         self._worker.moveToThread(self._thread)
         self._thread.started.connect(self._worker.run)
         self._worker.succeeded.connect(self._on_success)
