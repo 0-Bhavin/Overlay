@@ -10,9 +10,9 @@ import logging
 import textwrap
 
 try:
-    import google.genai
-     as genai  # type: ignore[import]
-    from google.genai import types  # type: ignore[import]
+    import google.genai as genai  # type: ignore[import]
+    # pyrefly: ignore [missing-import]
+    from google.genai import types 
 except ModuleNotFoundError as _err:
     raise ModuleNotFoundError(
         "google-genai is not installed. Run: pip install google-genai"

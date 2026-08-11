@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "AI Overlay Companion Extension",
+  "version": "1.0.0",
+  "description": "Chrome/Edge companion extension for AI Overlay cross-platform guidance framework.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dom_extractor.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

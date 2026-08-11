@@ -1,43 +1,70 @@
 {
-  "name": "insert an image int the slide",
-  "app": "PowerPoint",
-  "app_exe": "POWERPNT.EXE",
+  "name": "help me sign up",
+  "app": "OpenAI | Research & Deployment - Google Chrome",
+  "app_exe": "chrome.exe",
   "steps": [
     {
       "id": 1,
-      "target": "Insert",
-      "tooltip": "Click the Insert tab to see options for adding content to your slide.",
-      "action": "click",
+      "target": "Address bar",
+      "tooltip": "Enter 'openai.com' into the address bar and press Enter to navigate to the OpenAI website.",
+      "action": "type",
       "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "The Insert tab contains all the tools needed to add various elements, including images, to your presentation."
+      "animation": "arrow",
+      "explanation": "This takes you to the OpenAI homepage, the starting point for signing up."
     },
     {
       "id": 2,
-      "target": "Pictures",
-      "tooltip": "Click Pictures to insert an image from your computer or online sources.",
+      "target": "Log in",
+      "tooltip": "Click 'Log in' in the top right corner to proceed to the login/signup page.",
       "action": "click",
       "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "This opens a menu allowing you to choose the source of the picture you wish to insert into your slide."
+      "animation": "pulse",
+      "explanation": "This button directs you to the authentication page where you can either log in or create a new account."
     },
     {
       "id": 3,
-      "target": "This Device",
-      "tooltip": "Select This Device to browse for an image stored on your computer.",
+      "target": "Sign up",
+      "tooltip": "Click 'Sign up' to begin the process of creating a new OpenAI account.",
       "action": "click",
       "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "Choosing 'This Device' will open a file explorer window, letting you navigate to and select an image file from your local storage."
+      "animation": "pulse",
+      "explanation": "This action initiates the account creation form, allowing you to register with OpenAI."
     },
     {
       "id": 4,
-      "target": "Open",
-      "tooltip": "Navigate to your desired image, select it, and click Open to insert it.",
-      "action": "click",
+      "target": "Email address",
+      "tooltip": "Type your email address into the input field to register your account.",
+      "action": "type",
       "spotlight_shape": "rect",
       "animation": "arrow",
-      "explanation": "After selecting your image file, clicking 'Open' will place the image directly onto your current PowerPoint slide."
+      "explanation": "Provide your email address, which will be used for account verification and future logins."
+    },
+    {
+      "id": 5,
+      "target": "Continue",
+      "tooltip": "Click 'Continue' to proceed to the next step after entering your email.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "This confirms your email and moves you to the password creation stage of the sign-up process."
+    },
+    {
+      "id": 6,
+      "target": "Password",
+      "tooltip": "Create and type a strong password for your new OpenAI account.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "arrow",
+      "explanation": "Set a secure password to protect your account, ensuring it's unique and difficult to guess."
+    },
+    {
+      "id": 7,
+      "target": "Continue",
+      "tooltip": "Click 'Continue' to finalize your account creation with the chosen password.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "This completes the password setup, bringing you closer to successfully signing up for OpenAI."
     }
   ]
 }

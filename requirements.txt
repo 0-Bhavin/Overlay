@@ -24,6 +24,9 @@ mss==9.0.2
 # Image processing (HybridResolver — JPEG encoding for Gemini Vision)
 Pillow>=11.0.0
 
+# Browser Extension WebSocket Bridge
+websockets>=12.0
+
 # NOTE: pyatspi is NOT on PyPI — install via system package manager (Linux only)
 # Do NOT add pyatspi here
 

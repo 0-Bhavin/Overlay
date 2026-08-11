@@ -20,12 +20,13 @@ from core.action_watcher import ActionWatcher
 from core.UI import TaskInputDialog
 from core.tts import TTSEngine
 from core.completion_toast import CompletionToast
+from platforms.browser_connector import BrowserConnector
 from dotenv import load_dotenv
 load_dotenv()
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment (.env file or system variable).
-_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6Ij7vlOrKU0B3IwnnvSIF2hR7ZBhf8quG69-YewEwf2wg")
+_GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
 if not _GEMINI_API_KEY:
     raise EnvironmentError(
         "GEMINI_API_KEY is not set.\n"
@@ -38,8 +39,9 @@ def main() -> None:
     app = QApplication(sys.argv)
     app.setApplicationName("AI Overlay")
 
-    # ── 2. TTS engine (feature 1.5) ───────────────────────────────────
+    # ── 2. TTS engine & Browser Connector ─────────────────────────────
     tts = TTSEngine()
+    browser_connector = BrowserConnector()  # Starts WebSocket server on ws://localhost:8765
 
     # ── 3. Core overlay objects (hidden until task is ready) ──────────
     overlay       = OverlayWindow()
