@@ -1,7 +1,13 @@
 """Unit tests for UIConnector abstraction, UINode schema, and BrowserConnector."""
 
+import sys
 import time
 import unittest
+from pathlib import Path
+
+# Ensure project root directory is in sys.path when running script directly from tests/ folder
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from platforms.ui_connector import UIConnector, UINode
 from platforms.windows_connector import WindowsConnector
 from platforms.browser_connector import BrowserConnector

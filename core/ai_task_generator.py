@@ -126,13 +126,11 @@ class GeminiTaskGenerator:
     _MODEL = "gemini-2.5-flash"
 
     def __init__(self, api_key: str) -> None:
-        genai.configure(api_key=api_key)
-        self._app_model = genai.GenerativeModel(
-            model_name=self._MODEL,
+        self._client = genai.Client(api_key=api_key)
+        self._app_config = types.GenerateContentConfig(
             system_instruction=_APP_SYSTEM_PROMPT,
         )
-        self._website_model = genai.GenerativeModel(
-            model_name=self._MODEL,
+        self._website_config = types.GenerateContentConfig(
             system_instruction=_WEBSITE_SYSTEM_PROMPT,
         )
 
@@ -166,7 +164,7 @@ class GeminiTaskGenerator:
             retries are exhausted.
         """
         is_website = (target_mode == "website")
-        model = self._website_model if is_website else self._app_model
+        config = self._website_config if is_website else self._app_config
         user_prompt = (
             self._build_website_user_prompt(task_description, app_name)
             if is_website
@@ -179,7 +177,11 @@ class GeminiTaskGenerator:
             _log.debug("Gemini request attempt %d/%d (mode=%s)", attempt + 1, 1 + _MAX_RETRIES, target_mode)
 
             try:
-                response = model.generate_content(prompt)
+                response = self._client.models.generate_content(
+                    model=self._MODEL,
+                    contents=prompt,
+                    config=config,
+                )
                 raw = (response.text or "").strip()
                 _log.debug("Gemini raw response: %s", raw[:200])
                 result = self._parse_json(raw)
