@@ -196,8 +196,9 @@ QPushButton#toggleAppBtn:checked, QPushButton#toggleWebBtn:checked {
 }
 """
 
-_OUTPUT_DIR  = os.path.join(os.path.dirname(__file__), "..", "tasks")
-_OUTPUT_FILE = os.path.join(_OUTPUT_DIR, "generated_task.json")
+_OUTPUT_DIR           = os.path.join(os.path.dirname(__file__), "..", "tasks")
+_OUTPUT_FILE          = os.path.join(_OUTPUT_DIR, "generated_task.json")
+_DOM_SNAPSHOT_FILE    = os.path.join(_OUTPUT_DIR, "dom_snapshot.json")
 
 
 # ---------------------------------------------------------------------------
@@ -210,18 +211,47 @@ class _GeneratorWorker(QObject):
     succeeded = pyqtSignal(dict)
     failed    = pyqtSignal(str)
 
-    def __init__(self, generator: GeminiTaskGenerator, task: str, app: str, target_mode: str = "app") -> None:
+    def __init__(
+        self,
+        generator: GeminiTaskGenerator,
+        task: str,
+        app: str,
+        target_mode: str = "app",
+        dom_snapshot: list | None = None,
+    ) -> None:
         super().__init__()
         self._generator = generator
         self._task = task
         self._app  = app
         self._mode = target_mode
+        self._dom_snapshot = dom_snapshot
 
     @pyqtSlot()
     def run(self) -> None:
         try:
-            result = self._generator.generate(self._task, self._app, target_mode=self._mode)
+            result = self._generator.generate(
+                self._task, self._app, target_mode=self._mode, dom_snapshot=self._dom_snapshot
+            )
             self.succeeded.emit(result)
+        except Exception as exc:  # noqa: BLE001
+            self.failed.emit(str(exc))
+
+
+class _DOMFetchWorker(QObject):
+    """Fetches the current page's DOM tree from BrowserConnector on a background thread."""
+
+    succeeded = pyqtSignal(list)   # DOM UINode list (may be empty)
+    failed    = pyqtSignal(str)    # error message
+
+    def __init__(self, connector: object) -> None:
+        super().__init__()
+        self._connector = connector
+
+    @pyqtSlot()
+    def run(self) -> None:
+        try:
+            tree = self._connector.get_tree()  # type: ignore[attr-defined]
+            self.succeeded.emit(tree if tree else [])
         except Exception as exc:  # noqa: BLE001
             self.failed.emit(str(exc))
 
@@ -294,7 +324,7 @@ class TaskInputDialog(QWidget):
 
     task_ready: pyqtSignal = pyqtSignal(str)
 
-    def __init__(self, api_key: str, parent: QWidget | None = None) -> None:
+    def __init__(self, api_key: str, parent: QWidget | None = None, browser_connector: object | None = None) -> None:
         super().__init__(
             parent,
             Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint,
@@ -305,6 +335,7 @@ class TaskInputDialog(QWidget):
         self.setStyleSheet(_STYLE)
 
         self._target_mode = "app"  # "app" or "website"
+        self._browser_connector = browser_connector
         self._generator = GeminiTaskGenerator(api_key)
         self._thread: QThread | None = None
         self._worker: _GeneratorWorker | None = None
@@ -312,6 +343,8 @@ class TaskInputDialog(QWidget):
         self._mic_worker: _MicWorker | None = None
         self._scan_thread: QThread | None = None
         self._scan_worker: _WindowScanWorker | None = None
+        self._dom_thread: QThread | None = None
+        self._dom_worker: _DOMFetchWorker | None = None
 
         # Animated dots
         self._dot_count = 0
@@ -603,9 +636,36 @@ class TaskInputDialog(QWidget):
         if not task or not app:
             self._status_label.setText("⚠ Both fields are required.")
             return
+
         self._set_loading(True)
+
+        if self._target_mode == "website" and self._browser_connector is not None:
+            # Phase 1: fetch DOM from extension, then generate
+            self._status_label.setText("📡 Capturing DOM…")
+            self._dom_thread = QThread(self)
+            self._dom_worker = _DOMFetchWorker(self._browser_connector)
+            self._dom_worker.moveToThread(self._dom_thread)
+            self._dom_thread.started.connect(self._dom_worker.run)
+            self._dom_worker.succeeded.connect(self._on_dom_fetched)
+            self._dom_worker.failed.connect(self._on_dom_fetch_failed)
+            self._dom_worker.succeeded.connect(self._dom_thread.quit)
+            self._dom_worker.failed.connect(self._dom_thread.quit)
+            self._dom_thread.finished.connect(self._dom_thread.deleteLater)
+            self._dom_thread.start()
+        else:
+            # App mode or no connector: generate directly
+            self._start_generation(dom_snapshot=None)
+
+    def _start_generation(self, dom_snapshot: list | None) -> None:
+        """Kick off the Gemini generation worker with an optional DOM snapshot."""
+        task = self._task_edit.text().strip()
+        app  = self._app_box.currentText().strip()
         self._thread = QThread(self)
-        self._worker = _GeneratorWorker(self._generator, task, app, target_mode=self._target_mode)
+        self._worker = _GeneratorWorker(
+            self._generator, task, app,
+            target_mode=self._target_mode,
+            dom_snapshot=dom_snapshot,
+        )
         self._worker.moveToThread(self._thread)
         self._thread.started.connect(self._worker.run)
         self._worker.succeeded.connect(self._on_success)
@@ -614,6 +674,28 @@ class TaskInputDialog(QWidget):
         self._worker.failed.connect(self._thread.quit)
         self._thread.finished.connect(self._thread.deleteLater)
         self._thread.start()
+
+    @pyqtSlot(list)
+    def _on_dom_fetched(self, tree: list) -> None:
+        """Called when DOM fetch succeeds. Saves snapshot and starts generation."""
+        # Save dom_snapshot.json regardless of whether tree is empty
+        os.makedirs(_OUTPUT_DIR, exist_ok=True)
+        snapshot_path = os.path.abspath(_DOM_SNAPSHOT_FILE)
+        with open(snapshot_path, "w", encoding="utf-8") as fh:
+            json.dump(tree, fh, indent=2)
+
+        if tree:
+            self._status_label.setText(f"📄 DOM captured ({len(tree)} nodes)")
+        else:
+            self._status_label.setText("⚠ Extension not connected — generating without DOM")
+
+        self._start_generation(dom_snapshot=tree if tree else None)
+
+    @pyqtSlot(str)
+    def _on_dom_fetch_failed(self, error: str) -> None:
+        """Called when DOM fetch errors out. Falls back to generation without DOM."""
+        self._status_label.setText(f"⚠ DOM fetch failed: {error[:40]}")
+        self._start_generation(dom_snapshot=None)
 
     @pyqtSlot(dict)
     def _on_success(self, result: dict) -> None:

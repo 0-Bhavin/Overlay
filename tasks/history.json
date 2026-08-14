@@ -1,5 +1,20 @@
 [
   {
+    "task": "how to sign in on supabase",
+    "app": "Supabase | The Postgres Development Platform - Google Chrome",
+    "timestamp": "2026-08-13T20:10:04"
+  },
+  {
+    "task": "how to create a post",
+    "app": "YouTube - Google Chrome",
+    "timestamp": "2026-08-13T12:18:36"
+  },
+  {
+    "task": "how to swtich to youtube kids",
+    "app": "YouTube - Google Chrome",
+    "timestamp": "2026-08-13T12:13:38"
+  },
+  {
     "task": "how to see watch history",
     "app": "YouTube - Google Chrome",
     "timestamp": "2026-08-13T09:23:50"
@@ -83,20 +98,5 @@
     "task": "view mode to read mode",
     "app": "Document1 - Word",
     "timestamp": "2026-05-06T09:44:04"
-  },
-  {
-    "task": "add watermark on my Microsoft Word",
-    "app": "Microsoft word",
-    "timestamp": "2026-05-06T09:32:58"
-  },
-  {
-    "task": "draw in a circle in Paint",
-    "app": "paint",
-    "timestamp": "2026-05-05T20:41:38"
-  },
-  {
-    "task": "open Google collage in Microsoft Edge",
-    "app": "Microsoft Edge",
-    "timestamp": "2026-05-05T20:40:38"
   }
 ]

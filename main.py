@@ -150,7 +150,7 @@ def main() -> None:
     sc_exit.activated.connect(_on_exit)
 
     # ── 11. Task-input dialog ─────────────────────────────────────────
-    dialog = TaskInputDialog(api_key=_GEMINI_API_KEY)
+    dialog = TaskInputDialog(api_key=_GEMINI_API_KEY, browser_connector=browser_connector)
     dialog.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, True)
 
     def _on_task_ready(path: str) -> None:

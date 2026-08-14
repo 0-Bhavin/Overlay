@@ -1,0 +1,6120 @@
+[
+  {
+    "bounds": {
+      "height": 27,
+      "width": 107,
+      "x": 10,
+      "y": -27
+    },
+    "enabled": true,
+    "id": 1,
+    "role": "div",
+    "text": "Skip to content",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 26,
+      "width": 107,
+      "x": 10,
+      "y": -26
+    },
+    "enabled": true,
+    "id": 2,
+    "role": "a",
+    "text": "Skip to content",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 86,
+      "x": 21,
+      "y": -21
+    },
+    "enabled": true,
+    "id": 3,
+    "role": "span",
+    "text": "Skip to content",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 65,
+      "width": 1521,
+      "x": 0,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 4,
+    "role": "div",
+    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 65,
+      "width": 1521,
+      "x": 0,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 5,
+    "role": "nav",
+    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "type": "nav",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 1280,
+      "x": 120,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 6,
+    "role": "div",
+    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 1088,
+      "x": 216,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 7,
+    "role": "div",
+    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 642,
+      "x": 216,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 8,
+    "role": "div",
+    "text": "Product Developers Solutions Pricing Docs Blog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 124,
+      "x": 216,
+      "y": 20
+    },
+    "enabled": true,
+    "id": 9,
+    "role": "a",
+    "text": "",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 518,
+      "x": 340,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 10,
+    "role": "nav",
+    "text": "Main",
+    "type": "nav",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 35,
+      "width": 470,
+      "x": 372,
+      "y": 14
+    },
+    "enabled": true,
+    "id": 11,
+    "role": "div",
+    "text": "Product Developers Solutions Pricing Docs Blog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 86,
+      "x": 372,
+      "y": 15
+    },
+    "enabled": true,
+    "id": 12,
+    "role": "button",
+    "text": "Product",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 109,
+      "x": 463,
+      "y": 15
+    },
+    "enabled": true,
+    "id": 13,
+    "role": "button",
+    "text": "Developers",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 96,
+      "x": 576,
+      "y": 15
+    },
+    "enabled": true,
+    "id": 14,
+    "role": "button",
+    "text": "Solutions",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 35,
+      "width": 63,
+      "x": 676,
+      "y": 14
+    },
+    "enabled": true,
+    "id": 15,
+    "role": "a",
+    "text": "Pricing",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 19,
+      "width": 47,
+      "x": 684,
+      "y": 22
+    },
+    "enabled": true,
+    "id": 16,
+    "role": "div",
+    "text": "Pricing",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 19,
+      "width": 47,
+      "x": 684,
+      "y": 22
+    },
+    "enabled": true,
+    "id": 17,
+    "role": "div",
+    "text": "Pricing",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 35,
+      "width": 50,
+      "x": 743,
+      "y": 14
+    },
+    "enabled": true,
+    "id": 18,
+    "role": "a",
+    "text": "Docs",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 19,
+      "width": 34,
+      "x": 751,
+      "y": 22
+    },
+    "enabled": true,
+    "id": 19,
+    "role": "div",
+    "text": "Docs",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 19,
+      "width": 34,
+      "x": 751,
+      "y": 22
+    },
+    "enabled": true,
+    "id": 20,
+    "role": "div",
+    "text": "Docs",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 35,
+      "width": 46,
+      "x": 797,
+      "y": 14
+    },
+    "enabled": true,
+    "id": 21,
+    "role": "a",
+    "text": "Blog",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 19,
+      "width": 30,
+      "x": 805,
+      "y": 22
+    },
+    "enabled": true,
+    "id": 22,
+    "role": "div",
+    "text": "Blog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 19,
+      "width": 30,
+      "x": 805,
+      "y": 22
+    },
+    "enabled": true,
+    "id": 23,
+    "role": "div",
+    "text": "Blog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 284,
+      "x": 1021,
+      "y": 0
+    },
+    "enabled": true,
+    "id": 24,
+    "role": "div",
+    "text": "107.9K Sign in Start your project",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 26,
+      "width": 284,
+      "x": 1021,
+      "y": 19
+    },
+    "enabled": true,
+    "id": 25,
+    "role": "div",
+    "text": "107.9K Sign in Start your project",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 26,
+      "width": 86,
+      "x": 1021,
+      "y": 19
+    },
+    "enabled": true,
+    "id": 26,
+    "role": "a",
+    "text": "107.9K",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 65,
+      "x": 1032,
+      "y": 20
+    },
+    "enabled": true,
+    "id": 27,
+    "role": "span",
+    "text": "107.9K",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 65,
+      "x": 1032,
+      "y": 20
+    },
+    "enabled": true,
+    "id": 28,
+    "role": "span",
+    "text": "107.9K",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 26,
+      "width": 60,
+      "x": 1115,
+      "y": 19
+    },
+    "enabled": true,
+    "id": 29,
+    "role": "a",
+    "text": "Sign in",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 15,
+      "width": 39,
+      "x": 1126,
+      "y": 24
+    },
+    "enabled": true,
+    "id": 30,
+    "role": "span",
+    "text": "Sign in",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 26,
+      "width": 121,
+      "x": 1183,
+      "y": 19
+    },
+    "enabled": true,
+    "id": 31,
+    "role": "a",
+    "text": "Start your project",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 15,
+      "width": 99,
+      "x": 1194,
+      "y": 24
+    },
+    "enabled": true,
+    "id": 32,
+    "role": "span",
+    "text": "Start your project",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 6550,
+      "width": 1521,
+      "x": 0,
+      "y": 65
+    },
+    "enabled": true,
+    "id": 33,
+    "role": "div",
+    "text": "Build in a weekend Scale to millions Start your project with a Postgres database. Add Authentication",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 6550,
+      "width": 1521,
+      "x": 0,
+      "y": 65
+    },
+    "enabled": true,
+    "id": 34,
+    "role": "main",
+    "text": "Build in a weekend Scale to millions Start your project with a Postgres database. Add Authentication",
+    "type": "main",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 386,
+      "width": 1521,
+      "x": 0,
+      "y": 65
+    },
+    "enabled": true,
+    "id": 35,
+    "role": "header",
+    "text": "Build in a weekend Scale to millions Start your project with a Postgres database. Add Authentication",
+    "type": "header",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 386,
+      "width": 1280,
+      "x": 120,
+      "y": 65
+    },
+    "enabled": true,
+    "id": 36,
+    "role": "div",
+    "text": "Build in a weekend Scale to millions Start your project with a Postgres database. Add Authentication",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 162,
+      "width": 1088,
+      "x": 216,
+      "y": 225
+    },
+    "enabled": true,
+    "id": 37,
+    "role": "div",
+    "text": "Build in a weekend Scale to millions Start your project with a Postgres database. Add Authentication",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 92,
+      "width": 1088,
+      "x": 216,
+      "y": 225
+    },
+    "enabled": true,
+    "id": 38,
+    "role": "div",
+    "text": "Build in a weekend Scale to millions Start your project with a Postgres database. Add Authentication",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 536,
+      "x": 216,
+      "y": 225
+    },
+    "enabled": true,
+    "id": 39,
+    "role": "span",
+    "text": "Build in a weekend",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 536,
+      "x": 216,
+      "y": 271
+    },
+    "enabled": true,
+    "id": 40,
+    "role": "span",
+    "text": "Scale to millions",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 1088,
+      "x": 216,
+      "y": 349
+    },
+    "enabled": true,
+    "id": 41,
+    "role": "div",
+    "text": "Start your project Request a demo",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 149,
+      "x": 216,
+      "y": 349
+    },
+    "enabled": true,
+    "id": 42,
+    "role": "a",
+    "text": "Start your project",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 116,
+      "x": 233,
+      "y": 358
+    },
+    "enabled": true,
+    "id": 43,
+    "role": "span",
+    "text": "Start your project",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 141,
+      "x": 374,
+      "y": 349
+    },
+    "enabled": true,
+    "id": 44,
+    "role": "a",
+    "text": "Request a demo",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 107,
+      "x": 391,
+      "y": 358
+    },
+    "enabled": true,
+    "id": 45,
+    "role": "span",
+    "text": "Request a demo",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 973,
+      "width": 1521,
+      "x": 0,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 46,
+    "role": "section",
+    "text": "Postgres Database Every project is a full Postgres database, the world's most trusted relational dat",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 973,
+      "width": 1280,
+      "x": 120,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 47,
+    "role": "div",
+    "text": "Postgres Database Every project is a full Postgres database, the world's most trusted relational dat",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 532,
+      "x": 216,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 48,
+    "role": "a",
+    "text": "Postgres Database Every project is a full Postgres database, the world's most trusted relational dat",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 532,
+      "x": 216,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 49,
+    "role": "div",
+    "text": "Postgres Database Every project is a full Postgres database, the world's most trusted relational dat",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 530,
+      "x": 217,
+      "y": 452
+    },
+    "enabled": true,
+    "id": 50,
+    "role": "div",
+    "text": "Postgres Database Every project is a full Postgres database, the world's most trusted relational dat",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 326,
+      "width": 250,
+      "x": 241,
+      "y": 484
+    },
+    "enabled": true,
+    "id": 51,
+    "role": "div",
+    "text": "Postgres Database Every project is a full Postgres database, the world's most trusted relational dat",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 171,
+      "x": 241,
+      "y": 484
+    },
+    "enabled": true,
+    "id": 52,
+    "role": "div",
+    "text": "Postgres Database",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 286,
+      "width": 250,
+      "x": 241,
+      "y": 524
+    },
+    "enabled": true,
+    "id": 53,
+    "role": "div",
+    "text": "Every project is a full Postgres database, the world's most trusted relational database. 100% portab",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 68,
+      "width": 250,
+      "x": 241,
+      "y": 742
+    },
+    "enabled": true,
+    "id": 54,
+    "role": "span",
+    "text": "100% portable Built-in Auth with RLS Easy to extend",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 772,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 55,
+    "role": "a",
+    "text": "Authentication Add user sign ups and logins, securing your data with Row Level Security.",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 772,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 56,
+    "role": "div",
+    "text": "Authentication Add user sign ups and logins, securing your data with Row Level Security.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 252,
+      "x": 773,
+      "y": 452
+    },
+    "enabled": true,
+    "id": 57,
+    "role": "div",
+    "text": "Authentication Add user sign ups and logins, securing your data with Row Level Security.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 334,
+      "width": 220,
+      "x": 789,
+      "y": 476
+    },
+    "enabled": true,
+    "id": 58,
+    "role": "div",
+    "text": "Authentication Add user sign ups and logins, securing your data with Row Level Security.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 142,
+      "x": 797,
+      "y": 476
+    },
+    "enabled": true,
+    "id": 59,
+    "role": "div",
+    "text": "Authentication",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 294,
+      "width": 212,
+      "x": 797,
+      "y": 516
+    },
+    "enabled": true,
+    "id": 60,
+    "role": "div",
+    "text": "Add user sign ups and logins, securing your data with Row Level Security.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 1050,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 61,
+    "role": "a",
+    "text": "Edge Functions Easily write custom code without deploying or scaling servers. $ supabase functions d",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 1050,
+      "y": 451
+    },
+    "enabled": true,
+    "id": 62,
+    "role": "div",
+    "text": "Edge Functions Easily write custom code without deploying or scaling servers. $ supabase functions d",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 252,
+      "x": 1051,
+      "y": 452
+    },
+    "enabled": true,
+    "id": 63,
+    "role": "div",
+    "text": "Edge Functions Easily write custom code without deploying or scaling servers. $ supabase functions d",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 334,
+      "width": 220,
+      "x": 1067,
+      "y": 476
+    },
+    "enabled": true,
+    "id": 64,
+    "role": "div",
+    "text": "Edge Functions Easily write custom code without deploying or scaling servers.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 144,
+      "x": 1075,
+      "y": 476
+    },
+    "enabled": true,
+    "id": 65,
+    "role": "div",
+    "text": "Edge Functions",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 294,
+      "width": 212,
+      "x": 1075,
+      "y": 516
+    },
+    "enabled": true,
+    "id": 66,
+    "role": "div",
+    "text": "Easily write custom code without deploying or scaling servers.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 216,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 67,
+    "role": "a",
+    "text": "Storage Store, organize, and serve large files, from videos to images.",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 216,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 68,
+    "role": "div",
+    "text": "Storage Store, organize, and serve large files, from videos to images.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 252,
+      "x": 217,
+      "y": 876
+    },
+    "enabled": true,
+    "id": 69,
+    "role": "div",
+    "text": "Storage Store, organize, and serve large files, from videos to images.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 334,
+      "width": 220,
+      "x": 233,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 70,
+    "role": "div",
+    "text": "Storage Store, organize, and serve large files, from videos to images.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 87,
+      "x": 241,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 71,
+    "role": "div",
+    "text": "Storage",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 294,
+      "width": 212,
+      "x": 241,
+      "y": 940
+    },
+    "enabled": true,
+    "id": 72,
+    "role": "div",
+    "text": "Store, organize, and serve large files, from videos to images.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 494,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 73,
+    "role": "a",
+    "text": "Realtime Build multiplayer experiences with real-time data synchronization.",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 494,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 74,
+    "role": "div",
+    "text": "Realtime Build multiplayer experiences with real-time data synchronization.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 252,
+      "x": 495,
+      "y": 876
+    },
+    "enabled": true,
+    "id": 75,
+    "role": "div",
+    "text": "Realtime Build multiplayer experiences with real-time data synchronization.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 334,
+      "width": 220,
+      "x": 511,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 76,
+    "role": "div",
+    "text": "Realtime Build multiplayer experiences with real-time data synchronization.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 94,
+      "x": 519,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 77,
+    "role": "div",
+    "text": "Realtime",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 294,
+      "width": 212,
+      "x": 519,
+      "y": 940
+    },
+    "enabled": true,
+    "id": 78,
+    "role": "div",
+    "text": "Build multiplayer experiences with real-time data synchronization.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 772,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 79,
+    "role": "a",
+    "text": "Vector Integrate your favorite ML-models to store, index and search vector embeddings. OpenAI Huggin",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 772,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 80,
+    "role": "div",
+    "text": "Vector Integrate your favorite ML-models to store, index and search vector embeddings. OpenAI Huggin",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 252,
+      "x": 773,
+      "y": 876
+    },
+    "enabled": true,
+    "id": 81,
+    "role": "div",
+    "text": "Vector Integrate your favorite ML-models to store, index and search vector embeddings. OpenAI Huggin",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 334,
+      "width": 220,
+      "x": 789,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 82,
+    "role": "div",
+    "text": "Vector Integrate your favorite ML-models to store, index and search vector embeddings. OpenAI Huggin",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 76,
+      "x": 797,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 83,
+    "role": "div",
+    "text": "Vector",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 294,
+      "width": 212,
+      "x": 797,
+      "y": 940
+    },
+    "enabled": true,
+    "id": 84,
+    "role": "div",
+    "text": "Integrate your favorite ML-models to store, index and search vector embeddings. OpenAI Hugging Face",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 54,
+      "width": 212,
+      "x": 797,
+      "y": 1180
+    },
+    "enabled": true,
+    "id": 85,
+    "role": "span",
+    "text": "OpenAI Hugging Face",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 49,
+      "x": 829,
+      "y": 1182
+    },
+    "enabled": true,
+    "id": 86,
+    "role": "span",
+    "text": "OpenAI",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 92,
+      "x": 829,
+      "y": 1211
+    },
+    "enabled": true,
+    "id": 87,
+    "role": "span",
+    "text": "Hugging Face",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 1050,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 88,
+    "role": "a",
+    "text": "Data APIs Instant ready-to-use REST APIs.",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 400,
+      "width": 254,
+      "x": 1050,
+      "y": 875
+    },
+    "enabled": true,
+    "id": 89,
+    "role": "div",
+    "text": "Data APIs Instant ready-to-use REST APIs.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 398,
+      "width": 252,
+      "x": 1051,
+      "y": 876
+    },
+    "enabled": true,
+    "id": 90,
+    "role": "div",
+    "text": "Data APIs Instant ready-to-use REST APIs.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 334,
+      "width": 220,
+      "x": 1067,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 91,
+    "role": "div",
+    "text": "Data APIs Instant ready-to-use REST APIs.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 24,
+      "width": 99,
+      "x": 1075,
+      "y": 900
+    },
+    "enabled": true,
+    "id": 92,
+    "role": "div",
+    "text": "Data APIs",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 294,
+      "width": 212,
+      "x": 1075,
+      "y": 940
+    },
+    "enabled": true,
+    "id": 93,
+    "role": "div",
+    "text": "Instant ready-to-use REST APIs.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 27,
+      "width": 147,
+      "x": 216,
+      "y": 1300
+    },
+    "enabled": true,
+    "id": 94,
+    "role": "span",
+    "text": "Use one or all.",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 270,
+      "width": 1521,
+      "x": 0,
+      "y": 1424
+    },
+    "enabled": true,
+    "id": 95,
+    "role": "section",
+    "text": "Trusted by fast-growing companies worldwide",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 270,
+      "width": 1521,
+      "x": 0,
+      "y": 1424
+    },
+    "enabled": true,
+    "id": 96,
+    "role": "div",
+    "text": "Trusted by fast-growing companies worldwide",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 68,
+      "width": 1280,
+      "x": 120,
+      "y": 1424
+    },
+    "enabled": true,
+    "id": 97,
+    "role": "div",
+    "text": "Trusted by fast-growing companies worldwide",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 862,
+      "width": 1521,
+      "x": 0,
+      "y": 1694
+    },
+    "enabled": true,
+    "id": 98,
+    "role": "section",
+    "text": "Stay productive and manage your app without leaving the dashboard Table Editor SQL Editor RLS Polici",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 861,
+      "width": 1280,
+      "x": 120,
+      "y": 1694
+    },
+    "enabled": true,
+    "id": 99,
+    "role": "div",
+    "text": "Stay productive and manage your app without leaving the dashboard Table Editor SQL Editor RLS Polici",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 193,
+      "width": 1088,
+      "x": 216,
+      "y": 1734
+    },
+    "enabled": true,
+    "id": 100,
+    "role": "div",
+    "text": "Stay productive and manage your app without leaving the dashboard Table Editor SQL Editor RLS Polici",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 608,
+      "x": 216,
+      "y": 1777
+    },
+    "enabled": true,
+    "id": 101,
+    "role": "span",
+    "text": "Stay productive and manage your app",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 1088,
+      "x": 216,
+      "y": 1889
+    },
+    "enabled": true,
+    "id": 102,
+    "role": "tablist",
+    "text": "Table Editor SQL Editor RLS Policies",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 144,
+      "x": 216,
+      "y": 1889
+    },
+    "enabled": true,
+    "id": 103,
+    "role": "tab",
+    "text": "Table Editor",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 136,
+      "x": 369,
+      "y": 1889
+    },
+    "enabled": true,
+    "id": 104,
+    "role": "tab",
+    "text": "SQL Editor",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 147,
+      "x": 513,
+      "y": 1889
+    },
+    "enabled": true,
+    "id": 105,
+    "role": "tab",
+    "text": "RLS Policies",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 695,
+      "width": 1521,
+      "x": 0,
+      "y": 2555
+    },
+    "enabled": true,
+    "id": 106,
+    "role": "section",
+    "text": "Use Supabase with React import { createClient } from '@supabase/supabase-js' const supabase = create",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 695,
+      "width": 1521,
+      "x": 0,
+      "y": 2555
+    },
+    "enabled": true,
+    "id": 107,
+    "role": "div",
+    "text": "Use Supabase with React import { createClient } from '@supabase/supabase-js' const supabase = create",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 694,
+      "width": 1280,
+      "x": 120,
+      "y": 2555
+    },
+    "enabled": true,
+    "id": 108,
+    "role": "div",
+    "text": "Use Supabase with React import { createClient } from '@supabase/supabase-js' const supabase = create",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 502,
+      "width": 1088,
+      "x": 216,
+      "y": 2651
+    },
+    "enabled": true,
+    "id": 109,
+    "role": "div",
+    "text": "Use Supabase with React import { createClient } from '@supabase/supabase-js' const supabase = create",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 502,
+      "width": 544,
+      "x": 216,
+      "y": 2651
+    },
+    "enabled": true,
+    "id": 110,
+    "role": "div",
+    "text": "Use Supabase with React",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 544,
+      "x": 216,
+      "y": 2689
+    },
+    "enabled": true,
+    "id": 111,
+    "role": "span",
+    "text": "React",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 95,
+      "x": 216,
+      "y": 2689
+    },
+    "enabled": true,
+    "id": 112,
+    "role": "span",
+    "text": "React",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 502,
+      "width": 544,
+      "x": 760,
+      "y": 2651
+    },
+    "enabled": true,
+    "id": 113,
+    "role": "div",
+    "text": "import { createClient } from '@supabase/supabase-js' const supabase = createClient( process.env.SUPA",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 61,
+      "width": 542,
+      "x": 761,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 114,
+    "role": "tablist",
+    "text": "Framework",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 60,
+      "width": 90,
+      "x": 761,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 115,
+    "role": "tab",
+    "text": "React",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 60,
+      "width": 90,
+      "x": 852,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 116,
+    "role": "tab",
+    "text": "Next.js",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 60,
+      "width": 90,
+      "x": 942,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 117,
+    "role": "tab",
+    "text": "Flutter",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 60,
+      "width": 90,
+      "x": 1032,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 118,
+    "role": "tab",
+    "text": "Svelte",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 60,
+      "width": 90,
+      "x": 1123,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 119,
+    "role": "tab",
+    "text": "Vue",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 60,
+      "width": 90,
+      "x": 1213,
+      "y": 2652
+    },
+    "enabled": true,
+    "id": 120,
+    "role": "tab",
+    "text": "Nuxt",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 440,
+      "width": 542,
+      "x": 761,
+      "y": 2713
+    },
+    "enabled": true,
+    "id": 121,
+    "role": "tabpanel",
+    "text": "React code example",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 424,
+      "width": 542,
+      "x": 761,
+      "y": 2713
+    },
+    "enabled": true,
+    "id": 122,
+    "role": "div",
+    "text": "import { createClient } from '@supabase/supabase-js' const supabase = createClient( process.env.SUPA",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 424,
+      "width": 542,
+      "x": 761,
+      "y": 2713
+    },
+    "enabled": true,
+    "id": 123,
+    "role": "div",
+    "text": "import { createClient } from '@supabase/supabase-js' const supabase = createClient( process.env.SUPA",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 406,
+      "x": 785,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 124,
+    "role": "span",
+    "text": "import { createClient } from '@supabase/supabase-js'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 47,
+      "x": 785,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 125,
+    "role": "span",
+    "text": "import",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 832,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 126,
+    "role": "span",
+    "text": "{",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 109,
+      "x": 848,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 127,
+    "role": "span",
+    "text": "createClient",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 957,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 128,
+    "role": "span",
+    "text": "}",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 39,
+      "x": 965,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 129,
+    "role": "span",
+    "text": "from",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 1004,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 130,
+    "role": "span",
+    "text": "'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 164,
+      "x": 1019,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 131,
+    "role": "span",
+    "text": "@supabase/supabase-js",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1183,
+      "y": 2739
+    },
+    "enabled": true,
+    "id": 132,
+    "role": "span",
+    "text": "'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 234,
+      "x": 785,
+      "y": 2784
+    },
+    "enabled": true,
+    "id": 133,
+    "role": "span",
+    "text": "const supabase = createClient(",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 39,
+      "x": 785,
+      "y": 2784
+    },
+    "enabled": true,
+    "id": 134,
+    "role": "span",
+    "text": "const",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 824,
+      "y": 2784
+    },
+    "enabled": true,
+    "id": 135,
+    "role": "span",
+    "text": "supabase",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 894,
+      "y": 2784
+    },
+    "enabled": true,
+    "id": 136,
+    "role": "span",
+    "text": "=",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 101,
+      "x": 910,
+      "y": 2784
+    },
+    "enabled": true,
+    "id": 137,
+    "role": "span",
+    "text": "createClient",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1011,
+      "y": 2784
+    },
+    "enabled": true,
+    "id": 138,
+    "role": "span",
+    "text": "(",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 211,
+      "x": 785,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 139,
+    "role": "span",
+    "text": "process.env.SUPABASE_URL,",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 785,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 140,
+    "role": "span",
+    "text": "process",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 855,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 141,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 23,
+      "x": 863,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 142,
+    "role": "span",
+    "text": "env",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 887,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 143,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 94,
+      "x": 894,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 144,
+    "role": "span",
+    "text": "SUPABASE_URL",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 988,
+      "y": 2806
+    },
+    "enabled": true,
+    "id": 145,
+    "role": "span",
+    "text": ",",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 242,
+      "x": 785,
+      "y": 2828
+    },
+    "enabled": true,
+    "id": 146,
+    "role": "span",
+    "text": "process.env.SUPABASE_ANON_KEY",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 785,
+      "y": 2828
+    },
+    "enabled": true,
+    "id": 147,
+    "role": "span",
+    "text": "process",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 855,
+      "y": 2828
+    },
+    "enabled": true,
+    "id": 148,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 23,
+      "x": 863,
+      "y": 2828
+    },
+    "enabled": true,
+    "id": 149,
+    "role": "span",
+    "text": "env",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 887,
+      "y": 2828
+    },
+    "enabled": true,
+    "id": 150,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 133,
+      "x": 894,
+      "y": 2828
+    },
+    "enabled": true,
+    "id": 151,
+    "role": "span",
+    "text": "SUPABASE_ANON_KEY",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 785,
+      "y": 2850
+    },
+    "enabled": true,
+    "id": 152,
+    "role": "span",
+    "text": ")",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 785,
+      "y": 2850
+    },
+    "enabled": true,
+    "id": 153,
+    "role": "span",
+    "text": ")",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 242,
+      "x": 785,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 154,
+    "role": "span",
+    "text": "export default function App() {",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 47,
+      "x": 785,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 155,
+    "role": "span",
+    "text": "export",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 62,
+      "x": 832,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 156,
+    "role": "span",
+    "text": "default",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 894,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 157,
+    "role": "span",
+    "text": "function",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 31,
+      "x": 965,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 158,
+    "role": "span",
+    "text": "App",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 996,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 159,
+    "role": "span",
+    "text": "()",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 1011,
+      "y": 2894
+    },
+    "enabled": true,
+    "id": 160,
+    "role": "span",
+    "text": "{",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 312,
+      "x": 785,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 161,
+    "role": "span",
+    "text": "const [todos, setTodos] = useState([])",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 55,
+      "x": 785,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 162,
+    "role": "span",
+    "text": "const",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 840,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 163,
+    "role": "span",
+    "text": "[",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 39,
+      "x": 855,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 164,
+    "role": "span",
+    "text": "todos",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 894,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 165,
+    "role": "span",
+    "text": ",",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 902,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 166,
+    "role": "span",
+    "text": "setTodos",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 972,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 167,
+    "role": "span",
+    "text": "]",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 980,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 168,
+    "role": "span",
+    "text": "=",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 996,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 169,
+    "role": "span",
+    "text": "useState",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 31,
+      "x": 1066,
+      "y": 2916
+    },
+    "enabled": true,
+    "id": 170,
+    "role": "span",
+    "text": "([])",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 148,
+      "x": 785,
+      "y": 2960
+    },
+    "enabled": true,
+    "id": 171,
+    "role": "span",
+    "text": "useEffect(() => {",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 86,
+      "x": 785,
+      "y": 2960
+    },
+    "enabled": true,
+    "id": 172,
+    "role": "span",
+    "text": "useEffect",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 871,
+      "y": 2960
+    },
+    "enabled": true,
+    "id": 173,
+    "role": "span",
+    "text": "(",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 879,
+      "y": 2960
+    },
+    "enabled": true,
+    "id": 174,
+    "role": "span",
+    "text": "()",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 23,
+      "x": 894,
+      "y": 2960
+    },
+    "enabled": true,
+    "id": 175,
+    "role": "span",
+    "text": "=>",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 918,
+      "y": 2960
+    },
+    "enabled": true,
+    "id": 176,
+    "role": "span",
+    "text": "{",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 296,
+      "x": 785,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 177,
+    "role": "span",
+    "text": "supabase.from('todos').select('*')",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 94,
+      "x": 785,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 178,
+    "role": "span",
+    "text": "supabase",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 879,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 179,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 31,
+      "x": 887,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 180,
+    "role": "span",
+    "text": "from",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 918,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 181,
+    "role": "span",
+    "text": "(",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 926,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 182,
+    "role": "span",
+    "text": "'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 39,
+      "x": 933,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 183,
+    "role": "span",
+    "text": "todos",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 972,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 184,
+    "role": "span",
+    "text": "'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 980,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 185,
+    "role": "span",
+    "text": ")",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 988,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 186,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 47,
+      "x": 996,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 187,
+    "role": "span",
+    "text": "select",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1043,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 188,
+    "role": "span",
+    "text": "(",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1050,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 189,
+    "role": "span",
+    "text": "'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1058,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 190,
+    "role": "span",
+    "text": "*",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1066,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 191,
+    "role": "span",
+    "text": "'",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1074,
+      "y": 2982
+    },
+    "enabled": true,
+    "id": 192,
+    "role": "span",
+    "text": ")",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 320,
+      "x": 785,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 193,
+    "role": "span",
+    "text": ".then(({ data }) => setTodos(data))",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 55,
+      "x": 785,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 194,
+    "role": "span",
+    "text": ".",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 31,
+      "x": 840,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 195,
+    "role": "span",
+    "text": "then",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 871,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 196,
+    "role": "span",
+    "text": "(",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 879,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 197,
+    "role": "span",
+    "text": "({",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 47,
+      "x": 894,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 198,
+    "role": "span",
+    "text": "data",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 941,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 199,
+    "role": "span",
+    "text": "})",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 23,
+      "x": 957,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 200,
+    "role": "span",
+    "text": "=>",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 70,
+      "x": 980,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 201,
+    "role": "span",
+    "text": "setTodos",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 55,
+      "x": 1050,
+      "y": 3005
+    },
+    "enabled": true,
+    "id": 202,
+    "role": "span",
+    "text": "(data))",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 62,
+      "x": 785,
+      "y": 3027
+    },
+    "enabled": true,
+    "id": 203,
+    "role": "span",
+    "text": "}, [])",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 31,
+      "x": 785,
+      "y": 3027
+    },
+    "enabled": true,
+    "id": 204,
+    "role": "span",
+    "text": "},",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 31,
+      "x": 816,
+      "y": 3027
+    },
+    "enabled": true,
+    "id": 205,
+    "role": "span",
+    "text": "[])",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 273,
+      "x": 785,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 206,
+    "role": "span",
+    "text": "return <TodoList items={todos} />",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 62,
+      "x": 785,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 207,
+    "role": "span",
+    "text": "return",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 16,
+      "x": 848,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 208,
+    "role": "span",
+    "text": "<",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 62,
+      "x": 863,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 209,
+    "role": "span",
+    "text": "TodoList",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 47,
+      "x": 926,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 210,
+    "role": "span",
+    "text": "items",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 972,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 211,
+    "role": "span",
+    "text": "=",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 980,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 212,
+    "role": "span",
+    "text": "{",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 39,
+      "x": 988,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 213,
+    "role": "span",
+    "text": "todos",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 1027,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 214,
+    "role": "span",
+    "text": "}",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 23,
+      "x": 1035,
+      "y": 3071
+    },
+    "enabled": true,
+    "id": 215,
+    "role": "span",
+    "text": "/>",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 785,
+      "y": 3093
+    },
+    "enabled": true,
+    "id": 216,
+    "role": "span",
+    "text": "}",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 8,
+      "x": 785,
+      "y": 3093
+    },
+    "enabled": true,
+    "id": 217,
+    "role": "span",
+    "text": "}",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 30,
+      "width": 159,
+      "x": 1129,
+      "y": 3107
+    },
+    "enabled": true,
+    "id": 218,
+    "role": "a",
+    "text": "Read docs for React",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 896,
+      "width": 1521,
+      "x": 0,
+      "y": 3251
+    },
+    "enabled": true,
+    "id": 219,
+    "role": "section",
+    "text": "Kickstart your next project with production ready templates View all examples Stripe Subscriptions S",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 896,
+      "width": 1280,
+      "x": 120,
+      "y": 3251
+    },
+    "enabled": true,
+    "id": 220,
+    "role": "div",
+    "text": "Kickstart your next project with production ready templates View all examples Stripe Subscriptions S",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 76,
+      "width": 1088,
+      "x": 216,
+      "y": 3347
+    },
+    "enabled": true,
+    "id": 221,
+    "role": "div",
+    "text": "Kickstart your next project with production ready templates View all examples",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 527,
+      "x": 216,
+      "y": 3380
+    },
+    "enabled": true,
+    "id": 222,
+    "role": "span",
+    "text": "with production ready templates",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 119,
+      "x": 1186,
+      "y": 3402
+    },
+    "enabled": true,
+    "id": 223,
+    "role": "a",
+    "text": "View all examples",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 564,
+      "width": 1088,
+      "x": 216,
+      "y": 3486
+    },
+    "enabled": true,
+    "id": 224,
+    "role": "div",
+    "text": "Stripe Subscriptions Starter The all-in-one subscription starter kit for high-performance SaaS appli",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 374,
+      "width": 1088,
+      "x": 216,
+      "y": 3486
+    },
+    "enabled": true,
+    "id": 225,
+    "role": "div",
+    "text": "Stripe Subscriptions Starter The all-in-one subscription starter kit for high-performance SaaS appli",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 374,
+      "width": 538,
+      "x": 216,
+      "y": 3486
+    },
+    "enabled": true,
+    "id": 226,
+    "role": "a",
+    "text": "Stripe Subscriptions Starter The all-in-one subscription starter kit for high-performance SaaS appli",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 134,
+      "width": 536,
+      "x": 217,
+      "y": 3487
+    },
+    "enabled": true,
+    "id": 227,
+    "role": "div",
+    "text": "Stripe Subscriptions Starter The all-in-one subscription starter kit for high-performance SaaS appli",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 488,
+      "x": 241,
+      "y": 3537
+    },
+    "enabled": true,
+    "id": 228,
+    "role": "div",
+    "text": "Stripe Subscriptions Starter The all-in-one subscription starter kit for high-performance SaaS appli",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 179,
+      "width": 487,
+      "x": 242,
+      "y": 3699
+    },
+    "enabled": true,
+    "id": 229,
+    "role": "div",
+    "text": "Pricing page with subscription tiers",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 374,
+      "width": 538,
+      "x": 766,
+      "y": 3486
+    },
+    "enabled": true,
+    "id": 230,
+    "role": "a",
+    "text": "Next.js Starter A Next.js App Router template configured with cookie-based auth using Supabase, Type",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 134,
+      "width": 536,
+      "x": 767,
+      "y": 3487
+    },
+    "enabled": true,
+    "id": 231,
+    "role": "div",
+    "text": "Next.js Starter A Next.js App Router template configured with cookie-based auth using Supabase, Type",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 64,
+      "width": 488,
+      "x": 791,
+      "y": 3537
+    },
+    "enabled": true,
+    "id": 232,
+    "role": "div",
+    "text": "Next.js Starter A Next.js App Router template configured with cookie-based auth using Supabase, Type",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 240,
+      "width": 487,
+      "x": 792,
+      "y": 3669
+    },
+    "enabled": true,
+    "id": 233,
+    "role": "div",
+    "text": "Dashboard with sidebar navigation and data grid",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 178,
+      "width": 1088,
+      "x": 216,
+      "y": 3872
+    },
+    "enabled": true,
+    "id": 234,
+    "role": "div",
+    "text": "AI Chatbot An open-source AI chatbot app template built with Next.js, the Vercel AI SDK, OpenAI, and",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 178,
+      "width": 263,
+      "x": 216,
+      "y": 3872
+    },
+    "enabled": true,
+    "id": 235,
+    "role": "a",
+    "text": "AI Chatbot An open-source AI chatbot app template built with Next.js, the Vercel AI SDK, OpenAI, and",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 178,
+      "width": 263,
+      "x": 491,
+      "y": 3872
+    },
+    "enabled": true,
+    "id": 236,
+    "role": "a",
+    "text": "LangChain + Next.js Starter Starter template and example use-cases for LangChain projects in Next.js",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 178,
+      "width": 263,
+      "x": 766,
+      "y": 3872
+    },
+    "enabled": true,
+    "id": 237,
+    "role": "a",
+    "text": "Flutter User Management Get started with Supabase and Flutter by building a user management app with",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 178,
+      "width": 263,
+      "x": 1041,
+      "y": 3872
+    },
+    "enabled": true,
+    "id": 238,
+    "role": "a",
+    "text": "Expo React Native Starter An extended version of create-t3-turbo implementing authentication on both",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 812,
+      "width": 1521,
+      "x": 0,
+      "y": 4147
+    },
+    "enabled": true,
+    "id": 239,
+    "role": "section",
+    "text": "How industry leaders are building with Supabase More customer stories Lovable Powering millions of A",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 812,
+      "width": 1521,
+      "x": 0,
+      "y": 4147
+    },
+    "enabled": true,
+    "id": 240,
+    "role": "div",
+    "text": "How industry leaders are building with Supabase More customer stories Lovable Powering millions of A",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 76,
+      "width": 1280,
+      "x": 120,
+      "y": 4243
+    },
+    "enabled": true,
+    "id": 241,
+    "role": "div",
+    "text": "How industry leaders are building with Supabase More customer stories",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 76,
+      "width": 1088,
+      "x": 216,
+      "y": 4243
+    },
+    "enabled": true,
+    "id": 242,
+    "role": "div",
+    "text": "How industry leaders are building with Supabase More customer stories",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 436,
+      "x": 216,
+      "y": 4276
+    },
+    "enabled": true,
+    "id": 243,
+    "role": "span",
+    "text": "are building with Supabase",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 150,
+      "x": 1155,
+      "y": 4298
+    },
+    "enabled": true,
+    "id": 244,
+    "role": "a",
+    "text": "More customer stories",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 1280,
+      "x": 120,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 245,
+    "role": "div",
+    "text": "Lovable Powering millions of AI-generated apps with a complete Supabase backend. Lovable is about un",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 1088,
+      "x": 216,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 246,
+    "role": "div",
+    "text": "Lovable Powering millions of AI-generated apps with a complete Supabase backend. Lovable is about un",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 752,
+      "x": 216,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 247,
+    "role": "button",
+    "text": "Lovable",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 352,
+      "width": 560,
+      "x": 248,
+      "y": 4478
+    },
+    "enabled": true,
+    "id": 248,
+    "role": "div",
+    "text": "Lovable Powering millions of AI-generated apps with a complete Supabase backend. Lovable is about un",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 44,
+      "width": 560,
+      "x": 248,
+      "y": 4478
+    },
+    "enabled": true,
+    "id": 249,
+    "role": "div",
+    "text": "Lovable Powering millions of AI-generated apps with a complete Supabase backend.",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 183,
+      "width": 560,
+      "x": 248,
+      "y": 4648
+    },
+    "enabled": true,
+    "id": 250,
+    "role": "div",
+    "text": "Lovable is about unlocking creativity for anyone. Only 1% of the population knows how to code. Lovab",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 28,
+      "width": 560,
+      "x": 248,
+      "y": 4754
+    },
+    "enabled": true,
+    "id": 251,
+    "role": "div",
+    "text": "Bryan Byrne, Product Manager, Lovable",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 560,
+      "x": 248,
+      "y": 4814
+    },
+    "enabled": true,
+    "id": 252,
+    "role": "a",
+    "text": "Read the story \u2192",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 76,
+      "x": 976,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 253,
+    "role": "button",
+    "text": "eXp Realty",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 76,
+      "x": 1060,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 254,
+    "role": "button",
+    "text": "Phoenix Energy",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 76,
+      "x": 1144,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 255,
+    "role": "button",
+    "text": "Chatbase",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 480,
+      "width": 76,
+      "x": 1228,
+      "y": 4382
+    },
+    "enabled": true,
+    "id": 256,
+    "role": "button",
+    "text": "Rally",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 909,
+      "width": 1521,
+      "x": 0,
+      "y": 4958
+    },
+    "enabled": true,
+    "id": 257,
+    "role": "section",
+    "text": "Join the community Discover what our community has to say about their Supabase experience. Join us o",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 909,
+      "width": 1521,
+      "x": 0,
+      "y": 4958
+    },
+    "enabled": true,
+    "id": 258,
+    "role": "div",
+    "text": "Join the community Discover what our community has to say about their Supabase experience. Join us o",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 908,
+      "width": 1521,
+      "x": 0,
+      "y": 4958
+    },
+    "enabled": true,
+    "id": 259,
+    "role": "div",
+    "text": "Join the community Discover what our community has to say about their Supabase experience. Join us o",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 288,
+      "width": 1521,
+      "x": 0,
+      "y": 4958
+    },
+    "enabled": true,
+    "id": 260,
+    "role": "div",
+    "text": "Join the community Discover what our community has to say about their Supabase experience. Join us o",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 149,
+      "x": 686,
+      "y": 5132
+    },
+    "enabled": true,
+    "id": 261,
+    "role": "a",
+    "text": "Join us on Discord",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 124,
+      "x": 699,
+      "y": 5141
+    },
+    "enabled": true,
+    "id": 262,
+    "role": "span",
+    "text": "Join us on Discord",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 373,
+      "width": 1521,
+      "x": 0,
+      "y": 5867
+    },
+    "enabled": true,
+    "id": 263,
+    "role": "section",
+    "text": "Open source from day one Supabase is built in the open because we believe great developer tools shou",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 372,
+      "width": 1521,
+      "x": 0,
+      "y": 5867
+    },
+    "enabled": true,
+    "id": 264,
+    "role": "div",
+    "text": "Open source from day one Supabase is built in the open because we believe great developer tools shou",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 372,
+      "width": 1280,
+      "x": 120,
+      "y": 5867
+    },
+    "enabled": true,
+    "id": 265,
+    "role": "div",
+    "text": "Open source from day one Supabase is built in the open because we believe great developer tools shou",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 180,
+      "width": 512,
+      "x": 216,
+      "y": 5963
+    },
+    "enabled": true,
+    "id": 266,
+    "role": "div",
+    "text": "Open source from day one Supabase is built in the open because we believe great developer tools shou",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 180,
+      "width": 512,
+      "x": 216,
+      "y": 5963
+    },
+    "enabled": true,
+    "id": 267,
+    "role": "div",
+    "text": "Open source from day one Supabase is built in the open because we believe great developer tools shou",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 122,
+      "width": 512,
+      "x": 216,
+      "y": 5963
+    },
+    "enabled": true,
+    "id": 268,
+    "role": "div",
+    "text": "Open source from day one Supabase is built in the open because we believe great developer tools shou",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 155,
+      "x": 216,
+      "y": 6109
+    },
+    "enabled": true,
+    "id": 269,
+    "role": "div",
+    "text": "View on GitHub",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 155,
+      "x": 216,
+      "y": 6109
+    },
+    "enabled": true,
+    "id": 270,
+    "role": "a",
+    "text": "View on GitHub",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 103,
+      "x": 255,
+      "y": 6118
+    },
+    "enabled": true,
+    "id": 271,
+    "role": "span",
+    "text": "View on GitHub",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 375,
+      "width": 1521,
+      "x": 0,
+      "y": 6240
+    },
+    "enabled": true,
+    "id": 272,
+    "role": "section",
+    "text": "Build in a weekend, scale to millions Start your project Request a demo",
+    "type": "section",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 375,
+      "width": 1521,
+      "x": 0,
+      "y": 6240
+    },
+    "enabled": true,
+    "id": 273,
+    "role": "div",
+    "text": "Build in a weekend, scale to millions Start your project Request a demo",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 119,
+      "width": 1521,
+      "x": 0,
+      "y": 6368
+    },
+    "enabled": true,
+    "id": 274,
+    "role": "div",
+    "text": "Build in a weekend, scale to millions Start your project Request a demo",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 306,
+      "x": 474,
+      "y": 6365
+    },
+    "enabled": true,
+    "id": 275,
+    "role": "span",
+    "text": "Build in a weekend,",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 46,
+      "width": 266,
+      "x": 780,
+      "y": 6365
+    },
+    "enabled": true,
+    "id": 276,
+    "role": "span",
+    "text": "scale to millions",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 299,
+      "x": 611,
+      "y": 6449
+    },
+    "enabled": true,
+    "id": 277,
+    "role": "div",
+    "text": "Start your project Request a demo",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 149,
+      "x": 611,
+      "y": 6449
+    },
+    "enabled": true,
+    "id": 278,
+    "role": "a",
+    "text": "Start your project",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 116,
+      "x": 628,
+      "y": 6458
+    },
+    "enabled": true,
+    "id": 279,
+    "role": "span",
+    "text": "Start your project",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 38,
+      "width": 141,
+      "x": 769,
+      "y": 6449
+    },
+    "enabled": true,
+    "id": 280,
+    "role": "a",
+    "text": "Request a demo",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 107,
+      "x": 785,
+      "y": 6458
+    },
+    "enabled": true,
+    "id": 281,
+    "role": "span",
+    "text": "Request a demo",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1096,
+      "width": 1521,
+      "x": 0,
+      "y": 6615
+    },
+    "enabled": true,
+    "id": 282,
+    "role": "footer",
+    "text": "Footer We protect your data. More on Security SOC2 Type 2 Certified HIPAA Compliant ISO 27001 Certif",
+    "type": "footer",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 101,
+      "width": 1521,
+      "x": 0,
+      "y": 6615
+    },
+    "enabled": true,
+    "id": 283,
+    "role": "div",
+    "text": "We protect your data. More on Security SOC2 Type 2 Certified HIPAA Compliant ISO 27001 Certified",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 100,
+      "width": 1280,
+      "x": 120,
+      "y": 6615
+    },
+    "enabled": true,
+    "id": 284,
+    "role": "div",
+    "text": "We protect your data. More on Security SOC2 Type 2 Certified HIPAA Compliant ISO 27001 Certified",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 266,
+      "x": 302,
+      "y": 6655
+    },
+    "enabled": true,
+    "id": 285,
+    "role": "div",
+    "text": "We protect your data. More on Security",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 114,
+      "x": 453,
+      "y": 6655
+    },
+    "enabled": true,
+    "id": 286,
+    "role": "a",
+    "text": "More on Security",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 58,
+      "x": 799,
+      "y": 6655
+    },
+    "enabled": true,
+    "id": 287,
+    "role": "span",
+    "text": "Certified",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 67,
+      "x": 963,
+      "y": 6655
+    },
+    "enabled": true,
+    "id": 288,
+    "role": "span",
+    "text": "Compliant",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 58,
+      "x": 1162,
+      "y": 6655
+    },
+    "enabled": true,
+    "id": 289,
+    "role": "span",
+    "text": "Certified",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 995,
+      "width": 1280,
+      "x": 120,
+      "y": 6716
+    },
+    "enabled": true,
+    "id": 290,
+    "role": "div",
+    "text": "Twitter GitHub Discord Youtube TikTok Instagram Get product updates and news from Supabase. Subscrib",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 1088,
+      "x": 216,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 291,
+    "role": "div",
+    "text": "Twitter GitHub Discord Youtube TikTok Instagram Get product updates and news from Supabase. Subscrib",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 299,
+      "x": 216,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 292,
+    "role": "div",
+    "text": "Twitter GitHub Discord Youtube TikTok Instagram Get product updates and news from Supabase. Subscrib",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 30,
+      "width": 160,
+      "x": 216,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 293,
+    "role": "a",
+    "text": "",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 299,
+      "x": 216,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 294,
+    "role": "div",
+    "text": "Twitter GitHub Discord Youtube TikTok Instagram",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 22,
+      "x": 216,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 295,
+    "role": "a",
+    "text": "Twitter",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 215,
+      "y": 6873
+    },
+    "enabled": true,
+    "id": 296,
+    "role": "span",
+    "text": "Twitter",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 22,
+      "x": 258,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 297,
+    "role": "a",
+    "text": "GitHub",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 257,
+      "y": 6873
+    },
+    "enabled": true,
+    "id": 298,
+    "role": "span",
+    "text": "GitHub",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 22,
+      "x": 300,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 299,
+    "role": "a",
+    "text": "Discord",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 299,
+      "y": 6873
+    },
+    "enabled": true,
+    "id": 300,
+    "role": "span",
+    "text": "Discord",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 22,
+      "x": 342,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 301,
+    "role": "a",
+    "text": "Youtube",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 341,
+      "y": 6873
+    },
+    "enabled": true,
+    "id": 302,
+    "role": "span",
+    "text": "Youtube",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 22,
+      "x": 384,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 303,
+    "role": "a",
+    "text": "TikTok",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 383,
+      "y": 6873
+    },
+    "enabled": true,
+    "id": 304,
+    "role": "span",
+    "text": "TikTok",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 22,
+      "width": 22,
+      "x": 426,
+      "y": 6874
+    },
+    "enabled": true,
+    "id": 305,
+    "role": "a",
+    "text": "Instagram",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 425,
+      "y": 6873
+    },
+    "enabled": true,
+    "id": 306,
+    "role": "span",
+    "text": "Instagram",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 116,
+      "width": 299,
+      "x": 216,
+      "y": 6928
+    },
+    "enabled": true,
+    "id": 307,
+    "role": "div",
+    "text": "Get product updates and news from Supabase. Subscribe",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 116,
+      "width": 299,
+      "x": 216,
+      "y": 6928
+    },
+    "enabled": true,
+    "id": 308,
+    "role": "form",
+    "text": "Get product updates and news from Supabase. Subscribe",
+    "type": "form",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 34,
+      "width": 240,
+      "x": 216,
+      "y": 6976
+    },
+    "enabled": true,
+    "id": 309,
+    "role": "input",
+    "text": "Your email",
+    "type": "input:email",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 26,
+      "width": 79,
+      "x": 216,
+      "y": 7018
+    },
+    "enabled": true,
+    "id": 310,
+    "role": "button",
+    "text": "Subscribe",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 16,
+      "width": 58,
+      "x": 227,
+      "y": 7023
+    },
+    "enabled": true,
+    "id": 311,
+    "role": "span",
+    "text": "Subscribe",
+    "type": "span",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 773,
+      "x": 532,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 312,
+    "role": "div",
+    "text": "Product Pricing Database Auth Functions Realtime Storage Vector Cron Feature Catalog Launch Week Sol",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 773,
+      "x": 532,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 313,
+    "role": "div",
+    "text": "Product Pricing Database Auth Functions Realtime Storage Vector Cron Feature Catalog Launch Week Sol",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 115,
+      "x": 532,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 314,
+    "role": "div",
+    "text": "Product Pricing Database Auth Functions Realtime Storage Vector Cron Feature Catalog Launch Week",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 315,
+    "role": "a",
+    "text": "Pricing",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 316,
+    "role": "div",
+    "text": "Pricing",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 317,
+    "role": "a",
+    "text": "Database",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 318,
+    "role": "div",
+    "text": "Database",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 319,
+    "role": "a",
+    "text": "Auth",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 320,
+    "role": "div",
+    "text": "Auth",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6934
+    },
+    "enabled": true,
+    "id": 321,
+    "role": "a",
+    "text": "Functions",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6934
+    },
+    "enabled": true,
+    "id": 322,
+    "role": "div",
+    "text": "Functions",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6962
+    },
+    "enabled": true,
+    "id": 323,
+    "role": "a",
+    "text": "Realtime",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6962
+    },
+    "enabled": true,
+    "id": 324,
+    "role": "div",
+    "text": "Realtime",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6990
+    },
+    "enabled": true,
+    "id": 325,
+    "role": "a",
+    "text": "Storage",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 6990
+    },
+    "enabled": true,
+    "id": 326,
+    "role": "div",
+    "text": "Storage",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7018
+    },
+    "enabled": true,
+    "id": 327,
+    "role": "a",
+    "text": "Vector",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7018
+    },
+    "enabled": true,
+    "id": 328,
+    "role": "div",
+    "text": "Vector",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7046
+    },
+    "enabled": true,
+    "id": 329,
+    "role": "a",
+    "text": "Cron",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7046
+    },
+    "enabled": true,
+    "id": 330,
+    "role": "div",
+    "text": "Cron",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7074
+    },
+    "enabled": true,
+    "id": 331,
+    "role": "a",
+    "text": "Feature Catalog",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7074
+    },
+    "enabled": true,
+    "id": 332,
+    "role": "div",
+    "text": "Feature Catalog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7102
+    },
+    "enabled": true,
+    "id": 333,
+    "role": "a",
+    "text": "Launch Week",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 532,
+      "y": 7102
+    },
+    "enabled": true,
+    "id": 334,
+    "role": "div",
+    "text": "Launch Week",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 115,
+      "x": 663,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 335,
+    "role": "div",
+    "text": "Solutions AI Builders No Code Beginners Developers Postgres Devs Vibe Coders Hackathon Contestants S",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 336,
+    "role": "a",
+    "text": "AI Builders",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 337,
+    "role": "div",
+    "text": "AI Builders",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 338,
+    "role": "a",
+    "text": "No Code",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 339,
+    "role": "div",
+    "text": "No Code",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 340,
+    "role": "a",
+    "text": "Beginners",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 341,
+    "role": "div",
+    "text": "Beginners",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6934
+    },
+    "enabled": true,
+    "id": 342,
+    "role": "a",
+    "text": "Developers",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6934
+    },
+    "enabled": true,
+    "id": 343,
+    "role": "div",
+    "text": "Developers",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6962
+    },
+    "enabled": true,
+    "id": 344,
+    "role": "a",
+    "text": "Postgres Devs",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6962
+    },
+    "enabled": true,
+    "id": 345,
+    "role": "div",
+    "text": "Postgres Devs",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6990
+    },
+    "enabled": true,
+    "id": 346,
+    "role": "a",
+    "text": "Vibe Coders",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 6990
+    },
+    "enabled": true,
+    "id": 347,
+    "role": "div",
+    "text": "Vibe Coders",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7018
+    },
+    "enabled": true,
+    "id": 348,
+    "role": "a",
+    "text": "Hackathon Contestants",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7018
+    },
+    "enabled": true,
+    "id": 349,
+    "role": "div",
+    "text": "Hackathon Contestants",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7066
+    },
+    "enabled": true,
+    "id": 350,
+    "role": "a",
+    "text": "Startups",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7066
+    },
+    "enabled": true,
+    "id": 351,
+    "role": "div",
+    "text": "Startups",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7094
+    },
+    "enabled": true,
+    "id": 352,
+    "role": "a",
+    "text": "Agencies",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7094
+    },
+    "enabled": true,
+    "id": 353,
+    "role": "div",
+    "text": "Agencies",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7122
+    },
+    "enabled": true,
+    "id": 354,
+    "role": "a",
+    "text": "Enterprise",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7122
+    },
+    "enabled": true,
+    "id": 355,
+    "role": "div",
+    "text": "Enterprise",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7150
+    },
+    "enabled": true,
+    "id": 356,
+    "role": "a",
+    "text": "Innovation Teams",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7150
+    },
+    "enabled": true,
+    "id": 357,
+    "role": "div",
+    "text": "Innovation Teams",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7198
+    },
+    "enabled": true,
+    "id": 358,
+    "role": "a",
+    "text": "Hosted Postgres",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7198
+    },
+    "enabled": true,
+    "id": 359,
+    "role": "div",
+    "text": "Hosted Postgres",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7226
+    },
+    "enabled": true,
+    "id": 360,
+    "role": "a",
+    "text": "B2B SaaS",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7226
+    },
+    "enabled": true,
+    "id": 361,
+    "role": "div",
+    "text": "B2B SaaS",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7254
+    },
+    "enabled": true,
+    "id": 362,
+    "role": "a",
+    "text": "FinServ",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7254
+    },
+    "enabled": true,
+    "id": 363,
+    "role": "div",
+    "text": "FinServ",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7282
+    },
+    "enabled": true,
+    "id": 364,
+    "role": "a",
+    "text": "Healthcare",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7282
+    },
+    "enabled": true,
+    "id": 365,
+    "role": "div",
+    "text": "Healthcare",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7310
+    },
+    "enabled": true,
+    "id": 366,
+    "role": "a",
+    "text": "Agents",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 663,
+      "y": 7310
+    },
+    "enabled": true,
+    "id": 367,
+    "role": "div",
+    "text": "Agents",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7338
+    },
+    "enabled": true,
+    "id": 368,
+    "role": "a",
+    "text": "Switch from Firebase",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7338
+    },
+    "enabled": true,
+    "id": 369,
+    "role": "div",
+    "text": "Switch from Firebase",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7386
+    },
+    "enabled": true,
+    "id": 370,
+    "role": "a",
+    "text": "Switch from Neon",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 663,
+      "y": 7386
+    },
+    "enabled": true,
+    "id": 371,
+    "role": "div",
+    "text": "Switch from Neon",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 115,
+      "x": 795,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 372,
+    "role": "div",
+    "text": "Resources Blog Support System Status Become a Partner Partner Catalog Brand Assets Security & Compli",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 373,
+    "role": "a",
+    "text": "Blog",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 374,
+    "role": "div",
+    "text": "Blog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 375,
+    "role": "a",
+    "text": "Support",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 376,
+    "role": "div",
+    "text": "Support",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 377,
+    "role": "a",
+    "text": "System Status",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 378,
+    "role": "div",
+    "text": "System Status",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 795,
+      "y": 6934
+    },
+    "enabled": true,
+    "id": 379,
+    "role": "a",
+    "text": "Become a Partner",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 795,
+      "y": 6934
+    },
+    "enabled": true,
+    "id": 380,
+    "role": "div",
+    "text": "Become a Partner",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6982
+    },
+    "enabled": true,
+    "id": 381,
+    "role": "a",
+    "text": "Partner Catalog",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 6982
+    },
+    "enabled": true,
+    "id": 382,
+    "role": "div",
+    "text": "Partner Catalog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 7010
+    },
+    "enabled": true,
+    "id": 383,
+    "role": "a",
+    "text": "Brand Assets",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 7010
+    },
+    "enabled": true,
+    "id": 384,
+    "role": "div",
+    "text": "Brand Assets",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 795,
+      "y": 7038
+    },
+    "enabled": true,
+    "id": 385,
+    "role": "a",
+    "text": "Security & Compliance",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 795,
+      "y": 7038
+    },
+    "enabled": true,
+    "id": 386,
+    "role": "div",
+    "text": "Security & Compliance",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 7086
+    },
+    "enabled": true,
+    "id": 387,
+    "role": "a",
+    "text": "SOC2",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 7086
+    },
+    "enabled": true,
+    "id": 388,
+    "role": "div",
+    "text": "SOC2",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 7114
+    },
+    "enabled": true,
+    "id": 389,
+    "role": "a",
+    "text": "HIPAA",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 795,
+      "y": 7114
+    },
+    "enabled": true,
+    "id": 390,
+    "role": "div",
+    "text": "HIPAA",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 115,
+      "x": 926,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 391,
+    "role": "div",
+    "text": "Developers Documentation Supabase Library Changelog RSS",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 926,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 392,
+    "role": "a",
+    "text": "Documentation",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 926,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 393,
+    "role": "div",
+    "text": "Documentation",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 926,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 394,
+    "role": "a",
+    "text": "Supabase Library",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 926,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 395,
+    "role": "div",
+    "text": "Supabase Library",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 926,
+      "y": 6926
+    },
+    "enabled": true,
+    "id": 396,
+    "role": "a",
+    "text": "Changelog",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 926,
+      "y": 6926
+    },
+    "enabled": true,
+    "id": 397,
+    "role": "div",
+    "text": "Changelog",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 926,
+      "y": 6954
+    },
+    "enabled": true,
+    "id": 398,
+    "role": "a",
+    "text": "RSS",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 926,
+      "y": 6954
+    },
+    "enabled": true,
+    "id": 399,
+    "role": "div",
+    "text": "RSS",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 115,
+      "x": 1058,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 400,
+    "role": "div",
+    "text": "Community Events & Webinars SupaSquad Contributing Open Source DevTo",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 1058,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 401,
+    "role": "a",
+    "text": "Events & Webinars",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 1058,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 402,
+    "role": "div",
+    "text": "Events & Webinars",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6898
+    },
+    "enabled": true,
+    "id": 403,
+    "role": "a",
+    "text": "SupaSquad",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6898
+    },
+    "enabled": true,
+    "id": 404,
+    "role": "div",
+    "text": "SupaSquad",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6926
+    },
+    "enabled": true,
+    "id": 405,
+    "role": "a",
+    "text": "Contributing",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6926
+    },
+    "enabled": true,
+    "id": 406,
+    "role": "div",
+    "text": "Contributing",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6954
+    },
+    "enabled": true,
+    "id": 407,
+    "role": "a",
+    "text": "Open Source",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6954
+    },
+    "enabled": true,
+    "id": 408,
+    "role": "div",
+    "text": "Open Source",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6982
+    },
+    "enabled": true,
+    "id": 409,
+    "role": "a",
+    "text": "DevTo",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1058,
+      "y": 6982
+    },
+    "enabled": true,
+    "id": 410,
+    "role": "div",
+    "text": "DevTo",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 615,
+      "width": 115,
+      "x": 1189,
+      "y": 6812
+    },
+    "enabled": true,
+    "id": 411,
+    "role": "div",
+    "text": "Company Company Careers General Availability Legal Hub Privacy Policy Privacy Settings Acceptable Us",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 412,
+    "role": "a",
+    "text": "Company",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6850
+    },
+    "enabled": true,
+    "id": 413,
+    "role": "div",
+    "text": "Company",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 414,
+    "role": "a",
+    "text": "Careers",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6878
+    },
+    "enabled": true,
+    "id": 415,
+    "role": "div",
+    "text": "Careers",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 1189,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 416,
+    "role": "a",
+    "text": "General Availability",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 1189,
+      "y": 6906
+    },
+    "enabled": true,
+    "id": 417,
+    "role": "div",
+    "text": "General Availability",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6954
+    },
+    "enabled": true,
+    "id": 418,
+    "role": "a",
+    "text": "Legal Hub",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6954
+    },
+    "enabled": true,
+    "id": 419,
+    "role": "div",
+    "text": "Legal Hub",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6982
+    },
+    "enabled": true,
+    "id": 420,
+    "role": "a",
+    "text": "Privacy Policy",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 6982
+    },
+    "enabled": true,
+    "id": 421,
+    "role": "div",
+    "text": "Privacy Policy",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 108,
+      "x": 1189,
+      "y": 7013
+    },
+    "enabled": true,
+    "id": 422,
+    "role": "button",
+    "text": "Privacy Settings",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 108,
+      "x": 1189,
+      "y": 7013
+    },
+    "enabled": true,
+    "id": 423,
+    "role": "div",
+    "text": "Privacy Settings",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 1189,
+      "y": 7042
+    },
+    "enabled": true,
+    "id": 424,
+    "role": "a",
+    "text": "Acceptable Use Policy",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 40,
+      "width": 115,
+      "x": 1189,
+      "y": 7042
+    },
+    "enabled": true,
+    "id": 425,
+    "role": "div",
+    "text": "Acceptable Use Policy",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7090
+    },
+    "enabled": true,
+    "id": 426,
+    "role": "a",
+    "text": "Humans.txt",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7090
+    },
+    "enabled": true,
+    "id": 427,
+    "role": "div",
+    "text": "Humans.txt",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7118
+    },
+    "enabled": true,
+    "id": 428,
+    "role": "a",
+    "text": "Lawyers.txt",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7118
+    },
+    "enabled": true,
+    "id": 429,
+    "role": "div",
+    "text": "Lawyers.txt",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7146
+    },
+    "enabled": true,
+    "id": 430,
+    "role": "a",
+    "text": "Security.txt",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7146
+    },
+    "enabled": true,
+    "id": 431,
+    "role": "div",
+    "text": "Security.txt",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7174
+    },
+    "enabled": true,
+    "id": 432,
+    "role": "a",
+    "text": "Contact Us",
+    "type": "link",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 20,
+      "width": 115,
+      "x": 1189,
+      "y": 7174
+    },
+    "enabled": true,
+    "id": 433,
+    "role": "div",
+    "text": "Contact Us",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 61,
+      "width": 1088,
+      "x": 216,
+      "y": 7554
+    },
+    "enabled": true,
+    "id": 434,
+    "role": "div",
+    "text": "\u00a9 Supabase Inc Toggle theme",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 28,
+      "width": 28,
+      "x": 1276,
+      "y": 7587
+    },
+    "enabled": true,
+    "id": 435,
+    "role": "div",
+    "text": "Toggle theme",
+    "type": "div",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 28,
+      "width": 28,
+      "x": 1276,
+      "y": 7587
+    },
+    "enabled": true,
+    "id": 436,
+    "role": "button",
+    "text": "Toggle theme",
+    "type": "button",
+    "visible": true
+  },
+  {
+    "bounds": {
+      "height": 1,
+      "width": 1,
+      "x": 1290,
+      "y": 7600
+    },
+    "enabled": true,
+    "id": 437,
+    "role": "span",
+    "text": "Toggle theme",
+    "type": "span",
+    "visible": true
+  }
+]

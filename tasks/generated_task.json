@@ -1,42 +1,28 @@
 {
-  "name": "how to see watch history",
-  "app": "YouTube - Google Chrome",
+  "name": "how to sign in on supabase",
+  "app": "Supabase | The Postgres Development Platform - Google Chrome",
   "app_exe": "",
   "steps": [
     {
       "step_number": 1,
       "action": "click",
-      "description": "Click the menu button to open the sidebar.",
-      "element": {
-        "tag": "button",
-        "text": null,
-        "id": "guide-button",
-        "class": "yt-icon-button",
-        "name": null,
-        "role": "button",
-        "aria_label": "Guide",
-        "xpath": "//button[@id='guide-button']",
-        "css_selector": "#guide-button",
-        "parent_path": []
-      }
-    },
-    {
-      "step_number": 2,
-      "action": "click",
-      "description": "Click 'History' in the sidebar navigation.",
+      "description": "Click the 'Sign in' link.",
       "element": {
         "tag": "a",
-        "text": "History",
-        "id": null,
-        "class": "yt-simple-endpoint style-scope ytd-guide-entry-renderer",
+        "text": "Sign in",
+        "id": 29,
+        "class": null,
         "name": null,
         "role": "link",
-        "aria_label": "History",
-        "xpath": "//a[@href='/feed/history' and .//yt-formatted-string[text()='History']]",
-        "css_selector": "a[href='/feed/history']",
+        "aria_label": null,
+        "xpath": "/html/body/div[1]/nav/div/div/div[2]/div/a[2]",
+        "css_selector": "div.flex.items-center.justify-end > a:nth-child(2)",
         "parent_path": [
-          "#sections",
-          "#items"
+          "div",
+          "nav",
+          "div",
+          "div",
+          "div"
         ]
       }
     }

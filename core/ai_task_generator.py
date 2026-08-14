@@ -138,7 +138,13 @@ class GeminiTaskGenerator:
     # Public API
     # ------------------------------------------------------------------
 
-    def generate(self, task_description: str, app_name: str, target_mode: str = "app") -> dict:
+    def generate(
+        self,
+        task_description: str,
+        app_name: str,
+        target_mode: str = "app",
+        dom_snapshot: list | None = None,
+    ) -> dict:
         """Convert *task_description* into a task dict for *app_name*.
 
         Parameters
@@ -151,6 +157,10 @@ class GeminiTaskGenerator:
             or ``"https://google.com"``.
         target_mode:
             ``"app"`` for window desktop applications, or ``"website"`` for web applications.
+        dom_snapshot:
+            Optional list of UINode dicts captured from the browser extension's
+            DOM extractor. When provided in website mode, the snapshot is embedded
+            in the Gemini prompt so the model can map steps to real page elements.
 
         Returns
         -------
@@ -166,7 +176,7 @@ class GeminiTaskGenerator:
         is_website = (target_mode == "website")
         config = self._website_config if is_website else self._app_config
         user_prompt = (
-            self._build_website_user_prompt(task_description, app_name)
+            self._build_website_user_prompt(task_description, app_name, dom_snapshot)
             if is_website
             else self._build_app_user_prompt(task_description, app_name)
         )
@@ -222,12 +232,22 @@ class GeminiTaskGenerator:
         )
 
     @staticmethod
-    def _build_website_user_prompt(task_description: str, app_name: str) -> str:
-        return (
-            f"Target Webpage/URL: {app_name}\n"
-            f"Task: {task_description}\n\n"
-            "Return the JSON workflow object now."
-        )
+    def _build_website_user_prompt(
+        task_description: str,
+        app_name: str,
+        dom_snapshot: list | None = None,
+    ) -> str:
+        parts = [
+            f"Target Webpage/URL: {app_name}",
+            f"Task: {task_description}",
+        ]
+        if dom_snapshot:
+            dom_json = json.dumps(dom_snapshot, ensure_ascii=False)
+            parts.append(
+                f"Webpage DOM (UINode JSON array — use this to map steps to exact elements):\n{dom_json}"
+            )
+        parts.append("Return the JSON workflow object now.")
+        return "\n".join(parts)
 
     @staticmethod
     def _parse_json(raw: str) -> dict:
