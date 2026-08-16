@@ -1,0 +1,107 @@
+{
+  "name": "Open Chrome and compose a Gmail email",
+  "app": "Google Chrome",
+  "app_exe": "chrome.exe",
+  "target_type": "web",
+  "url": "https://mail.google.com",
+  "steps": [
+    {
+      "id": 1,
+      "target_type": "desktop",
+      "target": "Google Chrome",
+      "tooltip": "Click the Chrome icon in the taskbar to bring it to focus.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Ensures Chrome is the active foreground window before navigating to Gmail."
+    },
+    {
+      "id": 2,
+      "target_type": "web",
+      "target": "Compose",
+      "tooltip": "Click the Compose button to start writing a new email.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Opens a new message compose window in Gmail.",
+      "web_element": {
+        "tag": "div",
+        "text": "Compose",
+        "id": null,
+        "class": "T-I T-I-KE L3",
+        "name": null,
+        "role": "button",
+        "aria_label": "Compose",
+        "xpath": "//div[@gh='cm']",
+        "css_selector": "div.T-I-KE",
+        "data_testid": null
+      }
+    },
+    {
+      "id": 3,
+      "target_type": "web",
+      "target": "To",
+      "tooltip": "Type the recipient's email address in the To field.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Specifies who will receive the email.",
+      "web_element": {
+        "tag": "input",
+        "text": "",
+        "id": null,
+        "class": null,
+        "name": "to",
+        "role": "combobox",
+        "aria_label": "To",
+        "xpath": "//input[@name='to']",
+        "css_selector": "input[name='to']",
+        "data_testid": null
+      }
+    },
+    {
+      "id": 4,
+      "target_type": "web",
+      "target": "Subject",
+      "tooltip": "Enter a subject line for your email.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "The subject line gives recipients a preview of the email's topic.",
+      "web_element": {
+        "tag": "input",
+        "text": "",
+        "id": null,
+        "class": null,
+        "name": "subjectbox",
+        "role": "textbox",
+        "aria_label": "Subject",
+        "xpath": "//input[@name='subjectbox']",
+        "css_selector": "input[name='subjectbox']",
+        "data_testid": null
+      }
+    },
+    {
+      "id": 5,
+      "target_type": "web",
+      "target": "Send",
+      "tooltip": "Click Send to deliver the email.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Sends the composed email to the specified recipient.",
+      "web_element": {
+        "tag": "div",
+        "text": "Send",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "button",
+        "aria_label": "Send \u202f(Ctrl-Enter)",
+        "xpath": "//div[@data-tooltip='Send \u202f(Ctrl-Enter)']",
+        "css_selector": "div[data-tooltip='Send \u202f(Ctrl-Enter)']",
+        "data_testid": null
+      }
+    }
+  ]
+}

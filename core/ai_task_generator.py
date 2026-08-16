@@ -144,6 +144,7 @@ class GeminiTaskGenerator:
         app_name: str,
         target_mode: str = "app",
         dom_snapshot: list | None = None,
+        url: str = "",
     ) -> dict:
         """Convert *task_description* into a task dict for *app_name*.
 
@@ -161,6 +162,9 @@ class GeminiTaskGenerator:
             Optional list of UINode dicts captured from the browser extension's
             DOM extractor. When provided in website mode, the snapshot is embedded
             in the Gemini prompt so the model can map steps to real page elements.
+        url:
+            The target webpage URL for web tasks (e.g. ``"https://mail.google.com"``).
+            Stored in the returned dict so :class:`~core.task.Task` can record it.
 
         Returns
         -------
@@ -197,6 +201,9 @@ class GeminiTaskGenerator:
                 result = self._parse_json(raw)
                 if is_website:
                     self._validate_website_result(result)
+                    result = self._normalize_website_result(
+                        result, app_name=app_name, url=url
+                    )
                 else:
                     self._validate_app_result(result)
                 return result
@@ -296,3 +303,99 @@ class GeminiTaskGenerator:
                 raise ValueError(f"Step {i} is not a dict: {step!r}")
             if "step_number" not in step and "id" not in step:
                 raise ValueError(f"Step {i} is missing 'step_number' or 'id'")
+
+    @staticmethod
+    def _normalize_website_result(
+        result: dict,
+        app_name: str = "",
+        url: str = "",
+    ) -> dict:
+        """Normalise Gemini's website-mode JSON into the canonical Task schema.
+
+        Gemini's website system prompt produces::
+
+            {
+                "task": "...",
+                "steps": [
+                    {
+                        "step_number": 1,
+                        "action": "click",
+                        "description": "Click the Login button",
+                        "element": {
+                            "tag": "button", "text": "Login",
+                            "id": "login-btn", "role": "button",
+                            "aria_label": "Login", "xpath": "...", ...
+                        }
+                    }
+                ]
+            }
+
+        This method converts it to the same schema that
+        :class:`~core.task.Task` and :class:`~core.step.Step` expect::
+
+            {
+                "name": "...",
+                "app": "app_name",
+                "target_type": "web",
+                "url": "...",
+                "steps": [
+                    {
+                        "id": 1,
+                        "target_type": "web",
+                        "target": "Login button",
+                        "tooltip": "Click the Login button.",
+                        "action": "click",
+                        "spotlight_shape": "rect",
+                        "animation": "pulse",
+                        "explanation": "",
+                        "web_element": {"tag": "button", "text": "Login", ...}
+                    }
+                ]
+            }
+        """
+        normalized_steps = []
+        for raw in result.get("steps", []):
+            elem: dict = raw.get("element", {})
+
+            # Derive a short human-readable target name from the element.
+            target: str = (
+                elem.get("text")
+                or elem.get("aria_label")
+                or elem.get("id", "")
+                or elem.get("tag", "element")
+            )
+            if isinstance(target, int):
+                target = str(target)
+            target = str(target).strip()
+
+            # Use Gemini's description as the tooltip; fall back to target.
+            tooltip: str = (
+                raw.get("description")
+                or f"Interact with {target}."
+            ).strip()
+
+            step_id = raw.get("step_number") or raw.get("id") or (len(normalized_steps) + 1)
+
+            normalized_steps.append(
+                {
+                    "id": int(step_id),
+                    "target_type": "web",
+                    "target": target,
+                    "tooltip": tooltip,
+                    "action": raw.get("action", "click"),
+                    "spotlight_shape": "rect",
+                    "animation": "pulse",
+                    "explanation": "",
+                    "web_element": elem,
+                }
+            )
+
+        task_name: str = result.get("task") or app_name
+        return {
+            "name": task_name,
+            "app": app_name,
+            "app_exe": "",
+            "target_type": "web",
+            "url": url,
+            "steps": normalized_steps,
+        }

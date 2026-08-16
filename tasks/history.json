@@ -1,5 +1,15 @@
 [
   {
+    "task": "how to sign in",
+    "app": "Supabase | The Postgres Development Platform - Google Chrome",
+    "timestamp": "2026-08-16T09:54:37"
+  },
+  {
+    "task": "How to sign in",
+    "app": "Supabase | The Postgres Development Platform - Google Chrome",
+    "timestamp": "2026-08-15T11:58:43"
+  },
+  {
     "task": "how to sign in on supabase",
     "app": "Supabase | The Postgres Development Platform - Google Chrome",
     "timestamp": "2026-08-13T20:10:04"
@@ -88,15 +98,5 @@
     "task": "how do I convert this format into IEEE format",
     "app": "Document1 - Word",
     "timestamp": "2026-05-08T12:09:48"
-  },
-  {
-    "task": "convert the document into IEEE GUIDELINES",
-    "app": "AI_Overlay_doc_final2.0.docx - Word",
-    "timestamp": "2026-05-08T10:41:42"
-  },
-  {
-    "task": "view mode to read mode",
-    "app": "Document1 - Word",
-    "timestamp": "2026-05-06T09:44:04"
   }
 ]

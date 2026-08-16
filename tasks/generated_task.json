@@ -1,13 +1,18 @@
 {
-  "name": "how to sign in on supabase",
+  "name": "how to sign in",
   "app": "Supabase | The Postgres Development Platform - Google Chrome",
   "app_exe": "",
   "steps": [
     {
-      "step_number": 1,
+      "id": 1,
+      "target_type": "web",
+      "target": "Sign in",
+      "tooltip": "Click the 'Sign in' link in the navigation bar.",
       "action": "click",
-      "description": "Click the 'Sign in' link.",
-      "element": {
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "",
+      "web_element": {
         "tag": "a",
         "text": "Sign in",
         "id": 29,
@@ -15,8 +20,6 @@
         "name": null,
         "role": "link",
         "aria_label": null,
-        "xpath": "/html/body/div[1]/nav/div/div/div[2]/div/a[2]",
-        "css_selector": "div.flex.items-center.justify-end > a:nth-child(2)",
         "parent_path": [
           "div",
           "nav",

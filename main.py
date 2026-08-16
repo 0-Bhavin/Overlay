@@ -46,7 +46,7 @@ def main() -> None:
     # ── 3. Core overlay objects (hidden until task is ready) ──────────
     overlay       = OverlayWindow()
     layer_manager = LayerManager(overlay, tts=tts)
-    controller    = TaskController(layer_manager)
+    controller    = TaskController(layer_manager, browser_connector=browser_connector)
     hud           = layer_manager.hud_layer
     watcher       = ActionWatcher()
 
@@ -106,12 +106,27 @@ def main() -> None:
         )
     controller.element_not_found.connect(_on_element_not_found)
 
-    # ── 8b. ActionWatcher — auto-advance on menu/dialog/focus events ──
+    # ── 8b. ActionWatcher — auto-advance on menu/dialog/focus/web-click events ──
     def _on_coords_resolved(step) -> None:
         layer_manager.on_coords_resolved(step)
         if step.coords:
             l, t, r, b = step.coords
-            watcher.start_watching(QRect(l, t, r - l, b - t))
+            spotlight = QRect(l, t, r - l, b - t)
+
+            if getattr(step, "target_type", "desktop") == "web":
+                # Web step: watch for click events forwarded from the extension.
+                # Use the data-ai-overlay-id assigned during resolve as the filter key.
+                web_elem = getattr(step, "web_element", None) or {}
+                elem_id  = web_elem.get("resolved_element_id")  # set by WebResolver
+                watcher.start_watching(
+                    spotlight,
+                    target_type="web",
+                    browser_connector=browser_connector,
+                    web_element_id=elem_id,
+                )
+            else:
+                # Desktop step: use WinEventHook (existing behaviour).
+                watcher.start_watching(spotlight)
 
     controller.coords_resolved.disconnect(layer_manager.on_coords_resolved)
     controller.coords_resolved.connect(_on_coords_resolved)

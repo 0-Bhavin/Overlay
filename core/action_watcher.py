@@ -78,11 +78,23 @@ class ActionWatcher(QObject):
         # Keep a persistent reference so the WINFUNCTYPE wrapper isn't GC'd
         self._proc_ref = None
 
+        # Web-mode state
+        self._target_type: str = "desktop"
+        self._browser_connector = None
+        self._web_element_id: str | None = None
+        self._web_cb = None  # lambda registered with BrowserConnector.observe_changes()
+
     # ------------------------------------------------------------------
     # Public interface
     # ------------------------------------------------------------------
 
-    def start_watching(self, spotlight_rect: QRect) -> None:
+    def start_watching(
+        self,
+        spotlight_rect: QRect,
+        target_type: str = "desktop",
+        browser_connector=None,
+        web_element_id: str | None = None,
+    ) -> None:
         """Begin watching for interaction events near *spotlight_rect*.
 
         Safe to call multiple times — stops any existing watch first.
@@ -92,17 +104,40 @@ class ActionWatcher(QObject):
         spotlight_rect:
             Current spotlight area in screen coordinates. Used by the focus
             handler to filter events outside the target region.
+        target_type:
+            ``"desktop"`` to use WinEventHook (default); ``"web"`` to use the
+            WebSocket callback path instead.
+        browser_connector:
+            :class:`~platforms.browser_connector.BrowserConnector` instance.
+            Required when ``target_type == "web"``.
+        web_element_id:
+            The ``data-ai-overlay-id`` the extension assigned to the target
+            element.  When provided, the web callback only fires for clicks
+            on that specific element (rather than any click).
         """
         self.stop_watching()
         self._rect = spotlight_rect
         self._active = True
-        self._install_hook()
-        _log.info("ActionWatcher: watching started for rect %s", spotlight_rect)
+        self._target_type = target_type
+        self._browser_connector = browser_connector
+        self._web_element_id = str(web_element_id) if web_element_id is not None else None
+
+        if target_type == "web":
+            self._install_web_hook()
+        else:
+            self._install_hook()
+        _log.info(
+            "ActionWatcher: watching started for rect %s (mode=%s)",
+            spotlight_rect, target_type,
+        )
 
     def stop_watching(self) -> None:
-        """Remove the WinEvent hook and stop the message loop thread."""
+        """Remove the WinEvent hook (or WebSocket callback) and stop watching."""
         self._active = False
-        self._remove_hook()
+        if self._target_type == "web":
+            self._remove_web_hook()
+        else:
+            self._remove_hook()
 
     def update_rect(self, rect: QRect) -> None:
         """Update the spotlight rect without restarting the hook.
@@ -119,7 +154,45 @@ class ActionWatcher(QObject):
         self.stop_watching()
 
     # ------------------------------------------------------------------
-    # Hook install / remove
+    # Web hook install / remove
+    # ------------------------------------------------------------------
+
+    def _install_web_hook(self) -> None:
+        """Register a WebSocket change callback to detect browser clicks."""
+        if self._browser_connector is None:
+            _log.warning("ActionWatcher: web mode requested but browser_connector is None")
+            return
+
+        def _web_cb(data: dict) -> None:
+            if not self._active:
+                return
+            msg_type = data.get("type", "")
+            if msg_type != "web_action_detected":
+                return
+            # If we know which element to watch, filter by it
+            if self._web_element_id is not None:
+                elem_id = str(data.get("elementId", ""))
+                if elem_id and elem_id != self._web_element_id:
+                    return
+            _log.info("ActionWatcher [web]: click detected — advancing")
+            self._fire()
+
+        self._web_cb = _web_cb
+        self._browser_connector.observe_changes(_web_cb)
+        _log.debug("ActionWatcher: web callback registered")
+
+    def _remove_web_hook(self) -> None:
+        """Unregister the WebSocket change callback."""
+        if self._browser_connector is not None and self._web_cb is not None:
+            try:
+                self._browser_connector._change_callbacks.remove(self._web_cb)
+            except ValueError:
+                pass  # already removed
+        self._web_cb = None
+        _log.debug("ActionWatcher: web callback removed")
+
+    # ------------------------------------------------------------------
+    # Hook install / remove (desktop path — unchanged)
     # ------------------------------------------------------------------
 
     def _install_hook(self) -> None:

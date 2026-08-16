@@ -51,7 +51,7 @@
     "enabled": true,
     "id": 4,
     "role": "div",
-    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "text": "Product Developers Solutions Pricing Docs Blog 108K Sign in Start your project",
     "type": "div",
     "visible": true
   },
@@ -65,7 +65,7 @@
     "enabled": true,
     "id": 5,
     "role": "nav",
-    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "text": "Product Developers Solutions Pricing Docs Blog 108K Sign in Start your project",
     "type": "nav",
     "visible": true
   },
@@ -79,7 +79,7 @@
     "enabled": true,
     "id": 6,
     "role": "div",
-    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "text": "Product Developers Solutions Pricing Docs Blog 108K Sign in Start your project",
     "type": "div",
     "visible": true
   },
@@ -93,7 +93,7 @@
     "enabled": true,
     "id": 7,
     "role": "div",
-    "text": "Product Developers Solutions Pricing Docs Blog 107.9K Sign in Start your project",
+    "text": "Product Developers Solutions Pricing Docs Blog 108K Sign in Start your project",
     "type": "div",
     "visible": true
   },
@@ -324,70 +324,70 @@
   {
     "bounds": {
       "height": 64,
-      "width": 284,
-      "x": 1021,
+      "width": 275,
+      "x": 1029,
       "y": 0
     },
     "enabled": true,
     "id": 24,
     "role": "div",
-    "text": "107.9K Sign in Start your project",
+    "text": "108K Sign in Start your project",
     "type": "div",
     "visible": true
   },
   {
     "bounds": {
       "height": 26,
-      "width": 284,
-      "x": 1021,
+      "width": 275,
+      "x": 1029,
       "y": 19
     },
     "enabled": true,
     "id": 25,
     "role": "div",
-    "text": "107.9K Sign in Start your project",
+    "text": "108K Sign in Start your project",
     "type": "div",
     "visible": true
   },
   {
     "bounds": {
       "height": 26,
-      "width": 86,
-      "x": 1021,
+      "width": 78,
+      "x": 1029,
       "y": 19
     },
     "enabled": true,
     "id": 26,
     "role": "a",
-    "text": "107.9K",
+    "text": "108K",
     "type": "link",
     "visible": true
   },
   {
     "bounds": {
       "height": 24,
-      "width": 65,
-      "x": 1032,
+      "width": 56,
+      "x": 1040,
       "y": 20
     },
     "enabled": true,
     "id": 27,
     "role": "span",
-    "text": "107.9K",
+    "text": "108K",
     "type": "span",
     "visible": true
   },
   {
     "bounds": {
       "height": 24,
-      "width": 65,
-      "x": 1032,
+      "width": 56,
+      "x": 1040,
       "y": 20
     },
     "enabled": true,
     "id": 28,
     "role": "span",
-    "text": "107.9K",
+    "text": "108K",
     "type": "span",
     "visible": true
   },

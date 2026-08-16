@@ -48,9 +48,10 @@ class _CoordWorker(QObject):
     # Emitted when the element is not found, carrying the error details.
     element_not_found = pyqtSignal(str, object)  # payload: target (str), ElementNotFoundError (object)
 
-    def __init__(self) -> None:
+    def __init__(self, browser_connector=None) -> None:
         super().__init__()
         self._resolver = _get_resolver() if _RESOLVER_AVAILABLE else None
+        self._browser_connector = browser_connector
 
     @pyqtSlot(object, str, str)
     def resolve(self, step: Step, app_name: str, app_exe: str) -> None:
@@ -77,22 +78,36 @@ class _CoordWorker(QObject):
             class ElementNotFoundError(Exception): pass
 
         try:
-            coords = self._resolver.resolve(app_name, step.target, app_exe=app_exe or None)
+            coords = self._resolver.resolve(
+                app_name,
+                step.target,
+                app_exe=app_exe or None,
+                step=step,
+                browser_connector=self._browser_connector,
+            )
             if coords is None:
                 raise ElementNotFoundError(app_name, step.target, ["Resolver returned None"])
 
             l, t, r, b = coords
             w, h = r - l, b - t
-            if w > 600 or h > 400:
+            # Skip the size guard for web steps — web elements (e.g. full-width nav
+            # bars or modals) can legitimately exceed 600×400 px.
+            is_web = getattr(step, "target_type", "desktop") == "web"
+            if not is_web and (w > 600 or h > 400):
                 _log.warning(
                     "Resolved rect for %r is suspiciously large (%dx%d) — discarding",
                     step.target, w, h,
                 )
                 raise ElementNotFoundError(app_name, step.target, [f"Resolved rect is suspiciously large ({w}x{h})"])
 
-            # Determine if it was a cache hit
+            # Determine if it was a cache hit (desktop UIA only)
             cache_hit = False
-            if self._resolver is not None and hasattr(self._resolver, "_uia") and self._resolver._uia is not None:
+            if (
+                not is_web
+                and self._resolver is not None
+                and hasattr(self._resolver, "_uia")
+                and self._resolver._uia is not None
+            ):
                 cache_hit = getattr(self._resolver._uia, "last_cache_hit", False)
 
             _log.debug("Resolved %r -> %s (cache hit: %s)", step.target, coords, cache_hit)
@@ -148,13 +163,17 @@ class TaskController(QObject):
     element_not_found = pyqtSignal(str, object)    # target name, ElementNotFoundError
     _resolve_requested = pyqtSignal(object, str, str)   # (Step, app_name, app_exe)
     
-    def __init__(self, layer_manager) -> None:
+    def __init__(self, layer_manager, browser_connector=None) -> None:
         """
         Parameters
         ----------
         layer_manager:
             Any object exposing ``render_step(step)``, ``clear_all()``, and
             ``show_locating(step)`` / ``show_resolution_failed(target)``.
+        browser_connector:
+            Optional :class:`~platforms.browser_connector.BrowserConnector`.
+            Passed through to :class:`_CoordWorker` so web steps can be
+            resolved via the WebSocket bridge.
         """
         super().__init__()
         self._layer_manager = layer_manager
@@ -163,7 +182,7 @@ class TaskController(QObject):
         self._pending_step_id: int | None = None  # id of the step being resolved
 
         # ── Background resolution thread ──────────────────────────────
-        self._worker = _CoordWorker()
+        self._worker = _CoordWorker(browser_connector=browser_connector)
         self._thread = QThread(self)
         self._worker.moveToThread(self._thread)
 
