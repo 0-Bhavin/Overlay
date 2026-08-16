@@ -1,28 +1,31 @@
 {
-  "name": "how to sign in",
+  "name": "how to slect database from product",
   "app": "Supabase | The Postgres Development Platform - Google Chrome",
   "app_exe": "",
   "steps": [
     {
       "id": 1,
       "target_type": "web",
-      "target": "Sign in",
-      "tooltip": "Click the 'Sign in' link in the navigation bar.",
+      "target": "Database",
+      "tooltip": "Click the 'Database' link, which is located under the 'Product' section within the website's footer.",
       "action": "click",
       "spotlight_shape": "rect",
       "animation": "pulse",
       "explanation": "",
       "web_element": {
         "tag": "a",
-        "text": "Sign in",
-        "id": 29,
+        "text": "Database",
+        "id": 317,
         "class": null,
         "name": null,
         "role": "link",
         "aria_label": null,
+        "xpath": "/html/body/footer/div[2]/div[1]/div[2]/div[1]/div[1]/a[2]",
+        "css_selector": "footer > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > a:nth-child(2)",
         "parent_path": [
+          "footer",
           "div",
-          "nav",
+          "div",
           "div",
           "div",
           "div"

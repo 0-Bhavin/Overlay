@@ -195,15 +195,22 @@
 
     } else if (request.action === 'GET_VIEWPORT_INFO') {
       // Return live window geometry so WebResolver can convert DOM coords → screen coords.
-      // outerHeight - innerHeight = browser chrome/toolbar height in CSS pixels.
+      // screenLeft/screenTop already include the OS title bar + browser toolbar offset,
+      // so no manual arithmetic is needed on the Python side.
+      // outerHeight - innerHeight is kept for fallback / debugging purposes.
       sendResponse({
         status: 'ok',
-        screenX:     window.screenX,
-        screenY:     window.screenY,
-        outerWidth:  window.outerWidth,
-        outerHeight: window.outerHeight,
-        innerWidth:  window.innerWidth,
-        innerHeight: window.innerHeight,
+        screenX:          window.screenX,
+        screenY:          window.screenY,
+        // screenLeft/screenTop point to the true top-left of the viewport content area.
+        screenLeft:       window.screenLeft,
+        screenTop:        window.screenTop,
+        outerWidth:       window.outerWidth,
+        outerHeight:      window.outerHeight,
+        innerWidth:       window.innerWidth,
+        innerHeight:      window.innerHeight,
+        // devicePixelRatio lets the Python side correct for OS DPI scaling if needed.
+        devicePixelRatio: window.devicePixelRatio,
       });
 
     } else if (request.action === 'RESOLVE_ELEMENT') {

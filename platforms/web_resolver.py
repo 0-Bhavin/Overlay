@@ -80,12 +80,33 @@ class WebResolver:
                 ["get_viewport_info timed out — is the extension active on a real tab?"],
             )
 
-        screen_x: int   = vp["screenX"]
-        screen_y: int   = vp["screenY"]
-        toolbar_h: int  = vp["outerHeight"] - vp["innerHeight"]
-        _log.debug(
-            "WebResolver: viewport screen=(%d,%d) toolbar=%dpx",
-            screen_x, screen_y, toolbar_h,
+        screen_x: int  = vp["screenX"]
+        screen_y: int  = vp["screenY"]
+        # toolbar_h (CSS pixels) = all browser chrome above the viewport
+        # (OS title bar + tab strip + address bar + bookmarks bar etc.)
+        toolbar_h: int = vp["outerHeight"] - vp["innerHeight"]
+
+        # devicePixelRatio converts CSS pixels → physical screen pixels.
+        # Qt (AA_Use96Dpi) works in physical pixels; the browser reports
+        # screenX/Y, outerHeight, innerHeight and getBoundingClientRect()
+        # all in CSS pixels, so every value must be scaled by DPR.
+        dpr: float = max(1.0, float(vp.get("devicePixelRatio", 1.0)))
+
+        def _phys(css: float) -> int:
+            """Round a CSS pixel measurement to the nearest physical pixel."""
+            return round(float(css) * dpr)
+
+        # content_left/top = physical coordinates of the viewport's top-left corner.
+        # Chrome has NO left-side horizontal chrome (scrollbar is on the right),
+        # so content_left = screenX × DPR only.
+        content_left: int = _phys(screen_x)
+        content_top:  int = _phys(screen_y) + _phys(toolbar_h)
+
+        _log.info(
+            "WebResolver: dpr=%.2f  screen_css=(%d,%d) toolbar_css=%dpx"
+            " → viewport_phys=(%d,%d)",
+            dpr, screen_x, screen_y, toolbar_h,
+            content_left, content_top,
         )
 
         # 2. Resolve the element in the live DOM
@@ -96,9 +117,9 @@ class WebResolver:
                 ["resolve_element returned no match — element may not be visible"],
             )
 
-        rect  = elem_info["rect"]           # viewport-relative, from getBoundingClientRect()
-        _log.debug(
-            "WebResolver: DOM rect (viewport-relative) x=%s y=%s w=%s h=%s resolved_by=%s",
+        rect  = elem_info["rect"]           # viewport-relative CSS pixels from getBoundingClientRect()
+        _log.info(
+            "WebResolver: DOM rect css=(x=%s y=%s w=%s h=%s) resolved_by=%s",
             rect.get("x"), rect.get("y"), rect.get("width"), rect.get("height"),
             elem_info.get("resolvedBy", "?"),
         )
@@ -108,17 +129,16 @@ class WebResolver:
         if step.web_element is not None:
             step.web_element["resolved_element_id"] = elem_info.get("elementId")
 
-        # 3. Convert viewport-relative → absolute screen pixels
-        #    screen_L = screenX + rect.x
-        #    screen_T = screenY + toolbar_height + rect.y
-        #    (getBoundingClientRect is already viewport-relative, no scroll needed)
-        l = screen_x + int(rect.get("x", 0))
-        t = screen_y + toolbar_h + int(rect.get("y", 0))
-        r = l + int(rect.get("width",  0))
-        b = t + int(rect.get("height", 0))
+        # 3. Convert viewport-relative CSS pixels → absolute physical screen pixels.
+        #    content_left/top is already in physical pixels.
+        #    rect values are CSS pixels → multiply by DPR via _phys().
+        l = content_left + _phys(rect.get("x", 0))
+        t = content_top  + _phys(rect.get("y", 0))
+        r = l + _phys(rect.get("width",  0))
+        b = t + _phys(rect.get("height", 0))
 
         _log.info(
-            "WebResolver: resolved %r → screen (%d, %d, %d, %d)",
+            "WebResolver: resolved %r → physical (%d, %d, %d, %d)",
             step.target, l, t, r, b,
         )
         return (l, t, r, b)
