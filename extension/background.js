@@ -7,6 +7,7 @@
 const WS_URL = 'ws://127.0.0.1:8765';
 let socket = null;
 let reconnectTimer = null;
+let _lastViewportOffset = { x: 0, y: 0 };  // Updated by content script
 
 function connectWebSocket() {
   if (socket && (socket.readyState === WebSocket.CONNECTING || socket.readyState === WebSocket.OPEN)) {
@@ -32,10 +33,12 @@ function connectWebSocket() {
           if (tab && tab.id) {
             chrome.tabs.sendMessage(tab.id, { action: 'GET_TREE' }, (response) => {
               const tree = (response && response.tree) ? response.tree : [];
-              sendToBridge({ type: 'tree_response', req_id: msg.req_id, tree: tree });
+              const viewportOffset = (response && response.viewportOffset) || { x: 0, y: 0 };
+              _lastViewportOffset = viewportOffset;
+              sendToBridge({ type: 'tree_response', req_id: msg.req_id, tree: tree, viewportOffset: viewportOffset });
             });
           } else {
-            sendToBridge({ type: 'tree_response', req_id: msg.req_id, tree: [] });
+            sendToBridge({ type: 'tree_response', req_id: msg.req_id, tree: [], viewportOffset: { x: 0, y: 0 } });
           }
         } else if (msg.type === 'highlight') {
           const tab = await getActiveTab();

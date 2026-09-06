@@ -78,6 +78,10 @@ class ActionWatcher(QObject):
         # Keep a persistent reference so the WINFUNCTYPE wrapper isn't GC'd
         self._proc_ref = None
 
+        # Graceful shutdown support
+        self._stop_event = threading.Event()
+        self._stopping: bool = False
+
     # ------------------------------------------------------------------
     # Public interface
     # ------------------------------------------------------------------
@@ -101,6 +105,8 @@ class ActionWatcher(QObject):
 
     def stop_watching(self) -> None:
         """Remove the WinEvent hook and stop the message loop thread."""
+        self._stopping = True
+        self._stop_event.set()
         self._active = False
         self._remove_hook()
 
@@ -162,10 +168,11 @@ class ActionWatcher(QObject):
             self._hook_handle = None
             _log.debug("ActionWatcher: hook removed")
 
-        # Post WM_QUIT (0x0012) to the pump thread so GetMessage() returns 0
+        # Wake the message loop via the stop event + dummy message
+        self._stop_event.set()
         if self._loop_thread_id:
             ctypes.windll.user32.PostThreadMessageW(
-                self._loop_thread_id, 0x0012, 0, 0
+                self._loop_thread_id, 0x0012, 0, 0  # WM_QUIT
             )
             self._loop_thread_id = 0
 
@@ -176,15 +183,26 @@ class ActionWatcher(QObject):
     # ------------------------------------------------------------------
 
     def _run_message_loop(self) -> None:
-        """Pump Windows messages until WM_QUIT is posted."""
+        """Pump Windows messages until WM_QUIT is posted or stop is requested."""
         self._loop_thread_id = threading.current_thread().ident  # type: ignore[assignment]
         msg = ctypes.wintypes.MSG()
         _log.debug("ActionWatcher: message loop started (tid=%d)", self._loop_thread_id)
-        while ctypes.windll.user32.GetMessageW(
-            ctypes.byref(msg), None, 0, 0
-        ) > 0:
-            ctypes.windll.user32.TranslateMessage(ctypes.byref(msg))
-            ctypes.windll.user32.DispatchMessageW(ctypes.byref(msg))
+        while True:
+            ret = ctypes.windll.user32.MsgWaitForMultipleObjects(0, None, False, 100, 0x0001)  # QS_ALLINPUT | MWMO_INPUTAVAILABLE
+            if self._stop_event.is_set():
+                break
+            if ret == 0:  # input available
+                if ctypes.windll.user32.PeekMessageW(ctypes.byref(msg), None, 0, 0, 1):  # PM_REMOVE=1
+                    if msg.message == 0x0012:  # WM_QUIT
+                        break
+                    ctypes.windll.user32.TranslateMessage(ctypes.byref(msg))
+                    ctypes.windll.user32.DispatchMessageW(ctypes.byref(msg))
+                    if self._stop_event.is_set():
+                        break
+                else:
+                    # No message after peek, continue waiting
+                    continue
+            # ret == -1 (timeout) or other: continue waiting
         _log.debug("ActionWatcher: message loop exited")
 
     # ------------------------------------------------------------------

@@ -1,6 +1,7 @@
 """Main entry point for the AI overlay application."""
 from __future__ import annotations
 
+import logging
 import os
 import sys
 
@@ -23,6 +24,8 @@ from core.completion_toast import CompletionToast
 from platforms.browser_connector import BrowserConnector
 from dotenv import load_dotenv
 load_dotenv()
+
+_log = logging.getLogger(__name__)
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment (.env file or system variable).
@@ -155,8 +158,12 @@ def main() -> None:
 
     def _on_task_ready(path: str) -> None:
         """Called when Gemini finishes and the task JSON file is saved."""
-        dialog.hide()
-        controller.load_task(path)
+        dialog.task_ready.disconnect(_on_task_ready)  # prevent double-load
+        try:
+            controller.load_task(path)
+        except Exception:
+            _log.exception("Failed to load task from %s", path)
+            return
         overlay.show_overlay()
 
     dialog.task_ready.connect(_on_task_ready)

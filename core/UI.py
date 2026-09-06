@@ -678,7 +678,9 @@ class TaskInputDialog(QWidget):
     @pyqtSlot(list)
     def _on_dom_fetched(self, tree: list) -> None:
         """Called when DOM fetch succeeds. Saves snapshot and starts generation."""
-        # Save dom_snapshot.json regardless of whether tree is empty
+        # Save dom_snapshot.json regardless of whether tree is empty.
+        # Bounds in the snapshot are already screen-absolute (viewport offset applied
+        # in BrowserConnector.get_tree).
         os.makedirs(_OUTPUT_DIR, exist_ok=True)
         snapshot_path = os.path.abspath(_DOM_SNAPSHOT_FILE)
         with open(snapshot_path, "w", encoding="utf-8") as fh:
@@ -710,6 +712,7 @@ class TaskInputDialog(QWidget):
             "name":    task,
             "app":     app,
             "app_exe": result.get("app_exe", ""),
+            "mode":    self._target_mode,
             "steps":   result.get("steps", []),
         }
         os.makedirs(_OUTPUT_DIR, exist_ok=True)

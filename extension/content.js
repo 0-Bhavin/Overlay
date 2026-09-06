@@ -69,7 +69,16 @@
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'GET_TREE') {
       const tree = window.AIOverlayDOMExtractor ? window.AIOverlayDOMExtractor.extractSimplifiedDOM() : [];
-      sendResponse({ status: 'ok', tree: tree, url: window.location.href });
+      const viewportOffset = {
+        x: window.screenX + window.outerWidth - window.innerWidth,
+        y: window.screenY + window.outerHeight - window.innerHeight
+      };
+      sendResponse({
+        status: 'ok',
+        tree: tree,
+        url: window.location.href,
+        viewportOffset: viewportOffset
+      });
     } else if (request.action === 'HIGHLIGHT') {
       const success = highlightElement(request.elementId);
       sendResponse({ status: success ? 'ok' : 'not_found' });

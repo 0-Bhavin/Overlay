@@ -161,6 +161,7 @@ class TaskController(QObject):
         self._task: Task | None = None
         self._index: int = -1
         self._pending_step_id: int | None = None  # id of the step being resolved
+        self._loading: bool = False  # guard against re-entrant load_task calls
 
         # ── Background resolution thread ──────────────────────────────
         self._worker = _CoordWorker()
@@ -189,9 +190,16 @@ class TaskController(QObject):
 
     def load_task(self, path: str) -> None:
         """Load a task from *path* and immediately render the first step."""
-        self._task = Task.load_from_file(path)
-        self._index = -1
-        self.next_step()
+        if self._loading:
+            _log.debug("load_task: already loading, ignoring re-entrant call")
+            return
+        self._loading = True
+        try:
+            self._task = Task.load_from_file(path)
+            self._index = -1
+            self.next_step()
+        finally:
+            self._loading = False
 
     # ------------------------------------------------------------------
     # Navigation
@@ -271,7 +279,12 @@ class TaskController(QObject):
                 self._layer_manager.render_step(step_with_fake)
 
     def _resolver_available(self) -> bool:
-        return _RESOLVER_AVAILABLE and self._task is not None
+        if self._task is None:
+            return False
+        # Website mode coords are resolved at load time from the DOM snapshot
+        if getattr(self._task, "mode", "app") == "website":
+            return False
+        return _RESOLVER_AVAILABLE
 
     def _cancel_pending_resolution(self) -> None:
         """Stop the timeout timer and discard any stale pending resolution."""

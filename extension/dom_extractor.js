@@ -124,8 +124,8 @@
           enabled: !el.disabled,
           visible: true,
           bounds: {
-            x: Math.round(rect.left + window.scrollX),
-            y: Math.round(rect.top + window.scrollY),
+            x: Math.round(rect.left),      // viewport-relative; BrowserConnector adds viewport offset
+            y: Math.round(rect.top),       // viewport-relative; BrowserConnector adds viewport offset
             width: Math.round(rect.width),
             height: Math.round(rect.height)
           }

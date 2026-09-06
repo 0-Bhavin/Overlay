@@ -1,28 +1,49 @@
 {
-  "name": "how to sign in on supabase",
-  "app": "Supabase | The Postgres Development Platform - Google Chrome",
+  "name": "how to create a instagram story in canva",
+  "app": "Home - Canva - Google Chrome",
   "app_exe": "",
+  "mode": "website",
   "steps": [
     {
       "step_number": 1,
+      "action": "type",
+      "description": "Type 'Instagram Story' into the main search bar.",
+      "element": {
+        "tag": "input",
+        "text": null,
+        "id": "search-input",
+        "class": "search-bar__input",
+        "name": "q",
+        "type": "search",
+        "role": "searchbox",
+        "placeholder": "Search your content or Canva",
+        "aria_label": "Search for templates, projects, and more",
+        "xpath": "//input[@id='search-input' and @type='search' and @role='searchbox' and @placeholder='Search your content or Canva']",
+        "css_selector": "input#search-input[type='search'][role='searchbox'][placeholder='Search your content or Canva']",
+        "parent_path": [
+          "header",
+          "nav"
+        ]
+      },
+      "value": "Instagram Story"
+    },
+    {
+      "step_number": 2,
       "action": "click",
-      "description": "Click the 'Sign in' link.",
+      "description": "Click on the 'Instagram Story' design suggestion from the search results to start a new design.",
       "element": {
         "tag": "a",
-        "text": "Sign in",
-        "id": 29,
-        "class": null,
+        "text": "Instagram Story",
+        "id": null,
+        "class": "search-results__item design-type-suggestion",
         "name": null,
-        "role": "link",
-        "aria_label": null,
-        "xpath": "/html/body/div[1]/nav/div/div/div[2]/div/a[2]",
-        "css_selector": "div.flex.items-center.justify-end > a:nth-child(2)",
+        "role": "option",
+        "aria_label": "Create an Instagram Story design",
+        "xpath": "//a[text()='Instagram Story' and @role='option' and contains(@aria-label, 'Instagram Story')]",
+        "css_selector": "a[role='option'].design-type-suggestion:contains('Instagram Story')[aria-label*='Instagram Story']",
         "parent_path": [
           "div",
-          "nav",
-          "div",
-          "div",
-          "div"
+          "ul"
         ]
       }
     }

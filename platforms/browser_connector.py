@@ -34,6 +34,7 @@ class BrowserConnector(UIConnector):
         self._click_events: list[dict[str, Any]] = []
         self._server_thread: threading.Thread | None = None
         self._loop: asyncio.AbstractEventLoop | None = None
+        self._last_viewport_offset: dict[str, int] = {"x": 0, "y": 0}  # screen-space offset of browser viewport
         self._start_server()
 
     def _start_server(self) -> None:
@@ -91,6 +92,7 @@ class BrowserConnector(UIConnector):
         """Fetch current simplified DOM tree JSON from the active browser tab.
 
         Returns list of UINode dictionaries conforming to common UI schema.
+        Bounds are converted from viewport-relative to screen-absolute coordinates.
         """
         if not self.active_socket or not self._loop:
             _log.warning("BrowserConnector: No active browser extension connected")
@@ -108,11 +110,24 @@ class BrowserConnector(UIConnector):
                 asyncio.wait_for(fut, timeout=timeout), self._loop
             ).result()
             raw_tree = res.get("tree", [])
-            # Validate and convert nodes via UINode model
+            offset = res.get("viewportOffset") or {"x": 0, "y": 0}
+            self._last_viewport_offset = {
+                "x": int(offset.get("x", 0)),
+                "y": int(offset.get("y", 0)),
+            }
+            # Convert viewport-relative bounds to screen-absolute
             validated_nodes = []
             for item in raw_tree:
                 node = UINode.from_dict(item)
-                validated_nodes.append(node.to_dict())
+                d = node.to_dict()
+                b = d["bounds"]
+                d["bounds"] = {
+                    "x": b["x"] + self._last_viewport_offset["x"],
+                    "y": b["y"] + self._last_viewport_offset["y"],
+                    "width": b["width"],
+                    "height": b["height"],
+                }
+                validated_nodes.append(d)
             return validated_nodes
         except Exception as exc:
             _log.warning("BrowserConnector.get_tree timed out or failed: %s", exc)
