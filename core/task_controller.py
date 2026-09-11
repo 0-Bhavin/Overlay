@@ -260,6 +260,8 @@ class TaskController(QObject):
         self._cancel_pending_resolution()
 
         step = self._task.steps[self._index]
+        resolver_ok = self._resolver_available()
+        print(f"[_render_current] step #{step.id} mode={self._task.mode!r} resolver_available={resolver_ok} step.coords={step.coords}")
 
         # 1. Show locating state immediately (no coords yet)
         print(f"Rendering step {step.id}: {step.target!r} — locating…")
@@ -267,16 +269,22 @@ class TaskController(QObject):
         self.step_changed.emit(self._index, len(self._task.steps))
 
         # 2. Try live resolver first
-        if self._resolver_available():
+        if resolver_ok:
             self._pending_step_id = step.id
             self._timeout_timer.start()
             self._resolve_requested.emit(step, self._task.app, self._task.app_exe)
         else:
-            # No resolver — fall back to fake coords
-            step_with_fake = self.inject_fake_coords(step)
-            if step_with_fake.coords is not None:
-                print(f"Rendering step {step.id}: {step.target!r} at {step_with_fake.coords} [fake]")
-                self._layer_manager.render_step(step_with_fake)
+            # No live resolver — but coords may already be set from DOM snapshot (website mode)
+            if step.coords is not None:
+                print(f"Rendering step {step.id}: {step.target!r} at {step.coords} [DOM snapshot]")
+                self._layer_manager.render_step(step)
+            else:
+                # Fall back to fake coords (Phase 4 stub)
+                print(f"[_render_current] No live resolver and no DOM snapshot, using fake coords")
+                step_with_fake = self.inject_fake_coords(step)
+                if step_with_fake.coords is not None:
+                    print(f"Rendering step {step.id}: {step.target!r} at {step_with_fake.coords} [fake]")
+                    self._layer_manager.render_step(step_with_fake)
 
     def _resolver_available(self) -> bool:
         if self._task is None:

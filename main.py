@@ -18,6 +18,7 @@ from core.overlay_window import OverlayWindow
 from core.layer_manager import LayerManager
 from core.task_controller import TaskController
 from core.action_watcher import ActionWatcher
+from core.step import Step
 from core.UI import TaskInputDialog
 from core.tts import TTSEngine
 from core.completion_toast import CompletionToast
@@ -26,6 +27,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 _log = logging.getLogger(__name__)
+
+
+def _get_step_element_id(step: Step) -> int | None:
+    """Return the DOM element ID for a step, or None if not available."""
+    return getattr(step, "element_id", None)
 
 # ── API key ───────────────────────────────────────────────────────────────────
 # Set GEMINI_API_KEY in your environment (.env file or system variable).
@@ -111,6 +117,8 @@ def main() -> None:
 
     # ── 8b. ActionWatcher — auto-advance on menu/dialog/focus events ──
     def _on_coords_resolved(step) -> None:
+        if layer_manager.is_website_mode:
+            return  # Website mode: extension handles overlay + click detection
         layer_manager.on_coords_resolved(step)
         if step.coords:
             l, t, r, b = step.coords
@@ -156,7 +164,7 @@ def main() -> None:
     dialog = TaskInputDialog(api_key=_GEMINI_API_KEY, browser_connector=browser_connector)
     dialog.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, True)
 
-    def _on_task_ready(path: str) -> None:
+    def _on_task_ready(path: str, mode: str) -> None:
         """Called when Gemini finishes and the task JSON file is saved."""
         dialog.task_ready.disconnect(_on_task_ready)  # prevent double-load
         try:
@@ -164,7 +172,44 @@ def main() -> None:
         except Exception:
             _log.exception("Failed to load task from %s", path)
             return
-        overlay.show_overlay()
+        # Website mode: hide PyQt6 overlay, browser extension handles rendering
+        if mode == "website":
+            layer_manager.set_mode("website")
+
+            # Track pending element_id for click detection
+            pending_element_id: int | None = None
+
+            def _on_step_resolved_website(step):
+                element_id = _get_step_element_id(step)
+                if element_id is not None:
+                    browser_connector.highlight(element_id, step.tooltip)
+                else:
+                    browser_connector.clear_overlay()
+
+            def _on_website_click(data: dict) -> None:
+                nonlocal pending_element_id
+                clicked = data.get("elementId")
+                if clicked is not None and pending_element_id is not None:
+                    if str(clicked) == str(pending_element_id):
+                        pending_element_id = None
+                        controller.next_step()
+
+            controller.coords_resolved.connect(_on_step_resolved_website)
+            # Extract element_id from the step each time coords are resolved
+            def _track_element(step):
+                nonlocal pending_element_id
+                pending_element_id = _get_step_element_id(step)
+            controller.coords_resolved.connect(_track_element)
+
+            # Wire click detection from browser connector
+            browser_connector.observe_changes(_on_website_click)
+
+            # Suppress the normal PyQt6 path
+            controller.coords_resolved.disconnect(_on_coords_resolved)
+            controller.resolution_failed.disconnect(layer_manager.show_resolution_failed)
+            overlay.hide_overlay()
+        else:
+            overlay.show_overlay()
 
     dialog.task_ready.connect(_on_task_ready)
 

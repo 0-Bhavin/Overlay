@@ -1,49 +1,42 @@
 {
-  "name": "how to create a instagram story in canva",
+  "name": "CREATE A POSTER FROM TEMPLATES IN CANVA",
   "app": "Home - Canva - Google Chrome",
   "app_exe": "",
   "mode": "website",
   "steps": [
     {
       "step_number": 1,
-      "action": "type",
-      "description": "Type 'Instagram Story' into the main search bar.",
+      "action": "click",
+      "description": "Click the 'Create a design' button to initiate a new design project.",
       "element": {
-        "tag": "input",
-        "text": null,
-        "id": "search-input",
-        "class": "search-bar__input",
-        "name": "q",
-        "type": "search",
-        "role": "searchbox",
-        "placeholder": "Search your content or Canva",
-        "aria_label": "Search for templates, projects, and more",
-        "xpath": "//input[@id='search-input' and @type='search' and @role='searchbox' and @placeholder='Search your content or Canva']",
-        "css_selector": "input#search-input[type='search'][role='searchbox'][placeholder='Search your content or Canva']",
-        "parent_path": [
-          "header",
-          "nav"
-        ]
-      },
-      "value": "Instagram Story"
+        "tag": "button",
+        "text": "Create a design",
+        "id": "create-design-btn",
+        "class": "btn primary-button",
+        "name": null,
+        "role": "button",
+        "aria_label": "Create a new design",
+        "xpath": "//button[contains(.,'Create a design')]",
+        "css_selector": "button.primary-button:contains('Create a design')",
+        "parent_path": null
+      }
     },
     {
       "step_number": 2,
       "action": "click",
-      "description": "Click on the 'Instagram Story' design suggestion from the search results to start a new design.",
+      "description": "Select 'Poster' from the list of design types to start creating a poster.",
       "element": {
         "tag": "a",
-        "text": "Instagram Story",
-        "id": null,
-        "class": "search-results__item design-type-suggestion",
+        "text": "Poster",
+        "id": "design-type-poster",
+        "class": "design-type-option",
         "name": null,
-        "role": "option",
-        "aria_label": "Create an Instagram Story design",
-        "xpath": "//a[text()='Instagram Story' and @role='option' and contains(@aria-label, 'Instagram Story')]",
-        "css_selector": "a[role='option'].design-type-suggestion:contains('Instagram Story')[aria-label*='Instagram Story']",
+        "role": "menuitem",
+        "aria_label": "Create a Poster",
+        "xpath": "//div[@role='menu']/a[contains(.,'Poster')]",
+        "css_selector": "div[role='menu'] a.design-type-option:contains('Poster')",
         "parent_path": [
-          "div",
-          "ul"
+          "div[role='menu']"
         ]
       }
     }

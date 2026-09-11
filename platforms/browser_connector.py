@@ -34,6 +34,7 @@ class BrowserConnector(UIConnector):
         self._click_events: list[dict[str, Any]] = []
         self._server_thread: threading.Thread | None = None
         self._loop: asyncio.AbstractEventLoop | None = None
+        self._server_ready: threading.Event = threading.Event()
         self._last_viewport_offset: dict[str, int] = {"x": 0, "y": 0}  # screen-space offset of browser viewport
         self._start_server()
 
@@ -44,14 +45,20 @@ class BrowserConnector(UIConnector):
             asyncio.set_event_loop(self._loop)
 
             async def serve():
-                async with websockets.serve(self._handle_client, self.host, self.port):
-                    _log.info("BrowserConnector: WebSocket server running on ws://%s:%d", self.host, self.port)
-                    await asyncio.Future()  # Run forever
+                try:
+                    async with websockets.serve(self._handle_client, self.host, self.port):
+                        _log.info("BrowserConnector: WebSocket server running on ws://%s:%d", self.host, self.port)
+                        self._server_ready.set()
+                        await asyncio.Future()  # Run forever
+                except Exception as err:
+                    _log.error("BrowserConnector server loop error: %s", err)
+                    self._server_ready.set()
 
             try:
                 self._loop.run_until_complete(serve())
             except Exception as err:
                 _log.error("BrowserConnector server loop error: %s", err)
+                self._server_ready.set()
 
         self._server_thread = threading.Thread(target=run_loop, daemon=True)
         self._server_thread.start()
@@ -92,11 +99,26 @@ class BrowserConnector(UIConnector):
         """Fetch current simplified DOM tree JSON from the active browser tab.
 
         Returns list of UINode dictionaries conforming to common UI schema.
-        Bounds are converted from viewport-relative to screen-absolute coordinates.
+        Bounds are viewport-relative (not screen-space) — the extension uses
+        getBoundingClientRect() directly for rendering, so no conversion needed.
         """
-        if not self.active_socket or not self._loop:
-            _log.warning("BrowserConnector: No active browser extension connected")
+        # Wait for the server to be ready (with a timeout)
+        if not self._server_ready.wait(timeout=1.0):
+            _log.warning("BrowserConnector: WebSocket server not ready after 1.0s")
             return []
+
+        # Wait for the extension to connect (active_socket to be set) with a timeout
+        timeout_seconds = 5.0
+        end_time = time.time() + timeout_seconds
+        while time.time() < end_time:
+            if self.active_socket is not None and self._loop is not None:
+                break
+            time.sleep(0.1)
+        else:
+            _log.warning("BrowserConnector: No active browser extension connected after waiting")
+            return []
+
+        print(f"[BrowserConnector.get_tree] Socket active={self.active_socket is not None}, loop={self._loop is not None}")
 
         req_id = str(uuid.uuid4())
         fut: asyncio.Future = self._loop.create_future()
@@ -110,32 +132,26 @@ class BrowserConnector(UIConnector):
                 asyncio.wait_for(fut, timeout=timeout), self._loop
             ).result()
             raw_tree = res.get("tree", [])
-            offset = res.get("viewportOffset") or {"x": 0, "y": 0}
-            self._last_viewport_offset = {
-                "x": int(offset.get("x", 0)),
-                "y": int(offset.get("y", 0)),
-            }
-            # Convert viewport-relative bounds to screen-absolute
+            print(f"[BrowserConnector.get_tree] Received {len(raw_tree)} nodes")
+            # Return nodes with viewport-relative bounds (no screen-space conversion)
             validated_nodes = []
             for item in raw_tree:
                 node = UINode.from_dict(item)
-                d = node.to_dict()
-                b = d["bounds"]
-                d["bounds"] = {
-                    "x": b["x"] + self._last_viewport_offset["x"],
-                    "y": b["y"] + self._last_viewport_offset["y"],
-                    "width": b["width"],
-                    "height": b["height"],
-                }
-                validated_nodes.append(d)
+                validated_nodes.append(node.to_dict())
             return validated_nodes
         except Exception as exc:
+            print(f"[BrowserConnector.get_tree] Exception: {exc}")
             _log.warning("BrowserConnector.get_tree timed out or failed: %s", exc)
             self._pending_responses.pop(req_id, None)
             return []
 
-    def highlight(self, element_id: int | str, timeout: float = 2.0) -> bool:
-        """Highlight browser element with matching data-ai-overlay-id."""
+    def highlight(self, element_id: int | str, tooltip: str = "", timeout: float = 2.0) -> bool:
+        """Highlight browser element with matching data-ai-overlay-id.
+
+        The extension renders the overlay (highlight ring, dim, tooltip) directly
+        in the page using getBoundingClientRect(). Python sends element ID + tooltip
+        text; coordinates never cross the bridge.
+        """
         if not self.active_socket or not self._loop:
             return False
 
@@ -143,7 +159,10 @@ class BrowserConnector(UIConnector):
         fut: asyncio.Future = self._loop.create_future()
         self._pending_responses[req_id] = fut
 
-        msg = json.dumps({"type": "highlight", "req_id": req_id, "elementId": str(element_id)})
+        payload = {"type": "highlight", "req_id": req_id, "elementId": str(element_id)}
+        if tooltip:
+            payload["tooltip"] = tooltip
+        msg = json.dumps(payload)
         asyncio.run_coroutine_threadsafe(self.active_socket.send(msg), self._loop)
 
         try:
@@ -153,6 +172,28 @@ class BrowserConnector(UIConnector):
             return bool(res.get("success", False))
         except Exception as exc:
             _log.warning("BrowserConnector.highlight failed: %s", exc)
+            self._pending_responses.pop(req_id, None)
+            return False
+
+    def clear_overlay(self, timeout: float = 2.0) -> bool:
+        """Clear all in-page overlay elements (highlight, dim, tooltip)."""
+        if not self.active_socket or not self._loop:
+            return False
+
+        req_id = str(uuid.uuid4())
+        fut: asyncio.Future = self._loop.create_future()
+        self._pending_responses[req_id] = fut
+
+        msg = json.dumps({"type": "clear_overlay", "req_id": req_id})
+        asyncio.run_coroutine_threadsafe(self.active_socket.send(msg), self._loop)
+
+        try:
+            res = asyncio.run_coroutine_threadsafe(
+                asyncio.wait_for(fut, timeout=timeout), self._loop
+            ).result()
+            return bool(res.get("success", False))
+        except Exception as exc:
+            _log.warning("BrowserConnector.clear_overlay failed: %s", exc)
             self._pending_responses.pop(req_id, None)
             return False
 

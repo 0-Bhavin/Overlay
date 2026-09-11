@@ -83,6 +83,7 @@
   function extractSimplifiedDOM() {
     const nodes = [];
     let idCounter = 1;
+    let skipped = 0;
 
     function walkNode(el) {
       if (!el || el.nodeType !== Node.ELEMENT_NODE) return;
@@ -140,6 +141,7 @@
     }
 
     walkNode(document.body);
+    console.log('[DOM Extractor] Total nodes returned:', nodes.length);
     return nodes;
   }
 

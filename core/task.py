@@ -60,14 +60,23 @@ class Task:
 
         # Load DOM snapshot for website-mode coord resolution
         dom_lookup: dict[int, dict] = {}
+        dom_text_lookup: dict[str, dict] = {}  # text -> node (fallback)
         dom_path = os.path.join(os.path.dirname(os.path.abspath(path)), "dom_snapshot.json")
         if os.path.exists(dom_path):
             with open(dom_path, encoding="utf-8") as fh:
-                for node in json.load(fh):
-                    dom_lookup[node["id"]] = node
+                nodes = json.load(fh)
+            print(f"[Task.load_from_file] DOM snapshot: {len(nodes)} nodes from {dom_path}")
+            for node in nodes:
+                dom_lookup[node["id"]] = node
+                # Build text-based fallback lookup for elements without numeric id
+                text = node.get("text", "").strip().lower()
+                if text and text not in dom_text_lookup:
+                    dom_text_lookup[text] = node
+        else:
+            print(f"[Task.load_from_file] No dom_snapshot.json found at {dom_path}")
 
         steps = [
-            Step.from_dict(s, default_id=i + 1, dom_lookup=dom_lookup or None)
+            Step.from_dict(s, default_id=i + 1, dom_lookup=dom_lookup or None, dom_text_lookup=dom_text_lookup or None)
             for i, s in enumerate(data.get("steps", []))
         ]
         return cls(

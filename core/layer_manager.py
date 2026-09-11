@@ -63,6 +63,7 @@ class LayerManager(QObject):
         self._hud.raise_()
 
         self._current_step: Step | None = None
+        self._mode: str = "app"  # "app" or "website"
 
     # ------------------------------------------------------------------
     # Properties
@@ -77,6 +78,28 @@ class LayerManager(QObject):
         return self._hud
 
     # ------------------------------------------------------------------
+    # Mode (app vs website)
+    # ------------------------------------------------------------------
+
+    def set_mode(self, mode: str) -> None:
+        """Set the operating mode: "app" or "website".
+
+        In website mode, LayerManager becomes a no-op for spotlight/dim rendering.
+        The browser extension handles overlay rendering instead.
+        """
+        self._mode = mode
+        if mode == "website":
+            self._overlay.hide()
+
+    @property
+    def mode(self) -> str:
+        return self._mode
+
+    @property
+    def is_website_mode(self) -> bool:
+        return self._mode == "website"
+
+    # ------------------------------------------------------------------
     # Pause / resume
     # ------------------------------------------------------------------
 
@@ -86,7 +109,7 @@ class LayerManager(QObject):
         if paused:
             self._overlay.clear_spotlight()
         else:
-            if self._current_step:
+            if self._current_step and self._mode == "app":
                 self.render_step(self._current_step)
 
     # ------------------------------------------------------------------
@@ -96,6 +119,14 @@ class LayerManager(QObject):
     def render_step(self, step: Step) -> None:
         """Render a fully-resolved step (coords are known)."""
         self._current_step = step
+
+        # Website mode: extension handles spotlight/dim/tooltip rendering
+        if self._mode == "website":
+            # TTS still works in website mode
+            if self._tts is not None:
+                self._tts.speak(step.tooltip)
+            return
+
         self._overlay.set_resolving(False)   # 1.1 — stop pulse
 
         if step.coords is not None:
@@ -113,24 +144,34 @@ class LayerManager(QObject):
 
     def show_locating(self, step: Step) -> None:
         """Show dim + 'Locating…' tooltip + pulse rings while resolving (1.1)."""
+        # Website mode: extension handles overlay; no-op here
+        if self._mode == "website":
+            return
+
         self._overlay.set_spotlight(None, 0.55)
         self._overlay.set_resolving(True)    # 1.1 — start pulse
 
         locating_step = dataclasses.replace(
-            step, tooltip=f"\u201cLocating {step.target}\u2026\u201d"
+            step, tooltip=f"“Locating {step.target}…”"
         )
         self._tooltip.render(locating_step)
         self._tooltip.show()
 
     def show_resolution_failed(self, target: str) -> None:
+        # Website mode: extension handles overlay; no-op here
+        if self._mode == "website":
+            return
         self._overlay.set_resolving(False)   # 1.1 — stop pulse on failure
         self._tooltip.show_message(
-            f"\u26a0\ufe0f Couldn\u2019t find \u201c{target}\u201d \u2014 please click it manually"
+            f"⚠️ Couldn’t find “{target}” — please click it manually"
         )
 
     def show_recovery_panel(self, target: str, error: object, on_skip, on_retry) -> None:
+        # Website mode: extension handles overlay; no-op here
+        if self._mode == "website":
+            return
         self._overlay.set_resolving(False)   # stop pulse
-        msg = f"\u26a0\ufe0f Couldn't find \"{target}\" \u2014 skip or retry?"
+        msg = f"⚠️ Couldn't find \"{target}\" — skip or retry?"
         self._tooltip.show_recovery_panel(msg, on_skip, on_retry)
 
     # ------------------------------------------------------------------
@@ -138,7 +179,7 @@ class LayerManager(QObject):
     # ------------------------------------------------------------------
 
     def flash_step_complete(self, callback=None) -> None:
-        """Show a green ✓ flash on the spotlight, then call *callback*."""
+        """Show a green checkmark flash on the spotlight, then call *callback*."""
         self._overlay.show_step_complete_flash(callback)
 
     # ------------------------------------------------------------------

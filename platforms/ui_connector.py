@@ -55,9 +55,21 @@ class UIConnector(ABC):
         pass
 
     @abstractmethod
-    def highlight(self, element_id: int | str) -> bool:
-        """Highlight a target UI element by its identifier."""
+    def highlight(self, element_id: int | str, tooltip: str = "", timeout: float = 2.0) -> bool:
+        """Highlight a target UI element by its identifier.
+
+        Website mode: renders overlay (highlight ring + dim + tooltip) directly in-page.
+        App mode: delegates to platform-specific highlight mechanism.
+        """
         pass
+
+    def clear_overlay(self, timeout: float = 2.0) -> bool:
+        """Clear all overlay elements (highlight, dim, tooltip).
+
+        Default implementation for app mode (no-op). Website mode overrides
+        to clear in-page injected overlay.
+        """
+        return True  # No-op for app mode
 
     @abstractmethod
     def wait_for_click(self, element_id: int | str, timeout: float = 10.0) -> bool:
