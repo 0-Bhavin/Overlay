@@ -31,32 +31,34 @@ class WindowsConnector(UIConnector):
 
         # Try to resolve app window and extract elements
         try:
-            coords = self.resolver.resolve(self.app_name, self.app_name, app_exe=self.app_exe)
-            if coords:
-                left, top, right, bottom = coords
-                node = UINode(
-                    id=1,
-                    type="window",
-                    text=self.app_name,
-                    role="window",
-                    enabled=True,
-                    visible=True,
-                    bounds={
-                        "x": left,
-                        "y": top,
-                        "width": max(0, right - left),
-                        "height": max(0, bottom - top),
-                    },
-                )
-                nodes.append(node.to_dict())
+            window = self.resolver.find_window(self.app_name, app_exe=self.app_exe)
+            if window:
+                coords = self.resolver.get_coords(window)
+                if coords:
+                    left, top, right, bottom = coords
+                    node = UINode(
+                        id=1,
+                        type="window",
+                        text=self.app_name,
+                        role="window",
+                        enabled=True,
+                        visible=True,
+                        bounds={
+                            "x": left,
+                            "y": top,
+                            "width": max(0, right - left),
+                            "height": max(0, bottom - top),
+                        },
+                    )
+                    nodes.append(node.to_dict())
         except Exception as exc:
             _log.warning("WindowsConnector.get_tree failed: %s", exc)
 
         return nodes
 
-    def highlight(self, element_id: int | str) -> bool:
+    def highlight(self, element_id: int | str, tooltip: str = "", timeout: float = 2.0) -> bool:
         """Highlight Windows UI element by ID or name."""
-        _log.info("WindowsConnector highlight requested for %s", element_id)
+        _log.info("WindowsConnector highlight requested for %s (tooltip=%r)", element_id, tooltip)
         return True
 
     def wait_for_click(self, element_id: int | str, timeout: float = 10.0) -> bool:

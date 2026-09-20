@@ -39,21 +39,22 @@ def load_history() -> List[dict]:
     return []
 
 
-def save_to_history(task: str, app: str) -> None:
+def save_to_history(task: str, app: str, mode: str = "app") -> None:
     """Prepend *task* / *app* to the history file, capping at :data:`_MAX_ENTRIES`.
 
-    Duplicate (task, app) pairs are deduplicated before inserting so that
+    Duplicate (task, app, mode) triples are deduplicated before inserting so that
     re-running the same task simply moves it to the top.
     """
     history = load_history()
     # Remove existing duplicates
     history = [
         h for h in history
-        if not (h.get("task") == task and h.get("app") == app)
+        if not (h.get("task") == task and h.get("app") == app and h.get("mode") == mode)
     ]
     history.insert(0, {
         "task":      task,
         "app":       app,
+        "mode":      mode,
         "timestamp": datetime.now().isoformat(timespec="seconds"),
     })
     history = history[:_MAX_ENTRIES]

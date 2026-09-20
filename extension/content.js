@@ -1,24 +1,320 @@
 /**
  * AI Overlay — Content Script
  * Manages DOM extraction, element highlighting, click detection, and mutation tracking.
+ * Handles both standard websites and canvas-based apps like Google Sheets.
  */
 
 (function () {
   'use strict';
 
   let highlightOverlay = null;
+  let dimOverlay = null;
+  let tooltipOverlay = null;
+
+  // ─── Element extraction ─────────────────────────────────────────────────────
+
+  /**
+   * Get the viewport offset: top-left corner of the browser content area in screen coords.
+   * Formula: screenX + (outerWidth - innerWidth), screenY + (outerHeight - innerHeight)
+   * This accounts for the browser chrome (toolbar, sidebar, etc.) around the content area.
+   */
+  function getViewportOffset() {
+    return {
+      x: window.screenX + window.outerWidth - window.innerWidth,
+      y: window.screenY + window.outerHeight - window.innerHeight,
+    };
+  }
+
+  /**
+   * Extract interactive elements from the standard DOM.
+   * Used for regular websites.
+   */
+  function extractFromDOM() {
+    if (!window.AIOverlayDOMExtractor) return [];
+    return window.AIOverlayDOMExtractor.extractSimplifiedDOM();
+  }
+
+  /**
+   * Extract elements from Google Sheets' shadow-DOM canvas toolbar.
+   * Google Sheets renders its toolbar on a canvas element, but the interactive
+   * elements (Format, Bold, etc.) ARE in the DOM — they live inside a shadow root
+   * attached to the <waffle-iron> custom element.
+   */
+  function extractFromGoogleSheets() {
+    const nodes = [];
+    let idCounter = 1;
+
+    // The toolbar host: <waffle-iron> holds the shadow DOM with the toolbar buttons
+    const waffleIron = document.querySelector('waffle-iron');
+    if (!waffleIron) return [];
+
+    let toolbar;
+    try {
+      toolbar = waffleIron.shadowRoot;
+    } catch (err) {
+      console.log('[Content] Google Sheets: shadowRoot inaccessible (cross-origin?)');
+      return [];
+    }
+
+    if (!toolbar) return [];
+
+    // Google Sheets toolbar buttons have these patterns:
+    // <div class="goog-toolbarbutton" role="button" title="Format cells">...</div>
+    // <div class="goog-menu-button goog-inline-block" role="button" title="Format">...</div>
+    const buttons = toolbar.querySelectorAll(
+      '[role="button"][title], [role="menuitem"][title], [aria-label]'
+    );
+
+    for (const btn of buttons) {
+      const title = btn.getAttribute('title') || btn.getAttribute('aria-label') || '';
+      if (!title.trim()) continue;
+
+      // Get bounding rect in viewport coords
+      let rect;
+      try {
+        rect = btn.getBoundingClientRect();
+      } catch (err) {
+        continue;
+      }
+
+      if (rect.width <= 0 || rect.height <= 0) continue;
+
+      const style = window.getComputedStyle(btn);
+      if (style.display === 'none' || style.visibility === 'hidden') continue;
+
+      const role = btn.getAttribute('role') || 'button';
+      // Map Google Sheets role to our schema
+      const typeMap = {
+        'button': 'button',
+        'menuitem': 'menuitem',
+        'menu': 'menu',
+        'tab': 'tab',
+      };
+      const type = typeMap[role] || role;
+
+      // Tag the element with an ID for click detection
+      const nodeId = idCounter++;
+      btn.setAttribute('data-ai-overlay-id', String(nodeId));
+
+      nodes.push({
+        id: nodeId,
+        type: type,
+        text: title.trim(),
+        role: role,
+        enabled: !btn.disabled,
+        visible: true,
+        bounds: {
+          x: Math.round(rect.left),
+          y: Math.round(rect.top),
+          width: Math.round(rect.width),
+          height: Math.round(rect.height),
+        },
+      });
+    }
+
+    // Also extract from the formula bar if present
+    const formulaBar = toolbar.querySelector('.ink-pseudobutton, .goog-textinput');
+    if (formulaBar) {
+      const rect = formulaBar.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        const nodeId = idCounter++;
+        formulaBar.setAttribute('data-ai-overlay-id', String(nodeId));
+        nodes.push({
+          id: nodeId,
+          type: 'textbox',
+          text: formulaBar.getAttribute('title') || 'Formula bar',
+          role: 'textbox',
+          enabled: true,
+          visible: true,
+          bounds: {
+            x: Math.round(rect.left),
+            y: Math.round(rect.top),
+            width: Math.round(rect.width),
+            height: Math.round(rect.height),
+          },
+        });
+      }
+    }
+
+    console.log('[Content] Google Sheets extraction:', nodes.length, 'nodes from shadow DOM');
+    return nodes;
+  }
+
+  /**
+   * Detect which extraction strategy to use.
+   */
+  function extractElements() {
+    const url = window.location.href;
+
+    // Google Sheets: has a <waffle-iron> custom element with shadow DOM toolbar
+    if (url.includes('docs.google.com/spreadsheets') && document.querySelector('waffle-iron')) {
+      const nodes = extractFromGoogleSheets();
+      if (nodes.length > 0) return nodes;
+    }
+
+    // Standard DOM extraction for everything else
+    return extractFromDOM();
+  }
+
+  // ─── Overlay Layers ────────────────────────────────────────────────────────
+
+  /**
+   * Create or update the dim overlay covering the viewport.
+   */
+  function createDimOverlay() {
+    removeDimOverlay();
+    dimOverlay = document.createElement('div');
+    dimOverlay.id = 'ai-overlay-dim';
+    dimOverlay.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      pointer-events: none;
+      z-index: 999998;
+    `;
+    document.body.appendChild(dimOverlay);
+  }
+
+  /**
+   * Remove the dim overlay.
+   */
+  function removeDimOverlay() {
+    if (dimOverlay && dimOverlay.parentNode) {
+      dimOverlay.parentNode.removeChild(dimOverlay);
+      dimOverlay = null;
+    }
+  }
+
+  /**
+   * Remove the tooltip overlay.
+   */
+  function removeTooltipOverlay() {
+    if (tooltipOverlay && tooltipOverlay.parentNode) {
+      tooltipOverlay.parentNode.removeChild(tooltipOverlay);
+      tooltipOverlay = null;
+    }
+  }
+
+  /**
+   * Remove the highlight overlay.
+   */
+  function removeHighlight() {
+    if (highlightOverlay && highlightOverlay.parentNode) {
+      highlightOverlay.parentNode.removeChild(highlightOverlay);
+      highlightOverlay = null;
+    }
+  }
+
+  /**
+   * Create or update the tooltip overlay near the target element.
+   * @param {string} text - Tooltip text to display
+   * @param {number|string} elementId - ID of the element to anchor to
+   */
+  /**
+   * Create or update the tooltip overlay near the target element.
+   * @param {string} text - Tooltip text to display
+   * @param {Element} targetEl - DOM element to anchor to
+   */
+  function createTooltipOverlay(text, targetEl) {
+    removeTooltipOverlay();
+    if (!targetEl || !text) return false;
+
+    const rect = targetEl.getBoundingClientRect();
+    tooltipOverlay = document.createElement('div');
+    tooltipOverlay.id = 'ai-overlay-tooltip';
+    tooltipOverlay.style.cssText = `
+      position: absolute;
+      left: ${Math.max(8, rect.left + window.scrollX)}px;
+      top: ${Math.max(8, rect.top + window.scrollY - 36)}px; /* Above the element */
+      background: rgba(15, 23, 42, 0.95);
+      color: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(59, 130, 246, 0.6);
+      font-size: 13px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 500;
+      pointer-events: none;
+      z-index: 999999;
+      max-width: 350px;
+      white-space: normal;
+      word-wrap: break-word;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    `;
+    tooltipOverlay.textContent = text;
+    document.body.appendChild(tooltipOverlay);
+    return true;
+  }
+
+  /**
+   * Find element by ID or by text/attributes fallback search in the DOM.
+   */
+  function findElement(elementId, targetText) {
+    // 1. Try by data-ai-overlay-id if valid
+    if (elementId !== null && elementId !== undefined && String(elementId).trim() !== '') {
+      const el = document.querySelector(`[data-ai-overlay-id="${elementId}"]`);
+      if (el) return el;
+
+      const waffle = document.querySelector('waffle-iron');
+      if (waffle && waffle.shadowRoot) {
+        const shadowEl = waffle.shadowRoot.querySelector(`[data-ai-overlay-id="${elementId}"]`);
+        if (shadowEl) return shadowEl;
+      }
+    }
+
+    // 2. Try by text / label search fallback
+    if (targetText && String(targetText).trim()) {
+      const needle = String(targetText).trim().toLowerCase();
+
+      // Search interactive elements first
+      const candidates = document.querySelectorAll('button, a, input, [role="button"], [role="menuitem"], [role="tab"], h1, h2, h3, div, span, label');
+      let bestMatch = null;
+
+      for (const cand of candidates) {
+        const style = window.getComputedStyle(cand);
+        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+          continue;
+        }
+
+        const aria = (cand.getAttribute('aria-label') || cand.getAttribute('title') || cand.getAttribute('placeholder') || '').toLowerCase();
+        const text = (cand.innerText || cand.textContent || '').trim().toLowerCase();
+
+        if (aria === needle || text === needle) {
+          return cand; // Exact match
+        }
+        if (!bestMatch && (aria.includes(needle) || (text.length < 150 && text.includes(needle)))) {
+          bestMatch = cand;
+        }
+      }
+
+      if (bestMatch) return bestMatch;
+    }
+
+    return null;
+  }
 
   /**
    * Create or update the spotlight overlay on the target element.
-   * @param {number|string} elementId
    */
-  function highlightElement(elementId) {
+  function highlightElement(elementId, targetText, tooltip) {
+    // Remove all existing overlays
     removeHighlight();
+    removeDimOverlay();
+    removeTooltipOverlay();
 
-    const targetEl = document.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-    if (!targetEl) return false;
+    const el = findElement(elementId, targetText);
+    if (!el) {
+      console.warn('[Content] highlightElement could not find element for elementId:', elementId, 'targetText:', targetText);
+      return false;
+    }
 
-    const rect = targetEl.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
+    if (rect.width <= 0 && rect.height <= 0) return false;
+
+    // Create dim layer
+    createDimOverlay();
+
+    // Create highlight ring
     highlightOverlay = document.createElement('div');
     highlightOverlay.id = 'ai-overlay-spotlight-ring';
     highlightOverlay.style.cssText = `
@@ -29,7 +325,7 @@
       height: ${rect.height + 8}px;
       border: 3px solid #3b82f6;
       border-radius: 6px;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.8), inset 0 0 12px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.9), inset 0 0 12px rgba(59, 130, 246, 0.2);
       pointer-events: none;
       z-index: 999999;
       transition: all 0.2s ease-in-out;
@@ -43,7 +339,7 @@
       style.textContent = `
         @keyframes aiOverlayPulse {
           0% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
-          50% { box-shadow: 0 0 18px rgba(59, 130, 246, 1); }
+          50% { box-shadow: 0 0 20px rgba(59, 130, 246, 1); }
           100% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
         }
       `;
@@ -51,55 +347,112 @@
     }
 
     document.body.appendChild(highlightOverlay);
-    targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    if (tooltip || targetText) {
+      createTooltipOverlay(tooltip || targetText, el);
+    }
+
+    try {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (e) {}
+
     return true;
   }
 
   /**
-   * Remove current highlight overlay.
+   * Remove all overlays (highlight, dim, tooltip).
    */
-  function removeHighlight() {
-    if (highlightOverlay && highlightOverlay.parentNode) {
-      highlightOverlay.parentNode.removeChild(highlightOverlay);
-      highlightOverlay = null;
-    }
+  function removeAllOverlays() {
+    removeHighlight();
+    removeDimOverlay();
+    removeTooltipOverlay();
   }
+
+  // ─── Message handling ──────────────────────────────────────────────────────
 
   // Handle messages from background service worker / extension
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log('[Content] Received message:', request.action);
     if (request.action === 'GET_TREE') {
-      const tree = window.AIOverlayDOMExtractor ? window.AIOverlayDOMExtractor.extractSimplifiedDOM() : [];
-      sendResponse({ status: 'ok', tree: tree, url: window.location.href });
+      const tree = extractElements();
+      const viewportOffset = getViewportOffset();
+      console.log('[Content] Extracted', tree.length, 'nodes, viewportOffset:', viewportOffset);
+      sendResponse({
+        status: 'ok',
+        tree: tree,
+        url: window.location.href,
+        viewportOffset: viewportOffset,
+      });
+    } else if (request.action === 'ENHANCED_HIGHLIGHT') {
+      // Try enhanced highlighting first
+      if (window.AIOverlayEnhancedHighlight && window.AIOverlayEnhancedHighlight.HighlightManager) {
+        try {
+          const element = findElement(request.elementId, request.target);
+          if (element) {
+            const manager = new window.AIOverlayEnhancedHighlight.HighlightManager();
+            const success = manager.highlight(element, {
+              tooltip: request.tooltip || request.target,
+              showDim: true,
+              showProgress: true,
+              currentStep: request.currentStep || 1,
+              totalSteps: request.totalSteps || 1
+            });
+            console.log('[Content] Enhanced HIGHLIGHT result:', success);
+            sendResponse({ status: success ? 'ok' : 'not_found' });
+            return;
+          }
+        } catch (e) {
+          console.error('[Content] Enhanced highlighting failed:', e);
+        }
+      }
+      // Fall back to original highlighting
+      const success = highlightElement(request.elementId, request.target, request.tooltip);
+      console.log('[Content] Fallback HIGHLIGHT result:', success, 'elementId:', request.elementId, 'target:', request.target);
+      sendResponse({ status: success ? 'ok' : 'not_found' });
     } else if (request.action === 'HIGHLIGHT') {
-      const success = highlightElement(request.elementId);
+      const success = highlightElement(request.elementId, request.target, request.tooltip);
+      console.log('[Content] HIGHLIGHT result:', success, 'elementId:', request.elementId, 'target:', request.target);
       sendResponse({ status: success ? 'ok' : 'not_found' });
     } else if (request.action === 'CLEAR_HIGHLIGHT') {
-      removeHighlight();
+      removeAllOverlays();
+      sendResponse({ status: 'ok' });
+    } else if (request.action === 'OVERLAY_BLOCKED') {
+      console.warn('[Content] Overlay blocked by CSP on:', request.url);
       sendResponse({ status: 'ok' });
     }
     return true; // Keep response channel open for async
   });
 
+  // ─── Click tracking ───────────────────────────────────────────────────────
+
   // Track user clicks to send event back to background
   document.addEventListener('click', (event) => {
-    const target = event.target.closest('[data-ai-overlay-id]');
+    // Check normal DOM first, then shadow DOM
+    let target = event.target.closest('[data-ai-overlay-id]');
+    if (!target) {
+      const waffle = document.querySelector('waffle-iron');
+      if (waffle && waffle.shadowRoot) {
+        target = waffle.shadowRoot.querySelector('[data-ai-overlay-id]');
+      }
+    }
     const clickedId = target ? target.getAttribute('data-ai-overlay-id') : null;
     chrome.runtime.sendMessage({
       action: 'USER_CLICK',
       elementId: clickedId,
       tagName: event.target.tagName,
-      url: window.location.href
+      url: window.location.href,
     }).catch(() => {});
   }, true);
 
-  // Set up MutationObserver to detect DOM changes (Level 3 adaptive behavior)
+  // ─── Mutation tracking ─────────────────────────────────────────────────────
+
   let mutationTimeout = null;
   const observer = new MutationObserver(() => {
     if (mutationTimeout) clearTimeout(mutationTimeout);
     mutationTimeout = setTimeout(() => {
       chrome.runtime.sendMessage({
         action: 'DOM_MUTATED',
-        url: window.location.href
+        url: window.location.href,
       }).catch(() => {});
     }, 300);
   });

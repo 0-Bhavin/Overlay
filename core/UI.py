@@ -17,6 +17,7 @@ from PyQt6.QtCore import (
     pyqtSlot,
     QObject,
 )
+from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -49,28 +50,28 @@ except ImportError:
 
 _STYLE = """
 QWidget#TaskInputDialog {
-    background: #1e1e2e;
-    border-radius: 12px;
-    border: 1px solid #313244;
+    background: rgba(30, 30, 46, 235);
+    border-radius: 17px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 QLabel#title {
-    color: #cdd6f4;
-    font-size: 15px;
-    font-weight: 600;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
 }
 
 QLabel#fieldLabel {
-    color: #a6adc8;
+    color: #bac2de;
     font-size: 11px;
     font-weight: 500;
 }
 
 QLineEdit {
-    background: #313244;
-    border: 1px solid #45475a;
-    border-radius: 6px;
-    padding: 6px 10px;
+    background: rgba(49, 50, 68, 0.9);
+    border: 1px solid rgba(69, 71, 90, 0.8);
+    border-radius: 17px;
+    padding: 0px 14px;
     color: #cdd6f4;
     font-size: 12px;
     selection-background-color: #89b4fa;
@@ -80,89 +81,106 @@ QLineEdit:focus {
 }
 
 QPushButton#startBtn {
-    background: #89b4fa;
+    background: #6366f1;
     border: none;
-    border-radius: 6px;
+    border-radius: 17px;
     padding: 8px 20px;
-    color: #1e1e2e;
+    color: #ffffff;
     font-size: 12px;
     font-weight: 700;
 }
-QPushButton#startBtn:hover   { background: #74c7ec; }
-QPushButton#startBtn:pressed { background: #89dceb; }
+QPushButton#startBtn:hover   { background: #818cf8; }
+QPushButton#startBtn:pressed { background: #a5b4fc; }
 QPushButton#startBtn:disabled {
-    background: #45475a;
-    color: #6c7086;
+    background: rgba(69, 71, 90, 0.7);
+    color: #585b70;
 }
 
 QPushButton#closeBtn {
-    background: transparent;
+    background: rgba(49, 50, 68, 0.6);
     border: none;
-    color: #6c7086;
-    font-size: 14px;
-    padding: 2px 6px;
+    border-radius: 12px;
+    color: #7f849c;
+    font-size: 13px;
+    padding: 2px 8px;
 }
-QPushButton#closeBtn:hover { color: #f38ba8; }
+QPushButton#closeBtn:hover {
+    background: rgba(243, 139, 168, 0.2);
+    color: #f38ba8;
+}
 
 QPushButton#micBtn {
-    background: #313244;
-    border: 1px solid #45475a;
-    border-radius: 6px;
+    background: rgba(49, 50, 68, 0.9);
+    border: 1px solid rgba(69, 71, 90, 0.8);
+    border-radius: 17px;
     color: #cdd6f4;
     font-size: 14px;
-    padding: 4px 8px;
+    padding: 0px 10px;
 }
-QPushButton#micBtn:hover   { background: #45475a; }
-QPushButton#micBtn:checked { background: #f38ba8; border-color: #f38ba8; color: #1e1e2e; }
+QPushButton#micBtn:hover   { background: rgba(69, 71, 90, 1.0); }
+QPushButton#micBtn:checked {
+    background: #f38ba8;
+    border-color: #f38ba8;
+    color: #1e1e2e;
+}
 
 QComboBox#historyBox {
-    background: #313244;
-    border: 1px solid #45475a;
-    border-radius: 6px;
-    padding: 4px 10px;
-    color: #a6adc8;
+    background: rgba(49, 50, 68, 0.9);
+    border: 1px solid rgba(69, 71, 90, 0.8);
+    border-radius: 17px;
+    padding: 0px 14px;
+    color: #bac2de;
     font-size: 11px;
+    min-height: 34px;
 }
 QComboBox#historyBox::drop-down { border: none; }
 QComboBox#historyBox QAbstractItemView {
-    background: #313244;
+    background: rgba(30, 30, 46, 240);
     color: #cdd6f4;
     selection-background-color: #45475a;
-    border: 1px solid #45475a;
+    border: 1px solid rgba(69, 71, 90, 0.8);
 }
 
 QComboBox#appBox {
-    background: #313244;
-    border: 1px solid #45475a;
-    border-radius: 6px;
-    padding: 4px 10px;
+    background: rgba(49, 50, 68, 0.9);
+    border: 1px solid rgba(69, 71, 90, 0.8);
+    border-radius: 17px;
+    padding: 0px 14px;
     color: #cdd6f4;
     font-size: 12px;
+    min-height: 34px;
 }
 QComboBox#appBox:focus { border-color: #89b4fa; }
 QComboBox#appBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: right center;
-    width: 20px;
+    width: 28px;
     border: none;
 }
+QComboBox#appBox::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #7f849c;
+    margin-right: 10px;
+}
 QComboBox#appBox QAbstractItemView {
-    background: #313244;
+    background: rgba(30, 30, 46, 240);
     color: #cdd6f4;
     selection-background-color: #45475a;
-    border: 1px solid #45475a;
+    border: 1px solid rgba(69, 71, 90, 0.8);
     padding: 2px;
 }
 
 QPushButton#refreshBtn {
-    background: #313244;
-    border: 1px solid #45475a;
-    border-radius: 6px;
-    color: #a6adc8;
+    background: rgba(49, 50, 68, 0.9);
+    border: 1px solid rgba(69, 71, 90, 0.8);
+    border-radius: 17px;
+    color: #bac2de;
     font-size: 13px;
-    padding: 4px 8px;
+    padding: 0px 10px;
 }
-QPushButton#refreshBtn:hover   { background: #45475a; color: #cdd6f4; }
+QPushButton#refreshBtn:hover   { background: rgba(69, 71, 90, 1.0); color: #cdd6f4; }
 QPushButton#refreshBtn:disabled { color: #585b70; }
 
 QLabel#status {
@@ -171,15 +189,15 @@ QLabel#status {
 }
 
 QWidget#modeToggleContainer {
-    background: #181825;
-    border-radius: 8px;
-    border: 1px solid #313244;
+    background: rgba(24, 24, 37, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(49, 50, 68, 0.8);
 }
 
 QPushButton#toggleAppBtn, QPushButton#toggleWebBtn {
     background: transparent;
     border: none;
-    border-radius: 6px;
+    border-radius: 9px;
     color: #a6adc8;
     font-size: 12px;
     font-weight: 600;
@@ -187,11 +205,11 @@ QPushButton#toggleAppBtn, QPushButton#toggleWebBtn {
 }
 QPushButton#toggleAppBtn:hover, QPushButton#toggleWebBtn:hover {
     color: #cdd6f4;
-    background: #313244;
+    background: rgba(49, 50, 68, 0.6);
 }
 QPushButton#toggleAppBtn:checked, QPushButton#toggleWebBtn:checked {
-    background: #89b4fa;
-    color: #1e1e2e;
+    background: #6366f1;
+    color: #ffffff;
     font-weight: 700;
 }
 """
@@ -317,12 +335,12 @@ class TaskInputDialog(QWidget):
 
     Signals
     -------
-    task_ready(path):
-        Emitted with the absolute path to the generated JSON task file once
-        the Gemini call succeeds and the file is saved.
+    task_ready(path, mode):
+        Emitted with the absolute path to the generated JSON task file and
+        the target mode ("app" or "website") once the Gemini call succeeds.
     """
 
-    task_ready: pyqtSignal = pyqtSignal(str)
+    task_ready: pyqtSignal = pyqtSignal(str, str)
 
     def __init__(self, api_key: str, parent: QWidget | None = None, browser_connector: object | None = None) -> None:
         super().__init__(
@@ -356,6 +374,7 @@ class TaskInputDialog(QWidget):
         self._drag_pos = None
 
         self._build_ui()
+        self._init_shortcuts()
         self._load_history()
         self._centre_on_screen()
         # Auto-scan open windows when the dialog first opens
@@ -416,6 +435,7 @@ class TaskInputDialog(QWidget):
 
         self._history_box = QComboBox()
         self._history_box.setObjectName("historyBox")
+        self._history_box.setFixedHeight(34)
         self._history_box.addItem("— select a recent task —")
         self._history_box.currentIndexChanged.connect(self._on_history_selected)
         root.addWidget(self._history_box)
@@ -428,6 +448,7 @@ class TaskInputDialog(QWidget):
         task_row = QHBoxLayout()
         task_row.setSpacing(6)
         self._task_edit = QLineEdit()
+        self._task_edit.setFixedHeight(34)
         self._task_edit.setPlaceholderText('e.g. "Insert an image into the document"')
         task_row.addWidget(self._task_edit)
 
@@ -454,6 +475,7 @@ class TaskInputDialog(QWidget):
 
         self._app_box = QComboBox()
         self._app_box.setObjectName("appBox")
+        self._app_box.setFixedHeight(34)
         self._app_box.setEditable(True)            # allow free-text too
         self._app_box.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
         self._app_box.lineEdit().setPlaceholderText(
@@ -487,14 +509,27 @@ class TaskInputDialog(QWidget):
         root.addLayout(footer)
 
     # ------------------------------------------------------------------
+    # Keyboard shortcuts
+    # ------------------------------------------------------------------
+
+    def _init_shortcuts(self) -> None:
+        QShortcut(QKeySequence("Return"), self).activated.connect(self._on_start)
+        QShortcut(QKeySequence("Ctrl+Return"), self).activated.connect(self._on_start)
+        QShortcut(QKeySequence("Escape"), self).activated.connect(self.close)
+        QShortcut(QKeySequence("Ctrl+H"), self).activated.connect(self._history_box.setFocus)
+
+    # ------------------------------------------------------------------
     # 1.7  History
     # ------------------------------------------------------------------
 
     def _load_history(self) -> None:
         history = load_history()
         for entry in history:
-            label = f"{entry['task'][:30]}… | {entry['app']}" if len(entry['task']) > 30 \
-                    else f"{entry['task']} | {entry['app']}"
+            task_text = entry['task'][:28]
+            suffix = "…" if len(entry['task']) > 28 else ""
+            mode = entry.get("mode", "app")
+            badge = "🖥️" if mode == "app" else "🌐"
+            label = f"{badge} {task_text}{suffix} | {entry['app']}"
             self._history_box.addItem(label, userData=entry)
 
     @pyqtSlot(int)
@@ -504,8 +539,9 @@ class TaskInputDialog(QWidget):
         entry = self._history_box.itemData(index)
         if entry:
             self._task_edit.setText(entry.get("task", ""))
-            # Set the app combo text without triggering the index-changed signal
             self._app_box.setCurrentText(entry.get("app", ""))
+            mode = entry.get("mode", "app")
+            self._set_target_mode(mode)
 
     # ------------------------------------------------------------------
     # 1.6  Mic voice input
@@ -638,6 +674,7 @@ class TaskInputDialog(QWidget):
             return
 
         self._set_loading(True)
+        print(f"[_on_start] mode={self._target_mode!r} connector={'set' if self._browser_connector else 'None'}")
 
         if self._target_mode == "website" and self._browser_connector is not None:
             # Phase 1: fetch DOM from extension, then generate
@@ -678,7 +715,9 @@ class TaskInputDialog(QWidget):
     @pyqtSlot(list)
     def _on_dom_fetched(self, tree: list) -> None:
         """Called when DOM fetch succeeds. Saves snapshot and starts generation."""
-        # Save dom_snapshot.json regardless of whether tree is empty
+        # Save dom_snapshot.json regardless of whether tree is empty.
+        # Bounds in the snapshot are already screen-absolute (viewport offset applied
+        # in BrowserConnector.get_tree).
         os.makedirs(_OUTPUT_DIR, exist_ok=True)
         snapshot_path = os.path.abspath(_DOM_SNAPSHOT_FILE)
         with open(snapshot_path, "w", encoding="utf-8") as fh:
@@ -704,12 +743,13 @@ class TaskInputDialog(QWidget):
         app  = self._app_box.currentText().strip()
 
         # Save to history (1.7)
-        save_to_history(task, app)
+        save_to_history(task, app, mode=self._target_mode)
 
         task_dict = {
             "name":    task,
             "app":     app,
             "app_exe": result.get("app_exe", ""),
+            "mode":    self._target_mode,
             "steps":   result.get("steps", []),
         }
         os.makedirs(_OUTPUT_DIR, exist_ok=True)
@@ -718,7 +758,8 @@ class TaskInputDialog(QWidget):
             json.dump(task_dict, fh, indent=2)
 
         self._status_label.setText("✓ Task generated!")
-        self.task_ready.emit(out_path)
+        self.hide()
+        self.task_ready.emit(out_path, self._target_mode)
 
     @pyqtSlot(str)
     def _on_failure(self, error: str) -> None:
@@ -770,6 +811,20 @@ class TaskInputDialog(QWidget):
 
     def mouseReleaseEvent(self, event) -> None:  # type: ignore[override]
         self._drag_pos = None
+
+    def closeEvent(self, event) -> None:  # type: ignore[override]
+        """Stop background threads before window closes."""
+        for thread_name in ['_thread', '_mic_thread', '_scan_thread', '_dom_thread']:
+            thread = getattr(self, thread_name, None)
+            if thread is not None:
+                try:
+                    if not thread.isFinished():
+                        thread.quit()
+                        thread.wait()
+                except RuntimeError:
+                    # The thread object has been deleted
+                    pass
+        event.accept()
 
     # ------------------------------------------------------------------
     # Helpers

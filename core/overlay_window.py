@@ -104,6 +104,11 @@ class OverlayWindow(QWidget):
         self._topmost_timer.setInterval(50)
         self._topmost_timer.timeout.connect(self._reassert_topmost)
 
+        # Ensure the overlay starts fully hidden. Without this explicit hide(),
+        # calling layer.show() on child widgets in set_child_layers() can force
+        # the Qt parent window visible before show_overlay() is intentionally called.
+        self.hide()
+
     # ------------------------------------------------------------------
     # Dim / spotlight state API  (called by SpotlightLayer / LayerManager)
     # ------------------------------------------------------------------

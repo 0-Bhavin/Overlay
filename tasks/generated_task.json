@@ -1,30 +1,53 @@
 {
-  "name": "how to sign in on supabase",
-  "app": "Supabase | The Postgres Development Platform - Google Chrome",
-  "app_exe": "",
+  "name": "how to add a table in microsoft word",
+  "app": "Document1 - Word",
+  "app_exe": "WINWORD.EXE",
+  "mode": "app",
   "steps": [
     {
-      "step_number": 1,
+      "id": 1,
+      "target": "Insert tab",
+      "tooltip": "Click Insert tab to add elements.",
       "action": "click",
-      "description": "Click the 'Sign in' link.",
-      "element": {
-        "tag": "a",
-        "text": "Sign in",
-        "id": 29,
-        "class": null,
-        "name": null,
-        "role": "link",
-        "aria_label": null,
-        "xpath": "/html/body/div[1]/nav/div/div/div[2]/div/a[2]",
-        "css_selector": "div.flex.items-center.justify-end > a:nth-child(2)",
-        "parent_path": [
-          "div",
-          "nav",
-          "div",
-          "div",
-          "div"
-        ]
-      }
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Opens the Insert tab for adding new elements."
+    },
+    {
+      "id": 2,
+      "target": "Table button",
+      "tooltip": "Click Table to insert a table.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "arrow",
+      "explanation": "Inserts a new table into the document."
+    },
+    {
+      "id": 3,
+      "target": "Rows input box",
+      "tooltip": "Enter number of rows.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "none",
+      "explanation": "Specifies the number of rows in the table."
+    },
+    {
+      "id": 4,
+      "target": "Columns input box",
+      "tooltip": "Enter number of columns.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "none",
+      "explanation": "Specifies the number of columns in the table."
+    },
+    {
+      "id": 5,
+      "target": "Insert button",
+      "tooltip": "Click Insert to create the table.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Creates the table with specified rows and columns."
     }
   ]
 }

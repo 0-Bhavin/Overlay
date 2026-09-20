@@ -1,0 +1,35 @@
+(.venv) PS C:\Users\parth\college-code\ai-overlay\Overlay> python main.py
+C:\Users\parth\college-code\ai-overlay\Overlay\.venv\Lib\site-packages\pywinauto\__init__.py:80: UserWarning: Revert to STA COM threading mode
+  warnings.warn("Revert to STA COM threading mode", UserWarning)
+[_on_start] mode='website' connector=set
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 87 nodes
+[Task.load_from_file] DOM snapshot: 87 nodes from C:\Users\parth\college-code\ai-overlay\Overlay\tasks\dom_snapshot.json
+[Step.from_dict #1] Resolved by text='database' -> node #12: (0, 104, 255, 140)
+[Step.from_dict #2] Resolved by text='clusters' -> node #14: (0, 140, 255, 176)
+[Step.from_dict #3] Resolved by text='build a cluster' -> node #72: (497, 389, 1295, 457)
+[Step.from_dict #4] element text='div' NOT in text lookup
+[Step.from_dict #5] element text='div' NOT in text lookup
+[Step.from_dict #6] element text='div' NOT in text lookup
+[Step.from_dict #7] element text='div' NOT in text lookup
+[Step.from_dict #8] element text='div' NOT in text lookup
+[Step.from_dict #9] element text='div' NOT in text lookup
+[Step.from_dict #10] element text='button' NOT in text lookup
+[Step.from_dict #11] element text='button' NOT in text lookup
+[_render_current] step #1 mode='website' resolver_available=False step.coords=(0, 104, 255, 140)
+Rendering step 1: 'DATABASE' — locating…
+Rendering website step 1: 'DATABASE' (element_id=12) [DOM snapshot]
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 29 nodes
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 49 nodes
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 163 nodes
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 166 nodes
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 76 nodes
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 109 nodes
+[BrowserConnector.get_tree] Socket active=True, loop=True
+[BrowserConnector.get_tree] Received 124 nodes
