@@ -1,44 +1,53 @@
 {
-  "name": "CREATE A POSTER FROM TEMPLATES IN CANVA",
-  "app": "Home - Canva - Google Chrome",
-  "app_exe": "",
-  "mode": "website",
+  "name": "how to add a table in microsoft word",
+  "app": "Document1 - Word",
+  "app_exe": "WINWORD.EXE",
+  "mode": "app",
   "steps": [
     {
-      "step_number": 1,
+      "id": 1,
+      "target": "Insert tab",
+      "tooltip": "Click Insert tab to add elements.",
       "action": "click",
-      "description": "Click the 'Create a design' button to initiate a new design project.",
-      "element": {
-        "tag": "button",
-        "text": "Create a design",
-        "id": "create-design-btn",
-        "class": "btn primary-button",
-        "name": null,
-        "role": "button",
-        "aria_label": "Create a new design",
-        "xpath": "//button[contains(.,'Create a design')]",
-        "css_selector": "button.primary-button:contains('Create a design')",
-        "parent_path": null
-      }
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Opens the Insert tab for adding new elements."
     },
     {
-      "step_number": 2,
+      "id": 2,
+      "target": "Table button",
+      "tooltip": "Click Table to insert a table.",
       "action": "click",
-      "description": "Select 'Poster' from the list of design types to start creating a poster.",
-      "element": {
-        "tag": "a",
-        "text": "Poster",
-        "id": "design-type-poster",
-        "class": "design-type-option",
-        "name": null,
-        "role": "menuitem",
-        "aria_label": "Create a Poster",
-        "xpath": "//div[@role='menu']/a[contains(.,'Poster')]",
-        "css_selector": "div[role='menu'] a.design-type-option:contains('Poster')",
-        "parent_path": [
-          "div[role='menu']"
-        ]
-      }
+      "spotlight_shape": "rect",
+      "animation": "arrow",
+      "explanation": "Inserts a new table into the document."
+    },
+    {
+      "id": 3,
+      "target": "Rows input box",
+      "tooltip": "Enter number of rows.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "none",
+      "explanation": "Specifies the number of rows in the table."
+    },
+    {
+      "id": 4,
+      "target": "Columns input box",
+      "tooltip": "Enter number of columns.",
+      "action": "type",
+      "spotlight_shape": "rect",
+      "animation": "none",
+      "explanation": "Specifies the number of columns in the table."
+    },
+    {
+      "id": 5,
+      "target": "Insert button",
+      "tooltip": "Click Insert to create the table.",
+      "action": "click",
+      "spotlight_shape": "rect",
+      "animation": "pulse",
+      "explanation": "Creates the table with specified rows and columns."
     }
   ]
 }

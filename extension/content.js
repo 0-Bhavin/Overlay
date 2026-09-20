@@ -186,50 +186,6 @@
   }
 
   /**
-   * Create or update the tooltip overlay near the target element.
-   * @param {string} text - Tooltip text to display
-   * @param {number|string} elementId - ID of the element to anchor to
-   */
-  function createTooltipOverlay(text, elementId) {
-    removeTooltipOverlay();
-    const targetEl = document.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-    if (!targetEl) return false;
-
-    // Also try shadow DOM (for Google Sheets)
-    let el = targetEl;
-    if (!el) {
-      const waffle = document.querySelector('waffle-iron');
-      if (waffle && waffle.shadowRoot) {
-        el = waffle.shadowRoot.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-      }
-    }
-    if (!el) return false;
-
-    const rect = el.getBoundingClientRect();
-    tooltipOverlay = document.createElement('div');
-    tooltipOverlay.id = 'ai-overlay-tooltip';
-    tooltipOverlay.style.cssText = `
-      position: fixed;
-      left: ${rect.left + window.scrollX}px;
-      top: ${rect.top + window.scrollY - 28}px; /* Above the element */
-      background: rgba(0, 0, 0, 0.75);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      pointer-events: none;
-      z-index: 999999;
-      max-width: 200px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `;
-    tooltipOverlay.textContent = text;
-    document.body.appendChild(tooltipOverlay);
-    return true;
-  }
-
-  /**
    * Remove the tooltip overlay.
    */
   function removeTooltipOverlay() {
@@ -240,29 +196,120 @@
   }
 
   /**
-   * Create or update the spotlight overlay on the target element.
-   * @param {number|string} elementId
+   * Remove the highlight overlay.
    */
-  function highlightElement(elementId) {
+  function removeHighlight() {
+    if (highlightOverlay && highlightOverlay.parentNode) {
+      highlightOverlay.parentNode.removeChild(highlightOverlay);
+      highlightOverlay = null;
+    }
+  }
+
+  /**
+   * Create or update the tooltip overlay near the target element.
+   * @param {string} text - Tooltip text to display
+   * @param {number|string} elementId - ID of the element to anchor to
+   */
+  /**
+   * Create or update the tooltip overlay near the target element.
+   * @param {string} text - Tooltip text to display
+   * @param {Element} targetEl - DOM element to anchor to
+   */
+  function createTooltipOverlay(text, targetEl) {
+    removeTooltipOverlay();
+    if (!targetEl || !text) return false;
+
+    const rect = targetEl.getBoundingClientRect();
+    tooltipOverlay = document.createElement('div');
+    tooltipOverlay.id = 'ai-overlay-tooltip';
+    tooltipOverlay.style.cssText = `
+      position: absolute;
+      left: ${Math.max(8, rect.left + window.scrollX)}px;
+      top: ${Math.max(8, rect.top + window.scrollY - 36)}px; /* Above the element */
+      background: rgba(15, 23, 42, 0.95);
+      color: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(59, 130, 246, 0.6);
+      font-size: 13px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 500;
+      pointer-events: none;
+      z-index: 999999;
+      max-width: 350px;
+      white-space: normal;
+      word-wrap: break-word;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    `;
+    tooltipOverlay.textContent = text;
+    document.body.appendChild(tooltipOverlay);
+    return true;
+  }
+
+  /**
+   * Find element by ID or by text/attributes fallback search in the DOM.
+   */
+  function findElement(elementId, targetText) {
+    // 1. Try by data-ai-overlay-id if valid
+    if (elementId !== null && elementId !== undefined && String(elementId).trim() !== '') {
+      const el = document.querySelector(`[data-ai-overlay-id="${elementId}"]`);
+      if (el) return el;
+
+      const waffle = document.querySelector('waffle-iron');
+      if (waffle && waffle.shadowRoot) {
+        const shadowEl = waffle.shadowRoot.querySelector(`[data-ai-overlay-id="${elementId}"]`);
+        if (shadowEl) return shadowEl;
+      }
+    }
+
+    // 2. Try by text / label search fallback
+    if (targetText && String(targetText).trim()) {
+      const needle = String(targetText).trim().toLowerCase();
+
+      // Search interactive elements first
+      const candidates = document.querySelectorAll('button, a, input, [role="button"], [role="menuitem"], [role="tab"], h1, h2, h3, div, span, label');
+      let bestMatch = null;
+
+      for (const cand of candidates) {
+        const style = window.getComputedStyle(cand);
+        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+          continue;
+        }
+
+        const aria = (cand.getAttribute('aria-label') || cand.getAttribute('title') || cand.getAttribute('placeholder') || '').toLowerCase();
+        const text = (cand.innerText || cand.textContent || '').trim().toLowerCase();
+
+        if (aria === needle || text === needle) {
+          return cand; // Exact match
+        }
+        if (!bestMatch && (aria.includes(needle) || (text.length < 150 && text.includes(needle)))) {
+          bestMatch = cand;
+        }
+      }
+
+      if (bestMatch) return bestMatch;
+    }
+
+    return null;
+  }
+
+  /**
+   * Create or update the spotlight overlay on the target element.
+   */
+  function highlightElement(elementId, targetText, tooltip) {
     // Remove all existing overlays
     removeHighlight();
     removeDimOverlay();
     removeTooltipOverlay();
 
-    const targetEl = document.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-    if (!targetEl) return false;
-
-    // Also try shadow DOM (for Google Sheets)
-    let el = targetEl;
+    const el = findElement(elementId, targetText);
     if (!el) {
-      const waffle = document.querySelector('waffle-iron');
-      if (waffle && waffle.shadowRoot) {
-        el = waffle.shadowRoot.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-      }
+      console.warn('[Content] highlightElement could not find element for elementId:', elementId, 'targetText:', targetText);
+      return false;
     }
-    if (!el) return false;
 
     const rect = el.getBoundingClientRect();
+    if (rect.width <= 0 && rect.height <= 0) return false;
 
     // Create dim layer
     createDimOverlay();
@@ -278,7 +325,7 @@
       height: ${rect.height + 8}px;
       border: 3px solid #3b82f6;
       border-radius: 6px;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.8), inset 0 0 12px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.9), inset 0 0 12px rgba(59, 130, 246, 0.2);
       pointer-events: none;
       z-index: 999999;
       transition: all 0.2s ease-in-out;
@@ -292,7 +339,7 @@
       style.textContent = `
         @keyframes aiOverlayPulse {
           0% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
-          50% { box-shadow: 0 0 18px rgba(59, 130, 246, 1); }
+          50% { box-shadow: 0 0 20px rgba(59, 130, 246, 1); }
           100% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
         }
       `;
@@ -300,7 +347,15 @@
     }
 
     document.body.appendChild(highlightOverlay);
-    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    if (tooltip || targetText) {
+      createTooltipOverlay(tooltip || targetText, el);
+    }
+
+    try {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (e) {}
+
     return true;
   }
 
@@ -328,21 +383,40 @@
         url: window.location.href,
         viewportOffset: viewportOffset,
       });
-    } else if (request.action === 'HIGHLIGHT') {
-      const success = highlightElement(request.elementId);
-      // If we have tooltip text, show it
-      if (request.tooltip) {
-        createTooltipOverlay(request.tooltip, request.elementId);
+    } else if (request.action === 'ENHANCED_HIGHLIGHT') {
+      // Try enhanced highlighting first
+      if (window.AIOverlayEnhancedHighlight && window.AIOverlayEnhancedHighlight.HighlightManager) {
+        try {
+          const element = findElement(request.elementId, request.target);
+          if (element) {
+            const manager = new window.AIOverlayEnhancedHighlight.HighlightManager();
+            const success = manager.highlight(element, {
+              tooltip: request.tooltip || request.target,
+              showDim: true,
+              showProgress: true,
+              currentStep: request.currentStep || 1,
+              totalSteps: request.totalSteps || 1
+            });
+            console.log('[Content] Enhanced HIGHLIGHT result:', success);
+            sendResponse({ status: success ? 'ok' : 'not_found' });
+            return;
+          }
+        } catch (e) {
+          console.error('[Content] Enhanced highlighting failed:', e);
+        }
       }
-      console.log('[Content] HIGHLIGHT elementId:', request.elementId, 'success:', success);
+      // Fall back to original highlighting
+      const success = highlightElement(request.elementId, request.target, request.tooltip);
+      console.log('[Content] Fallback HIGHLIGHT result:', success, 'elementId:', request.elementId, 'target:', request.target);
+      sendResponse({ status: success ? 'ok' : 'not_found' });
+    } else if (request.action === 'HIGHLIGHT') {
+      const success = highlightElement(request.elementId, request.target, request.tooltip);
+      console.log('[Content] HIGHLIGHT result:', success, 'elementId:', request.elementId, 'target:', request.target);
       sendResponse({ status: success ? 'ok' : 'not_found' });
     } else if (request.action === 'CLEAR_HIGHLIGHT') {
       removeAllOverlays();
       sendResponse({ status: 'ok' });
-    }
-    // New message type for CSP blocking feedback
-    else if (request.action === 'OVERLAY_BLOCKED') {
-      // Just log for now; could be used to trigger fallback in Python
+    } else if (request.action === 'OVERLAY_BLOCKED') {
       console.warn('[Content] Overlay blocked by CSP on:', request.url);
       sendResponse({ status: 'ok' });
     }

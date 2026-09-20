@@ -1,5 +1,41 @@
 [
   {
+    "task": "how to add a table in microsoft word",
+    "app": "Document1 - Word",
+    "mode": "app",
+    "timestamp": "2026-09-20T13:15:21"
+  },
+  {
+    "task": "how do i create a new project",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-17T17:07:13"
+  },
+  {
+    "task": "how do i create a new project",
+    "app": "All Projects | Atlas: MongoDB Atlas - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-17T17:01:01"
+  },
+  {
+    "task": "how do i add a api key for antigravity cli",
+    "app": "OmniRoute — AI Gateway for Multi-Provider LLMs and 6 more pages - Personal - Microsoft​ Edge",
+    "mode": "website",
+    "timestamp": "2026-09-16T19:53:31"
+  },
+  {
+    "task": "how to add a cluster in mongodb",
+    "app": "Clusters | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-16T19:13:12"
+  },
+  {
+    "task": "how to add a cluster in mongodb",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-16T15:40:46"
+  },
+  {
     "task": "CREATE A POSTER FROM TEMPLATES IN CANVA",
     "app": "Home - Canva - Google Chrome",
     "mode": "website",
@@ -73,35 +109,5 @@
     "task": "help me sign up",
     "app": "OpenAI | Research & Deployment - Google Chrome",
     "timestamp": "2026-08-11T14:36:59"
-  },
-  {
-    "task": "insert an image int the slide",
-    "app": "PowerPoint",
-    "timestamp": "2026-07-24T13:02:05"
-  },
-  {
-    "task": "insert an image in slide",
-    "app": "PowerPoint",
-    "timestamp": "2026-07-24T12:58:22"
-  },
-  {
-    "task": "how do i filter the coloumns",
-    "app": "excel",
-    "timestamp": "2026-07-24T12:52:06"
-  },
-  {
-    "task": "add watermark on my Microsoft Word",
-    "app": "Microsoft word",
-    "timestamp": "2026-07-24T12:50:39"
-  },
-  {
-    "task": "insert an image into document",
-    "app": "LY_project_ppt  -  Protected View - PowerPoint",
-    "timestamp": "2026-07-24T12:48:19"
-  },
-  {
-    "task": "insert an image into the document",
-    "app": "LY_project_ppt  -  Protected View - PowerPoint",
-    "timestamp": "2026-07-24T12:45:34"
   }
 ]

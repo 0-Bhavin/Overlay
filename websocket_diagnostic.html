@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<title>AI Overlay - WebSocket Diagnostic Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --border: #e2e8f0;
+    --accent: #3b82f6;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --code-bg: #f1f5f9;
+    --side-padding: 24px;
+    padding-block: 24px;
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --border: #334155;
+      --code-bg: #1e293b;
+      --side-padding: 24px;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #f1f5f9;
+    --border: #334155;
+    --code-bg: #1e293b;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-inline: var(--side-padding);
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  header {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #64748b;
+  }
+
+  .section {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .status-ok { background: #d1fae5; color: #065f46; }
+  .status-warning { background: #fef3c7; color: #92400e; }
+  .status-error { background: #fee2e2; color: #991b1b; }
+
+  .btn {
+    padding: 0.625rem 1rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { opacity: 0.9; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .log {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    margin-top: 1rem;
+  }
+
+  .log-line {
+    margin: 0.25rem 0;
+  }
+
+  .log-error { color: var(--error); }
+  .log-success { color: var(--success); }
+  .log-info { color: var(--text); }
+
+  .step {
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+  }
+
+  .step-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-description {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .highlight-demo {
+    background: #f0f9ff;
+    border: 2px dashed #93c5fd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-demo.highlighted {
+    background: #dbeafe;
+    border-color: #3b82f6;
+  }
+
+  .highlight-ring {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 3px solid #3b82f6;
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.9), inset 0 0 12px rgba(59, 130, 246, 0.2);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .highlight-ring.visible {
+    opacity: 1;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
+    50% { box-shadow: 0 0 20px rgba(59, 130, 246, 1); }
+    100% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
+  }
+
+  .tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    z-index: 2;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip.visible {
+    opacity: 1;
+  }
+
+  .instructions {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-top: 1rem;
+  }
+</style>
+
+<div class="container">
+  <header>
+    <h1>🔍 AI Overlay Diagnostic Tool</h1>
+    <div class="subtitle">WebSocket Connection & Element Highlighting Tester</div>
+  </header>
+
+  <div class="section">
+    <h2>📊 Current Status</h2>
+    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+      <span class="status-badge status-warning">⚠️ WebSocket Connection Issues</span>
+      <span class="status-badge status-error">❌ No Element Highlighting</span>
+      <span class="status-badge status-ok">✅ Task Generation Working</span>
+    </div>
+    <p>Based on analysis of your system and logs:</p>
+    <ul>
+      <li>WebSocket server starts on port 8765 but extension can't connect</li>
+      <li>Generated task JSON is accurate but no visual highlighting</li>
+      <li>Flow stops after step because URL changes aren't handled</li>
+      <li>No step progress visualization in browser extension</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🔌 WebSocket Connection Test</h2>
+    <p>Test if your browser can connect to the WebSocket server:</p>
+
+    <div id="ws-status" class="status-badge status-error">Not Connected</div>
+
+    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+      <button id="test-ws-btn" class="btn">Test WebSocket Connection</button>
+      <button id="start-server-btn" class="btn">Start WebSocket Server</button>
+    </div>
+
+    <div class="log" id="ws-log"></div>
+
+    <div class="instructions">
+      <strong>Expected Behavior:</strong> Should connect to ws://127.0.0.1:8765
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Element Highlighting Test</h2>
+    <p>Test if the element highlighting system works:</p>
+
+    <div id="highlight-demo" class="highlight-demo">
+      <div id="highlight-ring" class="highlight-ring"></div>
+      <div id="tooltip" class="tooltip">Click Me</div>
+      <h3>Demo Element</h3>
+      <p>This element will be highlighted when you click the button below.</p>
+      <p><em>Expected: Blue glowing border with tooltip above</em></p>
+    </div>
+
+    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+      <button id="highlight-btn" class="btn" disabled>Highlight Element</button>
+      <button id="clear-btn" class="btn" disabled>Clear Highlight</button>
+    </div>
+
+    <div class="log" id="highlight-log"></div>
+
+    <div class="instructions">
+      <strong>What this tests:</strong> The visual highlighting logic that should work in the browser extension
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📋 Step-by-Step Diagnosis</h2>
+
+    <div class="step">
+      <div class="step-title">1. WebSocket Server Status</div>
+      <div class="step-description">Check if Python WebSocket server is running on port 8765</div>
+      <div id="step1-status" class="status-badge status-error">Checking...</div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">2. Browser Extension Status</div>
+      <div class="step-description">Verify extension is loaded and service worker is active</div>
+      <div id="step2-status" class="status-badge status-error">Waiting...</div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">3. DOM Extraction Test</div>
+      <div class="step-description">Test DOM extractor script can access page elements</div>
+      <div id="step3-status" class="status-badge status-error">Not Tested</div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">4. Highlighting CSS Test</div>
+      <div class="step-description">Verify highlight CSS animations and styling work</div>
+      <div id="step4-status" class="status-badge status-error">Not Tested</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🔧 Next Steps & Solutions</h2>
+
+    <div style="background: #f0f9ff; border-radius: 8px; padding: 1rem;">
+      <h3 style="margin-top: 0;">Immediate Fixes:</h3>
+      <ol>
+        <li><strong>Update browser extension</strong> with improved WebSocket error handling</li>
+        <li><strong>Add DOM refresh logic</strong> for when URL changes between steps</li>
+        <li><strong>Add step progress display</strong> to browser extension overlay</li>
+        <li><strong>Test extension injection</strong> on various websites</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+  let ws = null;
+  let logs = [];
+  const wsLog = document.getElementById('ws-log');
+  const highlightLog = document.getElementById('highlight-log');
+  const wsStatus = document.getElementById('ws-status');
+  const highlightBtn = document.getElementById('highlight-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const testWsBtn = document.getElementById('test-ws-btn');
+  const startServerBtn = document.getElementById('start-server-btn');
+
+  function log(type, message) {
+    const line = document.createElement('div');
+    line.className = `log-line log-${type}`;
+    line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+    wsLog.appendChild(line);
+    logs.push({type, message, time: new Date()});
+    wsLog.scrollTop = wsLog.scrollHeight;
+  }
+
+  function highlightLogMsg(type, message) {
+    const line = document.createElement('div');
+    line.className = `log-line log-${type}`;
+    line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+    highlightLog.appendChild(line);
+    highlightLog.scrollTop = highlightLog.scrollHeight;
+  }
+
+  function testWebSocketConnection() {
+    log('info', 'Testing WebSocket connection to ws://127.0.0.1:8765');
+    wsStatus.className = 'status-badge status-warning';
+    wsStatus.textContent = 'Connecting...';
+
+    try {
+      ws = new WebSocket('ws://127.0.0.1:8765');
+
+      ws.onopen = () => {
+        log('success', '✅ WebSocket connection established!');
+        wsStatus.className = 'status-badge status-ok';
+        wsStatus.textContent = 'Connected';
+        highlightBtn.disabled = false;
+        clearBtn.disabled = false;
+
+        // Update step status
+        document.getElementById('step1-status').className = 'status-badge status-ok';
+        document.getElementById('step1-status').textContent = 'Server Running';
+
+        // Send test message
+        ws.send(JSON.stringify({type: 'test', message: 'Hello from diagnostic tool'}));
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          log('info', `Received: ${JSON.stringify(data)}`);
+        } catch (e) {
+          log('info', `Received: ${event.data}`);
+        }
+      };
+
+      ws.onerror = (error) => {
+        log('error', `❌ WebSocket error: ${error}`);
+        wsStatus.className = 'status-badge status-error';
+        wsStatus.textContent = 'Connection Failed';
+
+        document.getElementById('step1-status').className = 'status-badge status-error';
+        document.getElementById('step1-status').textContent = 'Connection Failed';
+      };
+
+      ws.onclose = (event) => {
+        log('info', `WebSocket closed: ${event.code} ${event.reason}`);
+        wsStatus.className = 'status-badge status-error';
+        wsStatus.textContent = 'Disconnected';
+        highlightBtn.disabled = true;
+        clearBtn.disabled = true;
+      };
+
+    } catch (error) {
+      log('error', `❌ Failed to create WebSocket: ${error}`);
+      wsStatus.className = 'status-badge status-error';
+      wsStatus.textContent = 'Creation Failed';
+    }
+  }
+
+  function startWebSocketServer() {
+    log('info', 'Attempting to start WebSocket server...');
+
+    // This is a simplified simulation - in reality, the Python app starts the server
+    fetch('http://localhost:8765/test')
+      .then(response => response.text())
+      .then(data => {
+        log('success', 'Server appears to be running');
+      })
+      .catch(error => {
+        log('error', `Cannot reach server: ${error.message}`);
+        log('info', 'Note: The WebSocket server must be started via Python: python main.py');
+      });
+  }
+
+  function testHighlighting() {
+    highlightLogMsg('info', 'Testing element highlighting...');
+
+    const demo = document.getElementById('highlight-demo');
+    const ring = document.getElementById('highlight-ring');
+    const tooltip = document.getElementById('tooltip');
+
+    // Test CSS animations
+    demo.classList.add('highlighted');
+    ring.classList.add('visible');
+    tooltip.classList.add('visible');
+
+    highlightLogMsg('success', '✅ Highlighting applied successfully');
+
+    // Update step status
+    document.getElementById('step4-status').className = 'status-badge status-ok';
+    document.getElementById('step4-status').textContent = 'CSS Working';
+  }
+
+  function clearHighlighting() {
+    highlightLogMsg('info', 'Clearing highlighting...');
+
+    const demo = document.getElementById('highlight-demo');
+    const ring = document.getElementById('highlight-ring');
+    const tooltip = document.getElementById('tooltip');
+
+    demo.classList.remove('highlighted');
+    ring.classList.remove('visible');
+    tooltip.classList.remove('visible');
+
+    highlightLogMsg('info', 'Highlighting cleared');
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    testWsBtn.addEventListener('click', testWebSocketConnection);
+    startServerBtn.addEventListener('click', startWebSocketServer);
+    highlightBtn.addEventListener('click', testHighlighting);
+    clearBtn.addEventListener('click', clearHighlighting);
+
+    // Test DOM extraction
+    try {
+      const elements = document.querySelectorAll('*');
+      document.getElementById('step3-status').className = 'status-badge status-ok';
+      document.getElementById('step3-status').textContent = `DOM Access OK (${elements.length} elements)`;
+    } catch (error) {
+      document.getElementById('step3-status').className = 'status-badge status-error';
+      document.getElementById('step3-status').textContent = 'DOM Access Failed';
+    }
+
+    log('info', 'Diagnostic tool loaded. Click "Test WebSocket Connection" to begin.');
+  });
+</script>

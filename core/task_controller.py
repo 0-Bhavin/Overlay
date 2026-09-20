@@ -274,10 +274,15 @@ class TaskController(QObject):
             self._timeout_timer.start()
             self._resolve_requested.emit(step, self._task.app, self._task.app_exe)
         else:
-            # No live resolver — but coords may already be set from DOM snapshot (website mode)
-            if step.coords is not None:
+            # No live resolver — but coords / element_id may already be set from DOM snapshot (website mode)
+            if getattr(self._task, "mode", "app") == "website":
+                print(f"Rendering website step {step.id}: {step.target!r} (element_id={step.element_id}) [DOM snapshot]")
+                self._layer_manager.render_step(step)
+                self.coords_resolved.emit(step)
+            elif step.coords is not None:
                 print(f"Rendering step {step.id}: {step.target!r} at {step.coords} [DOM snapshot]")
                 self._layer_manager.render_step(step)
+                self.coords_resolved.emit(step)
             else:
                 # Fall back to fake coords (Phase 4 stub)
                 print(f"[_render_current] No live resolver and no DOM snapshot, using fake coords")
@@ -285,6 +290,7 @@ class TaskController(QObject):
                 if step_with_fake.coords is not None:
                     print(f"Rendering step {step.id}: {step.target!r} at {step_with_fake.coords} [fake]")
                     self._layer_manager.render_step(step_with_fake)
+                    self.coords_resolved.emit(step_with_fake)
 
     def _resolver_available(self) -> bool:
         if self._task is None:

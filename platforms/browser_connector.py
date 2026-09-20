@@ -9,6 +9,7 @@ import asyncio
 import json
 import logging
 import threading
+import time
 import uuid
 from typing import Any, Callable
 
@@ -108,7 +109,7 @@ class BrowserConnector(UIConnector):
             return []
 
         # Wait for the extension to connect (active_socket to be set) with a timeout
-        timeout_seconds = 5.0
+        timeout_seconds = timeout
         end_time = time.time() + timeout_seconds
         while time.time() < end_time:
             if self.active_socket is not None and self._loop is not None:
@@ -145,12 +146,11 @@ class BrowserConnector(UIConnector):
             self._pending_responses.pop(req_id, None)
             return []
 
-    def highlight(self, element_id: int | str, tooltip: str = "", timeout: float = 2.0) -> bool:
-        """Highlight browser element with matching data-ai-overlay-id.
+    def highlight(self, element_id: int | str | None = None, tooltip: str = "", target: str = "", timeout: float = 2.0) -> bool:
+        """Highlight browser element with matching data-ai-overlay-id or target text.
 
         The extension renders the overlay (highlight ring, dim, tooltip) directly
-        in the page using getBoundingClientRect(). Python sends element ID + tooltip
-        text; coordinates never cross the bridge.
+        in the page using getBoundingClientRect().
         """
         if not self.active_socket or not self._loop:
             return False
@@ -159,7 +159,12 @@ class BrowserConnector(UIConnector):
         fut: asyncio.Future = self._loop.create_future()
         self._pending_responses[req_id] = fut
 
-        payload = {"type": "highlight", "req_id": req_id, "elementId": str(element_id)}
+        payload = {
+            "type": "highlight",
+            "req_id": req_id,
+            "elementId": str(element_id) if element_id is not None else "",
+            "target": target,
+        }
         if tooltip:
             payload["tooltip"] = tooltip
         msg = json.dumps(payload)

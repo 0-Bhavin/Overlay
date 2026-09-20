@@ -758,6 +758,7 @@ class TaskInputDialog(QWidget):
             json.dump(task_dict, fh, indent=2)
 
         self._status_label.setText("✓ Task generated!")
+        self.hide()
         self.task_ready.emit(out_path, self._target_mode)
 
     @pyqtSlot(str)
