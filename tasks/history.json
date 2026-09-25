@@ -1,15 +1,69 @@
 [
   {
-    "task": "how to add a table in microsoft word",
-    "app": "Document1 - Word",
-    "mode": "app",
-    "timestamp": "2026-09-20T13:15:21"
+    "task": "how do i find my current billing ?",
+    "app": "OmniRoute — AI Gateway for Multi-Provider LLMs - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-25T11:31:12"
+  },
+  {
+    "task": "how do i find my current billing ?",
+    "app": "OmniRoute — AI Gateway for Multi-Provider LLMs - Personal - Microsoft​ Edge",
+    "mode": "website",
+    "timestamp": "2026-09-25T11:00:26"
+  },
+  {
+    "task": "how do i create a model api key",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-25T10:56:36"
+  },
+  {
+    "task": "how do i create a model api key",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-24T11:22:33"
   },
   {
     "task": "how do i create a new project",
     "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
     "mode": "website",
-    "timestamp": "2026-09-17T17:07:13"
+    "timestamp": "2026-09-24T11:19:35"
+  },
+  {
+    "task": "how do i create a new project",
+    "app": "Triggers | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-24T11:16:53"
+  },
+  {
+    "task": "how do i create a new trigger",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-24T11:13:57"
+  },
+  {
+    "task": "how to add a cluster in mongodb",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-20T14:27:50"
+  },
+  {
+    "task": "how do i sort the data in ascending order",
+    "app": "Crop wise irrigation - Excel",
+    "mode": "app",
+    "timestamp": "2026-09-20T14:08:21"
+  },
+  {
+    "task": "how to add a table in microsoft word",
+    "app": "Document1 - Word",
+    "mode": "app",
+    "timestamp": "2026-09-20T14:05:31"
+  },
+  {
+    "task": "how do i create a new project",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-20T14:03:51"
   },
   {
     "task": "how do i create a new project",
@@ -64,50 +118,5 @@
     "app": "Home - Canva - Google Chrome",
     "mode": "app",
     "timestamp": "2026-09-06T17:19:36"
-  },
-  {
-    "task": "how to create a instagram story in canva",
-    "app": "Home - Canva - Google Chrome",
-    "timestamp": "2026-09-06T13:24:08"
-  },
-  {
-    "task": "how to create a instagram story",
-    "app": "Home - Canva - Google Chrome",
-    "timestamp": "2026-09-06T13:23:00"
-  },
-  {
-    "task": "how to sign in on supabase",
-    "app": "Arc",
-    "timestamp": "2026-09-06T13:21:32"
-  },
-  {
-    "task": "how to find watch later videos",
-    "app": "https://youtube.com",
-    "timestamp": "2026-09-06T11:23:33"
-  },
-  {
-    "task": "how to sign in on supabase",
-    "app": "Supabase | The Postgres Development Platform - Google Chrome",
-    "timestamp": "2026-08-13T20:10:04"
-  },
-  {
-    "task": "how to create a post",
-    "app": "YouTube - Google Chrome",
-    "timestamp": "2026-08-13T12:18:36"
-  },
-  {
-    "task": "how to swtich to youtube kids",
-    "app": "YouTube - Google Chrome",
-    "timestamp": "2026-08-13T12:13:38"
-  },
-  {
-    "task": "how to see watch history",
-    "app": "YouTube - Google Chrome",
-    "timestamp": "2026-08-13T09:23:50"
-  },
-  {
-    "task": "help me sign up",
-    "app": "OpenAI | Research & Deployment - Google Chrome",
-    "timestamp": "2026-08-11T14:36:59"
   }
 ]

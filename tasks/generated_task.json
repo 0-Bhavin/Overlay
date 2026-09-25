@@ -1,53 +1,51 @@
 {
-  "name": "how to add a table in microsoft word",
-  "app": "Document1 - Word",
-  "app_exe": "WINWORD.EXE",
-  "mode": "app",
+  "name": "how do i find my current billing ?",
+  "app": "OmniRoute \u2014 AI Gateway for Multi-Provider LLMs - Google Chrome",
+  "app_exe": "",
+  "mode": "website",
   "steps": [
     {
-      "id": 1,
-      "target": "Insert tab",
-      "tooltip": "Click Insert tab to add elements.",
+      "step_number": 1,
       "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "Opens the Insert tab for adding new elements."
+      "description": "Click on the 'COSTS' button to expand the billing options.",
+      "element": {
+        "tag": "div",
+        "text": "COSTS push_pin expand_more",
+        "id": 31,
+        "role": "button",
+        "aria_label": null,
+        "name": null,
+        "xpath": "//div[@id='31']",
+        "css_selector": "#31",
+        "parent_path": [
+          "div",
+          "aside",
+          "nav",
+          "div"
+        ]
+      }
     },
     {
-      "id": 2,
-      "target": "Table button",
-      "tooltip": "Click Table to insert a table.",
+      "step_number": 2,
       "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "arrow",
-      "explanation": "Inserts a new table into the document."
-    },
-    {
-      "id": 3,
-      "target": "Rows input box",
-      "tooltip": "Enter number of rows.",
-      "action": "type",
-      "spotlight_shape": "rect",
-      "animation": "none",
-      "explanation": "Specifies the number of rows in the table."
-    },
-    {
-      "id": 4,
-      "target": "Columns input box",
-      "tooltip": "Enter number of columns.",
-      "action": "type",
-      "spotlight_shape": "rect",
-      "animation": "none",
-      "explanation": "Specifies the number of columns in the table."
-    },
-    {
-      "id": 5,
-      "target": "Insert button",
-      "tooltip": "Click Insert to create the table.",
-      "action": "click",
-      "spotlight_shape": "rect",
-      "animation": "pulse",
-      "explanation": "Creates the table with specified rows and columns."
+      "description": "Click on 'Overview Consolidated cost analysis' to view current billing.",
+      "element": {
+        "tag": "a",
+        "text": "account_balance_wallet Overview Consolidated cost analysis",
+        "id": 35,
+        "role": "link",
+        "aria_label": null,
+        "name": null,
+        "xpath": "//a[@id='35']",
+        "css_selector": "#35",
+        "parent_path": [
+          "div",
+          "aside",
+          "nav",
+          "div",
+          "div"
+        ]
+      }
     }
   ]
 }

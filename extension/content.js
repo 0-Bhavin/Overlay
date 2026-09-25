@@ -10,6 +10,7 @@
   let highlightOverlay = null;
   let dimOverlay = null;
   let tooltipOverlay = null;
+  let progressBar = null; // For step progress indicator
 
   // ─── Element extraction ─────────────────────────────────────────────────────
 
@@ -206,10 +207,15 @@
   }
 
   /**
-   * Create or update the tooltip overlay near the target element.
-   * @param {string} text - Tooltip text to display
-   * @param {number|string} elementId - ID of the element to anchor to
+   * Remove the progress bar overlay.
    */
+  function removeProgressBar() {
+    if (progressBar && progressBar.parentNode) {
+      progressBar.parentNode.removeChild(progressBar);
+      progressBar = null;
+    }
+  }
+
   /**
    * Create or update the tooltip overlay near the target element.
    * @param {string} text - Tooltip text to display
@@ -244,6 +250,41 @@
     tooltipOverlay.textContent = text;
     document.body.appendChild(tooltipOverlay);
     return true;
+  }
+
+  /**
+   * Create the progress bar element if it doesn't exist.
+   */
+  function createProgressBar() {
+    if (progressBar) return;
+    progressBar = document.createElement('div');
+    progressBar.id = 'ai-overlay-progress-bar';
+    progressBar.style.cssText = `
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 2147483647;
+      pointer-events: none;
+    `;
+    document.body.appendChild(progressBar);
+  }
+
+  /**
+   * Update the progress bar text.
+   * @param {number} current - Current step (1-based)
+   * @param {number} total - Total steps
+   */
+  function updateProgressBar(current, total) {
+    createProgressBar();
+    if (progressBar) {
+      progressBar.textContent = `Step ${current} of ${total}`;
+    }
   }
 
   /**
@@ -301,6 +342,7 @@
     removeHighlight();
     removeDimOverlay();
     removeTooltipOverlay();
+    removeProgressBar(); // Remove progress bar when highlighting changes (it will be re-added by step update if needed)
 
     const el = findElement(elementId, targetText);
     if (!el) {
@@ -360,12 +402,13 @@
   }
 
   /**
-   * Remove all overlays (highlight, dim, tooltip).
+   * Remove all overlays (highlight, dim, tooltip, progress bar).
    */
   function removeAllOverlays() {
     removeHighlight();
     removeDimOverlay();
     removeTooltipOverlay();
+    removeProgressBar();
   }
 
   // ─── Message handling ──────────────────────────────────────────────────────
@@ -384,6 +427,8 @@
         viewportOffset: viewportOffset,
       });
     } else if (request.action === 'ENHANCED_HIGHLIGHT') {
+      // Ensure elements have data-ai-overlay-id set for lookup
+      extractElements();
       // Try enhanced highlighting first
       if (window.AIOverlayEnhancedHighlight && window.AIOverlayEnhancedHighlight.HighlightManager) {
         try {
@@ -419,6 +464,11 @@
     } else if (request.action === 'OVERLAY_BLOCKED') {
       console.warn('[Content] Overlay blocked by CSP on:', request.url);
       sendResponse({ status: 'ok' });
+    } else if (request.action === 'STEP_UPDATE') {
+      // Update the progress bar
+      updateProgressBar(request.currentStep, request.totalSteps);
+      console.log('[Content] Updated progress bar:', request.currentStep, request.totalSteps);
+      sendResponse({ status: 'ok' });
     }
     return true; // Keep response channel open for async
   });
@@ -436,11 +486,42 @@
       }
     }
     const clickedId = target ? target.getAttribute('data-ai-overlay-id') : null;
+
+    // Extract targetText from clicked element similar to Step.from_dict logic
+    let clickedText = '';
+    if (target) {
+      const text = target.getAttribute('text') || target.getAttribute('aria-label') || target.getAttribute('placeholder') || target.getAttribute('id') || target.getAttribute('name') || target.tagName || '';
+      if (text.trim()) {
+        clickedText = text.trim();
+      }
+    }
+
+    // Determine if this is a navigation click
+    let isNavigation = false;
+    if (target) {
+      // Check if it's an anchor with an external href
+      if (target.tagName === 'A') {
+        const href = target.getAttribute('href');
+        if (href && !href.startsWith('#') && href !== '') {
+          isNavigation = true;
+        }
+      }
+      // Check if it's a button containing an anchor with external href
+      else if (target.tagName === 'BUTTON') {
+        const linkInside = target.querySelector('a[href]:not([href^="#"])');
+        if (linkInside) {
+          isNavigation = true;
+        }
+      }
+    }
+
     chrome.runtime.sendMessage({
       action: 'USER_CLICK',
       elementId: clickedId,
+      targetText: clickedText,
       tagName: event.target.tagName,
       url: window.location.href,
+      isNavigation: isNavigation   // <-- Add this
     }).catch(() => {});
   }, true);
 

@@ -79,9 +79,9 @@ class BrowserConnector(UIConnector):
                             fut.set_result(data)
 
                     # Trigger registered callbacks on DOM mutations or user clicks
-                    msg_type = data.get("type")
-                    if msg_type in ("dom_mutated", "user_click"):
-                        if msg_type == "user_click":
+                    msg_type = data.get("action")
+                    if msg_type in ("DOM_MUTATED", "USER_CLICK"):
+                        if msg_type == "USER_CLICK":
                             self._click_events.append(data)
                         for cb in self._change_callbacks:
                             try:
@@ -112,20 +112,20 @@ class BrowserConnector(UIConnector):
         timeout_seconds = timeout
         end_time = time.time() + timeout_seconds
         while time.time() < end_time:
-            if self.active_socket is not None and self._loop is not None:
+            if self.active_socket is not None and self._loop is not None and self._loop.is_running():
                 break
             time.sleep(0.1)
         else:
             _log.warning("BrowserConnector: No active browser extension connected after waiting")
             return []
 
-        print(f"[BrowserConnector.get_tree] Socket active={self.active_socket is not None}, loop={self._loop is not None}")
+        print(f"[BrowserConnector.get_tree] Socket active={self.active_socket is not None}, loop={self._loop is not None}, running={self._loop.is_running() if self._loop else False}")
 
         req_id = str(uuid.uuid4())
         fut: asyncio.Future = self._loop.create_future()
         self._pending_responses[req_id] = fut
 
-        msg = json.dumps({"type": "get_tree", "req_id": req_id})
+        msg = json.dumps({"action": "GET_TREE", "req_id": req_id})
         asyncio.run_coroutine_threadsafe(self.active_socket.send(msg), self._loop)
 
         try:
@@ -152,7 +152,7 @@ class BrowserConnector(UIConnector):
         The extension renders the overlay (highlight ring, dim, tooltip) directly
         in the page using getBoundingClientRect().
         """
-        if not self.active_socket or not self._loop:
+        if not self.active_socket or not self._loop or not self._loop.is_running():
             return False
 
         req_id = str(uuid.uuid4())
@@ -160,7 +160,7 @@ class BrowserConnector(UIConnector):
         self._pending_responses[req_id] = fut
 
         payload = {
-            "type": "highlight",
+            "action": "HIGHLIGHT",
             "req_id": req_id,
             "elementId": str(element_id) if element_id is not None else "",
             "target": target,
@@ -182,14 +182,14 @@ class BrowserConnector(UIConnector):
 
     def clear_overlay(self, timeout: float = 2.0) -> bool:
         """Clear all in-page overlay elements (highlight, dim, tooltip)."""
-        if not self.active_socket or not self._loop:
+        if not self.active_socket or not self._loop or not self._loop.is_running():
             return False
 
         req_id = str(uuid.uuid4())
         fut: asyncio.Future = self._loop.create_future()
         self._pending_responses[req_id] = fut
 
-        msg = json.dumps({"type": "clear_overlay", "req_id": req_id})
+        msg = json.dumps({"action": "clear_overlay", "req_id": req_id})
         asyncio.run_coroutine_threadsafe(self.active_socket.send(msg), self._loop)
 
         try:
@@ -222,3 +222,51 @@ class BrowserConnector(UIConnector):
     def observe_changes(self, callback: Callable[[dict[str, Any]], None]) -> None:
         """Register callback for DOM mutations or user clicks."""
         self._change_callbacks.append(callback)
+
+    def shutdown(self) -> None:
+        """Shutdown the WebSocket server and clean up resources."""
+        _log.info("BrowserConnector: Shutting down WebSocket server")
+        if self._loop and self._loop.is_running():
+            # Schedule the cleanup coroutine to run in the event loop
+            asyncio.run_coroutine_threadsafe(self._shutdown_async(), self._loop)
+        else:
+            # If loop isn't running, try to stop the thread gracefully
+            self._server_ready.set()  # Unblock any waiting threads
+            if self._server_thread and self._server_thread.is_alive():
+                self._server_thread.join(timeout=2.0)
+
+    async def _shutdown_async(self) -> None:
+        """Async shutdown helper to close WebSocket connections."""
+        try:
+            # Close all active connections
+            if self.active_socket:
+                await self.active_socket.close()
+                self.active_socket = None
+
+            # Stop the event loop
+            if self._loop and self._loop.is_running():
+                self._loop.stop()
+
+        except Exception as exc:
+            _log.warning("Error during BrowserConnector shutdown: %s", exc)
+
+    def send_custom_message(self, message: dict[str, Any]) -> bool:
+        """Send a custom message to the browser extension.
+
+        Args:
+            message: Dictionary to send as JSON message
+
+        Returns:
+            True if message was sent successfully, False otherwise
+        """
+        if not self.active_socket or not self._loop or not self._loop.is_running():
+            _log.warning("BrowserConnector: No active connection to send custom message")
+            return False
+
+        try:
+            msg = json.dumps(message)
+            asyncio.run_coroutine_threadsafe(self.active_socket.send(msg), self._loop)
+            return True
+        except Exception as exc:
+            _log.warning("BrowserConnector.send_custom_message failed: %s", exc)
+            return False

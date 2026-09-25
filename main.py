@@ -5,7 +5,7 @@ import logging
 import os
 import sys
 
-from PyQt6.QtCore import Qt, QRect
+from PyQt6.QtCore import Qt, QRect, QTimer
 from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import QApplication
 
@@ -31,6 +31,11 @@ _log = logging.getLogger(__name__)
 
 def _get_step_element_id(step: Step) -> int | None:
     """Return the DOM element ID for a step, or None if not available."""
+    # For website mode steps, the element id might be in step.element['id']
+    if hasattr(step, 'element') and isinstance(step.element, dict):
+        elem_id = step.element.get('id')
+        if elem_id is not None:
+            return elem_id
     return getattr(step, "element_id", None)
 
 # ── API key ───────────────────────────────────────────────────────────────────
@@ -60,6 +65,7 @@ def main() -> None:
         watcher.shutdown()
         controller.shutdown()
         tts.shutdown()
+        browser_connector.shutdown()
         overlay.hide_overlay()
         app.quit()
 
@@ -67,6 +73,7 @@ def main() -> None:
     def _on_task_completed() -> None:
         watcher.shutdown()
         controller.shutdown()
+        browser_connector.shutdown()
         overlay.hide_overlay()
         # Show toast; quit when it finishes fading out
         _toast = CompletionToast(callback=lambda: (tts.shutdown(), app.quit()))  # noqa: F841
@@ -139,6 +146,12 @@ def main() -> None:
     def _on_step_changed(index: int, total: int) -> None:
         hud.update_progress(index, total)
         overlay.setWindowTitle(f"AI Overlay — Step {index + 1} of {total}")
+        # Send step update to browser extension for progress bar
+        browser_connector.send_custom_message({
+            'type': 'stepUpdate',
+            'currentStep': index + 1,
+            'totalSteps': total
+        })
 
     controller.step_changed.connect(_on_step_changed)
     controller.task_completed.connect(_on_task_completed)
@@ -178,11 +191,24 @@ def main() -> None:
 
             # ── Bug 1 fix: connect BEFORE load_task so step 1 is not missed ──
             def _on_step_resolved_website(step) -> None:
-                browser_connector.highlight(
+                # Try to highlight immediately
+                result1 = browser_connector.highlight(
                     _get_step_element_id(step),
                     tooltip=step.tooltip,
                     target=getattr(step, "target", ""),
                 )
+                if not result1:
+                    _log.warning("Highlight failed for step %d (first attempt)", step.id)
+                # Try again after a short delay
+                def try_again():
+                    result2 = browser_connector.highlight(
+                        _get_step_element_id(step),
+                        tooltip=step.tooltip,
+                        target=getattr(step, "target", ""),
+                    )
+                    if not result2:
+                        _log.warning("Highlight failed for step %d (second attempt)", step.id)
+                QTimer.singleShot(200, try_again)
 
             def _track_element(step) -> None:
                 nonlocal pending_element_id, pending_target
@@ -230,7 +256,11 @@ def main() -> None:
                 if matched:
                     pending_element_id = None
                     pending_target = ""
-                    controller.next_step()
+                    if data.get("isNavigation"):
+                        # Wait for navigation to complete (2 seconds) then advance
+                        QTimer.singleShot(2000, controller.next_step)
+                    else:
+                        controller.next_step()
 
             # Connect website-mode signals before loading the task
             controller.coords_resolved.disconnect(_on_coords_resolved)

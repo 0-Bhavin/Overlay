@@ -43,7 +43,7 @@ function connectWebSocket() {
     socket.onmessage = async (event) => {
       try {
         const msg = JSON.parse(event.data);
-        if (msg.type === 'get_tree') {
+        if (msg.action === 'GET_TREE') {
           const tab = await getActiveTab();
           if (tab && tab.id) {
             try {
@@ -62,7 +62,7 @@ function connectWebSocket() {
             console.warn('[BG] No active web tab found for get_tree');
             sendToBridge({ type: 'tree_response', req_id: msg.req_id, tree: [], viewportOffset: { x: 0, y: 0 } });
           }
-        } else if (msg.type === 'highlight') {
+        } else if (msg.action === 'HIGHLIGHT') {
           const tab = await getActiveTab();
           if (tab && tab.id) {
             try {
