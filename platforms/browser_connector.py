@@ -93,8 +93,14 @@ class BrowserConnector(UIConnector):
         except websockets.exceptions.ConnectionClosed:
             _log.info("BrowserConnector: Extension disconnected")
         finally:
+            # Clean up pending responses for this connection
             if self.active_socket == websocket:
                 self.active_socket = None
+                # Cancel any pending futures since the connection is gone
+                for req_id, fut in list(self._pending_responses.items()):
+                    if not fut.done():
+                        fut.cancel()
+                    self._pending_responses.pop(req_id, None)
 
     def get_tree(self, timeout: float = 3.0) -> list[dict[str, Any]]:
         """Fetch current simplified DOM tree JSON from the active browser tab.
