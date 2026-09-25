@@ -117,4 +117,14 @@ The application follows a modular architecture with distinct layers:
 - When modifying code, run `graphify update .` (if the graphify skill is available) to keep the knowledge graph current.
 - Always test both App mode and Website mode when changing core interaction logic.
 
+## Recent Fixes (v1.5)
+
+- **Web Application Click Regression**: Fixed issue where steps wouldn't advance when clicking buttons on same-page interactions (SPA-style updates). Enhanced extension to send targetText with click messages and added navigation detection.
+- **Termination Issues**: Application can now be cleanly terminated from terminal - added proper WebSocket server shutdown in BrowserConnector and exit handlers.
+- **WebSocket Stability**: Added `_loop.is_running()` checks to all WebSocket communication methods to prevent race conditions between threads and asyncio event loop.
+- **Highlight Reliability**: Implemented double-attempt highlighting with retry logic for improved success rates during step resolution.
+- **Extension Context Invalidation**: Improved navigation detection and handling to gracefully manage context invalidation during page changes.
+- **Multi-page Highlight**: Verified 'a href' tag highlighting works correctly for navigational links.
+- **API Routing**: Confirmed Ollama is used by default (qwen-fast:latest), with Gemini fallback only when GEMINI_API_KEY is set in .env.
+
 Co-Authored-By: Claude Code <noreply@anthropic.com>

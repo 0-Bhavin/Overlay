@@ -3,49 +3,5 @@
   "app": "OmniRoute \u2014 AI Gateway for Multi-Provider LLMs - Google Chrome",
   "app_exe": "",
   "mode": "website",
-  "steps": [
-    {
-      "step_number": 1,
-      "action": "click",
-      "description": "Click on the 'COSTS' button to expand the billing options.",
-      "element": {
-        "tag": "div",
-        "text": "COSTS push_pin expand_more",
-        "id": 31,
-        "role": "button",
-        "aria_label": null,
-        "name": null,
-        "xpath": "//div[@id='31']",
-        "css_selector": "#31",
-        "parent_path": [
-          "div",
-          "aside",
-          "nav",
-          "div"
-        ]
-      }
-    },
-    {
-      "step_number": 2,
-      "action": "click",
-      "description": "Click on 'Overview Consolidated cost analysis' to view current billing.",
-      "element": {
-        "tag": "a",
-        "text": "account_balance_wallet Overview Consolidated cost analysis",
-        "id": 35,
-        "role": "link",
-        "aria_label": null,
-        "name": null,
-        "xpath": "//a[@id='35']",
-        "css_selector": "#35",
-        "parent_path": [
-          "div",
-          "aside",
-          "nav",
-          "div",
-          "div"
-        ]
-      }
-    }
-  ]
+  "steps": []
 }
