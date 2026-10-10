@@ -12,6 +12,23 @@
   let tooltipOverlay = null;
   let progressBar = null; // For step progress indicator
 
+  // chrome.runtime.sendMessage can throw synchronously when this content
+  // script survives an extension reload. Promise.catch() alone cannot handle
+  // that case, so all runtime messages go through this guard.
+  function sendRuntimeMessage(message) {
+    try {
+      const pending = chrome.runtime.sendMessage(message);
+      if (pending && typeof pending.catch === 'function') pending.catch(() => {});
+      return true;
+    } catch (error) {
+      if (String(error && error.message || error).includes('Extension context invalidated')) {
+        try { observer && observer.disconnect(); } catch (ignored) {}
+        if (mutationTimeout) clearTimeout(mutationTimeout);
+      }
+      return false;
+    }
+  }
+
   // ─── Element extraction ─────────────────────────────────────────────────────
 
   /**
@@ -291,19 +308,41 @@
    * Find element by ID or by text/attributes fallback search in the DOM.
    */
   function findElement(elementId, targetText) {
-    // 1. Try by data-ai-overlay-id if valid
+    const needle = String(targetText || '').trim().toLowerCase();
+    const matchesTarget = (el) => {
+      if (!el) return false;
+      if (!needle) return true;
+      const label = (
+        el.getAttribute('aria-label')
+        || el.getAttribute('title')
+        || el.getAttribute('placeholder')
+        || el.innerText
+        || el.textContent
+        || ''
+      ).trim().replace(/\s+/g, ' ').toLowerCase();
+      const tag = (el.tagName || '').toLowerCase();
+      const role = (el.getAttribute('role') || '').toLowerCase();
+      return label === needle
+        || label.includes(needle)
+        || (needle.includes(label) && label.length > 0)
+        || tag === needle
+        || role === needle;
+    };
+
+    // Numeric IDs are regenerated on every DOM extraction. Only trust an ID
+    // when the live element still matches the step's target text/type.
     if (elementId !== null && elementId !== undefined && String(elementId).trim() !== '') {
       const el = document.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-      if (el) return el;
+      if (matchesTarget(el)) return el;
 
       const waffle = document.querySelector('waffle-iron');
       if (waffle && waffle.shadowRoot) {
         const shadowEl = waffle.shadowRoot.querySelector(`[data-ai-overlay-id="${elementId}"]`);
-        if (shadowEl) return shadowEl;
+        if (matchesTarget(shadowEl)) return shadowEl;
       }
     }
 
-    // 2. Try by text / label search fallback
+    // Try by text / label search fallback
     if (targetText && String(targetText).trim()) {
       const needle = String(targetText).trim().toLowerCase();
 
@@ -455,6 +494,9 @@
       console.log('[Content] Fallback HIGHLIGHT result:', success, 'elementId:', request.elementId, 'target:', request.target);
       sendResponse({ status: success ? 'ok' : 'not_found' });
     } else if (request.action === 'HIGHLIGHT') {
+      // Re-tag the live page before resolving IDs. This is essential after
+      // full-page navigation, where the previous document's IDs are invalid.
+      extractElements();
       const success = highlightElement(request.elementId, request.target, request.tooltip);
       console.log('[Content] HIGHLIGHT result:', success, 'elementId:', request.elementId, 'target:', request.target);
       sendResponse({ status: success ? 'ok' : 'not_found' });
@@ -490,9 +532,17 @@
     // Extract targetText from clicked element similar to Step.from_dict logic
     let clickedText = '';
     if (target) {
-      const text = target.getAttribute('text') || target.getAttribute('aria-label') || target.getAttribute('placeholder') || target.getAttribute('id') || target.getAttribute('name') || target.tagName || '';
+      const text = target.getAttribute('aria-label')
+        || target.getAttribute('title')
+        || target.getAttribute('placeholder')
+        || target.innerText
+        || target.textContent
+        || target.getAttribute('id')
+        || target.getAttribute('name')
+        || target.tagName
+        || '';
       if (text.trim()) {
-        clickedText = text.trim();
+        clickedText = text.trim().replace(/\s+/g, ' ').slice(0, 100);
       }
     }
 
@@ -515,26 +565,44 @@
       }
     }
 
-    chrome.runtime.sendMessage({
+    sendRuntimeMessage({
       action: 'USER_CLICK',
       elementId: clickedId,
       targetText: clickedText,
       tagName: event.target.tagName,
       url: window.location.href,
-      isNavigation: isNavigation   // <-- Add this
-    }).catch(() => {});
+      isNavigation: isNavigation
+    });
   }, true);
 
   // ─── Mutation tracking ─────────────────────────────────────────────────────
 
   let mutationTimeout = null;
-  const observer = new MutationObserver(() => {
+  const observer = new MutationObserver((mutations) => {
+    // Ignore mutations caused by the overlay itself; otherwise creating a
+    // spotlight generates an endless DOM refresh loop.
+    const overlaySelector = '#ai-overlay-dim, #ai-overlay-tooltip, #ai-overlay-spotlight-ring, #ai-overlay-progress-bar, #ai-overlay-style';
+    const isOverlayNode = (node) => {
+      if (!(node instanceof Element)) return false;
+      return node.matches(overlaySelector) || Boolean(node.closest(overlaySelector));
+    };
+    const pageMutation = mutations.some((mutation) => {
+      if (isOverlayNode(mutation.target)) return false;
+      const changedNodes = [
+        ...Array.from(mutation.addedNodes),
+        ...Array.from(mutation.removedNodes),
+      ];
+      // Appending/removing only overlay nodes is not a page mutation.
+      if (changedNodes.length > 0 && changedNodes.every(isOverlayNode)) return false;
+      return true;
+    });
+    if (!pageMutation) return;
     if (mutationTimeout) clearTimeout(mutationTimeout);
     mutationTimeout = setTimeout(() => {
-      chrome.runtime.sendMessage({
+      sendRuntimeMessage({
         action: 'DOM_MUTATED',
         url: window.location.href,
-      }).catch(() => {});
+      });
     }, 300);
   });
 

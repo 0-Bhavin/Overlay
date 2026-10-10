@@ -1,164 +1,189 @@
-"""Gemini-powered task generator.
-
-Converts a plain-text task description into a structured list of step dicts
-that can be passed directly to :class:`~core.task.Task` or serialised to JSON.
-"""
+"""Gemini API task generation for desktop and website workflows."""
 from __future__ import annotations
 
 import json
 import logging
+import time
 import textwrap
+from dataclasses import dataclass
+from typing import Any
 
+genai: Any = None
+sdk_types: Any = None
 try:
-    import google.genai as genai  # type: ignore[import]
-    from google.genai import types 
-    _GENAI_AVAILABLE = True
-except Exception:
-    _GENAI_AVAILABLE = False
+    from google import genai as genai_module  # type: ignore[import]
+    from google.genai import types as genai_types
+    genai = genai_module
+    sdk_types = genai_types
+except ImportError:  # Keep importing the application possible for non-generation tests.
+    pass
 
-import requests
-import os
+from core.task_plan import TaskPlan
 
 _log = logging.getLogger(__name__)
-
-_MAX_RETRIES: int = 2  # number of extra attempts after the first failure
-
-_DEFAULT_OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
-_DEFAULT_OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen-fast:latest")
-
-# ---------------------------------------------------------------------------
-# System prompts
-# ---------------------------------------------------------------------------
+_API_RETRIES = 1
+_RETRY_BACKOFF_SECONDS = 1.0
 
 _APP_SYSTEM_PROMPT = textwrap.dedent("""\
-    You are a UI task decomposer. Given a user task and a target application
-    name, you output ONLY a valid JSON object — no markdown fences, no
-    explanations, no preamble, nothing but the raw JSON.
-
-    The top-level JSON object must contain EXACTLY these keys:
-      "app_exe" : string, the Windows process executable name used to launch
-                  or identify the application (e.g. "EXCEL.EXE", "WINWORD.EXE",
-                  "notepad.exe", "chrome.exe", "msedge.exe").
-                  Use the real Windows .exe name, not the full path.
-      "steps"   : array of step objects (see below)
-
-    Each step object inside "steps" must contain EXACTLY these keys:
-      "id"              : integer, starting at 1 and incrementing by 1
-      "target"          : string, a short name that matches a real UI element
-                          in the application (e.g. "Insert tab", "OK button")
-      "tooltip"         : string, a friendly instruction for the user,
-                          20 words or fewer
-      "action"          : string, one of: "click", "type", "scroll", "hover"
-      "spotlight_shape" : string, one of: "rect", "circle"
-      "animation"       : string, one of: "pulse", "arrow", "none"
-      "explanation"     : string, 1-2 sentences explaining WHY this step is
-                          needed and what it achieves, ≤ 40 words
-
-    Rules:
-    - Never include a "coords" key in any step.
-    - CRITICAL: target must be the RAW element name only. Strip all suffixes.
-      WRONG: "File menu", "Save button", "File name text box", "OK button"
-      RIGHT: "File", "Save", "File name", "OK"
-    - Keep target names short and matching real UI element names in the app.
-    - Keep tooltips concise and friendly (≤ 20 words).
-    - Output ONLY the JSON object. Any extra text will break the parser.
+    You are a UI task decomposer. Given a user task and target application,
+    return only a JSON object with app_exe and steps. Each step has id, target,
+    tooltip, action, spotlight_shape, animation, explanation. Targets are raw
+    UI element names without suffixes. Never include coords.
 """)
 
 _WEBSITE_SYSTEM_PROMPT = textwrap.dedent("""\
-    You are given:
-
-    A task description that needs to be performed on a webpage.
-    A JSON representation of the entire webpage, where each UI element and its attributes are available.
-
-    Your objective is to decompose the task into the smallest possible executable steps, where each step corresponds to a single user interaction (one click or one atomic action).
-
-    Instructions
-    Break the task into a sequence of atomic steps.
-    Each step should represent one interaction only (e.g., click a button, open a menu, select an option, focus an input field).
-    For every step, identify the corresponding element in the provided webpage JSON.
-    Extract and include all relevant attributes required to uniquely identify, filter, or navigate to that element.
-    Preserve the correct execution order of the steps.
-    If an element is nested, include its parent navigation path when necessary.
-    Do not omit intermediate navigation steps.
-    Return only valid JSON with no additional explanation.
-    Output JSON format
-    {
-      "task": "<original task>",
-      "steps": [
-        {
-          "step_number": 1,
-          "action": "click",
-          "description": "Click the Login button",
-          "element": {
-            "tag": "button",
-            "text": "Login",
-            "id": "login-btn",
-            "class": "btn btn-primary",
-            "name": null,
-            "role": "button",
-            "aria_label": "Login",
-            "xpath": "...",
-            "css_selector": "...",
-            "parent_path": ["header", "nav"]
-          }
-        }
-      ]
-    }
-
-    The goal is to generate a machine-readable JSON workflow where every step is directly mapped to the corresponding element in the webpage JSON and contains sufficient attributes for reliable element identification and navigation.
+    Decompose the user task into atomic browser interactions. Every step must
+    identify an element in the supplied DOM and use exactly this shape:
+    {"step_number": 1, "action": "click", "description": "...", "element":
+    {"tag": "button", "text": "...", "id": null, "class": null,
+    "name": null, "role": "button", "aria_label": null, "xpath": null,
+    "css_selector": null, "parent_path": []}}.
+    Do not invent elements absent from the DOM. Return only valid JSON.
 """)
 
-_RETRY_SUFFIX = (
-    "\n\nYour last response was not valid JSON. "
-    "Return ONLY the JSON array, with no extra text."
-)
+_PLAN_SYSTEM_PROMPT = textwrap.dedent("""\
+    Create a persistent, goal-level milestone plan for the user's browser task.
+    Produce 2 to 6 milestones unless the task can be completed on one page, in
+    which case produce exactly one. Milestones describe outcomes, never clicks.
+    Provide URL/text success hints only when plausible; leave arrays empty when
+    unsure. Generate steps ONLY for milestone 0 on the supplied page. Step items
+    must follow the existing website step format with step_number, action,
+    description, and element containing tag, text, id, class, name, role,
+    aria_label, xpath, css_selector, parent_path. Use only supplied DOM nodes.
+    Return JSON with milestones and steps.
+""")
 
-# ---------------------------------------------------------------------------
-# Generator
-# ---------------------------------------------------------------------------
+_VERIFY_SYSTEM_PROMPT = textwrap.dedent("""\
+    Continue a browser task from its persistent milestone plan. First decide
+    whether the current milestone is met using the current URL and DOM. The
+    heuristic hint is evidence only, not a verdict. If milestone_met is true,
+    generate steps for the next active milestone; otherwise continue the current
+    milestone. Never repeat completed actions or navigate backward. If no
+    available element advances the goal, return empty steps and explain why.
+    Return revised_remaining_milestones only when the remaining plan clearly
+    cannot work from this page. goal_complete may be true with empty steps.
+    Step items must use the existing website format: step_number, action,
+    description, element with tag, text, id, class, name, role, aria_label, xpath,
+    css_selector, parent_path. Use only the supplied DOM. Return JSON only.
+""")
+
+
+def _step_schema() -> dict[str, Any]:
+    """JSON response schema for the established website step shape."""
+    nullable_string = {"type": "STRING", "nullable": True}
+    element = {
+        "type": "OBJECT",
+        "properties": {
+            "tag": {"type": "STRING"},
+            "text": nullable_string,
+            "id": nullable_string,
+            "class": nullable_string,
+            "name": nullable_string,
+            "role": nullable_string,
+            "aria_label": nullable_string,
+            "xpath": nullable_string,
+            "css_selector": nullable_string,
+            "parent_path": {"type": "ARRAY", "items": {"type": "STRING"}},
+        },
+        "required": ["tag", "text", "id", "class", "name", "role", "aria_label", "xpath", "css_selector", "parent_path"],
+    }
+    return {
+        "type": "OBJECT",
+        "properties": {
+            "step_number": {"type": "INTEGER"},
+            "action": {"type": "STRING"},
+            "description": {"type": "STRING"},
+            "element": element,
+        },
+        "required": ["step_number", "action", "description", "element"],
+    }
+
+
+def _steps_array_schema() -> dict[str, Any]:
+    return {"type": "ARRAY", "items": _step_schema()}
+
+
+_PLAN_RESPONSE_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "milestones": {
+            "type": "ARRAY",
+            "items": {
+                "type": "OBJECT",
+                "properties": {
+                    "goal": {"type": "STRING"},
+                    "success_hint": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "url_contains": {"type": "ARRAY", "items": {"type": "STRING"}},
+                            "text_contains": {"type": "ARRAY", "items": {"type": "STRING"}},
+                        },
+                        "required": ["url_contains", "text_contains"],
+                    },
+                },
+                "required": ["goal", "success_hint"],
+            },
+        },
+        "steps": _steps_array_schema(),
+    },
+    "required": ["milestones", "steps"],
+}
+
+_VERIFY_RESPONSE_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "milestone_met": {"type": "BOOLEAN"},
+        "goal_complete": {"type": "BOOLEAN"},
+        "reason": {"type": "STRING"},
+        "revised_remaining_milestones": {
+            "type": "ARRAY",
+            "nullable": True,
+            "items": _PLAN_RESPONSE_SCHEMA["properties"]["milestones"]["items"],
+        },
+        "steps": _steps_array_schema(),
+    },
+    "required": ["milestone_met", "goal_complete", "reason", "revised_remaining_milestones", "steps"],
+}
+
+
+@dataclass
+class PlanResponse:
+    milestones: list[dict[str, Any]]
+    steps: list[dict[str, Any]]
+
+
+@dataclass
+class VerifyResponse:
+    milestone_met: bool
+    goal_complete: bool
+    reason: str
+    revised_remaining_milestones: list[dict[str, Any]] | None
+    steps: list[dict[str, Any]]
 
 
 class GeminiTaskGenerator:
-    """Task generator supporting Ollama local models (e.g. qwen-fast:latest) and Gemini API.
-
-    Parameters
-    ----------
-    api_key:
-        Optional Google Generative AI API key for Gemini fallback.
-    ollama_host:
-        Ollama endpoint URL (defaults to http://localhost:11434 or OLLAMA_HOST env var).
-    ollama_model:
-        Ollama model name (defaults to qwen-fast:latest or OLLAMA_MODEL env var).
-    """
+    """Generate task workflows exclusively through the Gemini API."""
 
     _GEMINI_MODEL = "gemini-2.5-flash"
 
-    def __init__(
-        self,
-        api_key: str = "",
-        ollama_host: str = _DEFAULT_OLLAMA_HOST,
-        ollama_model: str = _DEFAULT_OLLAMA_MODEL,
-    ) -> None:
+    def __init__(self, api_key: str = "") -> None:
         self._api_key = api_key
-        self._ollama_host = ollama_host.rstrip("/")
-        self._ollama_model = ollama_model
-        self._client = None
-
-        if api_key and _GENAI_AVAILABLE:
-            try:
-                self._client = genai.Client(api_key=api_key)
-                self._app_config = types.GenerateContentConfig(
-                    system_instruction=_APP_SYSTEM_PROMPT,
-                )
-                self._website_config = types.GenerateContentConfig(
-                    system_instruction=_WEBSITE_SYSTEM_PROMPT,
-                )
-            except Exception as exc:
-                _log.warning("Could not initialize Gemini client: %s", exc)
-
-    # ------------------------------------------------------------------
-    # Public API
-    # ------------------------------------------------------------------
+        self._client: Any = None
+        self._app_config: Any = None
+        self._website_config: Any = None
+        if not api_key:
+            return
+        if genai is None or sdk_types is None:
+            raise RuntimeError("google-genai is not installed; install requirements.txt")
+        self._client = genai.Client(api_key=api_key)
+        self._app_config = sdk_types.GenerateContentConfig(
+            system_instruction=_APP_SYSTEM_PROMPT,
+            response_mime_type="application/json",
+        )
+        self._website_config = sdk_types.GenerateContentConfig(
+            system_instruction=_WEBSITE_SYSTEM_PROMPT,
+            response_mime_type="application/json",
+        )
 
     def generate(
         self,
@@ -167,247 +192,246 @@ class GeminiTaskGenerator:
         target_mode: str = "app",
         dom_snapshot: list | None = None,
     ) -> dict:
-        """Convert *task_description* into a task dict for *app_name*."""
-        is_website = (target_mode == "website")
+        """Legacy one-call generator retained for UIA and app-mode workflows."""
+        self._require_client()
+        is_website = target_mode == "website"
         system_prompt = _WEBSITE_SYSTEM_PROMPT if is_website else _APP_SYSTEM_PROMPT
         user_prompt = (
             self._build_website_user_prompt(task_description, app_name, dom_snapshot)
-            if is_website
-            else self._build_app_user_prompt(task_description, app_name)
+            if is_website else self._build_app_user_prompt(task_description, app_name)
         )
-
-        # 1. Try Ollama first
-        try:
-            _log.info("Attempting task generation via Ollama (%s at %s)", self._ollama_model, self._ollama_host)
-            result = self._generate_ollama(system_prompt, user_prompt, is_website=is_website, app_name=app_name)
-            if result:
-                _log.info("Ollama task generation succeeded with %d steps", len(result.get("steps", [])))
-                return result
-        except Exception as exc:
-            _log.warning("Ollama generation failed: %s", exc)
-
-        # 2. Fallback to Gemini if client is available
-        if self._client is not None:
-            _log.info("Falling back to Gemini API (%s)", self._GEMINI_MODEL)
-            return self._generate_gemini(user_prompt, is_website=is_website)
-
-        raise RuntimeError(
-            f"Task generation failed. Ollama at {self._ollama_host} was unreachable or returned an error, "
-            f"and no valid Gemini API key is configured."
-        )
-
-    # ------------------------------------------------------------------
-    # Ollama Generation
-    # ------------------------------------------------------------------
-
-    def _generate_ollama(self, system_prompt: str, user_prompt: str, is_website: bool, app_name: str) -> dict:
-        url = f"{self._ollama_host}/api/chat"
-        payload = {
-            "model": self._ollama_model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            "format": "json",
-            "stream": False,
-            "options": {
-                "temperature": 0.1,
-            },
-        }
-
-        resp = requests.post(url, json=payload, timeout=60)
-        if resp.status_code != 200:
-            raise RuntimeError(f"Ollama returned HTTP {resp.status_code}: {resp.text[:200]}")
-
-        data = resp.json()
-        raw = data.get("message", {}).get("content", "")
-        parsed = self._parse_json(raw)
-
-        # Normalize outputs to ensure strict adherence to application schema
+        validator = self._validate_website_result if is_website else self._validate_app_result
+        result = self._generate_json(user_prompt, system_prompt, None, validator)
         if is_website:
-            return self._normalize_website_result(parsed, app_name)
-        else:
-            return self._normalize_app_result(parsed, app_name)
+            return self._normalize_website_result(result, app_name)
+        return self._normalize_app_result(result, app_name)
 
-    # ------------------------------------------------------------------
-    # Gemini Generation
-    # ------------------------------------------------------------------
+    def generate_plan_and_steps(self, query: str, url: str, dom: list) -> PlanResponse:
+        """Generate milestone overview and first-milestone steps in one API call."""
+        self._require_client()
+        user_prompt = "\n".join((
+            f"Original user goal: {query}",
+            f"Current URL: {url}",
+            "Current page DOM:",
+            json.dumps(dom, ensure_ascii=False),
+        ))
+        parsed = self._generate_json(
+            user_prompt, _PLAN_SYSTEM_PROMPT, _PLAN_RESPONSE_SCHEMA,
+            lambda value: self._validate_plan_response(value),
+        )
+        milestones = parsed.get("milestones")
+        if not isinstance(milestones, list) or not milestones:
+            raise ValueError("Gemini plan response must contain at least one milestone")
+        if len(milestones) > 6:
+            milestones = milestones[:6]
+        for milestone in milestones:
+            if not isinstance(milestone, dict) or not str(milestone.get("goal", "")).strip():
+                raise ValueError("Gemini returned a milestone without a goal")
+        normalized = self._normalize_website_result({"steps": parsed.get("steps", [])}, query)
+        return PlanResponse(milestones=milestones, steps=normalized["steps"])
 
-    def _generate_gemini(self, user_prompt: str, is_website: bool) -> dict:
-        config = self._website_config if is_website else self._app_config
-        last_error = None
+    def verify_and_generate(
+        self,
+        plan: TaskPlan,
+        last_completed_step: str,
+        url: str,
+        dom: list,
+        heuristic_hint_matched: bool,
+    ) -> VerifyResponse:
+        """Verify the active milestone and generate its continuation in one call."""
+        self._require_client()
+        active = plan.current()
+        user_payload = {
+            "original_goal": plan.original_goal,
+            "milestones": plan.milestones,
+            "current_milestone": active,
+            "last_completed_step": last_completed_step,
+            "current_url": url,
+            "heuristic_hint_matched": bool(heuristic_hint_matched),
+            "current_page_dom": dom,
+        }
+        parsed = self._generate_json(
+            json.dumps(user_payload, ensure_ascii=False),
+            _VERIFY_SYSTEM_PROMPT,
+            _VERIFY_RESPONSE_SCHEMA,
+            self._validate_verify_response,
+        )
+        if not isinstance(parsed.get("milestone_met"), bool):
+            raise ValueError("Gemini verify response is missing boolean milestone_met")
+        if not isinstance(parsed.get("goal_complete"), bool):
+            raise ValueError("Gemini verify response is missing boolean goal_complete")
+        normalized = self._normalize_website_result({"steps": parsed.get("steps", [])}, plan.original_goal)
+        revised = parsed.get("revised_remaining_milestones")
+        if revised is not None:
+            if not isinstance(revised, list) or any(not isinstance(m, dict) or not m.get("goal") for m in revised):
+                raise ValueError("Gemini returned invalid revised_remaining_milestones")
+        return VerifyResponse(
+            milestone_met=parsed["milestone_met"],
+            goal_complete=parsed["goal_complete"],
+            reason=str(parsed.get("reason", "")),
+            revised_remaining_milestones=revised,
+            steps=normalized["steps"],
+        )
 
-        for attempt in range(1 + _MAX_RETRIES):
-            prompt = user_prompt if attempt == 0 else user_prompt + _RETRY_SUFFIX
+    def _require_client(self) -> None:
+        if self._client is None:
+            raise RuntimeError("GEMINI_API_KEY is required for task generation")
+
+    def _generate_json(
+        self,
+        prompt: str,
+        system_prompt: str,
+        response_schema: dict | None,
+        validator,
+    ) -> dict:
+        last_error: Exception | None = None
+        for attempt in range(_API_RETRIES + 1):
             try:
-                response = self._client.models.generate_content(
-                    model=self._GEMINI_MODEL,
-                    contents=prompt,
-                    config=config,
-                )
-                raw = (response.text or "").strip()
+                raw = self._generate_content_once(prompt, system_prompt, response_schema)
                 result = self._parse_json(raw)
-                if is_website:
-                    self._validate_website_result(result)
-                else:
-                    self._validate_app_result(result)
+                validator(result)
                 return result
-            except (json.JSONDecodeError, ValueError) as exc:
-                last_error = exc
-                _log.warning("Gemini attempt %d failed: %s", attempt + 1, exc)
             except Exception as exc:
-                raise RuntimeError(f"Gemini API request failed: {exc}") from exc
+                last_error = exc
+                if attempt >= _API_RETRIES:
+                    break
+                _log.warning("Gemini generation/validation failed (attempt %d/%d): %s", attempt + 1, _API_RETRIES + 1, exc)
+                time.sleep(_RETRY_BACKOFF_SECONDS * (attempt + 1))
+        raise RuntimeError(f"Gemini generation failed after retry: {last_error}") from last_error
 
-        raise ValueError(f"Gemini returned invalid JSON: {last_error}")
+    def _generate_content_once(self, prompt: str, system_prompt: str, response_schema: dict | None) -> str:
+        config_kwargs: dict[str, Any] = {
+            "system_instruction": system_prompt,
+            "response_mime_type": "application/json",
+        }
+        if response_schema is not None:
+            config_kwargs["response_schema"] = response_schema
+        if sdk_types is None:
+            raise RuntimeError("google-genai is not installed; install requirements.txt")
+        config = sdk_types.GenerateContentConfig(**config_kwargs)
+        response = self._client.models.generate_content(
+            model=self._GEMINI_MODEL,
+            contents=prompt,
+            config=config,
+        )
+        text = (response.text or "").strip()
+        if not text:
+            raise ValueError("Gemini returned an empty response")
+        return text
 
     # ------------------------------------------------------------------
-    # Normalizers & Validators
+    # Existing step normalization and prompt helpers
     # ------------------------------------------------------------------
 
     @staticmethod
     def _normalize_app_result(result: dict, app_name: str) -> dict:
-        """Ensure all required app-mode keys exist and have valid shapes."""
         steps_raw = result.get("steps") or result.get("workflow") or []
         if isinstance(result, list):
-            steps_raw = result
-            result = {}
-
-        # Guess default exe if missing
+            steps_raw, result = result, {}
         app_exe = result.get("app_exe") or ""
         if not app_exe:
             lower = app_name.lower()
-            if "word" in lower:
-                app_exe = "WINWORD.EXE"
-            elif "excel" in lower:
-                app_exe = "EXCEL.EXE"
-            elif "powerpoint" in lower:
-                app_exe = "POWERPNT.EXE"
-            elif "chrome" in lower:
-                app_exe = "chrome.exe"
-            elif "edge" in lower:
-                app_exe = "msedge.exe"
-            elif "notepad" in lower:
-                app_exe = "notepad.exe"
-            else:
-                app_exe = f"{app_name.split()[0].lower()}.exe"
-
-        normalized_steps = []
-        for i, s in enumerate(steps_raw):
-            if not isinstance(s, dict):
+            app_exe = next((exe for needle, exe in (
+                ("word", "WINWORD.EXE"), ("excel", "EXCEL.EXE"),
+                ("powerpoint", "POWERPNT.EXE"), ("chrome", "chrome.exe"),
+                ("edge", "msedge.exe"), ("notepad", "notepad.exe"),
+            ) if needle in lower), f"{app_name.split()[0].lower()}.exe" if app_name.split() else "")
+        steps = []
+        for index, step in enumerate(steps_raw):
+            if not isinstance(step, dict):
                 continue
-            step_id = s.get("id") or s.get("step_number") or s.get("step_id") or (i + 1)
-            target = s.get("target") or s.get("element") or s.get("description") or f"Step {step_id}"
+            step_id = step.get("id") or step.get("step_number") or step.get("step_id") or index + 1
+            target = step.get("target") or step.get("element") or step.get("description") or f"Step {step_id}"
             if isinstance(target, dict):
                 target = target.get("text") or target.get("aria_label") or target.get("tag") or str(target)
-            tooltip = s.get("tooltip") or s.get("description") or str(target)
-            action = s.get("action") or "click"
-            spotlight_shape = s.get("spotlight_shape") or "rect"
-            animation = s.get("animation") or "pulse"
-            explanation = s.get("explanation") or s.get("description") or ""
-
-            normalized_steps.append({
-                "id": int(step_id),
-                "target": str(target),
-                "tooltip": str(tooltip),
-                "action": str(action),
-                "spotlight_shape": str(spotlight_shape),
-                "animation": str(animation),
-                "explanation": str(explanation),
+            steps.append({
+                "id": int(step_id), "target": str(target),
+                "tooltip": str(step.get("tooltip") or step.get("description") or target),
+                "action": str(step.get("action") or "click"),
+                "spotlight_shape": str(step.get("spotlight_shape") or "rect"),
+                "animation": str(step.get("animation") or "pulse"),
+                "explanation": str(step.get("explanation") or step.get("description") or ""),
             })
-
-        return {
-            "app_exe": app_exe,
-            "steps": normalized_steps,
-        }
+        return {"app_exe": app_exe, "steps": steps}
 
     @staticmethod
     def _normalize_website_result(result: dict, app_name: str) -> dict:
-        """Ensure all required website-mode keys exist and have valid shapes."""
         steps_raw = result.get("steps") or []
         if isinstance(result, list):
-            steps_raw = result
-            result = {}
-
-        normalized_steps = []
-        for i, s in enumerate(steps_raw):
-            if not isinstance(s, dict):
+            steps_raw, result = result, {}
+        steps = []
+        for index, step in enumerate(steps_raw):
+            if not isinstance(step, dict):
                 continue
-            step_number = s.get("step_number") or s.get("id") or s.get("step_id") or (i + 1)
-            action = s.get("action") or "click"
-            description = s.get("description") or s.get("tooltip") or f"Step {step_number}"
-            elem = s.get("element")
-            if not isinstance(elem, dict):
-                elem = {
-                    "tag": "button",
-                    "text": s.get("target") or description,
-                    "id": None,
-                    "role": "button",
-                }
-            normalized_steps.append({
-                "step_number": int(step_number),
+            number = step.get("step_number") or step.get("id") or step.get("step_id") or index + 1
+            action = step.get("action") or "click"
+            description = step.get("description") or step.get("tooltip") or f"Step {number}"
+            element = step.get("element")
+            if not isinstance(element, dict):
+                element = {"tag": "button", "text": step.get("target") or description, "id": None, "role": "button"}
+            steps.append({
+                "step_number": int(number),
                 "action": str(action),
                 "description": str(description),
-                "element": elem,
+                "element": element,
             })
-
-        return {
-            "task": result.get("task") or result.get("name") or app_name,
-            "steps": normalized_steps,
-        }
+        return {"task": result.get("task") or result.get("name") or app_name, "steps": steps}
 
     @staticmethod
     def _build_app_user_prompt(task_description: str, app_name: str) -> str:
-        return (
-            f"Application: {app_name}\n"
-            f"Task: {task_description}\n\n"
-            "Return the JSON step array now."
-        )
+        return f"Application: {app_name}\nTask: {task_description}\n\nReturn the JSON workflow now."
 
     @staticmethod
-    def _build_website_user_prompt(
-        task_description: str,
-        app_name: str,
-        dom_snapshot: list | None = None,
-    ) -> str:
-        parts = [
-            f"Target Webpage/URL: {app_name}",
-            f"Task: {task_description}",
-        ]
+    def _build_website_user_prompt(task_description: str, app_name: str, dom_snapshot: list | None = None) -> str:
+        parts = [f"Target Webpage/URL: {app_name}", f"Task: {task_description}"]
         if dom_snapshot:
-            dom_json = json.dumps(dom_snapshot, ensure_ascii=False)
-            parts.append(
-                f"Webpage DOM (UINode JSON array — use this to map steps to exact elements):\n{dom_json}"
-            )
+            parts.append("Webpage DOM (use this to map steps to exact elements):\n" + json.dumps(dom_snapshot, ensure_ascii=False))
         parts.append("Return the JSON workflow object now.")
         return "\n".join(parts)
 
     @staticmethod
     def _parse_json(raw: str) -> dict:
-        """Strip accidental markdown fences and parse JSON."""
         text = raw.strip()
         if text.startswith("```"):
             lines = text.splitlines()
             text = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
-        text = text.strip()
-        parsed = json.loads(text)
+        parsed = json.loads(text.strip())
         if isinstance(parsed, list):
             return {"steps": parsed}
         if not isinstance(parsed, dict):
-            raise ValueError(
-                f"Expected a JSON object at the top level, got {type(parsed).__name__!r}"
-            )
+            raise ValueError(f"Expected a JSON object, got {type(parsed).__name__}")
         return parsed
 
     @staticmethod
+    def _validate_plan_response(result: dict) -> None:
+        if not isinstance(result.get("milestones"), list) or not result["milestones"]:
+            raise ValueError("Plan response must contain a non-empty milestones list")
+        if not isinstance(result.get("steps"), list):
+            raise ValueError("Plan response must contain a steps list")
+        for milestone in result["milestones"]:
+            if not isinstance(milestone, dict) or not str(milestone.get("goal", "")).strip():
+                raise ValueError("Every milestone must have a goal")
+
+    @staticmethod
+    def _validate_verify_response(result: dict) -> None:
+        if not isinstance(result.get("milestone_met"), bool):
+            raise ValueError("Verify response must contain boolean milestone_met")
+        if not isinstance(result.get("goal_complete"), bool):
+            raise ValueError("Verify response must contain boolean goal_complete")
+        if not isinstance(result.get("steps"), list):
+            raise ValueError("Verify response must contain a steps list")
+        revised = result.get("revised_remaining_milestones")
+        if revised is not None and not isinstance(revised, list):
+            raise ValueError("revised_remaining_milestones must be a list or null")
+
+    @staticmethod
     def _validate_app_result(result: dict) -> None:
-        """Validate Gemini raw app result."""
         if "app_exe" not in result:
             raise ValueError("Response is missing required top-level key: 'app_exe'")
-        if "steps" not in result or not isinstance(result["steps"], list):
+        if not isinstance(result.get("steps"), list):
             raise ValueError("Response is missing a 'steps' list")
 
     @staticmethod
     def _validate_website_result(result: dict) -> None:
-        """Validate Gemini raw website result."""
-        if "steps" not in result or not isinstance(result["steps"], list):
+        if not isinstance(result.get("steps"), list):
             raise ValueError("Response is missing a 'steps' list")

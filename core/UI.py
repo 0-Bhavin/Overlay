@@ -31,6 +31,7 @@ from PyQt6.QtWidgets import (
 )
 
 from core.ai_task_generator import GeminiTaskGenerator
+from core.task_plan import TaskPlan
 from core.task_history import load_history, save_to_history
 
 # ---------------------------------------------------------------------------
@@ -216,6 +217,8 @@ QPushButton#toggleAppBtn:checked, QPushButton#toggleWebBtn:checked {
 
 _OUTPUT_DIR           = os.path.join(os.path.dirname(__file__), "..", "tasks")
 _OUTPUT_FILE          = os.path.join(_OUTPUT_DIR, "generated_task.json")
+_SUB_TASK_FILE        = os.path.join(_OUTPUT_DIR, "sub_task.json")
+_PLAN_FILE            = os.path.join(_OUTPUT_DIR, "plan.json")
 _DOM_SNAPSHOT_FILE    = os.path.join(_OUTPUT_DIR, "dom_snapshot.json")
 
 
@@ -247,10 +250,22 @@ class _GeneratorWorker(QObject):
     @pyqtSlot()
     def run(self) -> None:
         try:
-            result = self._generator.generate(
-                self._task, self._app, target_mode=self._mode, dom_snapshot=self._dom_snapshot
-            )
-            self.succeeded.emit(result)
+            if self._mode == "website":
+                result = self._generator.generate_plan_and_steps(
+                    self._task,
+                    self._app,
+                    self._dom_snapshot or [],
+                )
+                self.succeeded.emit({
+                    "steps": result.steps,
+                    "milestones": result.milestones,
+                    "website_plan": True,
+                })
+            else:
+                result = self._generator.generate(
+                    self._task, self._app, target_mode=self._mode, dom_snapshot=self._dom_snapshot
+                )
+                self.succeeded.emit(result)
         except Exception as exc:  # noqa: BLE001
             self.failed.emit(str(exc))
 
@@ -354,6 +369,7 @@ class TaskInputDialog(QWidget):
 
         self._target_mode = "app"  # "app" or "website"
         self._browser_connector = browser_connector
+        self._generation_app = ""
         self._generator = GeminiTaskGenerator(api_key)
         self._thread: QThread | None = None
         self._worker: _GeneratorWorker | None = None
@@ -697,6 +713,9 @@ class TaskInputDialog(QWidget):
         """Kick off the Gemini generation worker with an optional DOM snapshot."""
         task = self._task_edit.text().strip()
         app  = self._app_box.currentText().strip()
+        if self._target_mode == "website" and self._browser_connector is not None:
+            app = getattr(self._browser_connector, "current_url", "") or app
+        self._generation_app = app
         self._thread = QThread(self)
         self._worker = _GeneratorWorker(
             self._generator, task, app,
@@ -740,20 +759,41 @@ class TaskInputDialog(QWidget):
     def _on_success(self, result: dict) -> None:
         self._set_loading(False)
         task = self._task_edit.text().strip()
-        app  = self._app_box.currentText().strip()
+        app  = self._generation_app or self._app_box.currentText().strip()
 
         # Save to history (1.7)
         save_to_history(task, app, mode=self._target_mode)
+
+        steps = result.get("steps", [])
+        if not steps:
+            self._status_label.setText("⚠ No actionable steps generated.")
+            QMessageBox.warning(
+                self,
+                "No Steps Generated",
+                "The model returned an empty workflow for this page.\n\n"
+                "Try a more specific task, wait for the page to fully load, "
+                "or retry with a different model/API.",
+            )
+            return
 
         task_dict = {
             "name":    task,
             "app":     app,
             "app_exe": result.get("app_exe", ""),
             "mode":    self._target_mode,
-            "steps":   result.get("steps", []),
+            "steps":   steps,
         }
         os.makedirs(_OUTPUT_DIR, exist_ok=True)
-        out_path = os.path.abspath(_OUTPUT_FILE)
+        if self._target_mode == "website":
+            milestones = result.get("milestones") or [{"goal": task, "success_hint": {"url_contains": [], "text_contains": []}}]
+            plan = TaskPlan(task, milestones)
+            plan.save(_PLAN_FILE)
+            out_path = os.path.abspath(_SUB_TASK_FILE)
+            # Keep generated_task.json as a compatibility copy for existing tools.
+            with open(os.path.abspath(_OUTPUT_FILE), "w", encoding="utf-8") as fh:
+                json.dump(task_dict, fh, indent=2)
+        else:
+            out_path = os.path.abspath(_OUTPUT_FILE)
         with open(out_path, "w", encoding="utf-8") as fh:
             json.dump(task_dict, fh, indent=2)
 

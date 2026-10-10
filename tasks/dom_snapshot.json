@@ -1,3124 +1,1472 @@
 [
   {
-    "bounds": {
-      "height": 1,
-      "width": 1,
-      "x": -1,
-      "y": -1
-    },
-    "enabled": true,
     "id": 1,
-    "role": "a",
-    "text": "Skip to content",
-    "type": "link",
-    "visible": true
+    "type": "div",
+    "text": "Skip to main content menu_open chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & B",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1520,
+      "height": 920
+    }
   },
   {
-    "bounds": {
-      "height": 872,
-      "width": 1536,
-      "x": 0,
-      "y": 0
-    },
-    "enabled": true,
     "id": 2,
-    "role": "div",
-    "text": "Skip to content chevron_left OmniRoute v3.8.50 search home Home Dashboard overview OMNIPROXY push_pi",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 872,
-      "width": 220,
-      "x": 0,
-      "y": 0
-    },
-    "enabled": true,
-    "id": 3,
-    "role": "div",
-    "text": "Skip to content chevron_left OmniRoute v3.8.50 search home Home Dashboard overview OMNIPROXY push_pi",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 872,
-      "width": 220,
-      "x": 0,
-      "y": 0
-    },
-    "enabled": true,
-    "id": 4,
-    "role": "aside",
-    "text": "Skip to content chevron_left OmniRoute v3.8.50 search home Home Dashboard overview OMNIPROXY push_pi",
-    "type": "aside",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 1,
-      "width": 1,
-      "x": -1,
-      "y": -1
-    },
-    "enabled": true,
-    "id": 5,
-    "role": "a",
-    "text": "Skip to content",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 59,
-      "width": 219,
-      "x": 0,
-      "y": 66
-    },
-    "enabled": true,
-    "id": 6,
-    "role": "div",
-    "text": "OmniRoute v3.8.50",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 35,
-      "width": 187,
-      "x": 16,
-      "y": 78
-    },
-    "enabled": true,
-    "id": 7,
-    "role": "a",
-    "text": "OmniRoute v3.8.50",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 35,
-      "width": 69,
-      "x": 58,
-      "y": 78
-    },
-    "enabled": true,
-    "id": 8,
-    "role": "div",
-    "text": "OmniRoute v3.8.50",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 69,
-      "x": 58,
-      "y": 98
-    },
-    "enabled": true,
-    "id": 9,
-    "role": "span",
-    "text": "v3.8.50",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 42,
-      "width": 219,
-      "x": 0,
-      "y": 125
-    },
-    "enabled": true,
-    "id": 10,
-    "role": "div",
-    "text": "search",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 34,
-      "width": 187,
-      "x": 16,
-      "y": 125
-    },
-    "enabled": true,
-    "id": 11,
-    "role": "div",
-    "text": "search",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 34,
-      "width": 187,
-      "x": 16,
-      "y": 125
-    },
-    "enabled": true,
-    "id": 12,
-    "role": "div",
-    "text": "search",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 34,
-      "width": 36,
-      "x": 16,
-      "y": 125
-    },
-    "enabled": true,
-    "id": 13,
-    "role": "div",
-    "text": "search",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 34,
-      "width": 187,
-      "x": 16,
-      "y": 125
-    },
-    "enabled": true,
-    "id": 14,
-    "role": "input",
-    "text": "Search",
-    "type": "input:search",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 615,
-      "width": 219,
-      "x": 0,
-      "y": 166
-    },
-    "enabled": true,
-    "id": 15,
-    "role": "nav",
-    "text": "Main navigation",
-    "type": "nav",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 47,
-      "width": 195,
-      "x": 12,
-      "y": 170
-    },
-    "enabled": true,
-    "id": 16,
-    "role": "div",
-    "text": "home Home Dashboard overview",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 47,
-      "width": 195,
-      "x": 12,
-      "y": 170
-    },
-    "enabled": true,
-    "id": 17,
-    "role": "a",
-    "text": "home Home Dashboard overview",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 24,
-      "y": 182
-    },
-    "enabled": true,
-    "id": 18,
-    "role": "span",
-    "text": "home",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 35,
-      "width": 90,
-      "x": 60,
-      "y": 176
-    },
-    "enabled": true,
-    "id": 19,
-    "role": "div",
-    "text": "Home Dashboard overview",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 20,
-      "width": 90,
-      "x": 60,
-      "y": 176
-    },
-    "enabled": true,
-    "id": 20,
-    "role": "span",
-    "text": "Home",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 90,
-      "x": 60,
-      "y": 196
-    },
-    "enabled": true,
-    "id": 21,
-    "role": "span",
-    "text": "Dashboard overview",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 225
-    },
-    "enabled": true,
-    "id": 22,
-    "role": "div",
-    "text": "OMNIPROXY push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 225
-    },
-    "enabled": true,
-    "id": 23,
-    "role": "button",
-    "text": "OMNIPROXY push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 236
-    },
-    "enabled": true,
-    "id": 24,
-    "role": "span",
-    "text": "OMNIPROXY",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 231
-    },
-    "enabled": true,
-    "id": 25,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 269
-    },
-    "enabled": true,
-    "id": 26,
-    "role": "div",
-    "text": "ANALYTICS push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 269
-    },
-    "enabled": true,
-    "id": 27,
-    "role": "button",
-    "text": "ANALYTICS push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 280
-    },
-    "enabled": true,
-    "id": 28,
-    "role": "span",
-    "text": "ANALYTICS",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 275
-    },
-    "enabled": true,
-    "id": 29,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 313
-    },
-    "enabled": true,
-    "id": 30,
-    "role": "div",
-    "text": "COSTS push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 313
-    },
-    "enabled": true,
-    "id": 31,
-    "role": "button",
-    "text": "COSTS push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 324
-    },
-    "enabled": true,
-    "id": 32,
-    "role": "span",
-    "text": "COSTS",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 319
-    },
-    "enabled": true,
-    "id": 33,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 357
-    },
-    "enabled": true,
-    "id": 34,
-    "role": "div",
-    "text": "MONITORING push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 357
-    },
-    "enabled": true,
-    "id": 35,
-    "role": "button",
-    "text": "MONITORING push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 368
-    },
-    "enabled": true,
-    "id": 36,
-    "role": "span",
-    "text": "MONITORING",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 363
-    },
-    "enabled": true,
-    "id": 37,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 401
-    },
-    "enabled": true,
-    "id": 38,
-    "role": "div",
-    "text": "AGENTIC FEATURES push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 401
-    },
-    "enabled": true,
-    "id": 39,
-    "role": "button",
-    "text": "AGENTIC FEATURES push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 412
-    },
-    "enabled": true,
-    "id": 40,
-    "role": "span",
-    "text": "AGENTIC FEATURES",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 407
-    },
-    "enabled": true,
-    "id": 41,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 445
-    },
-    "enabled": true,
-    "id": 42,
-    "role": "div",
-    "text": "OTHER FEATURES push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 445
-    },
-    "enabled": true,
-    "id": 43,
-    "role": "button",
-    "text": "OTHER FEATURES push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 456
-    },
-    "enabled": true,
-    "id": 44,
-    "role": "span",
-    "text": "OTHER FEATURES",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 451
-    },
-    "enabled": true,
-    "id": 45,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 489
-    },
-    "enabled": true,
-    "id": 46,
-    "role": "div",
-    "text": "CONFIGURATION push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 489
-    },
-    "enabled": true,
-    "id": 47,
-    "role": "button",
-    "text": "CONFIGURATION push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 500
-    },
-    "enabled": true,
-    "id": 48,
-    "role": "span",
-    "text": "CONFIGURATION",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 495
-    },
-    "enabled": true,
-    "id": 49,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 533
-    },
-    "enabled": true,
-    "id": 50,
-    "role": "div",
-    "text": "HELP push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 195,
-      "x": 12,
-      "y": 533
-    },
-    "enabled": true,
-    "id": 51,
-    "role": "button",
-    "text": "HELP push_pin expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 15,
-      "width": 137,
-      "x": 20,
-      "y": 544
-    },
-    "enabled": true,
-    "id": 52,
-    "role": "span",
-    "text": "HELP",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 175,
-      "y": 539
-    },
-    "enabled": true,
-    "id": 53,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 219,
-      "x": 0,
-      "y": 782
-    },
-    "enabled": true,
-    "id": 54,
-    "role": "button",
-    "text": "Remote settings sync status: Sync off",
     "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 42,
-      "x": 44,
-      "y": 792
-    },
-    "enabled": true,
-    "id": 55,
-    "role": "span",
-    "text": "Sync off",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 54,
-      "width": 219,
-      "x": 0,
-      "y": 818
-    },
-    "enabled": true,
-    "id": 56,
-    "role": "div",
-    "text": "restart_alt Restart power_settings_new Shutdown",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 98,
-      "x": 8,
-      "y": 826
-    },
-    "enabled": true,
-    "id": 57,
+    "text": "Skip to main content",
     "role": "button",
-    "text": "Restart",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 22,
-      "y": 833
-    },
-    "enabled": true,
-    "id": 58,
-    "role": "span",
-    "text": "restart_alt",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 38,
-      "x": 54,
-      "y": 837
-    },
-    "enabled": true,
-    "id": 59,
-    "role": "span",
-    "text": "Restart",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 98,
-      "x": 114,
-      "y": 826
-    },
-    "enabled": true,
-    "id": 60,
-    "role": "button",
-    "text": "Shutdown",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 122,
-      "y": 833
-    },
-    "enabled": true,
-    "id": 61,
-    "role": "span",
-    "text": "power_settings_new",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 48,
-      "x": 154,
-      "y": 837
-    },
-    "enabled": true,
-    "id": 62,
-    "role": "span",
-    "text": "Shutdown",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 872,
-      "width": 1316,
-      "x": 220,
-      "y": 0
-    },
-    "enabled": true,
-    "id": 63,
-    "role": "main",
-    "text": "home Home Welcome to OmniRoute search Quick nav Ctrl+K EN expand_more light_mode check_circle logout",
-    "type": "main",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 79,
-      "width": 1316,
-      "x": 220,
-      "y": 0
-    },
-    "enabled": true,
-    "id": 64,
-    "role": "header",
-    "text": "home Home Welcome to OmniRoute search Quick nav Ctrl+K EN expand_more light_mode check_circle logout",
-    "type": "header",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 46,
-      "width": 175,
-      "x": 252,
-      "y": 16
-    },
-    "enabled": true,
-    "id": 65,
-    "role": "div",
-    "text": "home Home Welcome to OmniRoute",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 36,
-      "x": 252,
-      "y": 21
-    },
-    "enabled": true,
-    "id": 66,
-    "role": "div",
-    "text": "home",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 258,
-      "y": 27
-    },
-    "enabled": true,
-    "id": 67,
-    "role": "span",
-    "text": "home",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 46,
-      "width": 127,
-      "x": 300,
-      "y": 16
-    },
-    "enabled": true,
-    "id": 68,
-    "role": "div",
-    "text": "Home Welcome to OmniRoute",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 40,
-      "width": 416,
-      "x": 1088,
-      "y": 19
-    },
-    "enabled": true,
-    "id": 69,
-    "role": "div",
-    "text": "search Quick nav Ctrl+K EN expand_more light_mode check_circle logout",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 156,
-      "x": 1088,
-      "y": 20
-    },
-    "enabled": true,
-    "id": 70,
-    "role": "button",
-    "text": "Open quick navigation",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1099,
-      "y": 27
-    },
-    "enabled": true,
-    "id": 71,
-    "role": "span",
-    "text": "search",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 52,
-      "x": 1131,
-      "y": 31
-    },
-    "enabled": true,
-    "id": 72,
-    "role": "span",
-    "text": "Quick nav",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 92,
-      "x": 1256,
-      "y": 20
-    },
-    "enabled": true,
-    "id": 73,
-    "role": "div",
-    "text": "EN expand_more",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 92,
-      "x": 1256,
-      "y": 20
-    },
-    "enabled": true,
-    "id": 74,
-    "role": "button",
-    "text": "English",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 16,
-      "x": 1291,
-      "y": 31
-    },
-    "enabled": true,
-    "id": 75,
-    "role": "span",
-    "text": "EN",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1313,
-      "y": 27
-    },
-    "enabled": true,
-    "id": 76,
-    "role": "span",
-    "text": "expand_more",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 40,
-      "width": 40,
-      "x": 1360,
-      "y": 19
-    },
-    "enabled": true,
-    "id": 77,
-    "role": "button",
-    "text": "Switch to light mode",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1368,
-      "y": 27
-    },
-    "enabled": true,
-    "id": 78,
-    "role": "span",
-    "text": "light_mode",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 40,
-      "x": 1412,
-      "y": 21
-    },
-    "enabled": true,
-    "id": 79,
-    "role": "div",
-    "text": "check_circle",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 40,
-      "x": 1412,
-      "y": 21
-    },
-    "enabled": true,
-    "id": 80,
-    "role": "button",
-    "text": "All tokens healthy",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1420,
-      "y": 27
-    },
-    "enabled": true,
-    "id": 81,
-    "role": "span",
-    "text": "check_circle",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 40,
-      "width": 40,
-      "x": 1464,
-      "y": 19
-    },
-    "enabled": true,
-    "id": 82,
-    "role": "button",
-    "text": "Logout",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1472,
-      "y": 27
-    },
-    "enabled": true,
-    "id": 83,
-    "role": "span",
-    "text": "logout",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 793,
-      "width": 1316,
-      "x": 220,
-      "y": 79
-    },
-    "enabled": true,
-    "id": 84,
-    "role": "div",
-    "text": "Home Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend New users get 15% extra API credi",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 713,
-      "width": 1226,
-      "x": 260,
-      "y": 119
-    },
-    "enabled": true,
-    "id": 85,
-    "role": "div",
-    "text": "Home Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend New users get 15% extra API credi",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 1226,
-      "x": 260,
-      "y": 119
-    },
-    "enabled": true,
-    "id": 86,
-    "role": "nav",
-    "text": "Breadcrumb",
-    "type": "nav",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 20,
-      "width": 36,
-      "x": 260,
-      "y": 127
-    },
-    "enabled": true,
-    "id": 87,
-    "role": "span",
-    "text": "Home",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 20,
-      "width": 36,
-      "x": 260,
-      "y": 127
-    },
-    "enabled": true,
-    "id": 88,
-    "role": "span",
-    "text": "Home",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 670,
-      "width": 1226,
-      "x": 260,
-      "y": 162
-    },
-    "enabled": true,
-    "id": 89,
-    "role": "div",
-    "text": "Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend New users get 15% extra API credits on",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 77,
-      "width": 1226,
-      "x": 260,
-      "y": 162
-    },
-    "enabled": true,
-    "id": 90,
-    "role": "complementary",
-    "text": "Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 646,
-      "x": 277,
-      "y": 182
-    },
-    "enabled": true,
-    "id": 91,
-    "role": "div",
-    "text": "Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend New users get 15% extra API credits on",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 598,
-      "x": 325,
-      "y": 182
-    },
-    "enabled": true,
-    "id": 92,
-    "role": "div",
-    "text": "Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend New users get 15% extra API credits on",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 52,
-      "width": 191,
-      "x": 1278,
-      "y": 175
-    },
-    "enabled": true,
-    "id": 93,
-    "role": "div",
-    "text": "Get a Kimi API Key open_in_new Partner link close",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 52,
-      "width": 155,
-      "x": 1278,
-      "y": 175
-    },
-    "enabled": true,
-    "id": 94,
-    "role": "div",
-    "text": "Get a Kimi API Key open_in_new Partner link",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 155,
-      "x": 1278,
-      "y": 175
-    },
-    "enabled": true,
-    "id": 95,
-    "role": "a",
-    "text": "Partner link",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 14,
-      "width": 45,
-      "x": 1388,
-      "y": 213
-    },
-    "enabled": true,
-    "id": 96,
-    "role": "span",
-    "text": "Partner link",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 30,
-      "width": 24,
-      "x": 1445,
-      "y": 186
-    },
-    "enabled": true,
-    "id": 97,
-    "role": "button",
-    "text": "Dismiss",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1445,
-      "y": 186
-    },
-    "enabled": true,
-    "id": 98,
-    "role": "span",
-    "text": "close",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 77,
-      "width": 1226,
-      "x": 260,
-      "y": 255
-    },
-    "enabled": true,
-    "id": 99,
-    "role": "complementary",
-    "text": "Cheaper Inference is an OmniRoute Open Source Friend",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 1003,
-      "x": 277,
-      "y": 275
-    },
-    "enabled": true,
-    "id": 100,
-    "role": "div",
-    "text": "Cheaper Inference is an OmniRoute Open Source Friend A cost-ranked gateway reselling dozens of front",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 955,
-      "x": 325,
-      "y": 275
-    },
-    "enabled": true,
-    "id": 101,
-    "role": "div",
-    "text": "Cheaper Inference is an OmniRoute Open Source Friend A cost-ranked gateway reselling dozens of front",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 52,
-      "width": 170,
-      "x": 1298,
-      "y": 268
-    },
-    "enabled": true,
-    "id": 102,
-    "role": "div",
-    "text": "Get an API Key open_in_new Partner link close",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 52,
-      "width": 134,
-      "x": 1298,
-      "y": 268
-    },
-    "enabled": true,
-    "id": 103,
-    "role": "div",
-    "text": "Get an API Key open_in_new Partner link",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 134,
-      "x": 1298,
-      "y": 268
-    },
-    "enabled": true,
-    "id": 104,
-    "role": "a",
-    "text": "Partner link",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 14,
-      "width": 45,
-      "x": 1388,
-      "y": 306
-    },
-    "enabled": true,
-    "id": 105,
-    "role": "span",
-    "text": "Partner link",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 30,
-      "width": 24,
-      "x": 1445,
-      "y": 279
-    },
-    "enabled": true,
-    "id": 106,
-    "role": "button",
-    "text": "Dismiss",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1445,
-      "y": 279
-    },
-    "enabled": true,
-    "id": 107,
-    "role": "span",
-    "text": "close",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 77,
-      "width": 1226,
-      "x": 260,
-      "y": 348
-    },
-    "enabled": true,
-    "id": 108,
-    "role": "complementary",
-    "text": "OmniRoute now runs inside VS Code Copilot Chat",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 748,
-      "x": 277,
-      "y": 368
-    },
-    "enabled": true,
-    "id": 109,
-    "role": "div",
-    "text": "extension OmniRoute now runs inside VS Code Copilot Chat Install the free OmniCopilot extension and ",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 36,
-      "x": 277,
-      "y": 368
-    },
-    "enabled": true,
-    "id": 110,
-    "role": "div",
-    "text": "extension",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 700,
-      "x": 325,
-      "y": 368
-    },
-    "enabled": true,
-    "id": 111,
-    "role": "div",
-    "text": "OmniRoute now runs inside VS Code Copilot Chat Install the free OmniCopilot extension and every Omni",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 52,
-      "width": 235,
-      "x": 1234,
-      "y": 361
-    },
-    "enabled": true,
-    "id": 112,
-    "role": "div",
-    "text": "Get the Extension open_in_new Also on Open VSX (Cursor, Windsurf, VSCodium\u2026) close",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 52,
-      "width": 199,
-      "x": 1234,
-      "y": 361
-    },
-    "enabled": true,
-    "id": 113,
-    "role": "div",
-    "text": "Get the Extension open_in_new Also on Open VSX (Cursor, Windsurf, VSCodium\u2026)",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 36,
-      "width": 150,
-      "x": 1283,
-      "y": 361
-    },
-    "enabled": true,
-    "id": 114,
-    "role": "a",
-    "text": "Get the Extension open_in_new",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 14,
-      "width": 199,
-      "x": 1234,
-      "y": 399
-    },
-    "enabled": true,
-    "id": 115,
-    "role": "span",
-    "text": "Also on Open VSX (Cursor, Windsurf, VSCodium\u2026)",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 30,
-      "width": 24,
-      "x": 1445,
-      "y": 372
-    },
-    "enabled": true,
-    "id": 116,
-    "role": "button",
-    "text": "Dismiss",
-    "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1445,
-      "y": 372
-    },
-    "enabled": true,
-    "id": 117,
-    "role": "span",
-    "text": "close",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 834,
-      "width": 1226,
-      "x": 260,
-      "y": 442
-    },
-    "enabled": true,
-    "id": 118,
-    "role": "div",
-    "text": "Quick Start Get up and running in 4 steps. Connect providers, route models, monitor everything. menu",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 281,
-      "width": 1226,
-      "x": 260,
-      "y": 442
-    },
-    "enabled": true,
-    "id": 119,
-    "role": "div",
-    "text": "Quick Start Get up and running in 4 steps. Connect providers, route models, monitor everything. menu",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 231,
-      "width": 1176,
-      "x": 285,
-      "y": 466
-    },
-    "enabled": true,
-    "id": 120,
-    "role": "div",
-    "text": "Quick Start Get up and running in 4 steps. Connect providers, route models, monitor everything. menu",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 48,
-      "width": 1176,
-      "x": 285,
-      "y": 466
-    },
-    "enabled": true,
-    "id": 121,
-    "role": "div",
-    "text": "Quick Start Get up and running in 4 steps. Connect providers, route models, monitor everything. menu",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 48,
-      "width": 520,
-      "x": 285,
-      "y": 466
-    },
-    "enabled": true,
-    "id": 122,
-    "role": "div",
-    "text": "Quick Start Get up and running in 4 steps. Connect providers, route models, monitor everything.",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 38,
-      "width": 105,
-      "x": 1356,
-      "y": 472
-    },
-    "enabled": true,
-    "id": 123,
-    "role": "a",
-    "text": "menu_book Full Docs",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 1369,
-      "y": 478
-    },
-    "enabled": true,
-    "id": 124,
-    "role": "span",
-    "text": "menu_book",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 32,
-      "width": 32,
-      "x": 302,
-      "y": 551
-    },
-    "enabled": true,
-    "id": 125,
-    "role": "div",
-    "text": "key",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 306,
-      "y": 555
-    },
-    "enabled": true,
-    "id": 126,
-    "role": "span",
-    "text": "key",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 42,
-      "width": 316,
-      "x": 346,
-      "y": 551
-    },
-    "enabled": true,
-    "id": 127,
-    "role": "div",
-    "text": "1. Create API key Go to API Keys. Generate one key per environment.",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 105,
-      "x": 346,
-      "y": 552
-    },
-    "enabled": true,
-    "id": 128,
-    "role": "span",
-    "text": "1. Create API key",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 52,
-      "x": 384,
-      "y": 574
-    },
-    "enabled": true,
-    "id": 129,
-    "role": "a",
-    "text": "API Keys",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 32,
-      "width": 32,
-      "x": 896,
-      "y": 551
-    },
-    "enabled": true,
-    "id": 130,
-    "role": "div",
-    "text": "dns",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 900,
-      "y": 555
-    },
-    "enabled": true,
-    "id": 131,
-    "role": "span",
-    "text": "dns",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 42,
-      "width": 411,
-      "x": 940,
-      "y": 551
-    },
-    "enabled": true,
-    "id": 132,
-    "role": "div",
-    "text": "2. Connect providers Add accounts in Providers. Supports OAuth, API Key, and free tiers.",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 131,
-      "x": 940,
-      "y": 552
-    },
-    "enabled": true,
-    "id": 133,
-    "role": "span",
-    "text": "2. Connect providers",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 57,
-      "x": 1043,
-      "y": 574
-    },
-    "enabled": true,
-    "id": 134,
-    "role": "a",
-    "text": "Providers",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 32,
-      "width": 32,
-      "x": 302,
-      "y": 639
-    },
-    "enabled": true,
-    "id": 135,
-    "role": "div",
-    "text": "link",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 306,
-      "y": 643
-    },
-    "enabled": true,
-    "id": 136,
-    "role": "span",
-    "text": "link",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 42,
-      "width": 409,
-      "x": 346,
-      "y": 639
-    },
-    "enabled": true,
-    "id": 137,
-    "role": "div",
-    "text": "3. Point your client Set base URL to http://localhost:20128/v1 in your IDE or API client.",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 119,
-      "x": 346,
-      "y": 640
-    },
-    "enabled": true,
-    "id": 138,
-    "role": "span",
-    "text": "3. Point your client",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 32,
-      "width": 32,
-      "x": 896,
-      "y": 639
-    },
-    "enabled": true,
-    "id": 139,
-    "role": "div",
-    "text": "analytics",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 24,
-      "width": 24,
-      "x": 900,
-      "y": 643
-    },
-    "enabled": true,
-    "id": 140,
-    "role": "span",
-    "text": "analytics",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 42,
-      "width": 366,
-      "x": 940,
-      "y": 639
-    },
-    "enabled": true,
-    "id": 141,
-    "role": "div",
-    "text": "4. Monitor & optimize Track tokens, cost and errors in Request Logs and Analytics.",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 140,
-      "x": 940,
-      "y": 640
-    },
-    "enabled": true,
-    "id": 142,
-    "role": "span",
-    "text": "4. Monitor & optimize",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 82,
-      "x": 1134,
-      "y": 662
-    },
-    "enabled": true,
-    "id": 143,
-    "role": "a",
-    "text": "Request Logs",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 18,
-      "width": 55,
-      "x": 1248,
-      "y": 662
-    },
-    "enabled": true,
-    "id": 144,
-    "role": "a",
-    "text": "Analytics",
-    "type": "link",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 522,
-      "width": 1226,
-      "x": 260,
-      "y": 754
-    },
-    "enabled": true,
-    "id": 145,
-    "role": "div",
-    "text": "Provider Topology 1 active \u00b7 1 error Active Recent Error route OmniRoute 1 NVIDIA NIM OpenRouter Ant",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 522,
-      "width": 809,
-      "x": 260,
-      "y": 754
-    },
-    "enabled": true,
-    "id": 146,
-    "role": "div",
-    "text": "Provider Topology 1 active \u00b7 1 error Active Recent Error route OmniRoute 1 NVIDIA NIM OpenRouter Ant",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 40,
-      "width": 759,
-      "x": 285,
-      "y": 779
-    },
-    "enabled": true,
-    "id": 147,
-    "role": "div",
-    "text": "Provider Topology 1 active \u00b7 1 error Active Recent Error",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 40,
-      "width": 133,
-      "x": 285,
-      "y": 779
-    },
     "enabled": true,
-    "id": 148,
-    "role": "div",
-    "text": "Provider Topology 1 active \u00b7 1 error",
-    "type": "div",
-    "visible": true
-  },
-  {
+    "visible": true,
     "bounds": {
-      "height": 17,
+      "x": -500,
+      "y": 0,
       "width": 152,
-      "x": 892,
-      "y": 791
-    },
-    "enabled": true,
-    "id": 149,
-    "role": "div",
-    "text": "Active Recent Error",
-    "type": "div",
-    "visible": true
+      "height": 25
+    }
   },
   {
-    "bounds": {
-      "height": 17,
-      "width": 44,
-      "x": 892,
-      "y": 791
-    },
+    "id": 3,
+    "type": "div",
+    "text": "menu_open chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & BILLING bar_chart Usag",
+    "role": "div",
     "enabled": true,
-    "id": 150,
-    "role": "span",
-    "text": "Active",
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1520,
+      "height": 920
+    }
+  },
+  {
+    "id": 4,
+    "type": "div",
+    "text": "menu_open chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & BILLING bar_chart Usag",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 220,
+      "height": 920
+    }
+  },
+  {
+    "id": 5,
+    "type": "div",
+    "text": "menu_open",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 0,
+      "width": 203,
+      "height": 64
+    }
+  },
+  {
+    "id": 6,
+    "type": "link",
+    "text": "Google AI Studio",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 16,
+      "width": 163,
+      "height": 32
+    }
+  },
+  {
+    "id": 7,
+    "type": "button",
+    "text": "Collapse navigation menu",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 179,
+      "y": 16,
+      "width": 32,
+      "height": 32
+    }
+  },
+  {
+    "id": 8,
+    "type": "nav",
+    "text": "chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & BILLING bar_chart Usage speed Ra",
+    "role": "nav",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 64,
+      "width": 203,
+      "height": 856
+    }
+  },
+  {
+    "id": 9,
+    "type": "div",
+    "text": "chevron_left Dashboard",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 64,
+      "width": 203,
+      "height": 36
+    }
+  },
+  {
+    "id": 10,
+    "type": "link",
+    "text": "chevron_left Dashboard",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 64,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 11,
+    "type": "div",
+    "text": "PROJECT",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 100,
+      "width": 203,
+      "height": 26
+    }
+  },
+  {
+    "id": 12,
+    "type": "link",
+    "text": "key API Keys",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 126,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 13,
+    "type": "link",
+    "text": "folder Projects",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 162,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 14,
+    "type": "div",
+    "text": "USAGE & BILLING",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 210,
+      "width": 203,
+      "height": 26
+    }
+  },
+  {
+    "id": 15,
+    "type": "link",
+    "text": "bar_chart Usage",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 236,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 16,
+    "type": "link",
+    "text": "speed Rate Limit",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 272,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 17,
+    "type": "link",
+    "text": "paid Spend",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 308,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 18,
+    "type": "link",
+    "text": "receipt_long Billing",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 344,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 19,
+    "type": "div",
+    "text": "OBSERVE",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 392,
+      "width": 203,
+      "height": 26
+    }
+  },
+  {
+    "id": 20,
+    "type": "link",
+    "text": "database Logs and Datasets",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 418,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 21,
+    "type": "link",
+    "text": "Changelog arrow_outward",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 482,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 22,
+    "type": "div",
+    "text": "notifications settings search key parth.rana@somaiya.edu",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 816,
+      "width": 203,
+      "height": 104
+    }
+  },
+  {
+    "id": 23,
+    "type": "div",
+    "text": "notifications settings search key",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 822,
+      "width": 203,
+      "height": 32
+    }
+  },
+  {
+    "id": 24,
+    "type": "div",
+    "text": "notifications",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 822,
+      "width": 45,
+      "height": 32
+    }
+  },
+  {
+    "id": 25,
+    "type": "button",
+    "text": "What's new",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 9,
+      "y": 823,
+      "width": 43,
+      "height": 30
+    }
+  },
+  {
+    "id": 26,
+    "type": "div",
+    "text": "settings",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 61,
+      "y": 822,
+      "width": 45,
+      "height": 32
+    }
+  },
+  {
+    "id": 27,
+    "type": "button",
+    "text": "Settings",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 62,
+      "y": 823,
+      "width": 43,
+      "height": 30
+    }
+  },
+  {
+    "id": 28,
+    "type": "div",
+    "text": "search",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 114,
+      "y": 822,
+      "width": 45,
+      "height": 32
+    }
+  },
+  {
+    "id": 29,
+    "type": "button",
+    "text": "Search (Ctrl /)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 114,
+      "y": 823,
+      "width": 43,
+      "height": 30
+    }
+  },
+  {
+    "id": 30,
+    "type": "div",
+    "text": "key",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 166,
+      "y": 822,
+      "width": 45,
+      "height": 32
+    }
+  },
+  {
+    "id": 31,
+    "type": "button",
+    "text": "Get API key",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 167,
+      "y": 823,
+      "width": 43,
+      "height": 30
+    }
+  },
+  {
+    "id": 32,
+    "type": "div",
+    "text": "parth.rana@somaiya.edu",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 860,
+      "width": 203,
+      "height": 44
+    }
+  },
+  {
+    "id": 33,
+    "type": "button",
+    "text": "Google Account: Parth Rana (parth.rana@somaiya.edu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 8,
+      "y": 860,
+      "width": 203,
+      "height": 44
+    }
+  },
+  {
+    "id": 34,
     "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 17,
-      "width": 47,
-      "x": 948,
-      "y": 791
-    },
-    "enabled": true,
-    "id": 151,
+    "text": "parth.rana@somaiya.edu",
     "role": "span",
-    "text": "Recent",
-    "type": "span",
-    "visible": true
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 47,
+      "y": 869,
+      "width": 142,
+      "height": 26
+    }
   },
   {
-    "bounds": {
-      "height": 17,
-      "width": 37,
-      "x": 1007,
-      "y": 791
-    },
+    "id": 35,
+    "type": "div",
+    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
+    "role": "main",
     "enabled": true,
-    "id": 152,
+    "visible": true,
+    "bounds": {
+      "x": 220,
+      "y": 0,
+      "width": 1300,
+      "height": 920
+    }
+  },
+  {
+    "id": 36,
+    "type": "div",
+    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 220,
+      "y": 0,
+      "width": 1300,
+      "height": 920
+    }
+  },
+  {
+    "id": 37,
+    "type": "span",
+    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
     "role": "span",
-    "text": "Error",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 220,
+      "y": 0,
+      "width": 1300,
+      "height": 920
+    }
+  },
+  {
+    "id": 38,
+    "type": "div",
+    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 220,
+      "y": 0,
+      "width": 1300,
+      "height": 920
+    }
+  },
+  {
+    "id": 39,
+    "type": "div",
+    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 48,
+      "width": 1127,
+      "height": 1069
+    }
+  },
+  {
+    "id": 40,
+    "type": "div",
+    "text": "Gemini API Rate Limit Free tier description Docs Set up billing",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 48,
+      "width": 1127,
+      "height": 32
+    }
+  },
+  {
+    "id": 41,
+    "type": "div",
+    "text": "Gemini API Rate Limit Free tier",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 48,
+      "width": 307,
+      "height": 32
+    }
+  },
+  {
+    "id": 42,
     "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 420,
-      "width": 759,
-      "x": 285,
-      "y": 831
-    },
-    "enabled": true,
-    "id": 153,
-    "role": "div",
-    "text": "route OmniRoute 1 NVIDIA NIM OpenRouter Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 418,
-      "width": 758,
-      "x": 286,
-      "y": 832
-    },
-    "enabled": true,
-    "id": 154,
-    "role": "application",
-    "text": "route OmniRoute 1 NVIDIA NIM OpenRouter Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 418,
-      "width": 758,
-      "x": 286,
-      "y": 832
-    },
-    "enabled": true,
-    "id": 155,
-    "role": "div",
-    "text": "route OmniRoute 1 NVIDIA NIM OpenRouter Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 418,
-      "width": 758,
-      "x": 286,
-      "y": 832
-    },
-    "enabled": true,
-    "id": 156,
-    "role": "div",
-    "text": "route OmniRoute 1 NVIDIA NIM OpenRouter Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 521,
-      "width": 943,
-      "x": 678,
-      "y": 1075
-    },
-    "enabled": true,
-    "id": 157,
-    "role": "div",
-    "text": "route OmniRoute 1 NVIDIA NIM OpenRouter Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 521,
-      "width": 943,
-      "x": 678,
-      "y": 1075
-    },
-    "enabled": true,
-    "id": 158,
-    "role": "div",
-    "text": "route OmniRoute 1 NVIDIA NIM OpenRouter Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 69,
-      "width": 229,
-      "x": 586,
-      "y": 1048
-    },
-    "enabled": true,
-    "id": 159,
-    "role": "group",
-    "text": "route OmniRoute 1",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 69,
-      "width": 229,
-      "x": 586,
-      "y": 1048
-    },
-    "enabled": true,
-    "id": 160,
-    "role": "div",
-    "text": "route OmniRoute 1",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 35,
-      "width": 35,
-      "x": 613,
-      "y": 1065
-    },
-    "enabled": true,
-    "id": 161,
-    "role": "div",
-    "text": "route",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 30,
-      "width": 30,
-      "x": 615,
-      "y": 1067
-    },
-    "enabled": true,
-    "id": 162,
+    "text": "Free tier",
     "role": "span",
-    "text": "route",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 25,
-      "width": 93,
-      "x": 658,
-      "y": 1070
-    },
     "enabled": true,
-    "id": 163,
-    "role": "span",
-    "text": "OmniRoute",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 544,
+      "y": 55,
+      "width": 70,
+      "height": 20
+    }
   },
   {
-    "bounds": {
-      "height": 17,
-      "width": 22,
-      "x": 766,
-      "y": 1073
-    },
+    "id": 43,
+    "type": "div",
+    "text": "description Docs Set up billing",
+    "role": "div",
     "enabled": true,
-    "id": 164,
-    "role": "span",
-    "text": "1",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 1232,
+      "y": 48,
+      "width": 202,
+      "height": 32
+    }
   },
   {
+    "id": 44,
+    "type": "button",
+    "text": "Learn more",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
     "bounds": {
-      "height": 49,
+      "x": 1232,
+      "y": 48,
+      "width": 82,
+      "height": 32
+    }
+  },
+  {
+    "id": 45,
+    "type": "button",
+    "text": "Set up billing",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1321,
+      "y": 48,
+      "width": 112,
+      "height": 32
+    }
+  },
+  {
+    "id": 46,
+    "type": "section",
+    "text": "Project OverLay Time Range 28 Days",
+    "role": "section",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 116,
+      "width": 1127,
+      "height": 32
+    }
+  },
+  {
+    "id": 47,
+    "type": "label",
+    "text": "Project",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 123,
+      "width": 40,
+      "height": 18
+    }
+  },
+  {
+    "id": 48,
+    "type": "div",
+    "text": "OverLay",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 354,
+      "y": 116,
+      "width": 196,
+      "height": 32
+    }
+  },
+  {
+    "id": 49,
+    "type": "div",
+    "text": "OverLay",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 362,
+      "y": 120,
+      "width": 180,
+      "height": 24
+    }
+  },
+  {
+    "id": 50,
+    "type": "div",
+    "text": "OverLay",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 362,
+      "y": 120,
+      "width": 180,
+      "height": 24
+    }
+  },
+  {
+    "id": 51,
+    "type": "div",
+    "text": "OverLay",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 362,
+      "y": 120,
+      "width": 180,
+      "height": 24
+    }
+  },
+  {
+    "id": 52,
+    "type": "div",
+    "text": "OverLay",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 362,
+      "y": 122,
       "width": 170,
-      "x": 581,
-      "y": 893
-    },
-    "enabled": true,
-    "id": 165,
-    "role": "group",
-    "text": "NVIDIA NIM",
-    "type": "div",
-    "visible": true
+      "height": 21
+    }
   },
   {
+    "id": 53,
+    "type": "span",
+    "text": "OverLay",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
     "bounds": {
-      "height": 49,
+      "x": 362,
+      "y": 123,
+      "width": 55,
+      "height": 17
+    }
+  },
+  {
+    "id": 54,
+    "type": "label",
+    "text": "Time Range",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 566,
+      "y": 123,
+      "width": 67,
+      "height": 18
+    }
+  },
+  {
+    "id": 55,
+    "type": "div",
+    "text": "28 Days",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 642,
+      "y": 116,
+      "width": 196,
+      "height": 32
+    }
+  },
+  {
+    "id": 56,
+    "type": "div",
+    "text": "28 Days",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 650,
+      "y": 120,
+      "width": 180,
+      "height": 24
+    }
+  },
+  {
+    "id": 57,
+    "type": "div",
+    "text": "28 Days",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 650,
+      "y": 120,
+      "width": 180,
+      "height": 24
+    }
+  },
+  {
+    "id": 58,
+    "type": "div",
+    "text": "28 Days",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 650,
+      "y": 120,
+      "width": 180,
+      "height": 24
+    }
+  },
+  {
+    "id": 59,
+    "type": "div",
+    "text": "28 Days",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 650,
+      "y": 122,
       "width": 170,
-      "x": 581,
-      "y": 893
-    },
-    "enabled": true,
-    "id": 166,
-    "role": "div",
-    "text": "NVIDIA NIM",
-    "type": "div",
-    "visible": true
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 20,
-      "width": 84,
-      "x": 635,
-      "y": 908
-    },
-    "enabled": true,
-    "id": 167,
-    "role": "span",
-    "text": "NVIDIA NIM",
+    "id": 60,
     "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 49,
-      "width": 169,
-      "x": 807,
-      "y": 1140
-    },
-    "enabled": true,
-    "id": 168,
-    "role": "group",
-    "text": "OpenRouter",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 49,
-      "width": 169,
-      "x": 807,
-      "y": 1140
-    },
-    "enabled": true,
-    "id": 169,
-    "role": "div",
-    "text": "OpenRouter",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 20,
-      "width": 83,
-      "x": 862,
-      "y": 1154
-    },
-    "enabled": true,
-    "id": 170,
+    "text": "28 Days",
     "role": "span",
-    "text": "OpenRouter",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 650,
+      "y": 123,
+      "width": 54,
+      "height": 17
+    }
+  },
+  {
+    "id": 61,
     "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 49,
-      "width": 186,
-      "x": 355,
-      "y": 1140
-    },
-    "enabled": true,
-    "id": 171,
-    "role": "group",
-    "text": "Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 49,
-      "width": 186,
-      "x": 355,
-      "y": 1140
-    },
-    "enabled": true,
-    "id": 172,
-    "role": "div",
-    "text": "Antigravity CLI",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 30,
-      "width": 30,
-      "x": 369,
-      "y": 1149
-    },
-    "enabled": true,
-    "id": 173,
-    "role": "div",
-    "text": "Antigravity",
-    "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 20,
-      "width": 20,
-      "x": 374,
-      "y": 1154
-    },
-    "enabled": true,
-    "id": 174,
+    "text": "28 Days",
     "role": "span",
-    "text": "Antigravity",
-    "type": "span",
-    "visible": true
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 650,
+      "y": 123,
+      "width": 54,
+      "height": 17
+    }
   },
   {
-    "bounds": {
-      "height": 20,
-      "width": 100,
-      "x": 409,
-      "y": 1154
-    },
+    "id": 62,
+    "type": "section",
+    "text": "Rate limits by model info All models Compare tiers arrow_drop_down Peak usage per model compared to ",
+    "role": "section",
     "enabled": true,
-    "id": 175,
-    "role": "span",
-    "text": "Antigravity CLI",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 180,
+      "width": 1127,
+      "height": 180
+    }
   },
   {
-    "bounds": {
-      "height": 78,
-      "width": 26,
-      "x": 301,
-      "y": 1157
-    },
-    "enabled": true,
-    "id": 176,
-    "role": "div",
-    "text": "Control Panel",
+    "id": 63,
     "type": "div",
-    "visible": true
+    "text": "Rate limits by model info All models Compare tiers arrow_drop_down Peak usage per model compared to ",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 180,
+      "width": 1127,
+      "height": 56
+    }
   },
   {
-    "bounds": {
-      "height": 26,
-      "width": 26,
-      "x": 301,
-      "y": 1157
-    },
+    "id": 64,
+    "type": "div",
+    "text": "Rate limits by model info All models Compare tiers arrow_drop_down",
+    "role": "div",
     "enabled": true,
-    "id": 177,
-    "role": "button",
-    "text": "Zoom In",
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 180,
+      "width": 1127,
+      "height": 32
+    }
+  },
+  {
+    "id": 65,
+    "type": "span",
+    "text": "Rate limits by model",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 184,
+      "width": 153,
+      "height": 24
+    }
+  },
+  {
+    "id": 66,
     "type": "button",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 26,
-      "width": 26,
-      "x": 301,
-      "y": 1183
-    },
-    "enabled": true,
-    "id": 178,
+    "text": "Usage data may take up to 15 minutes to update.",
     "role": "button",
-    "text": "Zoom Out",
-    "type": "button",
-    "visible": true
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 468,
+      "y": 184,
+      "width": 24,
+      "height": 24
+    }
   },
   {
-    "bounds": {
-      "height": 26,
-      "width": 26,
-      "x": 301,
-      "y": 1209
-    },
+    "id": 67,
+    "type": "div",
+    "text": "All models Compare tiers arrow_drop_down",
+    "role": "div",
     "enabled": true,
-    "id": 179,
+    "visible": true,
+    "bounds": {
+      "x": 1168,
+      "y": 180,
+      "width": 266,
+      "height": 32
+    }
+  },
+  {
+    "id": 68,
+    "type": "div",
+    "text": "All models",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1168,
+      "y": 187,
+      "width": 116,
+      "height": 20
+    }
+  },
+  {
+    "id": 69,
+    "type": "button",
+    "text": "Toggle view all models",
+    "role": "switch",
+    "enabled": false,
+    "visible": true,
+    "bounds": {
+      "x": 1168,
+      "y": 187,
+      "width": 34,
+      "height": 20
+    }
+  },
+  {
+    "id": 70,
+    "type": "label",
+    "text": "All models",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1210,
+      "y": 187,
+      "width": 74,
+      "height": 20
+    }
+  },
+  {
+    "id": 71,
+    "type": "button",
+    "text": "Compare tiers arrow_drop_down",
     "role": "button",
-    "text": "Fit View",
-    "type": "button",
-    "visible": true
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1291,
+      "y": 180,
+      "width": 142,
+      "height": 32
+    }
   },
   {
-    "bounds": {
-      "height": 420,
-      "width": 405,
-      "x": 1081,
-      "y": 754
-    },
+    "id": 72,
+    "type": "span",
+    "text": "Peak usage per model compared to its limit over the last 28 days",
+    "role": "span",
     "enabled": true,
-    "id": 180,
-    "role": "div",
-    "text": "RECENT REQUESTS Model In / Out When gemini-3.5-flash-low 0\u2191 0\u2193 20s google/gemma-4-31b-it:free 0\u2191 0\u2193 ",
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 216,
+      "width": 427,
+      "height": 20
+    }
+  },
+  {
+    "id": 73,
+    "type": "section",
+    "text": "Model Category RPM TPM RPD Charts",
+    "role": "section",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 252,
+      "width": 1127,
+      "height": 108
+    }
+  },
+  {
+    "id": 74,
     "type": "div",
-    "visible": true
+    "text": "Model",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 269,
+      "width": 171,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 33,
-      "width": 371,
-      "x": 1098,
-      "y": 771
-    },
-    "enabled": true,
-    "id": 181,
-    "role": "div",
-    "text": "RECENT REQUESTS",
+    "id": 75,
     "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 108,
-      "x": 1098,
-      "y": 777
-    },
-    "enabled": true,
-    "id": 182,
-    "role": "span",
-    "text": "RECENT REQUESTS",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 350,
-      "width": 379,
-      "x": 1094,
-      "y": 808
-    },
-    "enabled": true,
-    "id": 183,
+    "text": "Model",
     "role": "div",
-    "text": "Model In / Out When gemini-3.5-flash-low 0\u2191 0\u2193 20s google/gemma-4-31b-it:free 0\u2191 0\u2193 21s nvidia/nemot",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 269,
+      "width": 42,
+      "height": 21
+    }
+  },
+  {
+    "id": 76,
     "type": "div",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 843
-    },
+    "text": "Category",
+    "role": "button",
     "enabled": true,
-    "id": 184,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 510,
+      "y": 269,
+      "width": 245,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 843
-    },
+    "id": 77,
+    "type": "div",
+    "text": "Category",
+    "role": "div",
     "enabled": true,
-    "id": 185,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 510,
+      "y": 269,
+      "width": 62,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 872
-    },
+    "id": 78,
+    "type": "div",
+    "text": "RPM",
+    "role": "button",
     "enabled": true,
-    "id": 186,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 786,
+      "y": 269,
+      "width": 168,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 872
-    },
+    "id": 79,
+    "type": "div",
+    "text": "RPM",
+    "role": "div",
     "enabled": true,
-    "id": 187,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 786,
+      "y": 269,
+      "width": 31,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 900
-    },
+    "id": 80,
+    "type": "div",
+    "text": "TPM",
+    "role": "button",
     "enabled": true,
-    "id": 188,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 986,
+      "y": 269,
+      "width": 168,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 900
-    },
+    "id": 81,
+    "type": "div",
+    "text": "TPM",
+    "role": "div",
     "enabled": true,
-    "id": 189,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 986,
+      "y": 269,
+      "width": 31,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 929
-    },
+    "id": 82,
+    "type": "div",
+    "text": "RPD",
+    "role": "button",
     "enabled": true,
-    "id": 190,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 1186,
+      "y": 269,
+      "width": 161,
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 929
-    },
+    "id": 83,
+    "type": "div",
+    "text": "RPD",
+    "role": "div",
     "enabled": true,
-    "id": 191,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
+    "visible": true,
     "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 958
-    },
-    "enabled": true,
-    "id": 192,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 958
-    },
-    "enabled": true,
-    "id": 193,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 987
-    },
-    "enabled": true,
-    "id": 194,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 987
-    },
-    "enabled": true,
-    "id": 195,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1016
-    },
-    "enabled": true,
-    "id": 196,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1016
-    },
-    "enabled": true,
-    "id": 197,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1044
-    },
-    "enabled": true,
-    "id": 198,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1044
-    },
-    "enabled": true,
-    "id": 199,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 35,
-      "x": 1347,
-      "y": 1073
-    },
-    "enabled": true,
-    "id": 200,
-    "role": "span",
-    "text": "63.7K\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 25,
-      "x": 1385,
-      "y": 1073
-    },
-    "enabled": true,
-    "id": 201,
-    "role": "span",
-    "text": "353\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1102
-    },
-    "enabled": true,
-    "id": 202,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1102
-    },
-    "enabled": true,
-    "id": 203,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1131
-    },
-    "enabled": true,
-    "id": 204,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1131
-    },
-    "enabled": true,
-    "id": 205,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1159
-    },
-    "enabled": true,
-    "id": 206,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1159
-    },
-    "enabled": true,
-    "id": 207,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 35,
-      "x": 1347,
-      "y": 1188
-    },
-    "enabled": true,
-    "id": 208,
-    "role": "span",
-    "text": "63.6K\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 25,
-      "x": 1385,
-      "y": 1188
-    },
-    "enabled": true,
-    "id": 209,
-    "role": "span",
-    "text": "232\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 35,
-      "x": 1354,
-      "y": 1217
-    },
-    "enabled": true,
-    "id": 210,
-    "role": "span",
-    "text": "63.6K\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 19,
-      "x": 1392,
-      "y": 1217
-    },
-    "enabled": true,
-    "id": 211,
-    "role": "span",
-    "text": "67\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1246
-    },
-    "enabled": true,
-    "id": 212,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1246
-    },
-    "enabled": true,
-    "id": 213,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 35,
-      "x": 1347,
-      "y": 1275
-    },
-    "enabled": true,
-    "id": 214,
-    "role": "span",
-    "text": "63.0K\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 25,
-      "x": 1385,
-      "y": 1275
-    },
-    "enabled": true,
-    "id": 215,
-    "role": "span",
-    "text": "651\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1303
-    },
-    "enabled": true,
-    "id": 216,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1303
-    },
-    "enabled": true,
-    "id": 217,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1332
-    },
-    "enabled": true,
-    "id": 218,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1332
-    },
-    "enabled": true,
-    "id": 219,
-    "role": "span",
-    "text": "0\u2193",
-    "type": "span",
-    "visible": true
-  },
-  {
-    "bounds": {
-      "height": 16,
+      "x": 1186,
+      "y": 269,
       "width": 28,
-      "x": 1354,
-      "y": 1361
-    },
-    "enabled": true,
-    "id": 220,
-    "role": "span",
-    "text": "5.0K\u2191",
-    "type": "span",
-    "visible": true
+      "height": 21
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 25,
-      "x": 1385,
-      "y": 1361
-    },
+    "id": 84,
+    "type": "section",
+    "text": "Peak usage trends Peak requests per minute (RPM) Peak requests per minute (RPM) This chart is descri",
+    "role": "section",
     "enabled": true,
-    "id": 221,
-    "role": "span",
-    "text": "892\u2193",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 392,
+      "width": 1127,
+      "height": 709
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1383,
-      "y": 1390
-    },
+    "id": 85,
+    "type": "div",
+    "text": "Peak usage trends",
+    "role": "div",
     "enabled": true,
-    "id": 222,
-    "role": "span",
-    "text": "0\u2191",
-    "type": "span",
-    "visible": true
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 392,
+      "width": 1127,
+      "height": 24
+    }
   },
   {
-    "bounds": {
-      "height": 16,
-      "width": 12,
-      "x": 1398,
-      "y": 1390
-    },
-    "enabled": true,
-    "id": 223,
-    "role": "span",
-    "text": "0\u2193",
+    "id": 86,
     "type": "span",
-    "visible": true
+    "text": "Peak usage trends",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 392,
+      "width": 142,
+      "height": 24
+    }
+  },
+  {
+    "id": 87,
+    "type": "div",
+    "text": "Peak requests per minute (RPM) Peak requests per minute (RPM) This chart is described by one or more",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 432,
+      "width": 1127,
+      "height": 669
+    }
+  },
+  {
+    "id": 88,
+    "type": "div",
+    "text": "Peak requests per minute (RPM) Peak requests per minute (RPM) This chart is described by one or more",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 432,
+      "width": 553,
+      "height": 325
+    }
+  },
+  {
+    "id": 89,
+    "type": "div",
+    "text": "Peak requests per minute (RPM)",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 453,
+      "width": 512,
+      "height": 33
+    }
+  },
+  {
+    "id": 90,
+    "type": "div",
+    "text": "Peak requests per minute (RPM)",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 453,
+      "width": 215,
+      "height": 21
+    }
+  },
+  {
+    "id": 91,
+    "type": "span",
+    "text": "Peak requests per minute (RPM)",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 454,
+      "width": 215,
+      "height": 17
+    }
+  },
+  {
+    "id": 92,
+    "type": "div",
+    "text": "refresh",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 815,
+      "y": 453,
+      "width": 24,
+      "height": 24
+    }
+  },
+  {
+    "id": 93,
+    "type": "div",
+    "text": "Peak requests per minute (RPM) This chart is described by one or more grids. A grid row represents a",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 486,
+      "width": 512,
+      "height": 250
+    }
+  },
+  {
+    "id": 94,
+    "type": "div",
+    "text": "Peak input tokens per minute (TPM) Peak input tokens per minute (TPM) This chart is described by one",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 880,
+      "y": 432,
+      "width": 553,
+      "height": 325
+    }
+  },
+  {
+    "id": 95,
+    "type": "div",
+    "text": "Peak input tokens per minute (TPM)",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 901,
+      "y": 453,
+      "width": 512,
+      "height": 33
+    }
+  },
+  {
+    "id": 96,
+    "type": "div",
+    "text": "Peak input tokens per minute (TPM)",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 901,
+      "y": 453,
+      "width": 239,
+      "height": 21
+    }
+  },
+  {
+    "id": 97,
+    "type": "span",
+    "text": "Peak input tokens per minute (TPM)",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 901,
+      "y": 454,
+      "width": 239,
+      "height": 17
+    }
+  },
+  {
+    "id": 98,
+    "type": "div",
+    "text": "refresh",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1389,
+      "y": 453,
+      "width": 24,
+      "height": 24
+    }
+  },
+  {
+    "id": 99,
+    "type": "div",
+    "text": "Peak input tokens per minute (TPM) This chart is described by one or more grids. A grid row represen",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 901,
+      "y": 486,
+      "width": 512,
+      "height": 250
+    }
+  },
+  {
+    "id": 100,
+    "type": "div",
+    "text": "Peak requests per day (RPD) Peak requests per day (RPD) This chart is described by one or more grids",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 307,
+      "y": 777,
+      "width": 553,
+      "height": 325
+    }
+  },
+  {
+    "id": 101,
+    "type": "div",
+    "text": "Peak requests per day (RPD)",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 797,
+      "width": 512,
+      "height": 33
+    }
+  },
+  {
+    "id": 102,
+    "type": "div",
+    "text": "Peak requests per day (RPD)",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 797,
+      "width": 192,
+      "height": 21
+    }
+  },
+  {
+    "id": 103,
+    "type": "span",
+    "text": "Peak requests per day (RPD)",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 799,
+      "width": 192,
+      "height": 17
+    }
+  },
+  {
+    "id": 104,
+    "type": "div",
+    "text": "refresh",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 815,
+      "y": 797,
+      "width": 24,
+      "height": 24
+    }
+  },
+  {
+    "id": 105,
+    "type": "div",
+    "text": "Peak requests per day (RPD) This chart is described by one or more grids. A grid row represents a ti",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 327,
+      "y": 830,
+      "width": 512,
+      "height": 250
+    }
   }
 ]

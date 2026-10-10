@@ -8,10 +8,10 @@
 const WS_URL = 'ws://127.0.0.1:8765';
 let socket = null;
 let reconnectTimer = null;
+let heartbeatTimer = null;
 
 function connectWebSocket() {
   console.log('[AI Overlay Extension] 🚀 Attempting WebSocket connection to', WS_URL);
-  console.log('[AI Overlay Extension] Service worker is running:', self.serviceWorker.state);
 
   if (socket && (socket.readyState === WebSocket.CONNECTING || socket.readyState === WebSocket.OPEN)) {
     console.log('[AI Overlay Extension] Socket already exists, readyState:', socket.readyState);
@@ -38,6 +38,21 @@ function connectWebSocket() {
         clearInterval(reconnectTimer);
         reconnectTimer = null;
       }
+      if (heartbeatTimer) clearInterval(heartbeatTimer);
+      // Keep the MV3 service worker and its WebSocket alive while Python is
+      // busy generating a task or sub-task.
+      heartbeatTimer = setInterval(() => {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+          try {
+            socket.send(JSON.stringify({
+              type: 'heartbeat',
+              timestamp: Date.now(),
+            }));
+          } catch (error) {
+            console.warn('[AI Overlay Extension] Heartbeat failed:', error);
+          }
+        }
+      }, 15000);
     };
 
     socket.onmessage = async (event) => {
@@ -53,6 +68,7 @@ function connectWebSocket() {
                 req_id: msg.req_id,
                 tree: (response && response.tree) ? response.tree : [],
                 viewportOffset: (response && response.viewportOffset) || { x: 0, y: 0 },
+                url: (response && response.url) || '',
               });
             } catch (err) {
               console.error('[BG] get_tree error:', err.message);
@@ -101,12 +117,23 @@ function connectWebSocket() {
 
     socket.onclose = (event) => {
       console.log('[AI Overlay Extension] WebSocket closed:', event.code, event.reason);
+      // Clear the stale object. Otherwise connectWebSocket() can keep
+      // observing a CLOSING/CLOSED socket and never create a replacement.
+      socket = null;
+      if (heartbeatTimer) {
+        clearInterval(heartbeatTimer);
+        heartbeatTimer = null;
+      }
       scheduleReconnect();
     };
 
     socket.onerror = (error) => {
       console.error('[AI Overlay Extension] WebSocket error:', error);
-      // Don't close() here - let onclose handle it
+      // Force onclose so the reconnect loop always starts.
+      if (socket) {
+        try { socket.close(); } catch (e) {}
+      }
+      scheduleReconnect();
     };
   } catch (err) {
     scheduleReconnect();
@@ -178,12 +205,32 @@ function isValidWebUrl(url) {
   return !url.startsWith('chrome://') && !url.startsWith('chrome-extension://') && !url.startsWith('devtools://');
 }
 
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status === 'complete' && tab && isValidWebUrl(tab.url)) {
+    sendToBridge({
+      type: 'page_navigated',
+      tabId: tabId,
+      url: tab.url,
+    });
+  }
+});
+
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'USER_CLICK') {
-    sendToBridge({ type: 'user_click', elementId: message.elementId, targetText: message.targetText || '', url: message.url });
+    sendToBridge({
+      type: 'user_click',
+      elementId: message.elementId,
+      targetText: message.targetText || '',
+      tagName: message.tagName || '',
+      url: message.url,
+      isNavigation: Boolean(message.isNavigation),
+    });
   } else if (message.action === 'DOM_MUTATED') {
     sendToBridge({ type: 'dom_mutated', url: message.url });
   }
 });
+
+chrome.runtime.onStartup.addListener(connectWebSocket);
+chrome.runtime.onInstalled.addListener(connectWebSocket);
 
 connectWebSocket();

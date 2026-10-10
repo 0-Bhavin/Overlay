@@ -1,13 +1,16 @@
 """Main entry point for the AI overlay application."""
 from __future__ import annotations
 
+import json
 import logging
 import os
 import sys
+from collections.abc import Callable
+from typing import Any, cast
 
-from PyQt6.QtCore import Qt, QRect, QTimer
+from PyQt6.QtCore import QObject, Qt, QRect, QThread, QTimer, pyqtSignal, pyqtSlot
 from PyQt6.QtGui import QKeySequence, QShortcut
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication, QMessageBox
 
 # Force 1:1 pixel mapping so pywinauto's physical pixel coords match Qt's
 # coordinate space exactly. Without this, on a 125% DPI display Qt uses
@@ -22,6 +25,15 @@ from core.step import Step
 from core.UI import TaskInputDialog
 from core.tts import TTSEngine
 from core.completion_toast import CompletionToast
+from core.ai_task_generator import GeminiTaskGenerator, VerifyResponse
+from core.task_plan import (
+    MAX_ATTEMPTS_PER_MILESTONE,
+    MAX_REPLANS,
+    TaskPlan,
+    apply_verification,
+    dom_text,
+    tier1_match,
+)
 from platforms.browser_connector import BrowserConnector
 from dotenv import load_dotenv
 load_dotenv()
@@ -29,27 +41,143 @@ load_dotenv()
 _log = logging.getLogger(__name__)
 
 
-def _get_step_element_id(step: Step) -> int | None:
-    """Return the DOM element ID for a step, or None if not available."""
-    # For website mode steps, the element id might be in step.element['id']
-    if hasattr(step, 'element') and isinstance(step.element, dict):
-        elem_id = step.element.get('id')
-        if elem_id is not None:
-            return elem_id
-    return getattr(step, "element_id", None)
+class _MainThreadInvoker(QObject):
+    requested = pyqtSignal()
+    event_received = pyqtSignal(object)
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.requested_callback: Callable[[], None] | None = None
+        self.event_callback: Callable[[dict], None] | None = None
+        self.requested.connect(self._dispatch_request)
+        self.event_received.connect(self._dispatch_event)
+
+    @pyqtSlot()
+    def _dispatch_request(self) -> None:
+        if self.requested_callback is not None:
+            self.requested_callback()
+
+    @pyqtSlot(object)
+    def _dispatch_event(self, event: object) -> None:
+        if self.event_callback is not None and isinstance(event, dict):
+            self.event_callback(event)
+
+
+class _SubTaskWorker(QObject):
+    """Fetch current-page evidence and make one combined Gemini verify/generate call."""
+
+    succeeded = pyqtSignal(object)
+    failed = pyqtSignal(str)
+
+    def __init__(
+        self,
+        connector: BrowserConnector,
+        api_key: str,
+        plan: TaskPlan,
+        last_completed_step: str,
+    ) -> None:
+        super().__init__()
+        self._connector = connector
+        self._api_key = api_key
+        self._plan = plan
+        self._last_completed_step = last_completed_step
+
+    @pyqtSlot()
+    def run(self) -> None:
+        try:
+            dom = self._connector.get_tree(timeout=8.0)
+            if not dom:
+                raise RuntimeError("The browser returned an empty DOM at the verification point")
+            url = self._connector.current_url or "Current browser page"
+            current = self._plan.current()
+            hint_matched = tier1_match(
+                current.get("success_hint") if current else None,
+                url,
+                dom_text(dom),
+            )
+            if self._plan.is_last() and hint_matched:
+                response = VerifyResponse(
+                    milestone_met=True,
+                    goal_complete=True,
+                    reason="Last milestone success hint matched current page",
+                    revised_remaining_milestones=None,
+                    steps=[],
+                )
+            else:
+                response = GeminiTaskGenerator(self._api_key).verify_and_generate(
+                    self._plan,
+                    self._last_completed_step,
+                    url,
+                    dom,
+                    hint_matched,
+                )
+            self.succeeded.emit({
+                "response": response,
+                "dom": dom,
+                "url": url,
+                "hint_matched": hint_matched,
+            })
+        except Exception as exc:  # noqa: BLE001
+            self.failed.emit(str(exc))
+
 
 # ── API key ───────────────────────────────────────────────────────────────────
-# Optional: GEMINI_API_KEY can be set in .env for Gemini fallback.
-# If not set, local Ollama model (qwen-fast:latest) will be used automatically.
+# Gemini is the sole task-generation provider.
 _GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
+if not _GEMINI_API_KEY:
+    _log.warning("GEMINI_API_KEY is not set; task generation will require a key in .env.")
+
+
+def _get_step_element_id(step: Step) -> int | None:
+    """Return the DOM element ID for a step, or None if not available."""
+    return getattr(step, "element_id", None)
+
+
+def _filter_steps_to_dom(steps: list[dict], dom: list[dict]) -> list[dict]:
+    """Drop generated steps whose target cannot be found in the supplied DOM."""
+    nodes_by_id = {str(node.get("id")): node for node in dom if node.get("id") is not None}
+    filtered = []
+    for step in steps:
+        element = step.get("element") if isinstance(step, dict) else None
+        if not isinstance(element, dict):
+            _log.warning("Dropping generated step without element mapping: %r", step)
+            continue
+        element_id = element.get("id")
+        raw_text = element.get("text") or element.get("aria_label") or element.get("name") or ""
+        needle = " ".join(str(raw_text).casefold().split())
+        if element_id is not None and str(element_id) in nodes_by_id:
+            id_node = nodes_by_id[str(element_id)]
+            id_text = " ".join(str(id_node.get("text") or "").casefold().split())
+            if not needle or id_text == needle or (len(needle) >= 3 and needle in id_text):
+                filtered.append(step)
+                continue
+        tag = str(element.get("tag") or "").casefold()
+        expected_type = "link" if tag == "a" else tag
+        found = False
+        if needle:
+            for node in dom:
+                node_text = " ".join(str(node.get("text") or "").casefold().split())
+                node_type = str(node.get("type") or "").casefold()
+                text_matches = node_text == needle or (
+                    len(needle) >= 3 and (needle in node_text or node_text in needle)
+                )
+                type_matches = not expected_type or node_type == expected_type or node.get("role") == tag
+                if text_matches and type_matches:
+                    found = True
+                    break
+        if found:
+            filtered.append(step)
+        else:
+            _log.warning("Dropping generated step not grounded in current DOM: %r", raw_text or step.get("description"))
+    return filtered
 
 
 def main() -> None:
-    # ── 1. Application ────────────────────────────────────────────────
+    # ── 1. Application ────────────────────────────────────────────
     app = QApplication(sys.argv)
     app.setApplicationName("AI Overlay")
 
-    # ── 2. TTS engine & Browser Connector ─────────────────────────────
+    # ── 2. TTS engine & Browser Connector ─────────────────────────
     tts = TTSEngine()
     browser_connector = BrowserConnector()  # Starts WebSocket server on ws://localhost:8765
 
@@ -188,96 +316,298 @@ def main() -> None:
             # Track pending element_id and target for click detection
             pending_element_id: int | None = None
             pending_target: str = ""
+            subtask_thread: QThread | None = None
+            subtask_worker: _SubTaskWorker | None = None
+            navigation_pending = False
+            empty_step_retries = 0
+            last_completed_step = ""
+            last_page_url = browser_connector.current_url
+            navigation_invoker = _MainThreadInvoker()
+            with open(path, encoding="utf-8") as task_file:
+                original_task = json.load(task_file).get("name", "")
+            plan_path = os.path.join(os.path.dirname(os.path.abspath(path)), "plan.json")
+            try:
+                task_plan = TaskPlan.load(plan_path)
+            except (OSError, ValueError, KeyError, json.JSONDecodeError):
+                _log.warning("No valid milestone plan found; using one implicit milestone")
+                task_plan = TaskPlan.single_milestone(original_task)
 
-            # ── Bug 1 fix: connect BEFORE load_task so step 1 is not missed ──
-            def _on_step_resolved_website(step) -> None:
-                # Try to highlight immediately
-                result1 = browser_connector.highlight(
-                    _get_step_element_id(step),
-                    tooltip=step.tooltip,
-                    target=getattr(step, "target", ""),
-                )
-                if not result1:
-                    _log.warning("Highlight failed for step %d (first attempt)", step.id)
-                # Try again after a short delay
-                def try_again():
-                    result2 = browser_connector.highlight(
+            # We'll wait for the browser extension to connect before proceeding
+            timer = QTimer()
+            timer.setInterval(1000)  # 1 second
+            attempt = 0
+            max_attempts = 10  # 10 seconds
+
+            def check_connection():
+                nonlocal attempt
+                attempt += 1
+                try:
+                    # Try to get the DOM tree with a short timeout
+                    tree = browser_connector.get_tree(timeout=0.5)
+                    if browser_connector.is_connected:
+                        _log.info(
+                            "Browser extension connected (DOM nodes returned: %d).",
+                            len(tree),
+                        )
+                        timer.stop()
+                        setup_website_mode()
+                        return
+                except Exception as e:
+                    _log.warning("Error checking extension connection: %s", e)
+                # If we get here, the extension is not connected yet; continue timer
+                if attempt >= max_attempts:
+                    timer.stop()
+                    _log.warning("Browser extension did not connect after %d seconds", max_attempts)
+                    # Show a message box to the user
+                    msg_box = QMessageBox()
+                    msg_box.setIcon(QMessageBox.Icon.Warning)
+                    msg_box.setWindowTitle("Browser Extension Not Connected")
+                    msg_box.setText("The browser extension did not connect within the expected time.")
+                    msg_box.setInformativeText("Please make sure the extension is installed and connected to ws://localhost:8765.")
+                    msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
+                    msg_box.exec()
+                    # We cannot proceed in website mode without the extension, so we exit the application
+                    app.quit()
+
+            def setup_website_mode():
+                # Now set up the website mode signals and load the task
+                # ── Bug 1 fix: connect BEFORE load_task so step 1 is not missed ──
+                def _on_step_resolved_website(step) -> None:
+                    # Try to highlight immediately
+                    result1 = browser_connector.highlight(
                         _get_step_element_id(step),
                         tooltip=step.tooltip,
                         target=getattr(step, "target", ""),
                     )
-                    if not result2:
-                        _log.warning("Highlight failed for step %d (second attempt)", step.id)
-                QTimer.singleShot(200, try_again)
+                    if not result1:
+                        _log.warning("Highlight failed for step %d (first attempt)", step.id)
+                    # Try again after a short delay
+                    def try_again():
+                        result2 = browser_connector.highlight(
+                            _get_step_element_id(step),
+                            tooltip=step.tooltip,
+                            target=getattr(step, "target", ""),
+                        )
+                        if not result2:
+                            _log.warning("Highlight failed for step %d (second attempt)", step.id)
+                    QTimer.singleShot(200, try_again)
 
-            def _track_element(step) -> None:
-                nonlocal pending_element_id, pending_target
-                pending_element_id = _get_step_element_id(step)
-                pending_target = getattr(step, "target", "")
+                def _track_element(step) -> None:
+                    nonlocal pending_element_id, pending_target
+                    pending_element_id = _get_step_element_id(step)
+                    pending_target = getattr(step, "target", "")
 
-            def _on_website_click(data: dict) -> None:
-                nonlocal pending_element_id, pending_target
-                msg_type = data.get("type")
+                def _on_subtask_thread_finished() -> None:
+                    nonlocal subtask_thread, subtask_worker
+                    subtask_thread = None
+                    subtask_worker = None
 
-                # ── Bug 3 fix: refresh DOM snapshot on mutation ───────────────
-                if msg_type == "dom_mutated":
-                    import threading as _threading
-                    def _refresh_dom() -> None:
-                        try:
-                            new_tree = browser_connector.get_tree(timeout=3.0)
-                            if new_tree:
-                                _log.info("DOM refreshed after mutation: %d nodes", len(new_tree))
-                                # Re-highlight the current step with fresh DOM data
-                                from PyQt6.QtCore import QTimer as _QTimer
-                                _QTimer.singleShot(0, lambda: browser_connector.highlight(
-                                    pending_element_id,
-                                    tooltip="",
-                                    target=pending_target,
-                                ))
-                        except Exception as exc:
-                            _log.warning("DOM refresh after mutation failed: %s", exc)
-                    _threading.Thread(target=_refresh_dom, daemon=True).start()
+                def _show_stuck(reason: str) -> None:
+                    _log.warning("Website task needs recovery: %s", reason)
+                    QMessageBox.warning(
+                        None,
+                        "Task Needs Help",
+                        "I couldn't determine the next safe step. The current workflow has been paused.\n\n"
+                        + reason,
+                    )
+
+                def _on_subtask_success(payload: object) -> None:
+                    nonlocal navigation_pending, empty_step_retries
+                    navigation_pending = False
+                    data = payload if isinstance(payload, dict) else {}
+                    response = data.get("response")
+                    dom = data.get("dom") or []
+                    url = data.get("url") or browser_connector.current_url
+                    hint_matched = bool(data.get("hint_matched"))
+                    if not isinstance(response, VerifyResponse):
+                        _show_stuck("Gemini returned an invalid verification response.")
+                        return
+                    if response.milestone_met != hint_matched:
+                        _log.info(
+                            "Milestone hint disagreement: heuristic=%s model=%s reason=%s",
+                            hint_matched, response.milestone_met, response.reason,
+                        )
+                    update = apply_verification(task_plan, response)
+                    if response.revised_remaining_milestones is not None and not update.replan_applied:
+                        _log.warning("Ignoring model replan: MAX_REPLANS=%d reached", MAX_REPLANS)
+                    if response.goal_complete:
+                        task_plan.save(plan_path)
+                        _log.info("Website task complete: %s", response.reason)
+                        controller.task_completed.emit()
+                        return
+                    task_plan.save(plan_path)
+                    grounded_steps = _filter_steps_to_dom(response.steps, dom)
+                    if not grounded_steps:
+                        if empty_step_retries < 1:
+                            empty_step_retries += 1
+                            _log.info("No DOM-grounded steps generated; retrying after page settle (%d/1)", empty_step_retries)
+                            QTimer.singleShot(1500, _schedule_subtask_on_main_thread)
+                            return
+                        _show_stuck(response.reason or "No actionable elements were found in the current page DOM.")
+                        return
+                    empty_step_retries = 0
+                    task_data = {
+                        "name": original_task,
+                        "app": url,
+                        "app_exe": "",
+                        "mode": "website",
+                        "steps": grounded_steps,
+                    }
+                    output_dir = os.path.dirname(os.path.abspath(path))
+                    snapshot_path = os.path.join(output_dir, "dom_snapshot.json")
+                    subtask_path = os.path.join(output_dir, "sub_task.json")
+                    try:
+                        with open(snapshot_path, "w", encoding="utf-8") as fh:
+                            json.dump(dom, fh, indent=2)
+                        with open(subtask_path, "w", encoding="utf-8") as fh:
+                            json.dump(task_data, fh, indent=2)
+                        controller.load_task(subtask_path)
+                    except Exception:
+                        _log.exception("Failed to persist/load the generated sub-task")
+                        _show_stuck("The generated steps could not be loaded.")
+
+                def _on_subtask_failure(error: str) -> None:
+                    nonlocal navigation_pending
+                    navigation_pending = False
+                    task_plan.save(plan_path)
+                    _log.error("Milestone verification/generation failed after API retry: %s", error)
+                    _show_stuck(f"Gemini API request failed: {error}")
+
+                def _generate_subtask() -> None:
+                    nonlocal subtask_thread, subtask_worker, navigation_pending
+                    if subtask_thread is not None and subtask_thread.isRunning():
+                        return
+                    current_milestone = task_plan.current()
+                    if current_milestone is None:
+                        navigation_pending = False
+                        _show_stuck("The milestone plan has no active milestone, but Gemini did not confirm completion.")
+                        return
+                    attempt = task_plan.mark_attempt()
+                    task_plan.save(plan_path)
+                    if attempt > MAX_ATTEMPTS_PER_MILESTONE:
+                        if task_plan.replans < MAX_REPLANS:
+                            remaining = cast(
+                                list[dict[str, Any] | str],
+                                task_plan.milestones[task_plan.current_index:],
+                            )
+                            task_plan.replace_remaining(remaining)
+                            attempt = task_plan.mark_attempt()
+                            task_plan.save(plan_path)
+                            _log.warning("Forcing milestone replan after attempt cap (%d/%d)", task_plan.replans, MAX_REPLANS)
+                        else:
+                            navigation_pending = False
+                            _show_stuck(f"Milestone attempt limit ({MAX_ATTEMPTS_PER_MILESTONE}) and replan limit ({MAX_REPLANS}) reached: {current_milestone['goal']}")
+                            return
+                    subtask_thread = QThread(app)
+                    subtask_worker = _SubTaskWorker(
+                        browser_connector,
+                        _GEMINI_API_KEY,
+                        task_plan,
+                        last_completed_step,
+                    )
+                    subtask_worker.moveToThread(subtask_thread)
+                    subtask_thread.started.connect(subtask_worker.run)
+                    subtask_worker.succeeded.connect(_on_subtask_success)
+                    subtask_worker.failed.connect(_on_subtask_failure)
+                    subtask_worker.succeeded.connect(subtask_thread.quit)
+                    subtask_worker.failed.connect(subtask_thread.quit)
+                    subtask_thread.finished.connect(subtask_thread.deleteLater)
+                    subtask_thread.finished.connect(_on_subtask_thread_finished)
+                    subtask_thread.start()
+
+                def _schedule_subtask() -> None:
+                    """Request scheduling from any thread safely."""
+                    navigation_invoker.requested.emit()
+
+                def _schedule_subtask_on_main_thread() -> None:
+                    nonlocal navigation_pending
+                    if navigation_pending:
+                        return
+                    if subtask_thread is not None and subtask_thread.isRunning():
+                        return
+                    navigation_pending = True
+                    QTimer.singleShot(2000, _generate_subtask)
+
+                navigation_invoker.requested_callback = _schedule_subtask_on_main_thread
+
+                def _handle_website_event(data: dict) -> None:
+                    nonlocal pending_element_id, pending_target, last_completed_step, last_page_url
+                    msg_type = data.get("type")
+
+                    if msg_type == "page_navigated":
+                        new_url = str(data.get("url") or "")
+                        url_changed = bool(new_url and new_url != last_page_url)
+                        if new_url:
+                            last_page_url = new_url
+                        if url_changed:
+                            # This covers full-page links even when an older
+                            # extension service worker drops the click metadata.
+                            _schedule_subtask()
+                        return
+
+                    if msg_type == "dom_mutated":
+                        # DOM mutations are common in SPAs and must not
+                        # re-highlight the current step. Full-page navigation
+                        # is handled by the page_navigated event, which fetches
+                        # a fresh DOM and generates sub_task.json.
+                        return
+
+                    if msg_type != "user_click":
+                        return
+
+                    clicked = data.get("elementId")
+                    clicked_text = (data.get("targetText") or "").strip().lower()
+
+                    matched = False
+                    if clicked is not None and pending_element_id is not None:
+                        if str(clicked) == str(pending_element_id):
+                            matched = True
+                    if not matched and pending_target and clicked_text:
+                        if pending_target.lower() in clicked_text or clicked_text in pending_target.lower():
+                            matched = True
+
+                    if matched:
+                        last_completed_step = pending_target or clicked_text
+                        # A later page_navigated event confirms whether this
+                        # click changed pages. This also handles links whose
+                        # click metadata incorrectly reports isNavigation=false.
+                        pending_element_id = None
+                        pending_target = ""
+                        if data.get("isNavigation"):
+                            # Wait for the new document to settle, then extract
+                            # its DOM and generate tasks/sub_task.json.
+                            _schedule_subtask()
+                        else:
+                            controller.next_step()
+
+                def _on_website_click(data: dict) -> None:
+                    # BrowserConnector callbacks arrive on its asyncio thread;
+                    # process click/state changes on Qt's main thread.
+                    navigation_invoker.event_received.emit(data)
+
+                navigation_invoker.event_callback = _handle_website_event
+
+                # Connect website-mode signals before loading the task
+                controller.coords_resolved.disconnect(_on_coords_resolved)
+                controller.resolution_failed.disconnect(layer_manager.show_resolution_failed)
+                controller.coords_resolved.connect(_on_step_resolved_website)
+                controller.coords_resolved.connect(_track_element)
+
+                # Wire click/mutation detection from browser connector
+                browser_connector.observe_changes(_on_website_click)
+                controller.steps_exhausted.connect(_schedule_subtask_on_main_thread)
+
+                # Now load the task — coords_resolved will fire for step 1 immediately
+                # and _on_step_resolved_website is already connected to catch it
+                try:
+                    controller.load_task(path)
+                except Exception:
+                    _log.exception("Failed to load task from %s", path)
                     return
 
-                if msg_type != "user_click":
-                    return
-
-                clicked = data.get("elementId")
-                clicked_text = (data.get("targetText") or "").strip().lower()
-
-                matched = False
-                if clicked is not None and pending_element_id is not None:
-                    if str(clicked) == str(pending_element_id):
-                        matched = True
-                if not matched and pending_target and clicked_text:
-                    if pending_target.lower() in clicked_text or clicked_text in pending_target.lower():
-                        matched = True
-
-                if matched:
-                    pending_element_id = None
-                    pending_target = ""
-                    if data.get("isNavigation"):
-                        # Wait for navigation to complete (2 seconds) then advance
-                        QTimer.singleShot(2000, controller.next_step)
-                    else:
-                        controller.next_step()
-
-            # Connect website-mode signals before loading the task
-            controller.coords_resolved.disconnect(_on_coords_resolved)
-            controller.resolution_failed.disconnect(layer_manager.show_resolution_failed)
-            controller.coords_resolved.connect(_on_step_resolved_website)
-            controller.coords_resolved.connect(_track_element)
-
-            # Wire click/mutation detection from browser connector
-            browser_connector.observe_changes(_on_website_click)
-
-            # Now load the task — coords_resolved will fire for step 1 immediately
-            # and _on_step_resolved_website is already connected to catch it
-            try:
-                controller.load_task(path)
-            except Exception:
-                _log.exception("Failed to load task from %s", path)
-                return
+            # Start the timer to check for extension connection
+            timer.timeout.connect(check_connection)
+            timer.start()
 
         else:
             # ── App mode ─────────────────────────────────────────────────────
@@ -287,7 +617,6 @@ def main() -> None:
                 _log.exception("Failed to load task from %s", path)
                 return
             overlay.show_overlay()
-
 
     dialog.task_ready.connect(_on_task_ready)
 

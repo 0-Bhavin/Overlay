@@ -134,7 +134,10 @@ class TaskController(QObject):
     step_changed(current_index, total):
         Emitted whenever the active step changes.
     task_completed:
-        Emitted when the user advances past the final step.
+        Emitted when an app-mode task finishes or website orchestration confirms
+        the overall goal is complete.
+    steps_exhausted:
+        Emitted when the current website sub-task runs out of steps.
     coords_resolved(step):
         Emitted from the main thread when background resolution succeeds.
     resolution_failed(target):
@@ -143,6 +146,7 @@ class TaskController(QObject):
 
     step_changed      = pyqtSignal(int, int)       # (index, total)
     task_completed    = pyqtSignal()
+    steps_exhausted   = pyqtSignal()              # Current task's steps are consumed
     coords_resolved   = pyqtSignal(object)         # Step
     resolution_failed = pyqtSignal(str)            # target name
     element_not_found = pyqtSignal(str, object)    # target name, ElementNotFoundError
@@ -195,7 +199,10 @@ class TaskController(QObject):
             return
         self._loading = True
         try:
-            self._task = Task.load_from_file(path)
+            task = Task.load_from_file(path)
+            if not task.steps:
+                raise ValueError(f"Task file contains no steps: {path}")
+            self._task = task
             self._index = -1
             self.next_step()
         finally:
@@ -214,7 +221,10 @@ class TaskController(QObject):
         if next_index >= len(self._task.steps):
             self._cancel_pending_resolution()
             self._layer_manager.clear_all()
-            self.task_completed.emit()
+            if getattr(self._task, "mode", "app") == "website":
+                self.steps_exhausted.emit()
+            else:
+                self.task_completed.emit()
             return
 
         self._index = next_index

@@ -1,7 +1,148 @@
 {
-  "name": "how do i find my current billing ?",
-  "app": "OmniRoute \u2014 AI Gateway for Multi-Provider LLMs - Google Chrome",
+  "name": "how to create a cluster and seed a sample user data",
+  "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
   "app_exe": "",
   "mode": "website",
-  "steps": []
+  "steps": [
+    {
+      "step_number": 1,
+      "action": "click",
+      "description": "Click the 'New Project' button",
+      "element": {
+        "tag": "a",
+        "text": "New Project",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "link",
+        "aria_label": null,
+        "xpath": "//div[@text='All Projects']/following-sibling::button[text()='New Project']",
+        "css_selector": "div:text('All Projects') ~ button:text('New Project')",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    },
+    {
+      "step_number": 2,
+      "action": "click",
+      "description": "Click the 'Clusters' tab",
+      "element": {
+        "tag": "button",
+        "text": "Clusters",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "link",
+        "aria_label": null,
+        "xpath": "//div[@text='Project Name']/following-sibling::button[text()='Clusters']",
+        "css_selector": "div:text('Project Name') ~ button:text('Clusters')",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    },
+    {
+      "step_number": 3,
+      "action": "click",
+      "description": "Click the 'Create Cluster' button",
+      "element": {
+        "tag": "button",
+        "text": "+ Add Tags",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "button",
+        "aria_label": null,
+        "xpath": "//div[@text='Clusters']/following-sibling::button[text()='+ Add Tags']",
+        "css_selector": "div:text('Clusters') ~ button:text('+ Add Tags')",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    },
+    {
+      "step_number": 4,
+      "action": "input",
+      "description": "Enter cluster name",
+      "element": {
+        "tag": "input",
+        "text": null,
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "textbox",
+        "aria_label": null,
+        "xpath": "//div[@text='Cluster Name']/following-sibling::input",
+        "css_selector": "div:text('Cluster Name') ~ input",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    },
+    {
+      "step_number": 5,
+      "action": "click",
+      "description": "Click the 'Create' button",
+      "element": {
+        "tag": "button",
+        "text": "Create",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "button",
+        "aria_label": null,
+        "xpath": "//div[@text='Cluster Name']/following-sibling::button[text()='Create']",
+        "css_selector": "div:text('Cluster Name') ~ button:text('Create')",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    },
+    {
+      "step_number": 6,
+      "action": "click",
+      "description": "Click the 'Sample User Data' option",
+      "element": {
+        "tag": "a",
+        "text": "Sample User Data",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "link",
+        "aria_label": null,
+        "xpath": "//div[@text='Sample Cluster']/following-sibling::button[text()='Sample User Data']",
+        "css_selector": "div:text('Sample Cluster') ~ button:text('Sample User Data')",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    },
+    {
+      "step_number": 7,
+      "action": "click",
+      "description": "Click the 'Seed' button",
+      "element": {
+        "tag": "button",
+        "text": "Seed",
+        "id": null,
+        "class": null,
+        "name": null,
+        "role": "button",
+        "aria_label": null,
+        "xpath": "//div[@text='Sample User Data']/following-sibling::button[text()='Seed']",
+        "css_selector": "div:text('Sample User Data') ~ button:text('Seed')",
+        "parent_path": [
+          "main",
+          "div"
+        ]
+      }
+    }
+  ]
 }

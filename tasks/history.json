@@ -1,9 +1,63 @@
 [
   {
+    "task": "how to create a cluster and seed a sample user data",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-10-01T10:56:11"
+  },
+  {
+    "task": "how to create a cluster and seed a sample user data in \"project 0\"",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-30T15:11:04"
+  },
+  {
+    "task": "How to insert a image in excel sheet",
+    "app": "Book1 - Excel",
+    "mode": "app",
+    "timestamp": "2026-09-30T12:48:54"
+  },
+  {
+    "task": "how to create a cluster and seed a sample user data",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-29T09:47:25"
+  },
+  {
+    "task": "how to create a cluster and seed a sample user data in project 0",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-29T09:39:05"
+  },
+  {
+    "task": "how do i add a new rectangle",
+    "app": "Arc",
+    "mode": "website",
+    "timestamp": "2026-09-27T18:59:15"
+  },
+  {
+    "task": "how do i create a new project",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-26T10:07:04"
+  },
+  {
+    "task": "how do i create a new project",
+    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-26T09:56:59"
+  },
+  {
+    "task": "how do i create a model api key",
+    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
+    "mode": "website",
+    "timestamp": "2026-09-26T09:53:19"
+  },
+  {
     "task": "how do i find my current billing ?",
     "app": "OmniRoute — AI Gateway for Multi-Provider LLMs - Google Chrome",
     "mode": "website",
-    "timestamp": "2026-09-25T11:54:23"
+    "timestamp": "2026-09-26T09:33:59"
   },
   {
     "task": "how do i find my current billing ?",
@@ -13,21 +67,9 @@
   },
   {
     "task": "how do i create a model api key",
-    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-25T10:56:36"
-  },
-  {
-    "task": "how do i create a model api key",
     "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
     "mode": "website",
     "timestamp": "2026-09-24T11:22:33"
-  },
-  {
-    "task": "how do i create a new project",
-    "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-24T11:19:35"
   },
   {
     "task": "how do i create a new project",
@@ -61,12 +103,6 @@
   },
   {
     "task": "how do i create a new project",
-    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-20T14:03:51"
-  },
-  {
-    "task": "how do i create a new project",
     "app": "All Projects | Atlas: MongoDB Atlas - Google Chrome",
     "mode": "website",
     "timestamp": "2026-09-17T17:01:01"
@@ -82,41 +118,5 @@
     "app": "Clusters | Cloud: MongoDB Cloud - Google Chrome",
     "mode": "website",
     "timestamp": "2026-09-16T19:13:12"
-  },
-  {
-    "task": "how to add a cluster in mongodb",
-    "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-16T15:40:46"
-  },
-  {
-    "task": "CREATE A POSTER FROM TEMPLATES IN CANVA",
-    "app": "Home - Canva - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-11T11:37:55"
-  },
-  {
-    "task": "CREATE A POSTER FROM TEMPLATES",
-    "app": "Home - Canva - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-11T11:00:20"
-  },
-  {
-    "task": "create a table in google sheets",
-    "app": "Untitled spreadsheet - Google Sheets - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-07T16:23:06"
-  },
-  {
-    "task": "create a table",
-    "app": "Untitled spreadsheet - Google Sheets - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-06T17:58:50"
-  },
-  {
-    "task": "how to create a instagram story in canva",
-    "app": "Home - Canva - Google Chrome",
-    "mode": "app",
-    "timestamp": "2026-09-06T17:19:36"
   }
 ]

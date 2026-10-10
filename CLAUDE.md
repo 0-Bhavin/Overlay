@@ -53,7 +53,7 @@ The application follows a modular architecture with distinct layers:
 
 2. **Core Components** (`core/` directory):
    - `task_controller.py`: Manages step-by-step task progression, asynchronous coordinate resolution, and step navigation.
-   - `ai_task_generator.py`: Calls Gemini API (or local Ollama) to decompose user tasks into steps.
+   - `ai_task_generator.py`: Calls the Gemini API to create task plans and decompose tasks into steps.
    - `layer_manager.py`: Renders PyQt6 overlays (spotlight, dim, tooltip, HUD) and manages visual state.
    - `action_watcher.py`: Uses Win32 mouse hooks to detect clicks in target regions for App mode.
    - `overlay_window.py`: Frameless, transparent Qt window that hosts the overlay layers.
@@ -125,6 +125,6 @@ The application follows a modular architecture with distinct layers:
 - **Highlight Reliability**: Implemented double-attempt highlighting with retry logic for improved success rates during step resolution.
 - **Extension Context Invalidation**: Improved navigation detection and handling to gracefully manage context invalidation during page changes.
 - **Multi-page Highlight**: Verified 'a href' tag highlighting works correctly for navigational links.
-- **API Routing**: Confirmed Ollama is used by default (qwen-fast:latest), with Gemini fallback only when GEMINI_API_KEY is set in .env.
+- **API Routing**: Gemini is the sole task-generation provider; configure GEMINI_API_KEY in .env.
 
 Co-Authored-By: Claude Code <noreply@anthropic.com>
