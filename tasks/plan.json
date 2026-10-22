@@ -1,0 +1,66 @@
+{
+  "original_goal": "Create a new private repository called bench-demo with a README, a Python .gitignore and an MIT license. Then create a label called bug and open an issue titled ‘Login fails on Safari’ with that label.",
+  "milestones": [
+    {
+      "id": 0,
+      "goal": "Navigate to the new repository creation page.",
+      "success_hint": {
+        "url_contains": [
+          "/new"
+        ],
+        "text_contains": [
+          "Create a new repository",
+          "New repository"
+        ]
+      },
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": 1,
+      "goal": "Create the 'bench-demo' private repository with a README, Python .gitignore, and MIT license.",
+      "success_hint": {
+        "url_contains": [
+          "/bench-demo"
+        ],
+        "text_contains": [
+          "bench-demo",
+          "Private"
+        ]
+      },
+      "status": "active",
+      "attempts": 1
+    },
+    {
+      "id": 2,
+      "goal": "Create a new label named 'bug' within the 'bench-demo' repository.",
+      "success_hint": {
+        "url_contains": [
+          "/labels"
+        ],
+        "text_contains": [
+          "bug"
+        ]
+      },
+      "status": "pending",
+      "attempts": 0
+    },
+    {
+      "id": 3,
+      "goal": "Open an issue titled 'Login fails on Safari' with the 'bug' label in the 'bench-demo' repository.",
+      "success_hint": {
+        "url_contains": [
+          "/issues"
+        ],
+        "text_contains": [
+          "Login fails on Safari",
+          "bug"
+        ]
+      },
+      "status": "pending",
+      "attempts": 0
+    }
+  ],
+  "current_index": 1,
+  "replans": 0
+}

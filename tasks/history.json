@@ -1,5 +1,35 @@
 [
   {
+    "task": "Create a new private repository called bench-demo with a README, a Python .gitignore and an MIT license. Then create a label called bug and open an issue titled ‘Login fails on Safari’ with that label.",
+    "app": "https://github.com/",
+    "mode": "website",
+    "timestamp": "2026-10-21T19:32:19"
+  },
+  {
+    "task": "how to create a free cluster and seed a sample user data",
+    "app": "https://cloud.mongodb.com/v2/6aa3cebb8ae8e896698a4816#/overview",
+    "mode": "website",
+    "timestamp": "2026-10-18T12:18:30"
+  },
+  {
+    "task": "how to create a cluster and seed a sample user data",
+    "app": "https://cloud.mongodb.com/v2/6ab9104faeb8f6a94b8b8d29#/overview",
+    "mode": "website",
+    "timestamp": "2026-10-18T12:02:00"
+  },
+  {
+    "task": "how to create a new design in figma and add photos to it",
+    "app": "https://www.figma.com/files/team/1681973710244120886/recents-and-sharing/recently-viewed?fuid=1681973708431614296",
+    "mode": "website",
+    "timestamp": "2026-10-18T11:57:42"
+  },
+  {
+    "task": "how to create a new design in figma and add photos to it",
+    "app": "Arc",
+    "mode": "website",
+    "timestamp": "2026-10-18T11:53:06"
+  },
+  {
     "task": "how to create a cluster and seed a sample user data",
     "app": "Project Overview | Cloud: MongoDB Cloud - Google Chrome",
     "mode": "website",
@@ -88,35 +118,5 @@
     "app": "All Projects | Cloud: MongoDB Cloud - Google Chrome",
     "mode": "website",
     "timestamp": "2026-09-20T14:27:50"
-  },
-  {
-    "task": "how do i sort the data in ascending order",
-    "app": "Crop wise irrigation - Excel",
-    "mode": "app",
-    "timestamp": "2026-09-20T14:08:21"
-  },
-  {
-    "task": "how to add a table in microsoft word",
-    "app": "Document1 - Word",
-    "mode": "app",
-    "timestamp": "2026-09-20T14:05:31"
-  },
-  {
-    "task": "how do i create a new project",
-    "app": "All Projects | Atlas: MongoDB Atlas - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-17T17:01:01"
-  },
-  {
-    "task": "how do i add a api key for antigravity cli",
-    "app": "OmniRoute — AI Gateway for Multi-Provider LLMs and 6 more pages - Personal - Microsoft​ Edge",
-    "mode": "website",
-    "timestamp": "2026-09-16T19:53:31"
-  },
-  {
-    "task": "how to add a cluster in mongodb",
-    "app": "Clusters | Cloud: MongoDB Cloud - Google Chrome",
-    "mode": "website",
-    "timestamp": "2026-09-16T19:13:12"
   }
 ]

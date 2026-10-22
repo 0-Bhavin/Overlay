@@ -32,6 +32,7 @@ from PyQt6.QtWidgets import (
 
 from core.ai_task_generator import GeminiTaskGenerator
 from core.task_plan import TaskPlan
+from core.website_step_grounding import filter_steps_to_dom
 from core.task_history import load_history, save_to_history
 
 # ---------------------------------------------------------------------------
@@ -259,6 +260,7 @@ class _GeneratorWorker(QObject):
                 self.succeeded.emit({
                     "steps": result.steps,
                     "milestones": result.milestones,
+                    "dom_snapshot": self._dom_snapshot or [],
                     "website_plan": True,
                 })
             else:
@@ -765,6 +767,8 @@ class TaskInputDialog(QWidget):
         save_to_history(task, app, mode=self._target_mode)
 
         steps = result.get("steps", [])
+        if self._target_mode == "website":
+            steps = filter_steps_to_dom(steps, result.get("dom_snapshot") or [])
         if not steps:
             self._status_label.setText("⚠ No actionable steps generated.")
             QMessageBox.warning(

@@ -50,7 +50,15 @@ _PLAN_SYSTEM_PROMPT = textwrap.dedent("""\
     must follow the existing website step format with step_number, action,
     description, and element containing tag, text, id, class, name, role,
     aria_label, xpath, css_selector, parent_path. Use only supplied DOM nodes.
-    Return JSON with milestones and steps.
+    Copy the exact numeric DOM id, type/tag and text for each element; put
+    values to type (e.g. a repository name) in the description, NOT in the
+    element text. Include each required visible form control in order, with
+    the intended value or option explicitly in its description. Do not plan
+    an option inside a closed menu: stop steps immediately after the click
+    that opens a menu, dropdown, dialog or picker. A control showing the
+    current setting (e.g. Public) does NOT select a different setting; its
+    menu must open before the desired option can be chosen. The next call
+    will see its newly visible choices. Return JSON with milestones and steps.
 """)
 
 _VERIFY_SYSTEM_PROMPT = textwrap.dedent("""\
@@ -64,7 +72,15 @@ _VERIFY_SYSTEM_PROMPT = textwrap.dedent("""\
     cannot work from this page. goal_complete may be true with empty steps.
     Step items must use the existing website format: step_number, action,
     description, element with tag, text, id, class, name, role, aria_label, xpath,
-    css_selector, parent_path. Use only the supplied DOM. Return JSON only.
+    css_selector, parent_path. Use only the supplied DOM. For each step copy
+    the exact node id and text; put values to type or select in the step
+    description. Never skip required visible fields or switches. If a step
+    opens a menu, dropdown or dialog, make it the LAST step so the next call
+    can see and choose from newly visible options. Clicking a current setting
+    (e.g. Public) does not itself select the requested alternative (Private).
+    Never mark a milestone met just because a menu is open or a form field
+    has been focused.
+    Return JSON only.
 """)
 
 

@@ -313,8 +313,8 @@
       if (!el) return false;
       if (!needle) return true;
       const label = (
-        el.getAttribute('aria-label')
-        || el.getAttribute('title')
+        window.AIOverlayDOMExtractor?.extractElementText(el)
+        || el.getAttribute('aria-label')
         || el.getAttribute('placeholder')
         || el.innerText
         || el.textContent
@@ -532,7 +532,8 @@
     // Extract targetText from clicked element similar to Step.from_dict logic
     let clickedText = '';
     if (target) {
-      const text = target.getAttribute('aria-label')
+      const text = window.AIOverlayDOMExtractor?.extractElementText(target)
+        || target.getAttribute('aria-label')
         || target.getAttribute('title')
         || target.getAttribute('placeholder')
         || target.innerText
@@ -572,6 +573,22 @@
       tagName: event.target.tagName,
       url: window.location.href,
       isNavigation: isNavigation
+    });
+  }, true);
+
+  // A text-entry step completes when the user commits the field (blur/change),
+  // not when they click into it before typing the requested value.
+  document.addEventListener('change', (event) => {
+    const field = event.target;
+    if (!field.matches('input, textarea, select')) return;
+    const id = field.getAttribute('data-ai-overlay-id');
+    if (!id) return;
+    sendRuntimeMessage({
+      action: 'USER_INPUT',
+      elementId: id,
+      targetText: field.getAttribute('aria-label') || field.getAttribute('placeholder') || field.getAttribute('name') || '',
+      hasValue: Boolean((field.value || '').trim()),
+      url: window.location.href
     });
   }, true);
 

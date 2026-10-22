@@ -1,0 +1,36 @@
+{
+  "name": "Create a new private repository called bench-demo with a README, a Python .gitignore and an MIT license. Then create a label called bug and open an issue titled \u2018Login fails on Safari\u2019 with that label.",
+  "app": "https://github.com/Platin14/bench-demo/settings",
+  "app_exe": "",
+  "mode": "website",
+  "steps": [
+    {
+      "step_number": 1,
+      "action": "click",
+      "description": "Click 'Change to private' to change the repository's visibility.",
+      "element": {
+        "tag": "button",
+        "text": "Change to private",
+        "id": "307",
+        "class": null,
+        "name": null,
+        "role": "menuitem",
+        "aria_label": null,
+        "xpath": "/html/body/div[1]/div[5]/main/div/div[2]/div/div[2]/div[10]/div/details/details-menu/div[1]/button",
+        "css_selector": "body > div.logged-in.env-production.page-responsive > div.application-main > main > div > div.container-xl.p-responsive.clearfix > div > div.d-flex.flex-column.flex-md-row.flex-lg-column.flex-xl-row > div.flex-shrink-0.flex-lg-grow-0.flex-xl-grow-0.pb-5.pb-xl-0.pr-xl-5 > div.Box.Box--danger.mt-4 > div > details > details-menu > div.SelectMenu-list > button.SelectMenu-item.width-full.btn-text-color-danger",
+        "parent_path": [
+          "div",
+          "details-menu",
+          "details",
+          "div",
+          "div",
+          "div",
+          "div",
+          "main",
+          "div",
+          "div"
+        ]
+      }
+    }
+  ]
+}

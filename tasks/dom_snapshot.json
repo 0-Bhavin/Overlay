@@ -2,1471 +2,4817 @@
   {
     "id": 1,
     "type": "div",
-    "text": "Skip to main content menu_open chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & B",
+    "text": "Skip to content Platin14 bench-demo Type / to search Repository navigation Code Issues Pull requests",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
       "x": 0,
-      "y": 0,
-      "width": 1520,
-      "height": 920
+      "y": -3206,
+      "width": 1521,
+      "height": 4130
     }
   },
   {
     "id": 2,
-    "type": "button",
-    "text": "Skip to main content",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": -500,
-      "y": 0,
-      "width": 152,
-      "height": 25
-    }
-  },
-  {
-    "id": 3,
     "type": "div",
-    "text": "menu_open chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & BILLING bar_chart Usag",
+    "text": "Skip to content Platin14 bench-demo Type / to search Repository navigation Code Issues Pull requests",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
       "x": 0,
-      "y": 0,
-      "width": 1520,
-      "height": 920
+      "y": -3206,
+      "width": 1521,
+      "height": 100
+    }
+  },
+  {
+    "id": 3,
+    "type": "link",
+    "text": "Skip to content",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": -3206,
+      "width": 1,
+      "height": 1
     }
   },
   {
     "id": 4,
     "type": "div",
-    "text": "menu_open chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & BILLING bar_chart Usag",
+    "text": "Platin14 bench-demo Type / to search Repository navigation Code Issues Pull requests Actions Project",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
       "x": 0,
-      "y": 0,
-      "width": 220,
-      "height": 920
+      "y": -3206,
+      "width": 1521,
+      "height": 100
     }
   },
   {
     "id": 5,
-    "type": "div",
-    "text": "menu_open",
-    "role": "div",
+    "type": "header",
+    "text": "Global navigation menu",
+    "role": "header",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 0,
-      "width": 203,
-      "height": 64
+      "x": 0,
+      "y": -3206,
+      "width": 1521,
+      "height": 100
     }
   },
   {
     "id": 6,
-    "type": "link",
-    "text": "Google AI Studio",
-    "role": "a",
+    "type": "div",
+    "text": "Platin14 bench-demo Type / to search",
+    "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 16,
-      "width": 163,
-      "height": 32
+      "x": 0,
+      "y": -3206,
+      "width": 1521,
+      "height": 52
     }
   },
   {
     "id": 7,
+    "type": "div",
+    "text": "Open menuHomepage (g then d) gGthen dD",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": -3206,
+      "width": 100,
+      "height": 52
+    }
+  },
+  {
+    "id": 8,
     "type": "button",
-    "text": "Collapse navigation menu",
+    "text": "(opens menu)",
     "role": "button",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 179,
-      "y": 16,
+      "x": 16,
+      "y": -3190,
       "width": 32,
       "height": 32
     }
   },
   {
-    "id": 8,
-    "type": "nav",
-    "text": "chevron_left Dashboard PROJECT key API Keys folder Projects USAGE & BILLING bar_chart Usage speed Ra",
-    "role": "nav",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 8,
-      "y": 64,
-      "width": 203,
-      "height": 856
-    }
-  },
-  {
     "id": 9,
-    "type": "div",
-    "text": "chevron_left Dashboard",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 8,
-      "y": 64,
-      "width": 203,
-      "height": 36
-    }
-  },
-  {
-    "id": 10,
     "type": "link",
-    "text": "chevron_left Dashboard",
+    "text": "",
     "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 64,
-      "width": 203,
+      "x": 60,
+      "y": -3190,
+      "width": 32,
       "height": 32
     }
   },
   {
-    "id": 11,
+    "id": 10,
     "type": "div",
-    "text": "PROJECT",
+    "text": "Platin14 bench-demo Type / to search",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 100,
-      "width": 203,
-      "height": 26
+      "x": 100,
+      "y": -3206,
+      "width": 1067,
+      "height": 52
+    }
+  },
+  {
+    "id": 11,
+    "type": "nav",
+    "text": "Breadcrumbs",
+    "role": "nav",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 100,
+      "y": -3190,
+      "width": 870,
+      "height": 32
     }
   },
   {
     "id": 12,
     "type": "link",
-    "text": "key API Keys",
+    "text": "Platin14",
     "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 126,
-      "width": 203,
+      "x": 100,
+      "y": -3190,
+      "width": 62,
       "height": 32
     }
   },
   {
     "id": 13,
-    "type": "link",
-    "text": "folder Projects",
-    "role": "a",
+    "type": "span",
+    "text": "Platin14",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 162,
-      "width": 203,
-      "height": 32
+      "x": 106,
+      "y": -3186,
+      "width": 50,
+      "height": 24
     }
   },
   {
     "id": 14,
-    "type": "div",
-    "text": "USAGE & BILLING",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 8,
-      "y": 210,
-      "width": 203,
-      "height": 26
-    }
-  },
-  {
-    "id": 15,
     "type": "link",
-    "text": "bar_chart Usage",
+    "text": "bench-demo",
     "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 236,
-      "width": 203,
+      "x": 176,
+      "y": -3190,
+      "width": 89,
+      "height": 32
+    }
+  },
+  {
+    "id": 15,
+    "type": "button",
+    "text": "bench-demo (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 265,
+      "y": -3190,
+      "width": 20,
       "height": 32
     }
   },
   {
     "id": 16,
-    "type": "link",
-    "text": "speed Rate Limit",
-    "role": "a",
+    "type": "div",
+    "text": "Type / to search",
+    "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 272,
-      "width": 203,
+      "x": 978,
+      "y": -3190,
+      "width": 189,
       "height": 32
     }
   },
   {
     "id": 17,
-    "type": "link",
-    "text": "paid Spend",
-    "role": "a",
+    "type": "div",
+    "text": "Type / to search",
+    "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 308,
-      "width": 203,
+      "x": 978,
+      "y": -3190,
+      "width": 191,
       "height": 32
     }
   },
   {
     "id": 18,
-    "type": "link",
-    "text": "receipt_long Billing",
-    "role": "a",
+    "type": "button",
+    "text": "Open quick search dialog, type / to search",
+    "role": "button",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 344,
-      "width": 203,
+      "x": 978,
+      "y": -3190,
+      "width": 191,
       "height": 32
     }
   },
   {
     "id": 19,
-    "type": "div",
-    "text": "OBSERVE",
-    "role": "div",
+    "type": "span",
+    "text": "Type / to search",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 392,
-      "width": 203,
-      "height": 26
+      "x": 991,
+      "y": -3185,
+      "width": 165,
+      "height": 21
     }
   },
   {
     "id": 20,
-    "type": "link",
-    "text": "database Logs and Datasets",
-    "role": "a",
+    "type": "span",
+    "text": "Type / to search",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 418,
-      "width": 203,
-      "height": 32
+      "x": 1015,
+      "y": -3185,
+      "width": 141,
+      "height": 21
     }
   },
   {
     "id": 21,
-    "type": "link",
-    "text": "Changelog arrow_outward",
-    "role": "a",
+    "type": "span",
+    "text": "Type / to search",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 482,
-      "width": 203,
-      "height": 32
+      "x": 1015,
+      "y": -3185,
+      "width": 141,
+      "height": 21
     }
   },
   {
     "id": 22,
     "type": "div",
-    "text": "notifications settings search key parth.rana@somaiya.edu",
+    "text": "Chat with CopilotCreate new...All issuesAll pull requestsAll repositoriesYou have no unread notifica",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 816,
-      "width": 203,
-      "height": 104
+      "x": 1167,
+      "y": -3206,
+      "width": 354,
+      "height": 52
     }
   },
   {
     "id": 23,
     "type": "div",
-    "text": "notifications settings search key",
+    "text": "Chat with CopilotCreate new...All issuesAll pull requestsAll repositories",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 822,
-      "width": 203,
+      "x": 1175,
+      "y": -3190,
+      "width": 250,
       "height": 32
     }
   },
   {
     "id": 24,
     "type": "div",
-    "text": "notifications",
+    "text": "Chat with Copilot",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 822,
-      "width": 45,
+      "x": 1175,
+      "y": -3190,
+      "width": 56,
       "height": 32
     }
   },
   {
     "id": 25,
-    "type": "button",
-    "text": "What's new",
-    "role": "button",
+    "type": "div",
+    "text": "Chat with Copilot",
+    "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 9,
-      "y": 823,
-      "width": 43,
-      "height": 30
+      "x": 1175,
+      "y": -3190,
+      "width": 56,
+      "height": 32
     }
   },
   {
     "id": 26,
     "type": "div",
-    "text": "settings",
+    "text": "Chat with Copilot",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 61,
-      "y": 822,
-      "width": 45,
+      "x": 1175,
+      "y": -3190,
+      "width": 56,
       "height": 32
     }
   },
   {
     "id": 27,
-    "type": "button",
-    "text": "Settings",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 62,
-      "y": 823,
-      "width": 43,
-      "height": 30
-    }
-  },
-  {
-    "id": 28,
     "type": "div",
-    "text": "search",
+    "text": "Chat with Copilot",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 114,
-      "y": 822,
-      "width": 45,
+      "x": 1175,
+      "y": -3190,
+      "width": 32,
+      "height": 32
+    }
+  },
+  {
+    "id": 28,
+    "type": "link",
+    "text": "",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1175,
+      "y": -3190,
+      "width": 32,
       "height": 32
     }
   },
   {
     "id": 29,
     "type": "button",
-    "text": "Search (Ctrl /)",
+    "text": "Open Copilot\u2026 (opens menu)",
     "role": "button",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 114,
-      "y": 823,
-      "width": 43,
-      "height": 30
+      "x": 1206,
+      "y": -3190,
+      "width": 26,
+      "height": 32
     }
   },
   {
     "id": 30,
-    "type": "div",
-    "text": "key",
-    "role": "div",
+    "type": "button",
+    "text": "(opens menu)",
+    "role": "button",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 166,
-      "y": 822,
-      "width": 45,
+      "x": 1255,
+      "y": -3190,
+      "width": 50,
       "height": 32
     }
   },
   {
     "id": 31,
-    "type": "button",
-    "text": "Get API key",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 167,
-      "y": 823,
-      "width": 43,
-      "height": 30
-    }
-  },
-  {
-    "id": 32,
     "type": "div",
-    "text": "parth.rana@somaiya.edu",
+    "text": "All issuesAll pull requestsAll repositories",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 860,
-      "width": 203,
-      "height": 44
+      "x": 1313,
+      "y": -3190,
+      "width": 112,
+      "height": 32
+    }
+  },
+  {
+    "id": 32,
+    "type": "link",
+    "text": "",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1313,
+      "y": -3190,
+      "width": 32,
+      "height": 32
     }
   },
   {
     "id": 33,
-    "type": "button",
-    "text": "Google Account: Parth Rana (parth.rana@somaiya.edu)",
-    "role": "button",
+    "type": "link",
+    "text": "",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 8,
-      "y": 860,
-      "width": 203,
-      "height": 44
+      "x": 1353,
+      "y": -3190,
+      "width": 32,
+      "height": 32
     }
   },
   {
     "id": 34,
-    "type": "span",
-    "text": "parth.rana@somaiya.edu",
-    "role": "span",
+    "type": "link",
+    "text": "",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 47,
-      "y": 869,
-      "width": 142,
-      "height": 26
+      "x": 1393,
+      "y": -3190,
+      "width": 32,
+      "height": 32
     }
   },
   {
     "id": 35,
-    "type": "div",
-    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
-    "role": "main",
+    "type": "link",
+    "text": "",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 220,
-      "y": 0,
-      "width": 1300,
-      "height": 920
+      "x": 1433,
+      "y": -3190,
+      "width": 32,
+      "height": 32
     }
   },
   {
     "id": 36,
     "type": "div",
-    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
+    "text": "Open user navigation menu",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 220,
-      "y": 0,
-      "width": 1300,
-      "height": 920
-    }
-  },
-  {
-    "id": 37,
-    "type": "span",
-    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
-    "role": "span",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 220,
-      "y": 0,
-      "width": 1300,
-      "height": 920
-    }
-  },
-  {
-    "id": 38,
-    "type": "div",
-    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 220,
-      "y": 0,
-      "width": 1300,
-      "height": 920
-    }
-  },
-  {
-    "id": 39,
-    "type": "div",
-    "text": "Gemini API Rate Limit Free tier description Docs Set up billing Project OverLay Time Range 28 Days R",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 48,
-      "width": 1127,
-      "height": 1069
-    }
-  },
-  {
-    "id": 40,
-    "type": "div",
-    "text": "Gemini API Rate Limit Free tier description Docs Set up billing",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 48,
-      "width": 1127,
+      "x": 1473,
+      "y": -3190,
+      "width": 32,
       "height": 32
     }
   },
   {
-    "id": 41,
-    "type": "div",
-    "text": "Gemini API Rate Limit Free tier",
-    "role": "div",
+    "id": 37,
+    "type": "button",
+    "text": "(opens menu)",
+    "role": "button",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 48,
-      "width": 307,
+      "x": 1473,
+      "y": -3190,
+      "width": 32,
+      "height": 32
+    }
+  },
+  {
+    "id": 38,
+    "type": "nav",
+    "text": "Repository",
+    "role": "nav",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": -3154,
+      "width": 1521,
+      "height": 48
+    }
+  },
+  {
+    "id": 39,
+    "type": "link",
+    "text": "Code",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 16,
+      "y": -3146,
+      "width": 73,
+      "height": 32
+    }
+  },
+  {
+    "id": 40,
+    "type": "span",
+    "text": "Code",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 48,
+      "y": -3141,
+      "width": 33,
+      "height": 21
+    }
+  },
+  {
+    "id": 41,
+    "type": "link",
+    "text": "Issues",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 97,
+      "y": -3146,
+      "width": 78,
       "height": 32
     }
   },
   {
     "id": 42,
     "type": "span",
-    "text": "Free tier",
+    "text": "Issues",
     "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 544,
-      "y": 55,
-      "width": 70,
-      "height": 20
+      "x": 129,
+      "y": -3141,
+      "width": 38,
+      "height": 21
     }
   },
   {
     "id": 43,
-    "type": "div",
-    "text": "description Docs Set up billing",
-    "role": "div",
+    "type": "link",
+    "text": "Pull requests",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 1232,
-      "y": 48,
-      "width": 202,
+      "x": 183,
+      "y": -3146,
+      "width": 121,
       "height": 32
     }
   },
   {
     "id": 44,
-    "type": "button",
-    "text": "Learn more",
-    "role": "button",
+    "type": "span",
+    "text": "Pull requests",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 1232,
-      "y": 48,
-      "width": 82,
-      "height": 32
+      "x": 215,
+      "y": -3141,
+      "width": 81,
+      "height": 21
     }
   },
   {
     "id": 45,
-    "type": "button",
-    "text": "Set up billing",
-    "role": "button",
+    "type": "link",
+    "text": "Actions",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 1321,
-      "y": 48,
-      "width": 112,
+      "x": 312,
+      "y": -3146,
+      "width": 87,
       "height": 32
     }
   },
   {
     "id": 46,
-    "type": "section",
-    "text": "Project OverLay Time Range 28 Days",
-    "role": "section",
+    "type": "span",
+    "text": "Actions",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 116,
-      "width": 1127,
-      "height": 32
+      "x": 344,
+      "y": -3141,
+      "width": 47,
+      "height": 21
     }
   },
   {
     "id": 47,
-    "type": "label",
-    "text": "Project",
-    "role": "label",
+    "type": "link",
+    "text": "Projects",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 123,
-      "width": 40,
-      "height": 18
+      "x": 407,
+      "y": -3146,
+      "width": 90,
+      "height": 32
     }
   },
   {
     "id": 48,
-    "type": "div",
-    "text": "OverLay",
-    "role": "div",
+    "type": "span",
+    "text": "Projects",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 354,
-      "y": 116,
-      "width": 196,
-      "height": 32
+      "x": 439,
+      "y": -3141,
+      "width": 50,
+      "height": 21
     }
   },
   {
     "id": 49,
-    "type": "div",
-    "text": "OverLay",
-    "role": "div",
+    "type": "link",
+    "text": "Wiki",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 362,
-      "y": 120,
-      "width": 180,
-      "height": 24
+      "x": 506,
+      "y": -3146,
+      "width": 68,
+      "height": 32
     }
   },
   {
     "id": 50,
-    "type": "div",
-    "text": "OverLay",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 362,
-      "y": 120,
-      "width": 180,
-      "height": 24
-    }
-  },
-  {
-    "id": 51,
-    "type": "div",
-    "text": "OverLay",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 362,
-      "y": 120,
-      "width": 180,
-      "height": 24
-    }
-  },
-  {
-    "id": 52,
-    "type": "div",
-    "text": "OverLay",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 362,
-      "y": 122,
-      "width": 170,
-      "height": 21
-    }
-  },
-  {
-    "id": 53,
     "type": "span",
-    "text": "OverLay",
+    "text": "Wiki",
     "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 362,
-      "y": 123,
-      "width": 55,
-      "height": 17
-    }
-  },
-  {
-    "id": 54,
-    "type": "label",
-    "text": "Time Range",
-    "role": "label",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 566,
-      "y": 123,
-      "width": 67,
-      "height": 18
-    }
-  },
-  {
-    "id": 55,
-    "type": "div",
-    "text": "28 Days",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 642,
-      "y": 116,
-      "width": 196,
-      "height": 32
-    }
-  },
-  {
-    "id": 56,
-    "type": "div",
-    "text": "28 Days",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 650,
-      "y": 120,
-      "width": 180,
-      "height": 24
-    }
-  },
-  {
-    "id": 57,
-    "type": "div",
-    "text": "28 Days",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 650,
-      "y": 120,
-      "width": 180,
-      "height": 24
-    }
-  },
-  {
-    "id": 58,
-    "type": "div",
-    "text": "28 Days",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 650,
-      "y": 120,
-      "width": 180,
-      "height": 24
-    }
-  },
-  {
-    "id": 59,
-    "type": "div",
-    "text": "28 Days",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 650,
-      "y": 122,
-      "width": 170,
-      "height": 21
-    }
-  },
-  {
-    "id": 60,
-    "type": "span",
-    "text": "28 Days",
-    "role": "span",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 650,
-      "y": 123,
-      "width": 54,
-      "height": 17
-    }
-  },
-  {
-    "id": 61,
-    "type": "span",
-    "text": "28 Days",
-    "role": "span",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 650,
-      "y": 123,
-      "width": 54,
-      "height": 17
-    }
-  },
-  {
-    "id": 62,
-    "type": "section",
-    "text": "Rate limits by model info All models Compare tiers arrow_drop_down Peak usage per model compared to ",
-    "role": "section",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 180,
-      "width": 1127,
-      "height": 180
-    }
-  },
-  {
-    "id": 63,
-    "type": "div",
-    "text": "Rate limits by model info All models Compare tiers arrow_drop_down Peak usage per model compared to ",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 180,
-      "width": 1127,
-      "height": 56
-    }
-  },
-  {
-    "id": 64,
-    "type": "div",
-    "text": "Rate limits by model info All models Compare tiers arrow_drop_down",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 180,
-      "width": 1127,
-      "height": 32
-    }
-  },
-  {
-    "id": 65,
-    "type": "span",
-    "text": "Rate limits by model",
-    "role": "span",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 184,
-      "width": 153,
-      "height": 24
-    }
-  },
-  {
-    "id": 66,
-    "type": "button",
-    "text": "Usage data may take up to 15 minutes to update.",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 468,
-      "y": 184,
-      "width": 24,
-      "height": 24
-    }
-  },
-  {
-    "id": 67,
-    "type": "div",
-    "text": "All models Compare tiers arrow_drop_down",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 1168,
-      "y": 180,
-      "width": 266,
-      "height": 32
-    }
-  },
-  {
-    "id": 68,
-    "type": "div",
-    "text": "All models",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 1168,
-      "y": 187,
-      "width": 116,
-      "height": 20
-    }
-  },
-  {
-    "id": 69,
-    "type": "button",
-    "text": "Toggle view all models",
-    "role": "switch",
-    "enabled": false,
-    "visible": true,
-    "bounds": {
-      "x": 1168,
-      "y": 187,
-      "width": 34,
-      "height": 20
-    }
-  },
-  {
-    "id": 70,
-    "type": "label",
-    "text": "All models",
-    "role": "label",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 1210,
-      "y": 187,
-      "width": 74,
-      "height": 20
-    }
-  },
-  {
-    "id": 71,
-    "type": "button",
-    "text": "Compare tiers arrow_drop_down",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 1291,
-      "y": 180,
-      "width": 142,
-      "height": 32
-    }
-  },
-  {
-    "id": 72,
-    "type": "span",
-    "text": "Peak usage per model compared to its limit over the last 28 days",
-    "role": "span",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 216,
-      "width": 427,
-      "height": 20
-    }
-  },
-  {
-    "id": 73,
-    "type": "section",
-    "text": "Model Category RPM TPM RPD Charts",
-    "role": "section",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 252,
-      "width": 1127,
-      "height": 108
-    }
-  },
-  {
-    "id": 74,
-    "type": "div",
-    "text": "Model",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 269,
-      "width": 171,
-      "height": 21
-    }
-  },
-  {
-    "id": 75,
-    "type": "div",
-    "text": "Model",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 269,
-      "width": 42,
-      "height": 21
-    }
-  },
-  {
-    "id": 76,
-    "type": "div",
-    "text": "Category",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 510,
-      "y": 269,
-      "width": 245,
-      "height": 21
-    }
-  },
-  {
-    "id": 77,
-    "type": "div",
-    "text": "Category",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 510,
-      "y": 269,
-      "width": 62,
-      "height": 21
-    }
-  },
-  {
-    "id": 78,
-    "type": "div",
-    "text": "RPM",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 786,
-      "y": 269,
-      "width": 168,
-      "height": 21
-    }
-  },
-  {
-    "id": 79,
-    "type": "div",
-    "text": "RPM",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 786,
-      "y": 269,
-      "width": 31,
-      "height": 21
-    }
-  },
-  {
-    "id": 80,
-    "type": "div",
-    "text": "TPM",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 986,
-      "y": 269,
-      "width": 168,
-      "height": 21
-    }
-  },
-  {
-    "id": 81,
-    "type": "div",
-    "text": "TPM",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 986,
-      "y": 269,
-      "width": 31,
-      "height": 21
-    }
-  },
-  {
-    "id": 82,
-    "type": "div",
-    "text": "RPD",
-    "role": "button",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 1186,
-      "y": 269,
-      "width": 161,
-      "height": 21
-    }
-  },
-  {
-    "id": 83,
-    "type": "div",
-    "text": "RPD",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 1186,
-      "y": 269,
+      "x": 538,
+      "y": -3141,
       "width": 28,
       "height": 21
     }
   },
   {
-    "id": 84,
-    "type": "section",
-    "text": "Peak usage trends Peak requests per minute (RPM) Peak requests per minute (RPM) This chart is descri",
-    "role": "section",
+    "id": 51,
+    "type": "link",
+    "text": "Security and quality",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 392,
-      "width": 1127,
-      "height": 709
+      "x": 582,
+      "y": -3146,
+      "width": 166,
+      "height": 32
     }
   },
   {
-    "id": 85,
-    "type": "div",
-    "text": "Peak usage trends",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 392,
-      "width": 1127,
-      "height": 24
-    }
-  },
-  {
-    "id": 86,
+    "id": 52,
     "type": "span",
-    "text": "Peak usage trends",
+    "text": "Security and quality",
     "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 392,
-      "width": 142,
-      "height": 24
+      "x": 614,
+      "y": -3141,
+      "width": 126,
+      "height": 21
     }
   },
   {
-    "id": 87,
+    "id": 53,
+    "type": "link",
+    "text": "Insights",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 756,
+      "y": -3146,
+      "width": 90,
+      "height": 32
+    }
+  },
+  {
+    "id": 54,
+    "type": "span",
+    "text": "Insights",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 788,
+      "y": -3141,
+      "width": 50,
+      "height": 21
+    }
+  },
+  {
+    "id": 55,
+    "type": "link",
+    "text": "Settings",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 853,
+      "y": -3146,
+      "width": 91,
+      "height": 32
+    }
+  },
+  {
+    "id": 56,
+    "type": "span",
+    "text": "Settings",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 885,
+      "y": -3141,
+      "width": 51,
+      "height": 21
+    }
+  },
+  {
+    "id": 57,
     "type": "div",
-    "text": "Peak requests per minute (RPM) Peak requests per minute (RPM) This chart is described by one or more",
+    "text": "Settings: Platin14/bench-demo General Access Collaborators Moderation Code, planning, and automation",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 432,
-      "width": 1127,
-      "height": 669
+      "x": 0,
+      "y": -3082,
+      "width": 1521,
+      "height": 3893
     }
   },
   {
-    "id": 88,
+    "id": 58,
     "type": "div",
-    "text": "Peak requests per minute (RPM) Peak requests per minute (RPM) This chart is described by one or more",
+    "text": "Settings: Platin14/bench-demo General Access Collaborators Moderation Code, planning, and automation",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 307,
-      "y": 432,
-      "width": 553,
-      "height": 325
+      "x": 0,
+      "y": -3082,
+      "width": 1521,
+      "height": 3893
     }
   },
   {
-    "id": 89,
+    "id": 59,
+    "type": "main",
+    "text": "Settings: Platin14/bench-demo General Access Collaborators Moderation Code, planning, and automation",
+    "role": "main",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": -3082,
+      "width": 1521,
+      "height": 3893
+    }
+  },
+  {
+    "id": 60,
     "type": "div",
-    "text": "Peak requests per minute (RPM)",
+    "text": "Settings: Platin14/bench-demo General Access Collaborators Moderation Code, planning, and automation",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 453,
-      "width": 512,
+      "x": 0,
+      "y": -3082,
+      "width": 1521,
+      "height": 3893
+    }
+  },
+  {
+    "id": 61,
+    "type": "div",
+    "text": "General Access Collaborators Moderation Code, planning, and automation Rulesets Actions Webhooks Cop",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 120,
+      "y": -3082,
+      "width": 1280,
+      "height": 3893
+    }
+  },
+  {
+    "id": 62,
+    "type": "div",
+    "text": "General Access Collaborators Moderation Code, planning, and automation Rulesets Actions Webhooks Cop",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3082,
+      "width": 1216,
+      "height": 3893
+    }
+  },
+  {
+    "id": 63,
+    "type": "div",
+    "text": "General Access Collaborators Moderation Code, planning, and automation Rulesets Actions Webhooks Cop",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3082,
+      "width": 256,
+      "height": 3893
+    }
+  },
+  {
+    "id": 64,
+    "type": "div",
+    "text": "General Access Collaborators Moderation Code, planning, and automation Rulesets Actions Webhooks Cop",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3082,
+      "width": 256,
+      "height": 685
+    }
+  },
+  {
+    "id": 65,
+    "type": "nav",
+    "text": "General settings",
+    "role": "nav",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3082,
+      "width": 256,
+      "height": 685
+    }
+  },
+  {
+    "id": 66,
+    "type": "link",
+    "text": "General",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3082,
+      "width": 256,
       "height": 33
     }
   },
   {
-    "id": 90,
+    "id": 67,
+    "type": "span",
+    "text": "General",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -3076,
+      "width": 216,
+      "height": 21
+    }
+  },
+  {
+    "id": 68,
     "type": "div",
-    "text": "Peak requests per minute (RPM)",
+    "text": "Access Collaborators Moderation",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 453,
-      "width": 215,
+      "x": 152,
+      "y": -3033,
+      "width": 256,
+      "height": 98
+    }
+  },
+  {
+    "id": 69,
+    "type": "div",
+    "text": "Access",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3033,
+      "width": 256,
+      "height": 32
+    }
+  },
+  {
+    "id": 70,
+    "type": "link",
+    "text": "Collaborators",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -3002,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 71,
+    "type": "span",
+    "text": "Collaborators",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2996,
+      "width": 216,
       "height": 21
+    }
+  },
+  {
+    "id": 72,
+    "type": "button",
+    "text": "Moderation (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2969,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 73,
+    "type": "span",
+    "text": "Moderation",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2963,
+      "width": 192,
+      "height": 21
+    }
+  },
+  {
+    "id": 74,
+    "type": "div",
+    "text": "Code, planning, and automation Rulesets Actions Webhooks Copilot Planning Environments Codespaces Pa",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2920,
+      "width": 256,
+      "height": 296
+    }
+  },
+  {
+    "id": 75,
+    "type": "div",
+    "text": "Code, planning, and automation",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2920,
+      "width": 256,
+      "height": 32
+    }
+  },
+  {
+    "id": 76,
+    "type": "button",
+    "text": "Rulesets (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2888,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 77,
+    "type": "span",
+    "text": "Rulesets",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2882,
+      "width": 192,
+      "height": 21
+    }
+  },
+  {
+    "id": 78,
+    "type": "button",
+    "text": "Actions (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2855,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 79,
+    "type": "span",
+    "text": "Actions",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2849,
+      "width": 192,
+      "height": 21
+    }
+  },
+  {
+    "id": 80,
+    "type": "link",
+    "text": "Webhooks",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2822,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 81,
+    "type": "span",
+    "text": "Webhooks",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2816,
+      "width": 216,
+      "height": 21
+    }
+  },
+  {
+    "id": 82,
+    "type": "button",
+    "text": "Copilot (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2789,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 83,
+    "type": "span",
+    "text": "Copilot",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2783,
+      "width": 192,
+      "height": 21
+    }
+  },
+  {
+    "id": 84,
+    "type": "button",
+    "text": "Planning (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2756,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 85,
+    "type": "span",
+    "text": "Planning",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2750,
+      "width": 192,
+      "height": 21
+    }
+  },
+  {
+    "id": 86,
+    "type": "link",
+    "text": "Environments",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2723,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 87,
+    "type": "span",
+    "text": "Environments",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2717,
+      "width": 216,
+      "height": 21
+    }
+  },
+  {
+    "id": 88,
+    "type": "link",
+    "text": "Codespaces",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2690,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
+    "id": 89,
+    "type": "span",
+    "text": "Codespaces",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 184,
+      "y": -2684,
+      "width": 216,
+      "height": 21
+    }
+  },
+  {
+    "id": 90,
+    "type": "link",
+    "text": "Pages",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2657,
+      "width": 256,
+      "height": 33
     }
   },
   {
     "id": 91,
     "type": "span",
-    "text": "Peak requests per minute (RPM)",
+    "text": "Pages",
     "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 454,
-      "width": 215,
-      "height": 17
+      "x": 184,
+      "y": -2651,
+      "width": 216,
+      "height": 21
     }
   },
   {
     "id": 92,
     "type": "div",
-    "text": "refresh",
+    "text": "Security and quality Advanced Security Deploy keys Secrets and variables",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 815,
-      "y": 453,
-      "width": 24,
-      "height": 24
+      "x": 152,
+      "y": -2608,
+      "width": 256,
+      "height": 131
     }
   },
   {
     "id": 93,
     "type": "div",
-    "text": "Peak requests per minute (RPM) This chart is described by one or more grids. A grid row represents a",
+    "text": "Security and quality",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 486,
-      "width": 512,
-      "height": 250
+      "x": 152,
+      "y": -2608,
+      "width": 256,
+      "height": 32
     }
   },
   {
     "id": 94,
-    "type": "div",
-    "text": "Peak input tokens per minute (TPM) Peak input tokens per minute (TPM) This chart is described by one",
-    "role": "div",
+    "type": "link",
+    "text": "Advanced Security",
+    "role": "a",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 880,
-      "y": 432,
-      "width": 553,
-      "height": 325
-    }
-  },
-  {
-    "id": 95,
-    "type": "div",
-    "text": "Peak input tokens per minute (TPM)",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 901,
-      "y": 453,
-      "width": 512,
+      "x": 152,
+      "y": -2577,
+      "width": 256,
       "height": 33
     }
   },
   {
-    "id": 96,
-    "type": "div",
-    "text": "Peak input tokens per minute (TPM)",
-    "role": "div",
+    "id": 95,
+    "type": "span",
+    "text": "Advanced Security",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 901,
-      "y": 453,
-      "width": 239,
+      "x": 184,
+      "y": -2571,
+      "width": 216,
       "height": 21
+    }
+  },
+  {
+    "id": 96,
+    "type": "link",
+    "text": "Deploy keys",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2544,
+      "width": 256,
+      "height": 33
     }
   },
   {
     "id": 97,
     "type": "span",
-    "text": "Peak input tokens per minute (TPM)",
+    "text": "Deploy keys",
     "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 901,
-      "y": 454,
-      "width": 239,
-      "height": 17
+      "x": 184,
+      "y": -2538,
+      "width": 216,
+      "height": 21
     }
   },
   {
     "id": 98,
-    "type": "div",
-    "text": "refresh",
-    "role": "div",
+    "type": "button",
+    "text": "Secrets and variables (opens menu)",
+    "role": "button",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 1389,
-      "y": 453,
-      "width": 24,
-      "height": 24
-    }
-  },
-  {
-    "id": 99,
-    "type": "div",
-    "text": "Peak input tokens per minute (TPM) This chart is described by one or more grids. A grid row represen",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 901,
-      "y": 486,
-      "width": 512,
-      "height": 250
-    }
-  },
-  {
-    "id": 100,
-    "type": "div",
-    "text": "Peak requests per day (RPD) Peak requests per day (RPD) This chart is described by one or more grids",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 307,
-      "y": 777,
-      "width": 553,
-      "height": 325
-    }
-  },
-  {
-    "id": 101,
-    "type": "div",
-    "text": "Peak requests per day (RPD)",
-    "role": "div",
-    "enabled": true,
-    "visible": true,
-    "bounds": {
-      "x": 327,
-      "y": 797,
-      "width": 512,
+      "x": 152,
+      "y": -2511,
+      "width": 256,
       "height": 33
     }
   },
   {
-    "id": 102,
-    "type": "div",
-    "text": "Peak requests per day (RPD)",
-    "role": "div",
+    "id": 99,
+    "type": "span",
+    "text": "Secrets and variables",
+    "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 797,
+      "x": 184,
+      "y": -2505,
       "width": 192,
       "height": 21
     }
   },
   {
+    "id": 100,
+    "type": "div",
+    "text": "Integrations GitHub Apps",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2462,
+      "width": 256,
+      "height": 65
+    }
+  },
+  {
+    "id": 101,
+    "type": "div",
+    "text": "Integrations",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2462,
+      "width": 256,
+      "height": 32
+    }
+  },
+  {
+    "id": 102,
+    "type": "link",
+    "text": "GitHub Apps",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 152,
+      "y": -2430,
+      "width": 256,
+      "height": 33
+    }
+  },
+  {
     "id": 103,
     "type": "span",
-    "text": "Peak requests per day (RPD)",
+    "text": "GitHub Apps",
     "role": "span",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 799,
-      "width": 192,
-      "height": 17
+      "x": 184,
+      "y": -2424,
+      "width": 216,
+      "height": 21
     }
   },
   {
     "id": 104,
     "type": "div",
-    "text": "refresh",
+    "text": "General Repository name Rename Template repository Loading Template repositories let users generate ",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 815,
-      "y": 797,
-      "width": 24,
-      "height": 24
+      "x": 448,
+      "y": -3082,
+      "width": 920,
+      "height": 3893
     }
   },
   {
     "id": 105,
     "type": "div",
-    "text": "Peak requests per day (RPD) This chart is described by one or more grids. A grid row represents a ti",
+    "text": "General Repository name Rename Template repository Loading Template repositories let users generate ",
     "role": "div",
     "enabled": true,
     "visible": true,
     "bounds": {
-      "x": 327,
-      "y": 830,
-      "width": 512,
-      "height": 250
+      "x": 448,
+      "y": -3082,
+      "width": 920,
+      "height": 3893
+    }
+  },
+  {
+    "id": 106,
+    "type": "div",
+    "text": "General",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -3082,
+      "width": 920,
+      "height": 45
+    }
+  },
+  {
+    "id": 107,
+    "type": "form",
+    "text": "Repository name Rename",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -3022,
+      "width": 920,
+      "height": 59
+    }
+  },
+  {
+    "id": 108,
+    "type": "label",
+    "text": "Repository name",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -3021,
+      "width": 108,
+      "height": 18
+    }
+  },
+  {
+    "id": 109,
+    "type": "input:text",
+    "text": "Repository name: bench-demo",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2995,
+      "width": 250,
+      "height": 32
+    }
+  },
+  {
+    "id": 110,
+    "type": "button",
+    "text": "Rename",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 703,
+      "y": -2995,
+      "width": 85,
+      "height": 32
+    }
+  },
+  {
+    "id": 111,
+    "type": "form",
+    "text": "Template repository Loading Template repositories let users generate new repositories with the same ",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2948,
+      "width": 920,
+      "height": 39
+    }
+  },
+  {
+    "id": 112,
+    "type": "div",
+    "text": "Template repository Loading Template repositories let users generate new repositories with the same ",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2948,
+      "width": 920,
+      "height": 39
+    }
+  },
+  {
+    "id": 113,
+    "type": "input:checkbox",
+    "text": "Template repository: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2944,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 114,
+    "type": "label",
+    "text": "Template repository",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 468,
+      "y": -2947,
+      "width": 127,
+      "height": 18
+    }
+  },
+  {
+    "id": 115,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 603,
+      "y": -2948,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 116,
+    "type": "link",
+    "text": "Learn more about template repositories",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1001,
+      "y": -2926,
+      "width": 210,
+      "height": 16
+    }
+  },
+  {
+    "id": 117,
+    "type": "div",
+    "text": "Releases",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2869,
+      "width": 920,
+      "height": 45
+    }
+  },
+  {
+    "id": 118,
+    "type": "form",
+    "text": "Enable release immutability Loading Disallow assets and tags from being modified once a release is p",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2808,
+      "width": 920,
+      "height": 39
+    }
+  },
+  {
+    "id": 119,
+    "type": "div",
+    "text": "Enable release immutability Loading Disallow assets and tags from being modified once a release is p",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2808,
+      "width": 920,
+      "height": 39
+    }
+  },
+  {
+    "id": 120,
+    "type": "input:checkbox",
+    "text": "Enable release immutability: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2804,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 121,
+    "type": "label",
+    "text": "Enable release immutability",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 468,
+      "y": -2807,
+      "width": 175,
+      "height": 18
+    }
+  },
+  {
+    "id": 122,
+    "type": "form",
+    "text": "Social preview Upload an image to customize your repository\u2019s social media preview. Images should be",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2729,
+      "width": 920,
+      "height": 134
+    }
+  },
+  {
+    "id": 123,
+    "type": "div",
+    "text": "Social preview Upload an image to customize your repository\u2019s social media preview. Images should be",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2729,
+      "width": 920,
+      "height": 134
+    }
+  },
+  {
+    "id": 124,
+    "type": "div",
+    "text": "Social preview",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2729,
+      "width": 920,
+      "height": 45
+    }
+  },
+  {
+    "id": 125,
+    "type": "div",
+    "text": "Upload an image to customize your repository\u2019s social media preview. Images should be at least 640\u00d73",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2668,
+      "width": 920,
+      "height": 73
+    }
+  },
+  {
+    "id": 126,
+    "type": "link",
+    "text": "Download template",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2616,
+      "width": 125,
+      "height": 18
+    }
+  },
+  {
+    "id": 127,
+    "type": "div",
+    "text": "Edit",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2585,
+      "width": 920,
+      "height": 39
+    }
+  },
+  {
+    "id": 128,
+    "type": "details",
+    "text": "Edit",
+    "role": "details",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2585,
+      "width": 920,
+      "height": 39
+    }
+  },
+  {
+    "id": 129,
+    "type": "summary",
+    "text": "Edit",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2585,
+      "width": 920,
+      "height": 31
+    }
+  },
+  {
+    "id": 130,
+    "type": "div",
+    "text": "Edit",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2585,
+      "width": 61,
+      "height": 31
+    }
+  },
+  {
+    "id": 131,
+    "type": "div",
+    "text": "Features",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2507,
+      "width": 920,
+      "height": 44
+    }
+  },
+  {
+    "id": 132,
+    "type": "div",
+    "text": "Wikis Loading Wikis host documentation for your repository. Restrict editing to collaborators only L",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -2463,
+      "width": 920,
+      "height": 1122
+    }
+  },
+  {
+    "id": 133,
+    "type": "form",
+    "text": "Wikis Loading Wikis host documentation for your repository. Restrict editing to collaborators only L",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -2463,
+      "width": 918,
+      "height": 109
+    }
+  },
+  {
+    "id": 134,
+    "type": "div",
+    "text": "Wikis Loading Wikis host documentation for your repository. Restrict editing to collaborators only L",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -2463,
+      "width": 918,
+      "height": 109
+    }
+  },
+  {
+    "id": 135,
+    "type": "div",
+    "text": "Wikis",
+    "role": "group",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -2447,
+      "width": 886,
+      "height": 93
+    }
+  },
+  {
+    "id": 136,
+    "type": "input:checkbox",
+    "text": "Wikis: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -2443,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 137,
+    "type": "label",
+    "text": "Wikis",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2446,
+      "width": 34,
+      "height": 18
+    }
+  },
+  {
+    "id": 138,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 527,
+      "y": -2447,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 139,
+    "type": "div",
+    "text": "Restrict editing to collaborators only Loading Public wikis will still be readable by everyone.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2393,
+      "width": 866,
+      "height": 39
+    }
+  },
+  {
+    "id": 140,
+    "type": "input:checkbox",
+    "text": "Restrict editing to collaborators only: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2389,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 141,
+    "type": "label",
+    "text": "Restrict editing to collaborators only",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 505,
+      "y": -2392,
+      "width": 232,
+      "height": 18
+    }
+  },
+  {
+    "id": 142,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 745,
+      "y": -2393,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 143,
+    "type": "div",
+    "text": "Issues Loading Issues integrate lightweight task tracking into your repository. Keep projects on tra",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -2339,
+      "width": 918,
+      "height": 270
+    }
+  },
+  {
+    "id": 144,
+    "type": "div",
+    "text": "Issues Loading Issues integrate lightweight task tracking into your repository. Keep projects on tra",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -2323,
+      "width": 886,
+      "height": 255
+    }
+  },
+  {
+    "id": 145,
+    "type": "form",
+    "text": "Issues Loading Issues integrate lightweight task tracking into your repository. Keep projects on tra",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2323,
+      "width": 866,
+      "height": 39
+    }
+  },
+  {
+    "id": 146,
+    "type": "input:checkbox",
+    "text": "Issues: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -2319,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 147,
+    "type": "label",
+    "text": "Issues",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2323,
+      "width": 38,
+      "height": 18
+    }
+  },
+  {
+    "id": 148,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 531,
+      "y": -2323,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 149,
+    "type": "div",
+    "text": "Issue permissions Creation allowed by: All users Loading If restricted, issues will still be readabl",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2276,
+      "width": 866,
+      "height": 79
+    }
+  },
+  {
+    "id": 150,
+    "type": "div",
+    "text": "Creation allowed by: All users Loading If restricted, issues will still be readable by everyone who ",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2247,
+      "width": 866,
+      "height": 50
+    }
+  },
+  {
+    "id": 151,
+    "type": "button",
+    "text": "Creation allowed by: All users (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2247,
+      "width": 229,
+      "height": 32
+    }
+  },
+  {
+    "id": 152,
+    "type": "span",
+    "text": "Creation allowed by: All users",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -2242,
+      "width": 187,
+      "height": 21
+    }
+  },
+  {
+    "id": 153,
+    "type": "span",
+    "text": "Creation allowed by: All users",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -2242,
+      "width": 187,
+      "height": 21
+    }
+  },
+  {
+    "id": 154,
+    "type": "span",
+    "text": "Creation allowed by:",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -2241,
+      "width": 130,
+      "height": 18
+    }
+  },
+  {
+    "id": 155,
+    "type": "span",
+    "text": "All users",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 628,
+      "y": -2241,
+      "width": 57,
+      "height": 18
+    }
+  },
+  {
+    "id": 156,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 722,
+      "y": -2239,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 157,
+    "type": "div",
+    "text": "Get organized with issue templates Give contributors issue templates that help you cut through the n",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2181,
+      "width": 866,
+      "height": 113
+    }
+  },
+  {
+    "id": 158,
+    "type": "div",
+    "text": "Get organized with issue templates Give contributors issue templates that help you cut through the n",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 502,
+      "y": -2161,
+      "width": 833,
+      "height": 71
+    }
+  },
+  {
+    "id": 159,
+    "type": "div",
+    "text": "Get organized with issue templates Give contributors issue templates that help you cut through the n",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 502,
+      "y": -2161,
+      "width": 692,
+      "height": 71
+    }
+  },
+  {
+    "id": 160,
+    "type": "div",
+    "text": "Set up templates",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1194,
+      "y": -2141,
+      "width": 141,
+      "height": 32
+    }
+  },
+  {
+    "id": 161,
+    "type": "link",
+    "text": "Set up templates",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1194,
+      "y": -2141,
+      "width": 141,
+      "height": 32
+    }
+  },
+  {
+    "id": 162,
+    "type": "form",
+    "text": "Sponsorships Loading Sponsorships help your community know how to financially support this repositor",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -2053,
+      "width": 918,
+      "height": 253
+    }
+  },
+  {
+    "id": 163,
+    "type": "div",
+    "text": "Sponsorships Loading Sponsorships help your community know how to financially support this repositor",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -2053,
+      "width": 918,
+      "height": 183
+    }
+  },
+  {
+    "id": 164,
+    "type": "div",
+    "text": "Sponsorships Loading Sponsorships help your community know how to financially support this repositor",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -2037,
+      "width": 886,
+      "height": 168
+    }
+  },
+  {
+    "id": 165,
+    "type": "input:checkbox",
+    "text": "Sponsorships: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -2033,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 166,
+    "type": "label",
+    "text": "Sponsorships",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -2036,
+      "width": 85,
+      "height": 18
+    }
+  },
+  {
+    "id": 167,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 585,
+      "y": -2037,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 168,
+    "type": "div",
+    "text": "Display a \"Sponsor\" button Add links to GitHub Sponsors or third-party methods your repository accep",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1982,
+      "width": 866,
+      "height": 113
+    }
+  },
+  {
+    "id": 169,
+    "type": "div",
+    "text": "Display a \"Sponsor\" button Add links to GitHub Sponsors or third-party methods your repository accep",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 502,
+      "y": -1961,
+      "width": 833,
+      "height": 71
+    }
+  },
+  {
+    "id": 170,
+    "type": "div",
+    "text": "Display a \"Sponsor\" button Add links to GitHub Sponsors or third-party methods your repository accep",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 502,
+      "y": -1961,
+      "width": 657,
+      "height": 71
+    }
+  },
+  {
+    "id": 171,
+    "type": "div",
+    "text": "Set up sponsor button",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1159,
+      "y": -1942,
+      "width": 176,
+      "height": 32
+    }
+  },
+  {
+    "id": 172,
+    "type": "link",
+    "text": "Set up sponsor button",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1159,
+      "y": -1942,
+      "width": 176,
+      "height": 32
+    }
+  },
+  {
+    "id": 173,
+    "type": "div",
+    "text": "Preserve this repository Loading Include this code in the GitHub Archive Program.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -1855,
+      "width": 918,
+      "height": 55
+    }
+  },
+  {
+    "id": 174,
+    "type": "div",
+    "text": "Preserve this repository Loading Include this code in the GitHub Archive Program.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1839,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 175,
+    "type": "input:checkbox",
+    "text": "Preserve this repository: 0",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1835,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 176,
+    "type": "label",
+    "text": "Preserve this repository",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1838,
+      "width": 154,
+      "height": 18
+    }
+  },
+  {
+    "id": 177,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 643,
+      "y": -1839,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 178,
+    "type": "link",
+    "text": "GitHub Archive Program",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 612,
+      "y": -1817,
+      "width": 129,
+      "height": 16
+    }
+  },
+  {
+    "id": 179,
+    "type": "form",
+    "text": "Discussions Loading Discussions is the space for your community to have conversations, ask questions",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -1785,
+      "width": 918,
+      "height": 55
+    }
+  },
+  {
+    "id": 180,
+    "type": "div",
+    "text": "Discussions Loading Discussions is the space for your community to have conversations, ask questions",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -1785,
+      "width": 918,
+      "height": 55
+    }
+  },
+  {
+    "id": 181,
+    "type": "div",
+    "text": "Discussions Loading Discussions is the space for your community to have conversations, ask questions",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1769,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 182,
+    "type": "input:checkbox",
+    "text": "Discussions: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1765,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 183,
+    "type": "label",
+    "text": "Discussions",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1768,
+      "width": 73,
+      "height": 18
+    }
+  },
+  {
+    "id": 184,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 566,
+      "y": -1769,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 185,
+    "type": "div",
+    "text": "Get started with Discussions Engage your community by having discussions right in your repository, w",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 481,
+      "y": -1714,
+      "width": 870,
+      "height": 113
+    }
+  },
+  {
+    "id": 186,
+    "type": "div",
+    "text": "Get started with Discussions Engage your community by having discussions right in your repository, w",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -1693,
+      "width": 837,
+      "height": 71
+    }
+  },
+  {
+    "id": 187,
+    "type": "div",
+    "text": "Get started with Discussions Engage your community by having discussions right in your repository, w",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -1693,
+      "width": 688,
+      "height": 71
+    }
+  },
+  {
+    "id": 188,
+    "type": "form",
+    "text": "",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1186,
+      "y": -1674,
+      "width": 149,
+      "height": 32
+    }
+  },
+  {
+    "id": 189,
+    "type": "input:submit",
+    "text": "Set up discussions",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1186,
+      "y": -1674,
+      "width": 149,
+      "height": 32
+    }
+  },
+  {
+    "id": 190,
+    "type": "form",
+    "text": "Projects Loading Projects on GitHub are created at the repository owner's level (organization or use",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -1586,
+      "width": 918,
+      "height": 73
+    }
+  },
+  {
+    "id": 191,
+    "type": "div",
+    "text": "Projects Loading Projects on GitHub are created at the repository owner's level (organization or use",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -1586,
+      "width": 918,
+      "height": 73
+    }
+  },
+  {
+    "id": 192,
+    "type": "div",
+    "text": "Projects Loading Projects on GitHub are created at the repository owner's level (organization or use",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1570,
+      "width": 886,
+      "height": 57
+    }
+  },
+  {
+    "id": 193,
+    "type": "input:checkbox",
+    "text": "Projects: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1566,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 194,
+    "type": "label",
+    "text": "Projects",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1569,
+      "width": 50,
+      "height": 18
+    }
+  },
+  {
+    "id": 195,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 543,
+      "y": -1570,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 196,
+    "type": "div",
+    "text": "Pull requests Loading Pull requests allow others to suggest changes to your repository. Pull request",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -1498,
+      "width": 918,
+      "height": 142
+    }
+  },
+  {
+    "id": 197,
+    "type": "div",
+    "text": "Pull requests Loading Pull requests allow others to suggest changes to your repository. Pull request",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1482,
+      "width": 886,
+      "height": 126
+    }
+  },
+  {
+    "id": 198,
+    "type": "form",
+    "text": "Pull requests Loading Pull requests allow others to suggest changes to your repository.",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1482,
+      "width": 866,
+      "height": 39
+    }
+  },
+  {
+    "id": 199,
+    "type": "input:checkbox",
+    "text": "Pull requests: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1478,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 200,
+    "type": "label",
+    "text": "Pull requests",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1481,
+      "width": 81,
+      "height": 18
+    }
+  },
+  {
+    "id": 201,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 574,
+      "y": -1482,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 202,
+    "type": "div",
+    "text": "Pull request permissions Creation allowed by: All users Loading If restricted, pull requests will st",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1435,
+      "width": 866,
+      "height": 79
+    }
+  },
+  {
+    "id": 203,
+    "type": "div",
+    "text": "Creation allowed by: All users Loading If restricted, pull requests will still be readable by everyo",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1406,
+      "width": 866,
+      "height": 50
+    }
+  },
+  {
+    "id": 204,
+    "type": "button",
+    "text": "Creation allowed by: All users (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1406,
+      "width": 229,
+      "height": 32
+    }
+  },
+  {
+    "id": 205,
+    "type": "span",
+    "text": "Creation allowed by: All users",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -1401,
+      "width": 187,
+      "height": 21
+    }
+  },
+  {
+    "id": 206,
+    "type": "span",
+    "text": "Creation allowed by: All users",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -1401,
+      "width": 187,
+      "height": 21
+    }
+  },
+  {
+    "id": 207,
+    "type": "span",
+    "text": "Creation allowed by:",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 498,
+      "y": -1400,
+      "width": 130,
+      "height": 18
+    }
+  },
+  {
+    "id": 208,
+    "type": "span",
+    "text": "All users",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 628,
+      "y": -1400,
+      "width": 57,
+      "height": 18
+    }
+  },
+  {
+    "id": 209,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 722,
+      "y": -1398,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 210,
+    "type": "div",
+    "text": "Pull Requests",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -1300,
+      "width": 920,
+      "height": 45
+    }
+  },
+  {
+    "id": 211,
+    "type": "form",
+    "text": "Allow merge commits Loading Add all commits from the head branch to the base branch with a merge com",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -1188,
+      "width": 920,
+      "height": 725
+    }
+  },
+  {
+    "id": 212,
+    "type": "div",
+    "text": "Allow merge commits Loading Add all commits from the head branch to the base branch with a merge com",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -1188,
+      "width": 920,
+      "height": 373
+    }
+  },
+  {
+    "id": 213,
+    "type": "div",
+    "text": "Allow merge commits Loading Add all commits from the head branch to the base branch with a merge com",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1172,
+      "width": 886,
+      "height": 122
+    }
+  },
+  {
+    "id": 214,
+    "type": "div",
+    "text": "Allow merge commits Loading Add all commits from the head branch to the base branch with a merge com",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1172,
+      "width": 886,
+      "height": 122
+    }
+  },
+  {
+    "id": 215,
+    "type": "label",
+    "text": "Allow merge commits",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1171,
+      "width": 139,
+      "height": 18
+    }
+  },
+  {
+    "id": 216,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 633,
+      "y": -1172,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 217,
+    "type": "input:checkbox",
+    "text": "Allow merge commits: merge_commit",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1168,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 218,
+    "type": "div",
+    "text": "Default commit message Presented when merging a pull request with merge. Default message",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1125,
+      "width": 866,
+      "height": 75
+    }
+  },
+  {
+    "id": 219,
+    "type": "details",
+    "text": "Default message",
+    "role": "details",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1082,
+      "width": 866,
+      "height": 32
+    }
+  },
+  {
+    "id": 220,
+    "type": "summary",
+    "text": "Default message",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1082,
+      "width": 151,
+      "height": 32
+    }
+  },
+  {
+    "id": 221,
+    "type": "span",
+    "text": "Default message",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 502,
+      "y": -1075,
+      "width": 105,
+      "height": 18
+    }
+  },
+  {
+    "id": 222,
+    "type": "div",
+    "text": "Allow squash merging Loading Combine all commits from the head branch into a single commit in the ba",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1021,
+      "width": 886,
+      "height": 122
+    }
+  },
+  {
+    "id": 223,
+    "type": "div",
+    "text": "Allow squash merging Loading Combine all commits from the head branch into a single commit in the ba",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1021,
+      "width": 886,
+      "height": 122
+    }
+  },
+  {
+    "id": 224,
+    "type": "label",
+    "text": "Allow squash merging",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -1020,
+      "width": 141,
+      "height": 18
+    }
+  },
+  {
+    "id": 225,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 635,
+      "y": -1021,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 226,
+    "type": "input:checkbox",
+    "text": "Allow squash merging: squash_merge",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -1017,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 227,
+    "type": "div",
+    "text": "Default commit message Presented when merging a pull request with squash. Default message",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -974,
+      "width": 866,
+      "height": 75
+    }
+  },
+  {
+    "id": 228,
+    "type": "details",
+    "text": "Default message",
+    "role": "details",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -931,
+      "width": 866,
+      "height": 32
+    }
+  },
+  {
+    "id": 229,
+    "type": "summary",
+    "text": "Default message",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -931,
+      "width": 151,
+      "height": 32
+    }
+  },
+  {
+    "id": 230,
+    "type": "span",
+    "text": "Default message",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 502,
+      "y": -924,
+      "width": 105,
+      "height": 18
+    }
+  },
+  {
+    "id": 231,
+    "type": "div",
+    "text": "Allow rebase merging Loading Add all commits from the head branch onto the base branch individually.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -869,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 232,
+    "type": "div",
+    "text": "Allow rebase merging Loading Add all commits from the head branch onto the base branch individually.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -869,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 233,
+    "type": "label",
+    "text": "Allow rebase merging",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -868,
+      "width": 139,
+      "height": 18
+    }
+  },
+  {
+    "id": 234,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 633,
+      "y": -869,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 235,
+    "type": "input:checkbox",
+    "text": "Allow rebase merging: rebase_merge",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -865,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 236,
+    "type": "div",
+    "text": "Always suggest updating pull request branches Loading Whenever there are new changes available in th",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -767,
+      "width": 920,
+      "height": 70
+    }
+  },
+  {
+    "id": 237,
+    "type": "div",
+    "text": "Always suggest updating pull request branches Loading Whenever there are new changes available in th",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -752,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 238,
+    "type": "div",
+    "text": "Always suggest updating pull request branches Loading Whenever there are new changes available in th",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -752,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 239,
+    "type": "label",
+    "text": "Always suggest updating pull request branches",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -751,
+      "width": 299,
+      "height": 18
+    }
+  },
+  {
+    "id": 240,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 794,
+      "y": -752,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 241,
+    "type": "input:checkbox",
+    "text": "Always suggest updating pull request branches: update_branch",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -748,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 242,
+    "type": "div",
+    "text": "Allow auto-merge Loading Waits for merge requirements to be met and then merges automatically. Learn",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -650,
+      "width": 920,
+      "height": 70
+    }
+  },
+  {
+    "id": 243,
+    "type": "div",
+    "text": "Allow auto-merge Loading Waits for merge requirements to be met and then merges automatically. Learn",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -634,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 244,
+    "type": "div",
+    "text": "Allow auto-merge Loading Waits for merge requirements to be met and then merges automatically. Learn",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -634,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 245,
+    "type": "label",
+    "text": "Allow auto-merge",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -634,
+      "width": 119,
+      "height": 18
+    }
+  },
+  {
+    "id": 246,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 609,
+      "y": -634,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 247,
+    "type": "input:checkbox",
+    "text": "Allow auto-merge: auto_merge",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -630,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 248,
+    "type": "link",
+    "text": "Learn more about auto-merge",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 871,
+      "y": -613,
+      "width": 60,
+      "height": 16
+    }
+  },
+  {
+    "id": 249,
+    "type": "div",
+    "text": "Automatically delete head branches Loading Deleted branches will still be able to be restored.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -533,
+      "width": 920,
+      "height": 70
+    }
+  },
+  {
+    "id": 250,
+    "type": "div",
+    "text": "Automatically delete head branches Loading Deleted branches will still be able to be restored.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -517,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 251,
+    "type": "div",
+    "text": "Automatically delete head branches Loading Deleted branches will still be able to be restored.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -517,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 252,
+    "type": "label",
+    "text": "Automatically delete head branches",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -516,
+      "width": 227,
+      "height": 18
+    }
+  },
+  {
+    "id": 253,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 721,
+      "y": -517,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 254,
+    "type": "input:checkbox",
+    "text": "Automatically delete head branches: delete_branch",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -513,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 255,
+    "type": "div",
+    "text": "Commits",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -422,
+      "width": 920,
+      "height": 44
+    }
+  },
+  {
+    "id": 256,
+    "type": "div",
+    "text": "Require contributors to sign off on web-based commits Loading Enabling this setting will require con",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -378,
+      "width": 920,
+      "height": 175
+    }
+  },
+  {
+    "id": 257,
+    "type": "div",
+    "text": "Require contributors to sign off on web-based commits Loading Enabling this setting will require con",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -378,
+      "width": 918,
+      "height": 73
+    }
+  },
+  {
+    "id": 258,
+    "type": "form",
+    "text": "Require contributors to sign off on web-based commits Loading Enabling this setting will require con",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -363,
+      "width": 886,
+      "height": 57
+    }
+  },
+  {
+    "id": 259,
+    "type": "div",
+    "text": "Require contributors to sign off on web-based commits Loading Enabling this setting will require con",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -363,
+      "width": 886,
+      "height": 57
+    }
+  },
+  {
+    "id": 260,
+    "type": "input:checkbox",
+    "text": "Require contributors to sign off on web-based commits: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -359,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 261,
+    "type": "label",
+    "text": "Require contributors to sign off on web-based commits",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -362,
+      "width": 352,
+      "height": 18
+    }
+  },
+  {
+    "id": 262,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 845,
+      "y": -363,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 263,
+    "type": "link",
+    "text": "Developer Certificate of Origin (DCO)",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 805,
+      "y": -323,
+      "width": 196,
+      "height": 16
+    }
+  },
+  {
+    "id": 264,
+    "type": "link",
+    "text": "Learn more about signing off on commits",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1008,
+      "y": -323,
+      "width": 220,
+      "height": 16
+    }
+  },
+  {
+    "id": 265,
+    "type": "div",
+    "text": "Allow comments on individual commits Loading Enabling this setting will allow anyone who can view th",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 449,
+      "y": -292,
+      "width": 918,
+      "height": 73
+    }
+  },
+  {
+    "id": 266,
+    "type": "form",
+    "text": "Allow comments on individual commits Loading Enabling this setting will allow anyone who can view th",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -276,
+      "width": 886,
+      "height": 57
+    }
+  },
+  {
+    "id": 267,
+    "type": "div",
+    "text": "Allow comments on individual commits Loading Enabling this setting will allow anyone who can view th",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -276,
+      "width": 886,
+      "height": 57
+    }
+  },
+  {
+    "id": 268,
+    "type": "input:checkbox",
+    "text": "Allow comments on individual commits: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -272,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 269,
+    "type": "label",
+    "text": "Allow comments on individual commits",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -275,
+      "width": 251,
+      "height": 18
+    }
+  },
+  {
+    "id": 270,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 744,
+      "y": -276,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 271,
+    "type": "link",
+    "text": "commit comments",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 881,
+      "y": -254,
+      "width": 99,
+      "height": 16
+    }
+  },
+  {
+    "id": 272,
+    "type": "div",
+    "text": "Archives",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -163,
+      "width": 920,
+      "height": 45
+    }
+  },
+  {
+    "id": 273,
+    "type": "form",
+    "text": "Include Git LFS objects in archives Git LFS usage in archives is billed at the same rate as usage wi",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -71,
+      "width": 920,
+      "height": 70
+    }
+  },
+  {
+    "id": 274,
+    "type": "div",
+    "text": "Include Git LFS objects in archives Git LFS usage in archives is billed at the same rate as usage wi",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": -71,
+      "width": 920,
+      "height": 70
+    }
+  },
+  {
+    "id": 275,
+    "type": "div",
+    "text": "Include Git LFS objects in archives Git LFS usage in archives is billed at the same rate as usage wi",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -56,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 276,
+    "type": "div",
+    "text": "Include Git LFS objects in archives Git LFS usage in archives is billed at the same rate as usage wi",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -56,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 277,
+    "type": "label",
+    "text": "Include Git LFS objects in archives",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": -55,
+      "width": 214,
+      "height": 18
+    }
+  },
+  {
+    "id": 278,
+    "type": "input:checkbox",
+    "text": "Include Git LFS objects in archives: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": -52,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 279,
+    "type": "div",
+    "text": "Pushes",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 39,
+      "width": 920,
+      "height": 44
+    }
+  },
+  {
+    "id": 280,
+    "type": "form",
+    "text": "Limit how many branches and tags can be updated in a single push Preview Loading Pushes will be reje",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 83,
+      "width": 920,
+      "height": 71
+    }
+  },
+  {
+    "id": 281,
+    "type": "div",
+    "text": "Limit how many branches and tags can be updated in a single push Preview Loading Pushes will be reje",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 83,
+      "width": 920,
+      "height": 71
+    }
+  },
+  {
+    "id": 282,
+    "type": "div",
+    "text": "Limit how many branches and tags can be updated in a single push Preview Loading Pushes will be reje",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 99,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 283,
+    "type": "div",
+    "text": "Limit how many branches and tags can be updated in a single push Preview Loading Pushes will be reje",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 99,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 284,
+    "type": "label",
+    "text": "Limit how many branches and tags can be updated in a single push",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": 100,
+      "width": 426,
+      "height": 18
+    }
+  },
+  {
+    "id": 285,
+    "type": "span",
+    "text": "Preview",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 923,
+      "y": 100,
+      "width": 60,
+      "height": 20
+    }
+  },
+  {
+    "id": 286,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 992,
+      "y": 99,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 287,
+    "type": "input:checkbox",
+    "text": "Limit how many branches and tags can be updated in a single push: true",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 103,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 288,
+    "type": "link",
+    "text": "Learn more about this setting",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 828,
+      "y": 121,
+      "width": 156,
+      "height": 16
+    }
+  },
+  {
+    "id": 289,
+    "type": "link",
+    "text": "feedback",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1084,
+      "y": 121,
+      "width": 48,
+      "height": 16
+    }
+  },
+  {
+    "id": 290,
+    "type": "div",
+    "text": "Issues",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 194,
+      "width": 920,
+      "height": 45
+    }
+  },
+  {
+    "id": 291,
+    "type": "form",
+    "text": "After merging a pull request, linked issues can be closed automatically. Auto-close issues with merg",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 255,
+      "width": 920,
+      "height": 101
+    }
+  },
+  {
+    "id": 292,
+    "type": "div",
+    "text": "Auto-close issues with merged linked pull requests Loading Whenever linked pull requests have merged",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 286,
+      "width": 920,
+      "height": 70
+    }
+  },
+  {
+    "id": 293,
+    "type": "div",
+    "text": "Auto-close issues with merged linked pull requests Loading Whenever linked pull requests have merged",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 301,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 294,
+    "type": "div",
+    "text": "Auto-close issues with merged linked pull requests Loading Whenever linked pull requests have merged",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 301,
+      "width": 886,
+      "height": 39
+    }
+  },
+  {
+    "id": 295,
+    "type": "label",
+    "text": "Auto-close issues with merged linked pull requests",
+    "role": "label",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": 302,
+      "width": 322,
+      "height": 18
+    }
+  },
+  {
+    "id": 296,
+    "type": "span",
+    "text": "Loading",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 816,
+      "y": 301,
+      "width": 16,
+      "height": 16
+    }
+  },
+  {
+    "id": 297,
+    "type": "input:checkbox",
+    "text": "Auto-close issues with merged linked pull requests: 1",
+    "role": "input",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 305,
+      "width": 13,
+      "height": 13
+    }
+  },
+  {
+    "id": 298,
+    "type": "div",
+    "text": "Danger Zone",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 396,
+      "width": 920,
+      "height": 44
+    }
+  },
+  {
+    "id": 299,
+    "type": "div",
+    "text": "Change visibility Change to private Change repository visibility This repository is currently public",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 448,
+      "y": 440,
+      "width": 920,
+      "height": 371
+    }
+  },
+  {
+    "id": 300,
+    "type": "div",
+    "text": "Change visibility Change to private",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1222,
+      "y": 462,
+      "width": 130,
+      "height": 32
+    }
+  },
+  {
+    "id": 301,
+    "type": "button",
+    "text": "Change visibility (opens menu)",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1222,
+      "y": 462,
+      "width": 130,
+      "height": 32
+    }
+  },
+  {
+    "id": 302,
+    "type": "span",
+    "text": "Change visibility",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1235,
+      "y": 467,
+      "width": 104,
+      "height": 21
+    }
+  },
+  {
+    "id": 303,
+    "type": "span",
+    "text": "Change visibility",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1235,
+      "y": 467,
+      "width": 104,
+      "height": 21
+    }
+  },
+  {
+    "id": 304,
+    "type": "div",
+    "text": "Change to private",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1160,
+      "y": 498,
+      "width": 192,
+      "height": 49
+    }
+  },
+  {
+    "id": 305,
+    "type": "div",
+    "text": "Change to private",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1160,
+      "y": 498,
+      "width": 192,
+      "height": 49
+    }
+  },
+  {
+    "id": 306,
+    "type": "div",
+    "text": "Change to private",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1160,
+      "y": 498,
+      "width": 192,
+      "height": 49
+    }
+  },
+  {
+    "id": 307,
+    "type": "button",
+    "text": "Change to private",
+    "role": "menuitem",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1168,
+      "y": 506,
+      "width": 176,
+      "height": 33
+    }
+  },
+  {
+    "id": 308,
+    "type": "span",
+    "text": "Change to private",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1176,
+      "y": 512,
+      "width": 160,
+      "height": 21
+    }
+  },
+  {
+    "id": 309,
+    "type": "div",
+    "text": "Change repository visibility This repository is currently public.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 457,
+      "width": 741,
+      "height": 42
+    }
+  },
+  {
+    "id": 310,
+    "type": "div",
+    "text": "This repository is currently public.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 478,
+      "width": 741,
+      "height": 21
+    }
+  },
+  {
+    "id": 311,
+    "type": "div",
+    "text": "Disable branch protection rules Disable branch protection rules enforcement and APIs",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 530,
+      "width": 646,
+      "height": 42
+    }
+  },
+  {
+    "id": 312,
+    "type": "form",
+    "text": "Disable branch protection rules",
+    "role": "form",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1127,
+      "y": 535,
+      "width": 224,
+      "height": 32
+    }
+  },
+  {
+    "id": 313,
+    "type": "button",
+    "text": "Disable branch protection rules",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1127,
+      "y": 535,
+      "width": 224,
+      "height": 32
+    }
+  },
+  {
+    "id": 314,
+    "type": "span",
+    "text": "Disable branch protection rules",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1140,
+      "y": 541,
+      "width": 199,
+      "height": 21
+    }
+  },
+  {
+    "id": 315,
+    "type": "span",
+    "text": "Disable branch protection rules",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1140,
+      "y": 541,
+      "width": 199,
+      "height": 21
+    }
+  },
+  {
+    "id": 316,
+    "type": "div",
+    "text": "Transfer ownership Transfer this repository to another user or to an organization where you have the",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 604,
+      "width": 794,
+      "height": 42
+    }
+  },
+  {
+    "id": 317,
+    "type": "div",
+    "text": "Transfer ownership Transfer this repository to another user or to an organization where you have the",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 604,
+      "width": 794,
+      "height": 42
+    }
+  },
+  {
+    "id": 318,
+    "type": "link",
+    "text": "Transfer",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1275,
+      "y": 609,
+      "width": 76,
+      "height": 32
+    }
+  },
+  {
+    "id": 319,
+    "type": "span",
+    "text": "Transfer",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1288,
+      "y": 615,
+      "width": 51,
+      "height": 21
+    }
+  },
+  {
+    "id": 320,
+    "type": "span",
+    "text": "Transfer",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1288,
+      "y": 615,
+      "width": 51,
+      "height": 21
+    }
+  },
+  {
+    "id": 321,
+    "type": "div",
+    "text": "Archive this repository Mark this repository as archived and read-only.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 678,
+      "width": 702,
+      "height": 42
+    }
+  },
+  {
+    "id": 322,
+    "type": "div",
+    "text": "Archive this repository",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1183,
+      "y": 683,
+      "width": 169,
+      "height": 32
+    }
+  },
+  {
+    "id": 323,
+    "type": "button",
+    "text": "Archive this repository",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1183,
+      "y": 683,
+      "width": 169,
+      "height": 32
+    }
+  },
+  {
+    "id": 324,
+    "type": "span",
+    "text": "Archive this repository",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1196,
+      "y": 689,
+      "width": 143,
+      "height": 21
+    }
+  },
+  {
+    "id": 325,
+    "type": "span",
+    "text": "Archive this repository",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1196,
+      "y": 689,
+      "width": 143,
+      "height": 21
+    }
+  },
+  {
+    "id": 326,
+    "type": "div",
+    "text": "Delete this repository",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1189,
+      "y": 757,
+      "width": 162,
+      "height": 32
+    }
+  },
+  {
+    "id": 327,
+    "type": "div",
+    "text": "Delete this repository Once you delete a repository, there is no going back. Please be certain.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 752,
+      "width": 708,
+      "height": 42
+    }
+  },
+  {
+    "id": 328,
+    "type": "div",
+    "text": "Delete this repository Once you delete a repository, there is no going back. Please be certain.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 465,
+      "y": 752,
+      "width": 708,
+      "height": 42
+    }
+  },
+  {
+    "id": 329,
+    "type": "footer",
+    "text": "Footer \u00a9 2026 GitHub, Inc. Footer navigation Terms Privacy Security Status Community Docs Contact Ma",
+    "role": "contentinfo",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 0,
+      "y": 811,
+      "width": 1521,
+      "height": 113
+    }
+  },
+  {
+    "id": 330,
+    "type": "div",
+    "text": "\u00a9 2026 GitHub, Inc. Footer navigation Terms Privacy Security Status Community Docs Contact Manage co",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 16,
+      "y": 859,
+      "width": 1489,
+      "height": 25
+    }
+  },
+  {
+    "id": 331,
+    "type": "div",
+    "text": "\u00a9 2026 GitHub, Inc.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 341,
+      "y": 859,
+      "width": 137,
+      "height": 25
+    }
+  },
+  {
+    "id": 332,
+    "type": "link",
+    "text": "GitHub Homepage",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 341,
+      "y": 859,
+      "width": 24,
+      "height": 25
+    }
+  },
+  {
+    "id": 333,
+    "type": "span",
+    "text": "\u00a9 2026 GitHub, Inc.",
+    "role": "span",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 373,
+      "y": 862,
+      "width": 105,
+      "height": 18
+    }
+  },
+  {
+    "id": 334,
+    "type": "nav",
+    "text": "Footer",
+    "role": "nav",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 485,
+      "y": 862,
+      "width": 703,
+      "height": 18
+    }
+  },
+  {
+    "id": 335,
+    "type": "link",
+    "text": "Terms",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 493,
+      "y": 863,
+      "width": 31,
+      "height": 16
+    }
+  },
+  {
+    "id": 336,
+    "type": "link",
+    "text": "Privacy",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 540,
+      "y": 863,
+      "width": 37,
+      "height": 16
+    }
+  },
+  {
+    "id": 337,
+    "type": "link",
+    "text": "Security",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 593,
+      "y": 863,
+      "width": 42,
+      "height": 16
+    }
+  },
+  {
+    "id": 338,
+    "type": "link",
+    "text": "Status",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 651,
+      "y": 863,
+      "width": 32,
+      "height": 16
+    }
+  },
+  {
+    "id": 339,
+    "type": "link",
+    "text": "Community",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 700,
+      "y": 863,
+      "width": 62,
+      "height": 16
+    }
+  },
+  {
+    "id": 340,
+    "type": "link",
+    "text": "Docs",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 777,
+      "y": 863,
+      "width": 26,
+      "height": 16
+    }
+  },
+  {
+    "id": 341,
+    "type": "link",
+    "text": "Contact",
+    "role": "a",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 819,
+      "y": 863,
+      "width": 41,
+      "height": 16
+    }
+  },
+  {
+    "id": 342,
+    "type": "button",
+    "text": "Manage cookies",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 876,
+      "y": 862,
+      "width": 86,
+      "height": 18
+    }
+  },
+  {
+    "id": 343,
+    "type": "button",
+    "text": "Do not share my personal information",
+    "role": "button",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 978,
+      "y": 862,
+      "width": 202,
+      "height": 18
+    }
+  },
+  {
+    "id": 344,
+    "type": "div",
+    "text": "Click the 'Change visibility' button to open the visibility options.",
+    "role": "div",
+    "enabled": true,
+    "visible": true,
+    "bounds": {
+      "x": 1222,
+      "y": 426,
+      "width": 299,
+      "height": 53
     }
   }
 ]

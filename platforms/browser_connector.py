@@ -108,9 +108,10 @@ class BrowserConnector(UIConnector):
                         msg_type = {
                             "dom_mutated": "DOM_MUTATED",
                             "user_click": "USER_CLICK",
+                            "user_input": "USER_INPUT",
                             "page_navigated": "PAGE_NAVIGATED",
                         }.get(data.get("type"))
-                    if msg_type in ("DOM_MUTATED", "USER_CLICK", "PAGE_NAVIGATED"):
+                    if msg_type in ("DOM_MUTATED", "USER_CLICK", "USER_INPUT", "PAGE_NAVIGATED"):
                         if msg_type == "USER_CLICK":
                             self._click_events.append(data)
                         callback_data = {
@@ -118,6 +119,7 @@ class BrowserConnector(UIConnector):
                             "type": {
                                 "DOM_MUTATED": "dom_mutated",
                                 "USER_CLICK": "user_click",
+                                "USER_INPUT": "user_input",
                                 "PAGE_NAVIGATED": "page_navigated",
                             }[msg_type],
                         }

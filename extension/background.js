@@ -225,6 +225,14 @@ chrome.runtime.onMessage.addListener((message) => {
       url: message.url,
       isNavigation: Boolean(message.isNavigation),
     });
+  } else if (message.action === 'USER_INPUT') {
+    sendToBridge({
+      type: 'user_input',
+      elementId: message.elementId,
+      targetText: message.targetText || '',
+      hasValue: Boolean(message.hasValue),
+      url: message.url,
+    });
   } else if (message.action === 'DOM_MUTATED') {
     sendToBridge({ type: 'dom_mutated', url: message.url });
   }

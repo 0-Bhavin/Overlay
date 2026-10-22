@@ -49,15 +49,30 @@
    * @returns {string}
    */
   function extractElementText(el) {
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      return (el.value || el.placeholder || el.getAttribute('aria-label') || el.name || '').trim();
-    }
     const ariaLabel = el.getAttribute('aria-label') || el.getAttribute('title');
-    if (ariaLabel) return ariaLabel.trim();
-
-    // Direct child text nodes or clean innerText (truncated to avoid giant text blocks)
-    let text = (el.innerText || el.textContent || '').trim();
-    return text.replace(/\s+/g, ' ').slice(0, 100);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      let label = ariaLabel || Array.from(el.labels || []).map(item => item.innerText).find(Boolean);
+      if (!label) {
+        // Some React forms render a sibling label without a `for` attribute.
+        let ancestor = el.parentElement;
+        for (let depth = 0; ancestor && depth < 3 && !label; depth++, ancestor = ancestor.parentElement) {
+          const nearby = ancestor.querySelector('label');
+          if (nearby) label = nearby.innerText;
+        }
+      }
+      label = (label || el.placeholder || el.name || '').trim().replace(/\s+/g, ' ');
+      const value = el.getAttribute('type') === 'password' ? '' : (el.value || '').trim();
+      return (label && value ? `${label}: ${value}` : label || value).slice(0, 100);
+    }
+    const text = (ariaLabel || el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
+    // Preserve the DOM schema while exposing that a button is a disclosure,
+    // rather than the final option shown after opening its menu/dialog.
+    const opensMenu = el.tagName === 'BUTTON' && (
+      (el.getAttribute('aria-haspopup') && el.getAttribute('aria-haspopup') !== 'false')
+      || el.getAttribute('aria-expanded') === 'false'
+    );
+    const visibleText = text || (el.tagName === 'BUTTON' ? (el.parentElement?.innerText || '').trim().replace(/\s+/g, ' ') : '');
+    return (visibleText + (opensMenu ? ' (opens menu)' : '')).trim().slice(0, 100);
   }
 
   /**
@@ -147,7 +162,8 @@
 
   // Export to global scope
   global.AIOverlayDOMExtractor = {
-    extractSimplifiedDOM: extractSimplifiedDOM
+    extractSimplifiedDOM: extractSimplifiedDOM,
+    extractElementText: extractElementText
   };
 
 })(typeof window !== 'undefined' ? window : this);

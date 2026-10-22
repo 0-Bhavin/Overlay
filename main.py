@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import sys
+import time
 from collections.abc import Callable
 from typing import Any, cast
 
@@ -26,6 +27,7 @@ from core.UI import TaskInputDialog
 from core.tts import TTSEngine
 from core.completion_toast import CompletionToast
 from core.ai_task_generator import GeminiTaskGenerator, VerifyResponse
+from core.website_step_grounding import filter_steps_to_dom as _filter_steps_to_dom
 from core.task_plan import (
     MAX_ATTEMPTS_PER_MILESTONE,
     MAX_REPLANS,
@@ -86,6 +88,15 @@ class _SubTaskWorker(QObject):
     def run(self) -> None:
         try:
             dom = self._connector.get_tree(timeout=8.0)
+            # Retry if the page is still loading (0 nodes returned after navigation)
+            if not dom:
+                _log.info("MilestoneVerifyWorker: empty DOM on first fetch — page may still be loading, retrying...")
+                for _attempt in range(5):
+                    time.sleep(2.0)
+                    dom = self._connector.get_tree(timeout=8.0)
+                    _log.info("MilestoneVerifyWorker: retry %d returned %d nodes", _attempt + 1, len(dom))
+                    if dom:
+                        break
             if not dom:
                 raise RuntimeError("The browser returned an empty DOM at the verification point")
             url = self._connector.current_url or "Current browser page"
@@ -132,44 +143,6 @@ def _get_step_element_id(step: Step) -> int | None:
     """Return the DOM element ID for a step, or None if not available."""
     return getattr(step, "element_id", None)
 
-
-def _filter_steps_to_dom(steps: list[dict], dom: list[dict]) -> list[dict]:
-    """Drop generated steps whose target cannot be found in the supplied DOM."""
-    nodes_by_id = {str(node.get("id")): node for node in dom if node.get("id") is not None}
-    filtered = []
-    for step in steps:
-        element = step.get("element") if isinstance(step, dict) else None
-        if not isinstance(element, dict):
-            _log.warning("Dropping generated step without element mapping: %r", step)
-            continue
-        element_id = element.get("id")
-        raw_text = element.get("text") or element.get("aria_label") or element.get("name") or ""
-        needle = " ".join(str(raw_text).casefold().split())
-        if element_id is not None and str(element_id) in nodes_by_id:
-            id_node = nodes_by_id[str(element_id)]
-            id_text = " ".join(str(id_node.get("text") or "").casefold().split())
-            if not needle or id_text == needle or (len(needle) >= 3 and needle in id_text):
-                filtered.append(step)
-                continue
-        tag = str(element.get("tag") or "").casefold()
-        expected_type = "link" if tag == "a" else tag
-        found = False
-        if needle:
-            for node in dom:
-                node_text = " ".join(str(node.get("text") or "").casefold().split())
-                node_type = str(node.get("type") or "").casefold()
-                text_matches = node_text == needle or (
-                    len(needle) >= 3 and (needle in node_text or node_text in needle)
-                )
-                type_matches = not expected_type or node_type == expected_type or node.get("role") == tag
-                if text_matches and type_matches:
-                    found = True
-                    break
-        if found:
-            filtered.append(step)
-        else:
-            _log.warning("Dropping generated step not grounded in current DOM: %r", raw_text or step.get("description"))
-    return filtered
 
 
 def main() -> None:
@@ -316,10 +289,12 @@ def main() -> None:
             # Track pending element_id and target for click detection
             pending_element_id: int | None = None
             pending_target: str = ""
+            pending_action: str = ""
             subtask_thread: QThread | None = None
             subtask_worker: _SubTaskWorker | None = None
             navigation_pending = False
             empty_step_retries = 0
+            waiting_poll_retries = 0
             last_completed_step = ""
             last_page_url = browser_connector.current_url
             navigation_invoker = _MainThreadInvoker()
@@ -393,9 +368,14 @@ def main() -> None:
                     QTimer.singleShot(200, try_again)
 
                 def _track_element(step) -> None:
-                    nonlocal pending_element_id, pending_target
+                    nonlocal pending_element_id, pending_target, pending_action
                     pending_element_id = _get_step_element_id(step)
                     pending_target = getattr(step, "target", "")
+                    pending_action = str(getattr(step, "action", "click")).casefold()
+                    if pending_action == "click":
+                        import re
+                        if re.search(r"\b(type|enter|fill|write)\b.*\b(field|input|name|text|description|title)\b", step.tooltip, re.IGNORECASE):
+                            pending_action = "type"
 
                 def _on_subtask_thread_finished() -> None:
                     nonlocal subtask_thread, subtask_worker
@@ -411,8 +391,16 @@ def main() -> None:
                         + reason,
                     )
 
+                _WAIT_KEYWORDS = (
+                    "wait", "waiting", "provision", "provisioning", "creat",
+                    "loading", "in progress", "not yet", "not available",
+                    "being created", "still", "pending",
+                )
+                _MAX_WAIT_POLLS = 20   # up to 20 × 30 s = 10 minutes
+                _WAIT_POLL_MS  = 30_000  # 30 seconds between polls
+
                 def _on_subtask_success(payload: object) -> None:
-                    nonlocal navigation_pending, empty_step_retries
+                    nonlocal navigation_pending, empty_step_retries, waiting_poll_retries
                     navigation_pending = False
                     data = payload if isinstance(payload, dict) else {}
                     response = data.get("response")
@@ -438,6 +426,18 @@ def main() -> None:
                     task_plan.save(plan_path)
                     grounded_steps = _filter_steps_to_dom(response.steps, dom)
                     if not grounded_steps:
+                        reason_lower = (response.reason or "").lower()
+                        is_wait_state = any(kw in reason_lower for kw in _WAIT_KEYWORDS)
+                        if is_wait_state and waiting_poll_retries < _MAX_WAIT_POLLS:
+                            waiting_poll_retries += 1
+                            _log.info(
+                                "Page is in a wait/provisioning state — polling again in %ds (%d/%d): %s",
+                                _WAIT_POLL_MS // 1000, waiting_poll_retries, _MAX_WAIT_POLLS,
+                                response.reason,
+                            )
+                            QTimer.singleShot(_WAIT_POLL_MS, _schedule_subtask_on_main_thread)
+                            return
+                        waiting_poll_retries = 0  # reset for next milestone
                         if empty_step_retries < 1:
                             empty_step_retries += 1
                             _log.info("No DOM-grounded steps generated; retrying after page settle (%d/1)", empty_step_retries)
@@ -446,6 +446,7 @@ def main() -> None:
                         _show_stuck(response.reason or "No actionable elements were found in the current page DOM.")
                         return
                     empty_step_retries = 0
+                    waiting_poll_retries = 0
                     task_data = {
                         "name": original_task,
                         "app": url,
@@ -531,7 +532,7 @@ def main() -> None:
                 navigation_invoker.requested_callback = _schedule_subtask_on_main_thread
 
                 def _handle_website_event(data: dict) -> None:
-                    nonlocal pending_element_id, pending_target, last_completed_step, last_page_url
+                    nonlocal pending_element_id, pending_target, pending_action, last_completed_step, last_page_url
                     msg_type = data.get("type")
 
                     if msg_type == "page_navigated":
@@ -552,7 +553,12 @@ def main() -> None:
                         # a fresh DOM and generates sub_task.json.
                         return
 
-                    if msg_type != "user_click":
+                    if msg_type not in ("user_click", "user_input"):
+                        return
+                    is_text_entry = pending_action in ("type", "fill", "enter", "input", "write")
+                    if is_text_entry != (msg_type == "user_input"):
+                        return
+                    if is_text_entry and not data.get("hasValue"):
                         return
 
                     clicked = data.get("elementId")
@@ -568,11 +574,18 @@ def main() -> None:
 
                     if matched:
                         last_completed_step = pending_target or clicked_text
+                        # Successful interaction is progress, not a failed attempt
+                        # at this milestone (long forms can have many controls).
+                        current = task_plan.current()
+                        if current is not None:
+                            current["attempts"] = 0
+                            task_plan.save(plan_path)
                         # A later page_navigated event confirms whether this
                         # click changed pages. This also handles links whose
                         # click metadata incorrectly reports isNavigation=false.
                         pending_element_id = None
                         pending_target = ""
+                        pending_action = ""
                         if data.get("isNavigation"):
                             # Wait for the new document to settle, then extract
                             # its DOM and generate tasks/sub_task.json.
