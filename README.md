@@ -1,8 +1,5 @@
 # AI Overlay (`Overlay`)
 
-> Repository summary for the uploaded `Overlay-main` zip (48 files).
-> Every Python, JavaScript and documentation file was surveyed, and the core modules (`main.py`, `ai_task_generator.py`, `browser_connector.py`, the controller, resolvers and extension) were read closely. The code was **not run**: it needs Windows, PyQt6, a Chrome extension and a Gemini API key.
-
 ---
 
 ## 1. Summary
