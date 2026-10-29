@@ -22,13 +22,11 @@ Website mode has the most advanced logic: Gemini builds a **milestone plan** (2 
 | Item | Detail |
 |---|---|
 | Project name | AI Overlay (folder `Overlay`) |
-| Platform | **Windows** (Linux AT-SPI resolver exists but is a stub and out of scope) |
+| Platform | **Windows** |
 | Python | 3.13 targeted (per project notes) |
 | Entry point | `python main.py` |
 | AI provider | Google Gemini (`gemini-2.5-flash`), through the `google-genai` SDK |
-| Contributors named in docs | `p4rth-rana314`, Bhavin Prajapati (added the mic and speech feature) |
-| Docs describe | Branch `feat/UIDictornary`, last listed commit 23 Jul 2026 |
-| License | None found in the zip |
+
 
 ### Project structure
 
